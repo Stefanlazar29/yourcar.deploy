@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/v/:unitId",
+      "destination": "/verify.html?u=:unitId"
+    }
+  ]
+}

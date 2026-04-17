@@ -1,0 +1,15 @@
+{
+  "total_vehicles": 1,
+  "last_update": "2026-03-26T09:03:40+00:00",
+  "vehicles": [
+    {
+      "vin": "TMBCY46Y654251499",
+      "make": "Skoda",
+      "model": "6Y / Fabia",
+      "year": "2004",
+      "fuel": "benzina",
+      "plate": "BZ-39-ALZ",
+      "series": "AESK120011T35E4"
+    }
+  ]
+}

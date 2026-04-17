@@ -1,0 +1,15 @@
+# Mulberry EXO — Reguli de proiect
+
+## Autentificare JWT
+- Orice comunicare Frontend ↔ Backend folosește protocolul JWT.
+- Token-ul se află ÎNTOTDEAUNA în `localStorage.getItem('mulberry_session')` (sau fallback `yourcar_token`).
+- NU accepta nicio funcție care salvează tipul de date (ex. literalul "String") în loc de valoarea reală a token-ului.
+- Verifică mereu că header-ul `Authorization` conține `'Bearer ' + token` (cu spațiu după Bearer) înainte de a trimite cererea.
+
+## Salvare token
+- La login/register, salvează `out.access_token` (valoarea din răspunsul API), NU `typeof`, NU `constructor.name`, NU literalul "String".
+- Token-ul JWT valid începe cu `eyJ` și are lungime > 50 caractere.
+
+## Onboarding (Pasul 4)
+- După înregistrarea vehiculului, salvează token-ul în `localStorage` ÎNAINTE de orice redirect.
+- Nu redirecționa automat dacă token-ul lipsește sau e invalid.

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mulberry — Reminder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="mlb-page">
+<div class="app" style="background:transparent;">
+<div class="screen active" id="s-engine">
+      <div class="panel-hdr mlb-head" style="background:#fff;">
+        <div class="panel-back mlb-back" style="border-radius:50%;" onclick="window.location.href='mulberry.html'" role="button" tabindex="0">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </div>
+        <div class="panel-title-blk">
+          <div class="pt mlb-h1" style="font-size:1.1rem;">Reminder</div>
+          <div class="ps mlb-muted" id="car-name-reminder">Revizie, asigurare, documente</div>
+        </div>
+      </div>
+      <div class="items-scroll" id="engine-list">
+        </div>
+      <div class="panel-acts">
+        <div class="act-row">
+          <div class="act-btn plus" onclick="openAddModal()" title="Adaugă">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="s-reminder">
+        <div class="panel-hdr mlb-head" style="background:#fff;">
+            <div class="panel-back mlb-back" onclick="show('s-engine')">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            </div>
+            <div class="panel-title-blk">
+              <div class="pt mlb-h1" style="font-size:1.05rem;" id="rd-header-title">Detalii</div>
+              <div class="ps mlb-muted">Atinge un câmp pentru a edita</div>
+            </div>
+        </div>
+        </div>
+
+    <div class="screen" id="s-ai">
+        </div>
+
+</div>
+<div class="modal-ov" id="modal-add" onclick="closeModalClick(event,'modal-add')">
+    <div class="modal-sh">
+        <div class="m-handle"></div>
+        <div class="m-title">Adaugă Reminder</div>
+        <div class="m-field">
+            <div class="m-label">Tip</div>
+            <select class="m-select" id="m-type">
+                <option value="rca">Asigurare RCA</option>
+                <option value="itp">ITP Inspecție</option>
+                <option value="oil">Schimb ulei</option>
+                <option value="tires">Anvelope</option>
+                <option value="service">Revizie generală</option>
+                <option value="other">Altele</option>
+            </select>
+        </div>
+        <div class="m-field">
+            <div class="m-label">Scadență / Detalii</div>
+            <input class="m-input" id="m-detail" placeholder="ex: Decembrie 2026 sau 5000 km"/>
+        </div>
+        <button class="m-save" type="button" onclick="saveItem()">Salvează</button>
+    </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/offline/appDB.js"></script>
+<script src="js/offline/core.js"></script>
+<script src="js/offline/reminders.js"></script>
+<script src="js/offline/ai.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Populăm numele mașinii la start
+    const vehicle = window.AppDB.getSavedVehicle();
+    if (vehicle) {
+      const el = document.getElementById('car-name-reminder');
+      if (el) el.textContent = (vehicle.marca || 'Vehicul') + " — " + (vehicle.nr || '');
+    }
+    
+    // Inițializăm lista de remindere dacă funcția există în reminders.js
+    if (typeof renderEngineList === 'function') {
+      renderEngineList();
+    }
+  });
+
+  // Funcție rapidă pentru închiderea modalului dacă nu e în core.js
+  function closeModalClick(e, id) {
+    if (e.target.id === id) document.getElementById(id).style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
+

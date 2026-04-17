@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ro" data-mulberry-bootstrap="1">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulberry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loader-wrapper" class="hidden" aria-hidden="true">
+    <div class="loader-content">
+      <div class="mulberry-loader-rings" aria-hidden="true">
+        <div class="mulberry-ring-outer"></div>
+        <div class="mulberry-circle"></div>
+      </div>
+      <p class="mulberry-loader-caption">Sincronizare Mulberry ID...</p>
+    </div>
+  </div>
+  <div class="app" id="app">
+    <!-- LOGIN -->
+    <div class="screen active" id="s-login">  
+      <div class="login-top">
+        <div class="login-logo">
+          <div class="logo-icon-wrap logo-icon-wrap--brand">
+            <img src="assets/mulberry-logo.png" alt="Mulberry" width="68" height="68" decoding="async" />
+          </div>
+          <div class="login-h">Mul<span>berry</span></div>
+          <div class="login-tag">Co-pilotul tău auto · by ExoTerra </div>
+        </div>
+      </div>
+      <div class="auth-wrap">
+        <!-- Step 1: Email + Parolă -->
+        <div class="step-body" id="login-step1">
+          <form onsubmit="return false;" autocomplete="on">
+          <div class="field">
+            <div class="flabel">Email</div>
+            <input class="finput" id="si-id" type="email" placeholder="email@exemplu.com" autocomplete="username">
+            <div class="ferr" id="si-err-id"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">Parolă</div>
+            <div class="pass-wrap">
+              <input class="finput" id="si-pass" type="password" placeholder="Parola" autocomplete="current-password">
+              <button class="pass-eye" type="button" onclick="togglePassVis('si-pass', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2.036 12.322a1.012 1.012 0 0 1 0 -.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639 C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="ferr" id="si-err-pass"></div>
+          </div>
+          <button class="btn btn-neon" type="button" onclick="submitSignIn()">Continuă</button>
+          <div class="divider"><span>sau</span></div>
+          <button class="btn" type="button" onclick="typeof goToOnboarding==='function'?goToOnboarding():show('auth')">Înregistrare vehicul (pași 1–4)</button>
+          </form>
+        </div>
+        <!-- Step 2: Cod acces secundar (Parola 2 = telefon) -->
+        <div class="step-body" id="login-step2" style="display:none;">
+          <form onsubmit="return false;" autocomplete="on">
+          <div class="field">
+            <div class="flabel">Cod de acces secundar</div>
+            <input class="finput" id="si-phone" type="tel" placeholder="Numărul de telefon (+40 7XX XXX XXX)" autocomplete="tel">
+            <div class="fhint" id="login-step2-hint">Introdu numărul de telefon asociat contului.</div>
+          </div>
+          <button class="btn btn-neon" type="button" onclick="submitSignInStep2()">Conectare</button>
+          <button class="btn" type="button" onclick="showLoginStep1()">‹ Înapoi</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ONBOARDING -->
+    <div class="screen" id="s-auth">
+      <div class="auth-wrap">
+        <div class="step-header">
+          <div class="back-btn" onclick="show('login')">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </div>
+          <div>
+            <div class="step-title" id="auth-step-title">Contul tău</div>
+            <div class="step-sub" id="auth-step-sub">Pasul 1 din 4</div>
+          </div>
+        </div>
+
+        <div class="progress-bar" id="progress-bar">
+          <div class="pb-dot active" id="pb0"></div>
+          <div class="pb-dot" id="pb1"></div>
+          <div class="pb-dot" id="pb2"></div>
+          <div class="pb-dot" id="pb3"></div>
+        </div>
+
+        <!-- STEP 0 -->
+        <div class="step-body" id="step-0">
+          <form onsubmit="return false;" autocomplete="on">
+          <div class="field">
+            <div class="flabel">Adresă email</div>
+            <input class="finput" id="inp-email" type="email" placeholder="exemplu@email.com" oninput="clearErr('email')" autocomplete="username">
+            <div class="ferr" id="err-email"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">Parolă</div>
+            <input class="finput" id="inp-pass" type="password" placeholder="Minim 8 caractere" oninput="clearErr('pass')" autocomplete="new-password">
+            <div class="ferr" id="err-pass"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">Confirmare parolă</div>
+            <input class="finput" id="inp-pass2" type="password" placeholder="Repetă parola" autocomplete="new-password">
+            <div class="ferr" id="err-pass2"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">Număr mobil (opțional)</div>
+            <input class="finput" id="inp-phone" type="tel" placeholder="+40 7XX XXX XXX">
+          </div>
+          <button class="btn btn-neon" type="button" onclick="submitStep0()">Continuă →</button>
+          </form>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-body" id="step-1" style="display:none;">
+          <div class="field">
+            <div class="flabel">Marcă vehicul</div>
+            <input class="finput" id="inp-make" type="text" placeholder="ex: Dacia" oninput="clearErr('make')">
+            <div class="ferr" id="err-make"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">Model</div>
+            <input class="finput" id="inp-model" type="text" placeholder="ex: Logan" oninput="clearErr('vmodel')">
+            <div class="ferr" id="err-vmodel"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">An producție</div>
+            <input class="finput" id="inp-year" type="number" placeholder="ex: 2021" min="1950" max="2026">
+            <div class="ferr" id="err-year"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">Tip combustibil</div>
+            <select class="finput" id="inp-fuel" onchange="clearErr('fuel')">
+              <option value="">Selectează tipul</option>
+              <option value="benzina">Benzină</option>
+              <option value="motorina">Motorină</option>
+              <option value="hibrid">Hibrid</option>
+              <option value="electric">Electric</option>
+              <option value="gpl">GPL</option>
+            </select>
+            <div class="ferr" id="err-fuel"></div>
+          </div>
+          <button class="btn btn-neon" type="button" onclick="submitStep1()">Continuă →</button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-body" id="step-2" style="display:none;">
+          <div class="field">
+            <div class="flabel">Număr de înmatriculare</div>
+            <input class="finput" id="inp-plate" type="text" placeholder="ex: B 01 MLB" style="text-transform:uppercase;" oninput="clearErr('plate')">
+            <div class="ferr" id="err-plate"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">VIN (17 caractere)</div>
+            <input class="finput" id="inp-vin" type="text" placeholder="ex: WVWZZZAUZNW123456" maxlength="17" oninput="validateVIN(this)" style="text-transform:uppercase;font-family:var(--mono);letter-spacing:.05em;">
+            <div class="ferr" id="err-vin"></div>
+            <div class="fhint" id="vin-counter">0 / 17 caractere</div>
+          </div>
+          <div class="field">
+            <div class="flabel">Seria model</div>
+            <input class="finput" id="inp-series" type="text" placeholder="ex: Mk7, E46, W204">
+          </div>
+          <button class="btn btn-neon" type="button" onclick="submitStep2Form()">Continuă →</button>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-body" id="step-3" style="display:none;">
+          <div style="background:var(--surf);border:1px solid var(--cb2);border-radius:14px;padding:16px;">
+            <div class="flabel">Confirmare</div>
+            <div id="conf-make" style="margin-top:8px;font-weight:800;"></div>
+            <div id="conf-plate" style="margin-top:6px;color:var(--dim);"></div>
+            <div id="conf-vin" style="margin-top:6px;color:var(--dim);font-family:var(--mono);"></div>
+            <div id="conf-year" style="margin-top:6px;color:var(--dim);"></div>
+            <div id="conf-series" style="margin-top:6px;color:var(--dim);"></div>
+          </div>
+          <button class="btn btn-neon" type="button" onclick="submitStep3(event)">Salvează vehicul → Mulberry ID</button>
+          <div id="onboarding-step3-hint" class="fhint" style="display:none;margin-top:12px;">Verifică în consolă (F12) că există token. Apoi:</div>
+          <button class="btn" id="btn-onboarding-dashboard" type="button" style="display:none;margin-top:8px;">Confirm token OK — mergi la Dashboard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASH -->
+    <div class="screen" id="s-dash">
+      <!-- Top Header -->
+      <div class="dashboard-header">
+        <button type="button" class="header-brand-mark header-brand-mark--tap" id="btn-mulberry-logo-menu" aria-label="Deschide MulberryHub" title="MulberryHub">
+          <img src="assets/mulberry-logo.png" alt="" class="header-mulberry-logo" width="40" height="40" decoding="async" role="presentation" />
+        </button>
+        <div class="user-info">
+          <div class="welcome-text">Mulberry</div>
+          <div class="user-name" id="user-full-name" hidden></div>
+          <button type="button" class="user-email-btn" id="user-email" title="Setări profil (MyMulberry)" aria-label="Cont email — deschide setări profil">
+            —
+          </button>
+        </div>
+        <div class="header-actions">
+          <button type="button" class="header-notification-icon" id="btn-mulberry-reminder" aria-label="Mulberry Reminder" title="Mulberry Reminder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7 -3 9 -3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
+          <button type="button" class="header-more-btn" id="btn-mulberry-menu" aria-label="Mai multe">⋯</button>
+        </div>
+      </div>
+
+      <!-- verify-toast (post-login UX) -->
+      <div id="verify-toast" class="verify-badge" style="display:none; align-items:center;">
+        <span>Verificat cu succes</span>
+        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </div>
+
+      <div class="scroll-body">
+        <div class="dash-content">
+          <!-- Alertă Digital Twin (setată din chat când manualul semnalează ABS / ulei etc.) -->
+          <div id="digital-twin-alert" class="digital-twin-alert" style="display:none;margin:0 0 12px 0;padding:14px 16px;border-radius:14px;background:rgba(225,255,0,0.08);border:1px solid rgba(225,255,0,0.35);font-size:13px;line-height:1.45;color:var(--white);"></div>
+          <!-- Card 1: Main Score (Neon Yellow) -->
+          <div class="mulberry-id-card id-card--visa id-card--atlas">
+            <div class="id-card-head id-card-head--black">
+              <span class="brand-id">Mulberry ID</span>
+              <img class="id-card-logo" src="assets/mulberry-logo.png" alt="" width="36" height="36" decoding="async" />
+            </div>
+            <div class="id-card-body id-card-body--atlas">
+              <div class="id-card-left id-card-left--atlas">
+                <div class="id-card-hero-atlas">
+                  <span class="id-brand-compact car-brand" id="d-car-brand">—</span>
+                  <div class="id-hero-slug">
+                    <span class="car-model id-hero-model" id="d-car-title"></span>
+                  </div>
+                </div>
+                <div class="id-tech-atlas id-id-stack" aria-label="Date vehicul">
+                  <div class="id-tech-field">
+                    <span class="id-tech-lab">VIN</span>
+                    <span class="id-tech-val id-tech-val--mono vin-code" id="d-vin-subtle">—</span>
+                  </div>
+                  <div class="id-tech-field">
+                    <span class="id-tech-lab">Înmatriculare</span>
+                    <span class="id-tech-val id-tech-val--mono plate-number" id="d-plate-sub">—</span>
+                  </div>
+                  <div class="id-tech-field">
+                    <span class="id-tech-lab">MLBR</span>
+                    <span class="id-tech-val id-tech-val--mono id-tech-val--mlbr mlbr-code" id="d-mlbr-index">MLBR 0000 - AA00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="id-card-right-atlas" aria-hidden="true">
+                <span class="id-nfc-badge" title="ID digital">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M6 10c2.5-4 9.5-4 12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M8.5 12c1.6-2.2 6.4-2.2 8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M11 14c.6-.8 2.4-.8 3 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="id-card-footer-qr">
+              <div class="id-qr-stack">
+                <span class="id-tech-lab id-qr-lab">QR</span>
+                <div class="id-card-qr" aria-hidden="true"><div id="qrcode-mini"></div></div>
+                <span class="id-qr-caption">Scanează pentru identitate digitală</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Mulberry Assistant (Chat AI) — click oriunde deschide conversația; input rămâne pentru întrebare rapidă -->
+          <div class="module-card assistant-card" role="link" tabindex="0" aria-label="Deschide Mulberry Assistant"
+            onclick="window.location.href='mulberry_chat.html'"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='mulberry_chat.html';}">
+            <div class="assistant-header">
+              <span class="assistant-title">Mulberry Assistant</span>
+              <a href="mulberry_chat.html" class="assistant-expand-icon" onclick="event.stopPropagation()" aria-label="Deschide chatul complet" title="Deschide conversația">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </a>
+            </div>
+            <div class="assistant-preview-strip" aria-hidden="true">
+              <div class="assistant-preview-soft" id="d-assistant-preview-soft">SoftScore —%</div>
+              <div class="assistant-preview-chat" id="d-assistant-preview-last">Întreabă despre întreținere, DTC…</div>
+            </div>
+            <div class="chat-input-container" onclick="event.stopPropagation()">
+              <input type="text" id="assistant-input" placeholder="Întreabă-l pe Mulberry Assistant...">
+              <button id="send-to-ai" type="button" onclick="event.stopPropagation(); askMulberry();">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+              </button>
+            </div>
+            <div id="assistant-response" class="assistant-response"></div>
+          </div>
+
+          <!-- Card 3: Mulberry Cloud -->
+          <div class="module-card mulberry-card cloud-card" onclick="window.location.href='mulberry_cloud.html'">
+            <div class="mulberry-card-icon cloud-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="mulberry-card-content">
+              <span class="mulberry-card-title">Mulberry Cloud</span>
+              <span class="mulberry-card-sub">Documente încărcate · confirmă cu bifă</span>
+            </div>
+            <span class="mulberry-card-chevron">›</span>
+          </div>
+
+          <!-- Card 4: Mulberry SoftScore -->
+          <div class="module-card mulberry-card softscore-card" onclick="window.location.href='mulberry_softscore.html'">
+            <div class="mulberry-card-icon softscore-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+            </div>
+            <div class="mulberry-card-content">
+              <span class="mulberry-card-title">Mulberry SoftScore</span>
+              <span class="mulberry-card-sub">Index vehicul · preț estimat piață</span>
+            </div>
+            <span class="mulberry-card-chevron">›</span>
+          </div>
+
+          <!-- Preview Mulberry SoftScore (aceeași lățime ca modulele) -->
+          <div class="module-card mulberry-card softscore-preview-card" onclick="window.location.href='mulberry_softscore.html'">
+            <div class="mulberry-card-icon softscore-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 7 4-14 2 7h5"/></svg>
+            </div>
+            <div class="mulberry-card-content softscore-preview-body">
+              <span class="mulberry-card-title">Preview Mulberry SoftScore</span>
+              <div class="softscore-preview-soft" id="d-softscore-preview-pct">SoftScore —%</div>
+              <div class="softscore-preview-price" id="d-softscore-preview-price">— €</div>
+              <div class="softscore-preview-assist-hint">Estimare Mulberry Assistant</div>
+              <div class="softscore-preview-depr" id="d-softscore-preview-depr">—% / an · market value</div>
+              <div class="softscore-preview-meta" id="d-softscore-preview-updated">Actualizat săptămânal · —</div>
+            </div>
+            <span class="mulberry-card-chevron">›</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-tab-bar" id="bottom-tab-bar" role="navigation" aria-label="Navigare principală">
+        <div class="tab-item active" onclick="show('dash')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <span>Home</span>
+        </div>
+        <div class="tab-item" onclick="window.location.href='mulberry_chat.html'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Chat</span>
+        </div>
+        <div class="tab-item" onclick="window.openSoftScoreModal && window.openSoftScoreModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg>
+          <span>SoftScore</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SETĂRI PROFIL (MyMulberry) — card hero + text pe gradient peste imagine -->
+    <div class="screen" id="s-profile-settings">
+      <div class="profile-card-screen">
+        <button
+          type="button"
+          class="profile-card-back"
+          onclick="show('dash'); try { history.replaceState(null, '', 'mulberry.html'); } catch(e){}"
+          aria-label="Înapoi la dashboard"
+        >
+          ‹
+        </button>
+        <div class="profile-hero-card">
+          <div class="profile-hero-card__media">
+            <img
+              id="profile-model-ai-img"
+              class="profile-hero-card__img"
+              src=""
+              alt=""
+              width="768"
+              height="900"
+              loading="lazy"
+              decoding="async"
+              onerror="this.onerror=null;this.src='assets/car-profile-reference.png'"
+            />
+            <div class="profile-hero-card__gradient" aria-hidden="true"></div>
+            <div class="profile-hero-card__content">
+              <div class="profile-name-row">
+                <span class="profile-display-name" id="profile-display-name">sefanlazar</span>
+                <span class="profile-verified" title="Cont verificat Mulberry" aria-label="Cont verificat">
+                  <svg class="profile-verified__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" fill="currentColor" />
+                    <path
+                      d="M7.5 12.5l2.5 2.5 5-6"
+                      stroke="#0a0a0a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <p class="profile-bio" id="profile-bio">Co-pilot auto Mulberry · vehicul legat de cont.</p>
+              <div class="profile-stats-row" role="group" aria-label="Statistici vehicul">
+                <div class="profile-stat">
+                  <span class="profile-stat__val" id="profile-stat-soft">
+                    <svg class="profile-stat__star" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        fill="currentColor"
+                        d="M12 2l2.95 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l7.05-1.01L12 2z"
+                      />
+                    </svg>
+                    <span id="profile-stat-soft-txt">—</span>
+                  </span>
+                  <span class="profile-stat__label">SoftScore</span>
+                </div>
+                <span class="profile-stat-divider" aria-hidden="true"></span>
+                <div class="profile-stat">
+                  <span class="profile-stat__val" id="profile-stat-km">—</span>
+                  <span class="profile-stat__label">Kilometri</span>
+                </div>
+                <span class="profile-stat-divider" aria-hidden="true"></span>
+                <div class="profile-stat">
+                  <span class="profile-stat__val" id="profile-stat-year">—</span>
+                  <span class="profile-stat__label">An</span>
+                </div>
+              </div>
+              <div class="profile-actions-row">
+                <button type="button" class="profile-btn-primary" id="profile-btn-contact">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <path d="M22 6l-10 7L2 6" />
+                  </svg>
+                  <span>În contact</span>
+                </button>
+                <button type="button" class="profile-btn-icon" id="profile-btn-bookmark" title="SoftScore" aria-label="Deschide Mulberry SoftScore">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <span class="profile-model-img-badge">AI</span>
+          </div>
+        </div>
+        <article class="profile-settings-article profile-settings-article--below" aria-labelledby="profile-model-heading">
+          <h2 class="profile-settings-sr-only" id="profile-model-heading">Detalii vehicul</h2>
+          <p class="profile-model-title-line" id="profile-model-title-line">—</p>
+          <p class="profile-model-vin-line" id="profile-model-vin-line">—</p>
+          <h3 class="profile-model-h3">Prezentare vehicul (istoric &amp; utilizare)</h3>
+          <p class="profile-narrative-meta" id="profile-narrative-meta" hidden></p>
+          <button type="button" class="profile-narrative-refresh" id="profile-narrative-refresh" hidden>
+            Actualizează descrierea din istoric
+          </button>
+          <div id="profile-model-history" class="profile-model-block profile-model-block--history profile-model-block--literary"></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- MODAL SoftScore Calibration -->
+    <div class="modal-ov" id="modal-softscore" onclick="closeModalClick(event,'modal-softscore')">
+      <div class="modal-wrap">
+        <div class="modal-header">
+          <div class="m-title">Calibrare SoftScore</div>
+          <div class="m-sub">Completează pentru a debloca  Mulberry SoftScore</div>
+        </div>
+        <div class="modal-body">
+          <div class="field">
+            <div class="flabel">An fabricare</div>
+            <input class="finput" id="cal-year" type="number" placeholder="2021" min="1950" max="2026">
+          </div>
+          <div class="field" style="margin-top:10px;">
+            <div class="flabel">Kilometri actuali</div>
+            <input class="finput" id="cal-km" type="number" placeholder="120000">
+          </div>
+          <div class="field" style="margin-top:10px;">
+            <div class="flabel">Data ultima revizie</div>
+            <input class="finput" id="cal-revision" type="date">
+          </div>
+          <div class="field" style="margin-top:10px;">
+            <div class="flabel">Istoric accidentări</div>
+            <select class="finput" id="cal-accident">
+              <option value="no">Fără accidente</option>
+              <option value="yes">A avut accidente</option>
+            </select>
+          </div>
+          <div class="field" style="margin-top:10px;">
+            <div class="flabel">Data ITP</div>
+            <input class="finput" id="cal-itp" type="date">
+          </div>
+          <div class="ferr show" id="cal-err" style="margin-top:10px;"></div>
+          <button class="btn btn-neon" type="button" onclick="saveSoftScoreCalibration()">Calibrează Scor</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIDDEN FILE INPUT for Cloud Upload -->
+    <input type="file" id="file-upload" style="display:none;" accept="image/*,.pdf" onchange="handleFileUpload(event)">
+
+    <!-- MulberryHub — foaie mare (logo · ⋯) -->
+    <div class="apple-sheet-ov" id="sheet-mulberry-library" aria-hidden="true" role="dialog" aria-labelledby="mulberry-lib-heading">
+      <div class="apple-sheet-backdrop" onclick="window.closeMulberryLibrarySheet && window.closeMulberryLibrarySheet()"></div>
+      <div class="apple-sheet mulberry-lib-sheet" onclick="event.stopPropagation()">
+        <div class="apple-sheet-handle" aria-hidden="true"></div>
+        <div class="mulberry-lib-head">
+          <img src="assets/mulberry-logo.png" width="44" height="44" alt="" decoding="async" />
+          <div>
+            <div class="mulberry-lib-title" id="mulberry-lib-heading">MulberryHub</div>
+            <div class="mulberry-lib-sub">Module, identitate și setări model</div>
+          </div>
+        </div>
+        <div class="apple-group">
+          <div class="apple-group-label">Acasă</div>
+          <div class="apple-group-body apple-group-body--mymulberry">
+            <div class="hub-mymulberry-preview" id="hub-mymulberry-preview" aria-hidden="true">
+              <div class="hub-mymulberry-preview__thumb">
+                <img id="hub-mymulberry-preview-img" src="assets/car-profile-reference.png" alt="" width="56" height="56" loading="lazy" decoding="async" />
+              </div>
+              <div class="hub-mymulberry-preview__meta">
+                <span class="hub-mymulberry-preview__name">sefanlazar</span>
+                <span class="hub-mymulberry-preview__vin" id="hub-mymulberry-preview-sub">Profil vehicul · Mulberry</span>
+              </div>
+            </div>
+            <a class="apple-row mulberry-lib-row mulberry-lib-row--profile" href="mulberry.html#profile-settings" id="lib-link-mymulberry">
+              <span class="mlb-r-title">MyMulberry</span>
+              <span class="mlb-r-desc">Profil sefanlazar · imagine vehicul și date cont</span>
+            </a>
+          </div>
+        </div>
+        <div class="apple-group">
+          <div class="apple-group-label">Identitate</div>
+          <div class="apple-group-body">
+            <a class="apple-row mulberry-lib-row" href="yourcar_id.html">
+              <span class="mlb-r-title">Mulberry ID</span>
+              <span class="mlb-r-desc">Vehicul legat de cont · status sesiune</span>
+            </a>
+            <a class="apple-row mulberry-lib-row" href="mulberry_menu.html">
+              <span class="mlb-r-title">ID Hub</span>
+              <span class="mlb-r-desc">Raport vehicul (BIOS) · în toolbar dreapta: descarcă PDF etichetă</span>
+            </a>
+          </div>
+        </div>
+        <div class="apple-group">
+          <div class="apple-group-label">Date &amp; scor</div>
+          <div class="apple-group-body">
+            <a class="apple-row mulberry-lib-row" href="mulberry_cloud.html">
+              <span class="mlb-r-title">Mulberry Cloud</span>
+              <span class="mlb-r-desc">Documente RCA / ITP / service</span>
+            </a>
+            <a class="apple-row mulberry-lib-row" href="mulberry_softscore.html">
+              <span class="mlb-r-title">Mulberry SoftScore</span>
+              <span class="mlb-r-desc">Scor și estimare piață</span>
+            </a>
+          </div>
+        </div>
+        <div class="apple-group">
+          <div class="apple-group-label">Setări</div>
+          <div class="apple-group-body">
+            <a class="apple-row mulberry-lib-row" href="mulberry.html#profile-settings" id="lib-link-profile-settings">
+              <span class="mlb-r-title">Setări profil</span>
+              <span class="mlb-r-desc">Rezumat vehicul, imagine studio, capacități — MyMulberry</span>
+            </a>
+            <a class="apple-row mulberry-lib-row" href="reminder.html">
+              <span class="mlb-r-title">Reminder</span>
+              <span class="mlb-r-desc">Notificări · întreținere</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mulberry Reminder — foaie Apple (Notificări + Reminder) -->
+    <div class="apple-sheet-ov" id="sheet-reminder" aria-hidden="true" role="dialog" aria-labelledby="sheet-reminder-title">
+      <div class="apple-sheet-backdrop" onclick="window.closeMulberryReminderSheet && window.closeMulberryReminderSheet()"></div>
+      <div class="apple-sheet" onclick="event.stopPropagation()">
+        <div class="apple-sheet-handle" aria-hidden="true"></div>
+        <div class="apple-sheet-title" id="sheet-reminder-title">Mulberry Reminder</div>
+        <div class="apple-group">
+          <div class="apple-group-label">Notificări</div>
+          <div class="apple-group-body">
+            <div class="apple-row apple-row-muted" id="reminder-notif-placeholder">Nicio notificare nouă</div>
+          </div>
+        </div>
+        <div class="apple-group">
+          <div class="apple-group-label">Reminder</div>
+          <div class="apple-group-body">
+            <a class="apple-row" href="reminder.html">Deschide reminder-urile</a>
+            <div class="apple-row apple-row-muted">Evenimente și întreținere</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Script-uri (Config primul). contentScript.js din consolă = extensii Chrome, nu fișiere din proiect. -->
+  <script src="js/mock_data.js" onerror="console.error('NU se încarcă: js/mock_data.js')"></script>
+  <script src="js/config.js" onerror="console.error('NU se încarcă: js/config.js')"></script>
+  <script src="js/mulberry_softscore_hub.js" onerror="console.error('NU se încarcă: js/mulberry_softscore_hub.js')"></script>
+  <script src="js/api_poll_guard.js" onerror="console.error('NU se încarcă: js/api_poll_guard.js')"></script>
+  <script src="js/mulberry_device.js" onerror="console.error('NU se încarcă: js/mulberry_device.js')"></script>
+  <script src="js/api_client.js" onerror="console.error('NU se încarcă: js/api_client.js')"></script>
+  <script src="js/vendor/qrcode-scannable.min.js" onerror="console.error('NU se încarcă: js/vendor/qrcode-scannable.min.js')"></script>
+  <script src="js/vendor/qr-code-styling.umd.js" onerror="console.error('NU se încarcă: js/vendor/qr-code-styling.umd.js')"></script>
+  <script src="js/mulberry_styled_qr.js" onerror="console.error('NU se încarcă: js/mulberry_styled_qr.js')"></script>
+  <script src="js/offline/appDB.js" onerror="console.error('NU se încarcă: js/offline/appDB.js')"></script>
+  <script src="js/offline/core.js" onerror="console.error('NU se încarcă: js/offline/core.js')"></script>
+  <script src="js/mulberry_profile_settings.js" onerror="console.error('NU se încarcă: js/mulberry_profile_settings.js')"></script>
+  <script src="js/offline/auth.js" onerror="console.error('NU se încarcă: js/offline/auth.js')"></script>
+  <script src="js/offline/onboarding.js" onerror="console.error('NU se încarcă: js/offline/onboarding.js')"></script>
+  <script src="js/offline/reminders.js" onerror="console.error('NU se încarcă: js/offline/reminders.js')"></script>
+  <script src="js/offline/partners.js" onerror="console.error('NU se încarcă: js/offline/partners.js')"></script>
+  <script src="js/offline/ai.js" onerror="console.error('NU se încarcă: js/offline/ai.js')"></script>
+  <script src="js/offline/cloud.js" onerror="console.error('NU se încarcă: js/offline/cloud.js')"></script>
+  <script src="js/offline/soft.js" onerror="console.error('NU se încarcă: js/offline/soft.js')"></script>
+  <script src="js/offline/backend_bridge.js" onerror="console.error('NU se încarcă: js/offline/backend_bridge.js')"></script>
+  <script>
+    // bootstrap: sesiune persistentă + redirect logic
+    // Caută mulberry_session (sau yourcar_token). Dacă există și /me reușește → dash; altfel → login sau auth
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        document.querySelectorAll('path[d]').forEach(function (path) {
+          var d = path.getAttribute('d');
+          if (d && !/^[MmLlHhVvCcSsQqTtAaZz]/.test(String(d).trim())) {
+            console.warn('[SVG] Path invalid (removed):', d);
+            path.remove();
+          }
+        });
+      } catch (eSvg) {}
+      (async function() {
+        if (window.__mulberryBootstrapRunning) return;
+        window.__mulberryBootstrapRunning = true;
+
+        function goOnboardingIfPossible() {
+          if (typeof window.goToOnboarding === 'function') window.goToOnboarding();
+          else show('auth');
+        }
+        function refreshTokenVar() {
+          var t = (window.api && window.api.getToken) ? window.api.getToken() : (localStorage.getItem('mulberry_session') || localStorage.getItem('yourcar_token') || '');
+          return t ? String(t).trim() : '';
+        }
+        try {
+          var token = refreshTokenVar();
+
+          /* LocalBase: token local-* — fără /me pe rețea; evită cercul „backend mort → șters token” */
+          if (token.indexOf('local-') === 0) {
+            var sessOff = null;
+            try {
+              var rawOff = null;
+              try {
+                if (window.MULBERRY_TAB_SESSION_ONLY) {
+                  rawOff = sessionStorage.getItem('mulberry_current_session') || localStorage.getItem('mulberry_current_session');
+                } else {
+                  rawOff = localStorage.getItem('mulberry_current_session') || sessionStorage.getItem('mulberry_current_session');
+                }
+              } catch (eR) {
+                rawOff = localStorage.getItem('mulberry_current_session');
+              }
+              if (rawOff) {
+                sessOff = JSON.parse(rawOff);
+                if (window.AppDB) window.AppDB.currentUser = sessOff;
+              }
+            } catch (e0) {}
+            if (sessOff && (sessOff.role || '').toLowerCase() === 'founder') {
+              show('dash');
+              if (window.AppDB.ui && window.AppDB.ui.syncDashboard) window.AppDB.ui.syncDashboard();
+              if (typeof window.initMulberryNotifications === 'function') window.initMulberryNotifications();
+              try { if (localStorage.getItem('mulberry_verify_ok') === '1') { localStorage.removeItem('mulberry_verify_ok'); if (typeof window.showSuccessAuth === 'function') window.showSuccessAuth(); } } catch (e) {}
+              return;
+            }
+            var v0 = window.AppDB && window.AppDB.getSavedVehicle ? window.AppDB.getSavedVehicle() : {};
+            if (v0 && (v0.marca || v0.nr || v0.vin || v0.plate)) {
+              show('dash');
+              if (window.AppDB.ui && window.AppDB.ui.syncDashboard) window.AppDB.ui.syncDashboard();
+              if (typeof window.initMulberryNotifications === 'function') window.initMulberryNotifications();
+              try { if (localStorage.getItem('mulberry_verify_ok') === '1') { localStorage.removeItem('mulberry_verify_ok'); if (typeof window.showSuccessAuth === 'function') window.showSuccessAuth(); } } catch (e) {}
+            } else {
+              goOnboardingIfPossible();
+            }
+            return;
+          }
+
+          if (token && window.api && typeof window.api.me === 'function') {
+            var meErrCaught = null;
+            try {
+              var me = await window.api.me();
+              if (me) {
+                var session = { id: String(me.id), identifier: me.identifier, email: me.identifier, name: (me.identifier || '').split('@')[0] || 'User', role: me.role || 'user', access_token: token };
+                try { localStorage.setItem('mulberry_current_session', JSON.stringify(session)); localStorage.setItem('is_founder', (me.role === 'founder') ? 'true' : 'false'); } catch (e) {}
+                if (window.AppDB) window.AppDB.currentUser = session;
+
+                if ((me.role || '').toLowerCase() === 'founder') {
+                  show('dash');
+                  if (window.AppDB.ui && window.AppDB.ui.syncDashboard) window.AppDB.ui.syncDashboard();
+                  if (typeof window.initMulberryNotifications === 'function') window.initMulberryNotifications();
+                  try { if (localStorage.getItem('mulberry_verify_ok') === '1') { localStorage.removeItem('mulberry_verify_ok'); if (typeof window.showSuccessAuth === 'function') window.showSuccessAuth(); } } catch (e) {}
+                  return;
+                }
+
+                var vehicles = [];
+                try {
+                  if (window.api.getVehicles) vehicles = await window.api.getVehicles();
+                } catch (e) {
+                  var v = window.AppDB && window.AppDB.getSavedVehicle ? window.AppDB.getSavedVehicle() : {};
+                  if (v && (v.marca || v.nr || v.vin || v.plate)) vehicles = [{ vin: v.vin }];
+                }
+                if (vehicles && vehicles.length > 0) {
+                  if (window.AppDB && typeof window.AppDB.mergeVehicleFromServer === 'function') {
+                    try { await window.AppDB.mergeVehicleFromServer(vehicles[0]); } catch (eM) {}
+                  }
+                  show('dash');
+                  if (window.AppDB.ui && window.AppDB.ui.syncDashboard) window.AppDB.ui.syncDashboard();
+                  if (typeof window.initMulberryNotifications === 'function') window.initMulberryNotifications();
+                  try { if (localStorage.getItem('mulberry_verify_ok') === '1') { localStorage.removeItem('mulberry_verify_ok'); if (typeof window.showSuccessAuth === 'function') window.showSuccessAuth(); } } catch (e) {}
+                } else {
+                  goOnboardingIfPossible();
+                }
+                return;
+              }
+            } catch (meErr) {
+              meErrCaught = meErr;
+              console.warn('[Core] /me offline sau timeout — păstrăm tokenul; folosim date locale.', meErr && meErr.message);
+              var msg = String((meErr && meErr.message) || '');
+              var lower = msg.toLowerCase();
+              if (meErr && meErr.httpStatus === 403) {
+                console.warn('[Core] 403 pe /me — păstrăm sesiunea; verifică HWID sau MULBERRY_SINGLE_DEVICE.');
+              } else {
+                var isAuthFailure =
+                  /Eroare API \(401\)/.test(msg) ||
+                  lower.indexOf('authentication failed') >= 0 ||
+                  lower.indexOf('unauthorized') >= 0;
+                if (isAuthFailure) {
+                  try {
+                    localStorage.removeItem('mulberry_session');
+                    localStorage.removeItem('yourcar_token');
+                    localStorage.removeItem('is_founder');
+                  } catch (e) {}
+                }
+              }
+            }
+
+            token = refreshTokenVar();
+            if (!token) {
+              show('login');
+              return;
+            }
+            /* Fără /me reușit, AppDB.currentUser poate lipsi — nu deschide onboarding (salt vizual login ↔ auth). */
+            if (meErrCaught && meErrCaught.httpStatus === 403) {
+              show('login');
+              return;
+            }
+            try {
+              var rawSess = localStorage.getItem('mulberry_current_session') || sessionStorage.getItem('mulberry_current_session');
+              if (rawSess && window.AppDB) {
+                var o = JSON.parse(rawSess);
+                if (o && o.id != null) window.AppDB.currentUser = o;
+              }
+            } catch (eHydr) {}
+            var vPost = window.AppDB && window.AppDB.getSavedVehicle ? window.AppDB.getSavedVehicle() : {};
+            if (vPost && (vPost.marca || vPost.nr || vPost.vin || vPost.plate)) {
+              show('dash');
+              if (window.AppDB.ui && window.AppDB.ui.syncDashboard) window.AppDB.ui.syncDashboard();
+              if (typeof window.initMulberryNotifications === 'function') window.initMulberryNotifications();
+              try { if (localStorage.getItem('mulberry_verify_ok') === '1') { localStorage.removeItem('mulberry_verify_ok'); if (typeof window.showSuccessAuth === 'function') window.showSuccessAuth(); } } catch (e) {}
+            } else {
+              goOnboardingIfPossible();
+            }
+            return;
+          }
+          if (!token) {
+            show('login');
+          } else {
+            var v = window.AppDB && window.AppDB.getSavedVehicle ? window.AppDB.getSavedVehicle() : {};
+            if (v && (v.marca || v.nr || v.vin || v.plate)) {
+              show('dash');
+              if (window.AppDB.ui && window.AppDB.ui.syncDashboard) window.AppDB.ui.syncDashboard();
+              if (typeof window.initMulberryNotifications === 'function') window.initMulberryNotifications();
+              try { if (localStorage.getItem('mulberry_verify_ok') === '1') { localStorage.removeItem('mulberry_verify_ok'); if (typeof window.showSuccessAuth === 'function') window.showSuccessAuth(); } } catch (e) {}
+            } else {
+              goOnboardingIfPossible();
+            }
+          }
+        } catch (e) {
+          console.warn('[Core] bootstrap Mulberry:', e && e.message);
+          show('login');
+        } finally {
+          window.__mulberryBootstrapRunning = false;
+          try {
+            if (String(location.hash || '') === '#profile-settings' && typeof show === 'function') {
+              var dashEl = document.getElementById('s-dash');
+              if (dashEl && dashEl.classList.contains('active')) show('profile-settings');
+            }
+          } catch (eHash) {}
+        }
+      })();
+    });
+
+    // sanity check: dacă lipsește o funcție globală, o vezi imediat în consolă
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof window.show !== 'function') console.error('Lipsește window.show (core.js nu a pornit)');
+      if (typeof window.submitSignIn !== 'function') console.error('Lipsește window.submitSignIn (auth.js nu a pornit)');
+      if (typeof window.submitStep0 !== 'function') console.error('Lipsește window.submitStep0 (onboarding.js nu a pornit)');
+    });
+
+    (function() {
+      function openReminderSheet() {
+        var ov = document.getElementById('sheet-reminder');
+        if (!ov) return;
+        ov.classList.add('active');
+        ov.setAttribute('aria-hidden', 'false');
+        try { document.body.style.overflow = 'hidden'; } catch (e) {}
+      }
+      window.closeMulberryReminderSheet = function() {
+        var ov = document.getElementById('sheet-reminder');
+        if (!ov) return;
+        ov.classList.remove('active');
+        ov.setAttribute('aria-hidden', 'true');
+        try {
+          if (!document.getElementById('sheet-mulberry-library') || !document.getElementById('sheet-mulberry-library').classList.contains('active')) {
+            document.body.style.overflow = '';
+          }
+        } catch (e) {}
+      };
+
+      function openMulberryLibrarySheet() {
+        var lib = document.getElementById('sheet-mulberry-library');
+        if (!lib) return;
+        if (window.closeMulberryReminderSheet) window.closeMulberryReminderSheet();
+        lib.classList.add('active');
+        lib.setAttribute('aria-hidden', 'false');
+        try { document.body.style.overflow = 'hidden'; } catch (e) {}
+      }
+      window.closeMulberryLibrarySheet = function() {
+        var lib = document.getElementById('sheet-mulberry-library');
+        if (!lib) return;
+        lib.classList.remove('active');
+        lib.setAttribute('aria-hidden', 'true');
+        try {
+          var rem = document.getElementById('sheet-reminder');
+          if (!rem || !rem.classList.contains('active')) document.body.style.overflow = '';
+        } catch (e) {}
+      };
+      window.openMulberryLibrarySheet = openMulberryLibrarySheet;
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var bell = document.getElementById('btn-mulberry-reminder');
+        if (bell) bell.addEventListener('click', function(ev) { ev.preventDefault(); ev.stopPropagation(); openReminderSheet(); });
+        var menuBtn = document.getElementById('btn-mulberry-menu');
+        if (menuBtn) menuBtn.addEventListener('click', function(ev) { ev.preventDefault(); ev.stopPropagation(); openMulberryLibrarySheet(); });
+        var logoBtn = document.getElementById('btn-mulberry-logo-menu');
+        if (logoBtn) logoBtn.addEventListener('click', function(ev) { ev.preventDefault(); ev.stopPropagation(); openMulberryLibrarySheet(); });
+
+        var emailBtn = document.getElementById('user-email');
+        if (emailBtn) {
+          emailBtn.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            emailBtn.classList.add('user-email-btn--active');
+            try { if (window.closeMulberryLibrarySheet) window.closeMulberryLibrarySheet(); } catch (eL) {}
+            if (typeof window.show === 'function') window.show('profile-settings');
+            try { history.replaceState(null, '', 'mulberry.html#profile-settings'); } catch (eH) {}
+          });
+        }
+
+        var libProf = document.getElementById('lib-link-profile-settings');
+        if (libProf) {
+          libProf.addEventListener('click', function (ev) {
+            var path = (window.location.pathname || '').split('/').pop() || '';
+            var onMulberry = path === 'mulberry.html' || path === '';
+            if (!onMulberry) return;
+            ev.preventDefault();
+            try { if (window.closeMulberryLibrarySheet) window.closeMulberryLibrarySheet(); } catch (eL2) {}
+            if (typeof window.show === 'function') window.show('profile-settings');
+            try { history.replaceState(null, '', 'mulberry.html#profile-settings'); } catch (eH2) {}
+          });
+        }
+
+        window.addEventListener('hashchange', function () {
+          if (String(location.hash || '') !== '#profile-settings') return;
+          var dashEl = document.getElementById('s-dash');
+          if (dashEl && dashEl.classList.contains('active') && typeof window.show === 'function') window.show('profile-settings');
+        });
+
+        var myM = document.getElementById('lib-link-mymulberry');
+        if (myM) {
+          myM.addEventListener('click', function (ev) {
+            var path = (window.location.pathname || '').split('/').pop() || '';
+            var onMulberry = path === 'mulberry.html' || path === '';
+            if (onMulberry) {
+              ev.preventDefault();
+              try { window.closeMulberryLibrarySheet(); } catch (e) {}
+              if (typeof window.show === 'function') window.show('profile-settings');
+              try { history.replaceState(null, '', 'mulberry.html#profile-settings'); } catch (eH3) {}
+            }
+          });
+        }
+
+        document.addEventListener('keydown', function(ev) {
+          if (ev.key !== 'Escape') return;
+          var lib = document.getElementById('sheet-mulberry-library');
+          if (lib && lib.classList.contains('active') && window.closeMulberryLibrarySheet) window.closeMulberryLibrarySheet();
+          else {
+            var ov = document.getElementById('sheet-reminder');
+            if (ov && ov.classList.contains('active') && window.closeMulberryReminderSheet) window.closeMulberryReminderSheet();
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

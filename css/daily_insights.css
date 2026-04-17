@@ -1,0 +1,834 @@
+/* Daily Insights — MulberryEXO; glassmorphism + switch + modale citire */
+
+.daily-insights-section {
+  display: block;
+}
+
+.daily-insights-section.daily-insights--hidden {
+  display: none !important;
+}
+
+.daily-insights-section.daily-insights-glass {
+  margin: 0 0 20px 0;
+  padding: 16px 14px 18px;
+  border-radius: 22px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Titlu lizibil pe fundal deschis (#s-dash) — negru, fără strikethrough */
+#s-dash .daily-insights-heading,
+.daily-insights-heading {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0a0a0a !important;
+  margin: 0 0 8px 4px;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  -webkit-text-decoration: none !important;
+  text-decoration-thickness: 0 !important;
+}
+
+.daily-insights-banner {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #1a1a1a;
+  margin: 0 4px 14px 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Viewport — un card vizibil, tranziție 1s */
+.insight-switch-wrap {
+  position: relative;
+}
+
+.insight-switch-viewport {
+  position: relative;
+  min-height: 200px;
+  border-radius: 20px;
+  overflow: visible;
+  background: transparent;
+  border: none;
+}
+
+.insight-slides {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+}
+
+/* Un singur slide vizibil — fără absolute/visibility (evită carduri invizibile) */
+.insight-slide {
+  display: none;
+  padding: 8px 4px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition:
+    opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.insight-slide.is-active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.insight-switch-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.insight-switch-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.insight-switch-dots button[aria-current='true'] {
+  background: rgba(225, 255, 0, 0.95);
+  transform: scale(1.25);
+}
+
+.insight-card-inner {
+  position: relative;
+  height: 100%;
+  min-height: 176px;
+  border-radius: 20px;
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  color: #f4fff4;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(18, 22, 32, 0.38);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 48px rgba(0, 0, 0, 0.18);
+}
+
+.insight-card-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(
+    --insight-bg,
+    radial-gradient(120% 80% at 20% 20%, rgba(225, 255, 0, 0.08), transparent 55%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.06) 0%, rgba(12, 14, 22, 0.55) 100%)
+  );
+  z-index: 0;
+}
+
+.insight-card-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(155deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.72) 100%),
+    var(--insight-img, none);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.42;
+  z-index: 0;
+}
+
+.insight-card-inner.article::before {
+  --insight-bg: radial-gradient(100% 80% at 80% 10%, rgba(180, 255, 120, 0.1), transparent 55%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.05), rgba(12, 16, 26, 0.5));
+}
+
+.insight-card-inner.promo::before {
+  --insight-bg: radial-gradient(90% 70% at 10% 90%, rgba(225, 255, 0, 0.1), transparent 60%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.05), rgba(12, 16, 26, 0.5));
+}
+
+.insight-card-inner > * {
+  position: relative;
+  z-index: 1;
+}
+
+.insight-card-inner .tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(225, 255, 0, 0.95);
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(225, 255, 0, 0.32);
+  align-self: flex-start;
+}
+
+.insight-card-inner h3 {
+  margin: 8px 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+}
+
+.insight-essence-preview {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.insight-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.insight-open-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0a0a0c;
+  background: linear-gradient(135deg, rgba(225, 255, 0, 0.95), rgba(200, 230, 80, 0.9));
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(225, 255, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.insight-open-read:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(225, 255, 0, 0.35);
+}
+
+/* Modal citire — glass */
+.insight-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+}
+
+.insight-modal[hidden] {
+  display: none !important;
+}
+
+.insight-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.insight-modal-panel.glass-panel {
+  position: relative;
+  width: 100%;
+  max-width: min(520px, 100vw);
+  max-height: min(88vh, 900px);
+  margin: 0 auto;
+  padding: 20px 20px 24px;
+  border-radius: 22px 22px 0 0;
+  background: rgba(22, 24, 32, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
+  box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  overflow: auto;
+  animation: insightModalUp 0.45s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@keyframes insightModalUp {
+  from {
+    transform: translateY(110%);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.insight-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.insight-modal-close:hover {
+  background: rgba(225, 255, 0, 0.2);
+}
+
+.insight-modal-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(225, 255, 0, 0.9);
+  margin-bottom: 8px;
+}
+
+.insight-modal-title {
+  margin: 0 0 12px;
+  padding-right: 36px;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #fff;
+}
+
+.insight-modal-essence {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: rgba(225, 255, 0, 0.88);
+}
+
+.insight-modal-read-hint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 14px;
+}
+
+.insight-modal-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media (min-width: 540px) {
+  .insight-modal-panel.glass-panel {
+    border-radius: 22px;
+    margin: 24px auto;
+    max-height: min(82vh, 860px);
+  }
+}
+
+/* ── Titlu serif + tab-uri (stil feed știri) ── */
+.daily-insights-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.daily-insights-heading--serif {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none !important;
+  color: #0a0a0a !important;
+  margin: 0 0 2px 4px;
+}
+
+.daily-insights-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 4px;
+  flex-wrap: wrap;
+}
+
+.daily-insights-tab {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.42);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.daily-insights-tab.is-active {
+  color: #0a0a0a;
+  background: rgba(0, 0, 0, 0.07);
+  position: relative;
+}
+
+.daily-insights-tab.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #0a0a0a;
+}
+
+/* ── Card magazine (imagine sus, corp alb) ── */
+.insight-card-magazine {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.1),
+    0 4px 14px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  max-width: 100%;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.insight-card-magazine:hover {
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.12),
+    0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.insight-card-magazine:active {
+  transform: scale(0.992);
+}
+
+.insight-card-media {
+  height: 168px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-color: #ececec;
+}
+
+.insight-card-media--strip {
+  padding: 0;
+  overflow: hidden;
+  background-color: #0a0a0a;
+}
+
+.insight-media-strip {
+  display: flex;
+  height: 168px;
+  width: 100%;
+  gap: 3px;
+}
+
+.insight-media-strip__cell {
+  flex: 1 1 0;
+  min-width: 0;
+  background-size: cover;
+  background-position: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.insight-media-strip__cell:last-child {
+  border-right: none;
+}
+
+/* Galerie cadru — pagina articol */
+.insight-frame-gallery {
+  margin: 20px 0 28px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.insight-frame-gallery__label {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.insight-frame-gallery__strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+
+.insight-frame-gallery__fig {
+  margin: 0;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.insight-frame-gallery__img {
+  width: min(240px, 72vw);
+  height: 140px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.insight-card-body {
+  padding: 14px 16px 16px;
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+.insight-card-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.insight-badge-mexo {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #e91e8c;
+  background: rgba(233, 30, 140, 0.1);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.insight-pill-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.insight-card-title {
+  margin: 0 0 8px;
+  font-size: 1.06rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #0a0a0a;
+}
+
+.insight-card-magazine .insight-essence-preview {
+  color: rgba(0, 0, 0, 0.52);
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.insight-card-authorline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.42);
+  margin: 10px 0 12px;
+}
+
+.insight-card-author {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.insight-card-dot {
+  opacity: 0.55;
+}
+
+.insight-card-magazine .insight-actions {
+  margin-top: 0;
+  justify-content: flex-start;
+}
+
+/* ── Pagină articol full (al doilea frame) ── */
+.insight-page-body {
+  margin: 0;
+  min-height: 100vh;
+  background: #fafafa;
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+.insight-article-page {
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.insight-article-hero {
+  position: relative;
+  min-height: 42vh;
+  background-size: cover;
+  background-position: center;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px 18px 28px;
+}
+
+.insight-article-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+.insight-article-back {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  left: 12px;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.insight-article-hero-tags {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.insight-article-hero-tags .insight-badge-mexo {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.insight-article-hero-tags .insight-pill-tag {
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.insight-article-hero-title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.insight-article-sheet {
+  position: relative;
+  margin-top: -18px;
+  border-radius: 22px 22px 0 0;
+  background: #fff;
+  padding: 22px 20px 40px;
+  min-height: 40vh;
+}
+
+.insight-article-float-actions {
+  position: absolute;
+  top: -22px;
+  right: 18px;
+  z-index: 2;
+  display: flex;
+  gap: 10px;
+}
+
+.insight-float-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  background: #fff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.insight-article-meta {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 18px;
+  padding-top: 4px;
+}
+
+.insight-article-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ── Comunitate opinii (stil feed social) ── */
+.insight-social-page {
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f4f4f5;
+  font-family: "DM Sans", system-ui, sans-serif;
+  padding-bottom: 48px;
+}
+
+.insight-social-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: max(10px, env(safe-area-inset-top)) 14px 12px;
+  background: rgba(244, 244, 245, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.insight-social-back {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  background: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.insight-social-title-block h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: #0a0a0a;
+  line-height: 1.25;
+}
+
+.insight-social-title-block p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.insight-social-compose {
+  margin: 16px 14px;
+  padding: 14px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.insight-social-compose textarea {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.insight-social-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.insight-btn-polish {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.insight-btn-post {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #e91e8c, #ff6b4a);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.insight-social-feed {
+  padding: 0 14px;
+}
+
+.insight-social-post {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.insight-social-post-meta {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 8px;
+}
+
+.insight-social-post-body {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #111;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.insight-social-hint {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.4);
+  margin: 0 14px 12px;
+  line-height: 1.45;
+}

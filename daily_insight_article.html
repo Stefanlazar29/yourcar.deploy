@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Articol · Mulberry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/daily_insights.css" />
+</head>
+<body class="insight-page-body">
+  <article class="insight-article-page" id="insight-article-root">
+    <div class="insight-article-hero" id="insight-article-hero">
+      <button type="button" class="insight-article-back" onclick="if (history.length > 1) { history.back(); } else { location.href='mulberry.html'; }" aria-label="Înapoi">←</button>
+      <span class="insight-article-hero-tags" id="insight-hero-tags"></span>
+      <h1 class="insight-article-hero-title" id="insight-hero-title"></h1>
+    </div>
+    <div class="insight-article-sheet">
+      <div class="insight-article-float-actions">
+        <button type="button" class="insight-float-btn" id="insight-share-btn" aria-label="Partajează">↗</button>
+      </div>
+      <div class="insight-article-meta" id="insight-article-meta"></div>
+      <div class="insight-article-body" id="insight-article-body"></div>
+      <div class="insight-frame-gallery" id="insight-frame-gallery" hidden></div>
+    </div>
+  </article>
+  <script src="js/config.js"></script>
+  <script src="js/daily_insight_article.js"></script>
+</body>
+</html>

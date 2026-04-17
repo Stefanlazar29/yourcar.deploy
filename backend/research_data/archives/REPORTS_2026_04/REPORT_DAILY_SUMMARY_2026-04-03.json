@@ -1,0 +1,6066 @@
+{
+  "schema": "mulberry_daily_archive_v2",
+  "generated_at": "2026-04-03T21:30:00Z",
+  "date": "2026-04-03",
+  "security_auth_audit": {
+    "counts_by_status": {
+      "SUCCESS": 4,
+      "TAB_CLOSE": 12116
+    },
+    "recent_events": [
+      {
+        "id": 12120,
+        "created_at": "2026-04-03T21:25:41",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12119,
+        "created_at": "2026-04-03T21:22:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12118,
+        "created_at": "2026-04-03T21:22:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12117,
+        "created_at": "2026-04-03T21:21:49",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12116,
+        "created_at": "2026-04-03T21:21:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12115,
+        "created_at": "2026-04-03T21:21:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12114,
+        "created_at": "2026-04-03T20:46:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12113,
+        "created_at": "2026-04-03T20:25:45",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12112,
+        "created_at": "2026-04-03T20:23:45",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12111,
+        "created_at": "2026-04-03T20:23:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12110,
+        "created_at": "2026-04-03T20:23:21",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12109,
+        "created_at": "2026-04-03T20:23:13",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12108,
+        "created_at": "2026-04-03T20:23:08",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12107,
+        "created_at": "2026-04-03T20:22:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12106,
+        "created_at": "2026-04-03T20:22:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12105,
+        "created_at": "2026-04-03T20:21:46",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12104,
+        "created_at": "2026-04-03T20:21:39",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12103,
+        "created_at": "2026-04-03T11:39:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12102,
+        "created_at": "2026-04-03T10:55:57",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12101,
+        "created_at": "2026-04-03T10:54:27",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12100,
+        "created_at": "2026-04-03T10:54:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12099,
+        "created_at": "2026-04-03T10:54:12",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12098,
+        "created_at": "2026-04-03T10:53:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12097,
+        "created_at": "2026-04-03T10:36:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12096,
+        "created_at": "2026-04-03T10:36:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12095,
+        "created_at": "2026-04-03T10:20:08",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12094,
+        "created_at": "2026-04-03T10:19:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12093,
+        "created_at": "2026-04-03T10:13:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12092,
+        "created_at": "2026-04-03T10:11:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12091,
+        "created_at": "2026-04-03T10:11:13",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12090,
+        "created_at": "2026-04-03T10:09:55",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12089,
+        "created_at": "2026-04-03T10:09:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12088,
+        "created_at": "2026-04-03T10:08:14",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12087,
+        "created_at": "2026-04-03T09:59:35",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12086,
+        "created_at": "2026-04-03T09:58:00",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12085,
+        "created_at": "2026-04-03T09:57:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12084,
+        "created_at": "2026-04-03T09:46:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12083,
+        "created_at": "2026-04-03T09:46:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12082,
+        "created_at": "2026-04-03T09:46:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12081,
+        "created_at": "2026-04-03T09:29:07",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12080,
+        "created_at": "2026-04-03T09:28:29",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12079,
+        "created_at": "2026-04-03T09:17:26",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12078,
+        "created_at": "2026-04-03T09:17:25",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12077,
+        "created_at": "2026-04-03T09:17:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12076,
+        "created_at": "2026-04-03T09:17:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12075,
+        "created_at": "2026-04-03T09:17:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12074,
+        "created_at": "2026-04-03T09:17:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12073,
+        "created_at": "2026-04-03T09:17:21",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12072,
+        "created_at": "2026-04-03T09:17:19",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12071,
+        "created_at": "2026-04-03T09:17:16",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12070,
+        "created_at": "2026-04-03T09:17:16",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12069,
+        "created_at": "2026-04-03T09:17:13",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12068,
+        "created_at": "2026-04-03T09:17:13",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12067,
+        "created_at": "2026-04-03T09:17:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12066,
+        "created_at": "2026-04-03T09:17:09",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12065,
+        "created_at": "2026-04-03T09:17:07",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12064,
+        "created_at": "2026-04-03T09:17:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12063,
+        "created_at": "2026-04-03T09:17:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12062,
+        "created_at": "2026-04-03T09:17:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12061,
+        "created_at": "2026-04-03T09:17:02",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12060,
+        "created_at": "2026-04-03T09:17:00",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12059,
+        "created_at": "2026-04-03T09:16:57",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12058,
+        "created_at": "2026-04-03T09:16:55",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12057,
+        "created_at": "2026-04-03T09:16:54",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12056,
+        "created_at": "2026-04-03T09:16:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12055,
+        "created_at": "2026-04-03T09:16:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12054,
+        "created_at": "2026-04-03T09:16:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12053,
+        "created_at": "2026-04-03T09:16:46",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12052,
+        "created_at": "2026-04-03T09:16:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12051,
+        "created_at": "2026-04-03T09:16:42",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12050,
+        "created_at": "2026-04-03T09:16:39",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12049,
+        "created_at": "2026-04-03T09:16:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12048,
+        "created_at": "2026-04-03T09:16:36",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12047,
+        "created_at": "2026-04-03T09:16:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12046,
+        "created_at": "2026-04-03T09:16:32",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12045,
+        "created_at": "2026-04-03T09:16:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12044,
+        "created_at": "2026-04-03T09:16:27",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12043,
+        "created_at": "2026-04-03T09:16:26",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12042,
+        "created_at": "2026-04-03T09:16:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12041,
+        "created_at": "2026-04-03T09:16:22",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12040,
+        "created_at": "2026-04-03T09:16:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12039,
+        "created_at": "2026-04-03T09:16:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12038,
+        "created_at": "2026-04-03T09:16:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12037,
+        "created_at": "2026-04-03T09:16:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12036,
+        "created_at": "2026-04-03T09:16:13",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12035,
+        "created_at": "2026-04-03T09:16:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12034,
+        "created_at": "2026-04-03T09:16:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12033,
+        "created_at": "2026-04-03T09:16:08",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12032,
+        "created_at": "2026-04-03T09:16:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12031,
+        "created_at": "2026-04-03T09:16:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12030,
+        "created_at": "2026-04-03T09:16:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12029,
+        "created_at": "2026-04-03T09:15:59",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12028,
+        "created_at": "2026-04-03T09:15:57",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12027,
+        "created_at": "2026-04-03T09:15:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12026,
+        "created_at": "2026-04-03T09:15:54",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12025,
+        "created_at": "2026-04-03T09:15:51",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12024,
+        "created_at": "2026-04-03T09:15:49",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12023,
+        "created_at": "2026-04-03T09:15:49",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12022,
+        "created_at": "2026-04-03T09:15:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12021,
+        "created_at": "2026-04-03T09:15:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12020,
+        "created_at": "2026-04-03T09:15:42",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12019,
+        "created_at": "2026-04-03T09:15:42",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12018,
+        "created_at": "2026-04-03T09:15:39",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12017,
+        "created_at": "2026-04-03T09:15:38",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12016,
+        "created_at": "2026-04-03T09:15:36",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12015,
+        "created_at": "2026-04-03T09:15:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12014,
+        "created_at": "2026-04-03T09:15:32",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12013,
+        "created_at": "2026-04-03T09:15:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12012,
+        "created_at": "2026-04-03T09:15:28",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12011,
+        "created_at": "2026-04-03T09:15:27",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12010,
+        "created_at": "2026-04-03T09:15:25",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12009,
+        "created_at": "2026-04-03T09:15:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12008,
+        "created_at": "2026-04-03T09:15:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12007,
+        "created_at": "2026-04-03T09:15:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12006,
+        "created_at": "2026-04-03T09:15:21",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12005,
+        "created_at": "2026-04-03T09:15:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12004,
+        "created_at": "2026-04-03T09:15:19",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12003,
+        "created_at": "2026-04-03T09:15:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12002,
+        "created_at": "2026-04-03T09:15:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12001,
+        "created_at": "2026-04-03T09:15:16",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      }
+    ]
+  },
+  "security_auth_audit_24h": [
+    {
+      "id": 11505,
+      "created_at": "2026-04-03T07:45:35",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11506,
+      "created_at": "2026-04-03T07:45:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11507,
+      "created_at": "2026-04-03T07:45:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11508,
+      "created_at": "2026-04-03T07:45:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11509,
+      "created_at": "2026-04-03T07:45:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11510,
+      "created_at": "2026-04-03T07:45:41",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11511,
+      "created_at": "2026-04-03T07:45:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11512,
+      "created_at": "2026-04-03T07:45:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11513,
+      "created_at": "2026-04-03T07:45:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11514,
+      "created_at": "2026-04-03T07:45:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11515,
+      "created_at": "2026-04-03T07:45:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11516,
+      "created_at": "2026-04-03T07:45:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11517,
+      "created_at": "2026-04-03T07:45:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11518,
+      "created_at": "2026-04-03T07:45:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11519,
+      "created_at": "2026-04-03T07:45:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11520,
+      "created_at": "2026-04-03T07:46:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11521,
+      "created_at": "2026-04-03T07:46:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11522,
+      "created_at": "2026-04-03T07:46:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11523,
+      "created_at": "2026-04-03T07:46:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11524,
+      "created_at": "2026-04-03T07:46:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11525,
+      "created_at": "2026-04-03T07:46:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11526,
+      "created_at": "2026-04-03T07:46:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11527,
+      "created_at": "2026-04-03T07:46:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11528,
+      "created_at": "2026-04-03T07:46:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11529,
+      "created_at": "2026-04-03T07:46:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11530,
+      "created_at": "2026-04-03T07:46:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11531,
+      "created_at": "2026-04-03T07:46:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11532,
+      "created_at": "2026-04-03T07:46:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11533,
+      "created_at": "2026-04-03T07:46:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11534,
+      "created_at": "2026-04-03T07:46:57",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11535,
+      "created_at": "2026-04-03T07:47:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11536,
+      "created_at": "2026-04-03T07:47:07",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11537,
+      "created_at": "2026-04-03T07:47:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11538,
+      "created_at": "2026-04-03T07:47:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11539,
+      "created_at": "2026-04-03T07:47:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11540,
+      "created_at": "2026-04-03T07:47:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11541,
+      "created_at": "2026-04-03T07:47:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11542,
+      "created_at": "2026-04-03T07:47:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11543,
+      "created_at": "2026-04-03T07:47:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11544,
+      "created_at": "2026-04-03T07:47:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11545,
+      "created_at": "2026-04-03T07:47:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11546,
+      "created_at": "2026-04-03T07:47:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11547,
+      "created_at": "2026-04-03T07:47:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11548,
+      "created_at": "2026-04-03T07:47:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11549,
+      "created_at": "2026-04-03T07:47:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11550,
+      "created_at": "2026-04-03T07:47:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11551,
+      "created_at": "2026-04-03T07:47:48",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11552,
+      "created_at": "2026-04-03T07:47:48",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11553,
+      "created_at": "2026-04-03T07:47:53",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11554,
+      "created_at": "2026-04-03T07:47:53",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11555,
+      "created_at": "2026-04-03T07:47:58",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11556,
+      "created_at": "2026-04-03T07:48:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11557,
+      "created_at": "2026-04-03T07:48:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11558,
+      "created_at": "2026-04-03T07:48:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11559,
+      "created_at": "2026-04-03T07:48:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11560,
+      "created_at": "2026-04-03T07:48:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11561,
+      "created_at": "2026-04-03T07:48:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11562,
+      "created_at": "2026-04-03T07:48:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11563,
+      "created_at": "2026-04-03T07:54:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11564,
+      "created_at": "2026-04-03T07:54:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11565,
+      "created_at": "2026-04-03T08:04:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11566,
+      "created_at": "2026-04-03T08:04:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11567,
+      "created_at": "2026-04-03T08:06:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11568,
+      "created_at": "2026-04-03T08:06:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11569,
+      "created_at": "2026-04-03T08:06:10",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11570,
+      "created_at": "2026-04-03T08:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11571,
+      "created_at": "2026-04-03T08:06:41",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11572,
+      "created_at": "2026-04-03T08:06:41",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11573,
+      "created_at": "2026-04-03T08:06:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11574,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11575,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11576,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11577,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11578,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11579,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11580,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11581,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11582,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11583,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11584,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11585,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11586,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11587,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11588,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11589,
+      "created_at": "2026-04-03T08:55:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11590,
+      "created_at": "2026-04-03T08:55:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11591,
+      "created_at": "2026-04-03T08:55:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11592,
+      "created_at": "2026-04-03T08:55:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11593,
+      "created_at": "2026-04-03T08:55:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11594,
+      "created_at": "2026-04-03T08:55:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11595,
+      "created_at": "2026-04-03T08:55:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11596,
+      "created_at": "2026-04-03T08:55:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11597,
+      "created_at": "2026-04-03T08:55:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11598,
+      "created_at": "2026-04-03T08:55:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11599,
+      "created_at": "2026-04-03T08:55:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11600,
+      "created_at": "2026-04-03T08:55:26",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11601,
+      "created_at": "2026-04-03T08:55:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11602,
+      "created_at": "2026-04-03T08:55:29",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11603,
+      "created_at": "2026-04-03T08:55:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11604,
+      "created_at": "2026-04-03T08:55:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11605,
+      "created_at": "2026-04-03T08:55:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11606,
+      "created_at": "2026-04-03T08:55:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11607,
+      "created_at": "2026-04-03T08:55:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11608,
+      "created_at": "2026-04-03T08:55:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11609,
+      "created_at": "2026-04-03T08:55:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11610,
+      "created_at": "2026-04-03T08:55:40",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11611,
+      "created_at": "2026-04-03T08:55:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11612,
+      "created_at": "2026-04-03T08:55:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11613,
+      "created_at": "2026-04-03T08:56:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11614,
+      "created_at": "2026-04-03T08:56:07",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11615,
+      "created_at": "2026-04-03T08:56:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11616,
+      "created_at": "2026-04-03T08:56:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11617,
+      "created_at": "2026-04-03T08:56:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11618,
+      "created_at": "2026-04-03T08:56:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11619,
+      "created_at": "2026-04-03T08:56:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11620,
+      "created_at": "2026-04-03T08:56:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11621,
+      "created_at": "2026-04-03T08:56:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11622,
+      "created_at": "2026-04-03T08:56:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11623,
+      "created_at": "2026-04-03T08:56:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11624,
+      "created_at": "2026-04-03T08:56:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11625,
+      "created_at": "2026-04-03T08:56:51",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11626,
+      "created_at": "2026-04-03T08:56:51",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11627,
+      "created_at": "2026-04-03T08:56:56",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11628,
+      "created_at": "2026-04-03T08:56:56",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11629,
+      "created_at": "2026-04-03T08:56:57",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11630,
+      "created_at": "2026-04-03T08:57:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11631,
+      "created_at": "2026-04-03T08:57:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11632,
+      "created_at": "2026-04-03T08:57:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11633,
+      "created_at": "2026-04-03T08:57:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11634,
+      "created_at": "2026-04-03T08:57:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11635,
+      "created_at": "2026-04-03T08:57:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11636,
+      "created_at": "2026-04-03T08:57:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11637,
+      "created_at": "2026-04-03T08:57:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11638,
+      "created_at": "2026-04-03T08:57:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11639,
+      "created_at": "2026-04-03T08:57:10",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11640,
+      "created_at": "2026-04-03T08:57:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11641,
+      "created_at": "2026-04-03T08:57:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11642,
+      "created_at": "2026-04-03T08:57:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11643,
+      "created_at": "2026-04-03T08:57:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11644,
+      "created_at": "2026-04-03T08:57:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11645,
+      "created_at": "2026-04-03T08:57:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11646,
+      "created_at": "2026-04-03T08:57:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11647,
+      "created_at": "2026-04-03T08:57:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11648,
+      "created_at": "2026-04-03T08:57:26",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11649,
+      "created_at": "2026-04-03T08:57:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11650,
+      "created_at": "2026-04-03T08:57:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11651,
+      "created_at": "2026-04-03T08:57:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11652,
+      "created_at": "2026-04-03T08:57:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11653,
+      "created_at": "2026-04-03T08:57:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11654,
+      "created_at": "2026-04-03T08:57:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11655,
+      "created_at": "2026-04-03T08:57:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11656,
+      "created_at": "2026-04-03T08:57:40",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11657,
+      "created_at": "2026-04-03T08:57:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11658,
+      "created_at": "2026-04-03T08:57:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11659,
+      "created_at": "2026-04-03T08:57:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11660,
+      "created_at": "2026-04-03T08:57:48",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11661,
+      "created_at": "2026-04-03T08:57:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11662,
+      "created_at": "2026-04-03T08:57:53",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11663,
+      "created_at": "2026-04-03T08:57:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11664,
+      "created_at": "2026-04-03T08:57:56",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11665,
+      "created_at": "2026-04-03T08:57:58",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11666,
+      "created_at": "2026-04-03T08:58:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11667,
+      "created_at": "2026-04-03T08:58:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11668,
+      "created_at": "2026-04-03T08:58:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11669,
+      "created_at": "2026-04-03T08:58:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11670,
+      "created_at": "2026-04-03T08:58:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11671,
+      "created_at": "2026-04-03T08:58:11",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11672,
+      "created_at": "2026-04-03T08:58:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11673,
+      "created_at": "2026-04-03T08:58:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11674,
+      "created_at": "2026-04-03T08:58:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11675,
+      "created_at": "2026-04-03T08:58:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11676,
+      "created_at": "2026-04-03T08:58:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11677,
+      "created_at": "2026-04-03T08:58:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11678,
+      "created_at": "2026-04-03T08:58:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11679,
+      "created_at": "2026-04-03T08:58:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11680,
+      "created_at": "2026-04-03T08:58:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11681,
+      "created_at": "2026-04-03T08:58:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11682,
+      "created_at": "2026-04-03T08:58:29",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11683,
+      "created_at": "2026-04-03T08:58:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11684,
+      "created_at": "2026-04-03T08:58:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11685,
+      "created_at": "2026-04-03T08:58:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11686,
+      "created_at": "2026-04-03T08:58:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11687,
+      "created_at": "2026-04-03T08:58:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11688,
+      "created_at": "2026-04-03T08:58:40",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11689,
+      "created_at": "2026-04-03T08:58:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11690,
+      "created_at": "2026-04-03T08:58:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11691,
+      "created_at": "2026-04-03T08:58:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11692,
+      "created_at": "2026-04-03T08:58:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11693,
+      "created_at": "2026-04-03T08:58:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11694,
+      "created_at": "2026-04-03T08:58:51",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11695,
+      "created_at": "2026-04-03T08:58:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11696,
+      "created_at": "2026-04-03T08:58:55",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11697,
+      "created_at": "2026-04-03T08:58:57",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11698,
+      "created_at": "2026-04-03T08:58:59",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11699,
+      "created_at": "2026-04-03T08:59:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11700,
+      "created_at": "2026-04-03T08:59:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11701,
+      "created_at": "2026-04-03T08:59:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11702,
+      "created_at": "2026-04-03T08:59:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11703,
+      "created_at": "2026-04-03T08:59:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11704,
+      "created_at": "2026-04-03T08:59:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11705,
+      "created_at": "2026-04-03T08:59:11",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11706,
+      "created_at": "2026-04-03T08:59:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11707,
+      "created_at": "2026-04-03T08:59:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11708,
+      "created_at": "2026-04-03T08:59:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11709,
+      "created_at": "2026-04-03T08:59:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11710,
+      "created_at": "2026-04-03T08:59:19",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11711,
+      "created_at": "2026-04-03T08:59:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11712,
+      "created_at": "2026-04-03T08:59:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11713,
+      "created_at": "2026-04-03T08:59:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11714,
+      "created_at": "2026-04-03T08:59:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11715,
+      "created_at": "2026-04-03T08:59:48",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11716,
+      "created_at": "2026-04-03T08:59:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11717,
+      "created_at": "2026-04-03T08:59:57",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11718,
+      "created_at": "2026-04-03T09:00:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11719,
+      "created_at": "2026-04-03T09:00:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11720,
+      "created_at": "2026-04-03T09:00:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11721,
+      "created_at": "2026-04-03T09:00:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11722,
+      "created_at": "2026-04-03T09:00:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11723,
+      "created_at": "2026-04-03T09:00:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11724,
+      "created_at": "2026-04-03T09:00:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11725,
+      "created_at": "2026-04-03T09:00:11",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11726,
+      "created_at": "2026-04-03T09:00:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11727,
+      "created_at": "2026-04-03T09:00:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11728,
+      "created_at": "2026-04-03T09:00:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11729,
+      "created_at": "2026-04-03T09:00:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11730,
+      "created_at": "2026-04-03T09:00:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11731,
+      "created_at": "2026-04-03T09:00:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11732,
+      "created_at": "2026-04-03T09:00:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11733,
+      "created_at": "2026-04-03T09:00:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11734,
+      "created_at": "2026-04-03T09:00:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11735,
+      "created_at": "2026-04-03T09:00:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11736,
+      "created_at": "2026-04-03T09:00:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11737,
+      "created_at": "2026-04-03T09:00:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11738,
+      "created_at": "2026-04-03T09:00:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11739,
+      "created_at": "2026-04-03T09:00:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11740,
+      "created_at": "2026-04-03T09:00:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11741,
+      "created_at": "2026-04-03T09:00:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11742,
+      "created_at": "2026-04-03T09:00:55",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11743,
+      "created_at": "2026-04-03T09:01:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11744,
+      "created_at": "2026-04-03T09:01:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11745,
+      "created_at": "2026-04-03T09:01:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11746,
+      "created_at": "2026-04-03T09:01:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11747,
+      "created_at": "2026-04-03T09:01:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11748,
+      "created_at": "2026-04-03T09:01:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11749,
+      "created_at": "2026-04-03T09:01:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11750,
+      "created_at": "2026-04-03T09:01:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11751,
+      "created_at": "2026-04-03T09:01:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11752,
+      "created_at": "2026-04-03T09:01:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11753,
+      "created_at": "2026-04-03T09:01:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11754,
+      "created_at": "2026-04-03T09:01:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11755,
+      "created_at": "2026-04-03T09:01:26",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11756,
+      "created_at": "2026-04-03T09:01:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11757,
+      "created_at": "2026-04-03T09:01:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11758,
+      "created_at": "2026-04-03T09:01:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11759,
+      "created_at": "2026-04-03T09:01:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11760,
+      "created_at": "2026-04-03T09:01:35",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11761,
+      "created_at": "2026-04-03T09:01:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11762,
+      "created_at": "2026-04-03T09:01:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11763,
+      "created_at": "2026-04-03T09:01:40",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11764,
+      "created_at": "2026-04-03T09:01:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11765,
+      "created_at": "2026-04-03T09:01:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11766,
+      "created_at": "2026-04-03T09:01:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11767,
+      "created_at": "2026-04-03T09:01:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11768,
+      "created_at": "2026-04-03T09:01:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11769,
+      "created_at": "2026-04-03T09:01:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11770,
+      "created_at": "2026-04-03T09:01:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11771,
+      "created_at": "2026-04-03T09:01:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11772,
+      "created_at": "2026-04-03T09:01:56",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11773,
+      "created_at": "2026-04-03T09:01:59",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11774,
+      "created_at": "2026-04-03T09:01:59",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11775,
+      "created_at": "2026-04-03T09:02:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11776,
+      "created_at": "2026-04-03T09:02:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11777,
+      "created_at": "2026-04-03T09:02:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11778,
+      "created_at": "2026-04-03T09:02:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11779,
+      "created_at": "2026-04-03T09:02:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11780,
+      "created_at": "2026-04-03T09:02:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11781,
+      "created_at": "2026-04-03T09:02:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11782,
+      "created_at": "2026-04-03T09:02:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11783,
+      "created_at": "2026-04-03T09:02:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11784,
+      "created_at": "2026-04-03T09:02:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11785,
+      "created_at": "2026-04-03T09:02:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11786,
+      "created_at": "2026-04-03T09:02:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11787,
+      "created_at": "2026-04-03T09:02:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11788,
+      "created_at": "2026-04-03T09:02:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11789,
+      "created_at": "2026-04-03T09:02:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11790,
+      "created_at": "2026-04-03T09:02:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11791,
+      "created_at": "2026-04-03T09:02:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11792,
+      "created_at": "2026-04-03T09:02:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11793,
+      "created_at": "2026-04-03T09:02:19",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11794,
+      "created_at": "2026-04-03T09:02:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11795,
+      "created_at": "2026-04-03T09:02:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11796,
+      "created_at": "2026-04-03T09:02:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11797,
+      "created_at": "2026-04-03T09:02:26",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11798,
+      "created_at": "2026-04-03T09:02:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11799,
+      "created_at": "2026-04-03T09:02:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11800,
+      "created_at": "2026-04-03T09:02:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11801,
+      "created_at": "2026-04-03T09:02:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11802,
+      "created_at": "2026-04-03T09:02:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11803,
+      "created_at": "2026-04-03T09:03:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11804,
+      "created_at": "2026-04-03T09:03:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11805,
+      "created_at": "2026-04-03T09:03:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11806,
+      "created_at": "2026-04-03T09:03:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11807,
+      "created_at": "2026-04-03T09:03:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11808,
+      "created_at": "2026-04-03T09:03:48",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11809,
+      "created_at": "2026-04-03T09:03:48",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11810,
+      "created_at": "2026-04-03T09:03:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11811,
+      "created_at": "2026-04-03T09:03:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11812,
+      "created_at": "2026-04-03T09:06:11",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11813,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11814,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11815,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11816,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11817,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11818,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11819,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11820,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11821,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11822,
+      "created_at": "2026-04-03T09:06:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11823,
+      "created_at": "2026-04-03T09:06:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11824,
+      "created_at": "2026-04-03T09:06:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11825,
+      "created_at": "2026-04-03T09:06:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11826,
+      "created_at": "2026-04-03T09:06:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11827,
+      "created_at": "2026-04-03T09:06:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11828,
+      "created_at": "2026-04-03T09:06:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11829,
+      "created_at": "2026-04-03T09:10:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11830,
+      "created_at": "2026-04-03T09:10:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11831,
+      "created_at": "2026-04-03T09:10:07",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11832,
+      "created_at": "2026-04-03T09:10:10",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11833,
+      "created_at": "2026-04-03T09:10:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11834,
+      "created_at": "2026-04-03T09:10:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11835,
+      "created_at": "2026-04-03T09:10:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11836,
+      "created_at": "2026-04-03T09:10:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11837,
+      "created_at": "2026-04-03T09:10:19",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11838,
+      "created_at": "2026-04-03T09:10:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11839,
+      "created_at": "2026-04-03T09:10:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11840,
+      "created_at": "2026-04-03T09:10:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11841,
+      "created_at": "2026-04-03T09:10:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11842,
+      "created_at": "2026-04-03T09:10:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11843,
+      "created_at": "2026-04-03T09:10:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11844,
+      "created_at": "2026-04-03T09:10:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11845,
+      "created_at": "2026-04-03T09:10:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11846,
+      "created_at": "2026-04-03T09:10:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11847,
+      "created_at": "2026-04-03T09:10:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11848,
+      "created_at": "2026-04-03T09:10:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11849,
+      "created_at": "2026-04-03T09:10:35",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11850,
+      "created_at": "2026-04-03T09:10:35",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11851,
+      "created_at": "2026-04-03T09:10:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11852,
+      "created_at": "2026-04-03T09:10:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11853,
+      "created_at": "2026-04-03T09:10:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11854,
+      "created_at": "2026-04-03T09:10:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11855,
+      "created_at": "2026-04-03T09:10:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11856,
+      "created_at": "2026-04-03T09:10:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11857,
+      "created_at": "2026-04-03T09:10:45",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11858,
+      "created_at": "2026-04-03T09:10:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11859,
+      "created_at": "2026-04-03T09:10:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11860,
+      "created_at": "2026-04-03T09:10:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11861,
+      "created_at": "2026-04-03T09:10:48",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11862,
+      "created_at": "2026-04-03T09:10:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11863,
+      "created_at": "2026-04-03T09:10:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11864,
+      "created_at": "2026-04-03T09:10:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11865,
+      "created_at": "2026-04-03T09:10:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11866,
+      "created_at": "2026-04-03T09:10:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11867,
+      "created_at": "2026-04-03T09:10:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11868,
+      "created_at": "2026-04-03T09:10:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11869,
+      "created_at": "2026-04-03T09:10:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11870,
+      "created_at": "2026-04-03T09:10:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11871,
+      "created_at": "2026-04-03T09:10:57",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11872,
+      "created_at": "2026-04-03T09:10:59",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11873,
+      "created_at": "2026-04-03T09:11:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11874,
+      "created_at": "2026-04-03T09:11:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11875,
+      "created_at": "2026-04-03T09:11:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11876,
+      "created_at": "2026-04-03T09:11:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11877,
+      "created_at": "2026-04-03T09:11:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11878,
+      "created_at": "2026-04-03T09:11:07",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11879,
+      "created_at": "2026-04-03T09:11:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11880,
+      "created_at": "2026-04-03T09:11:11",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11881,
+      "created_at": "2026-04-03T09:11:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11882,
+      "created_at": "2026-04-03T09:11:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11883,
+      "created_at": "2026-04-03T09:11:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11884,
+      "created_at": "2026-04-03T09:11:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11885,
+      "created_at": "2026-04-03T09:11:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11886,
+      "created_at": "2026-04-03T09:11:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11887,
+      "created_at": "2026-04-03T09:11:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11888,
+      "created_at": "2026-04-03T09:11:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11889,
+      "created_at": "2026-04-03T09:11:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11890,
+      "created_at": "2026-04-03T09:11:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11891,
+      "created_at": "2026-04-03T09:11:26",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11892,
+      "created_at": "2026-04-03T09:11:26",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11893,
+      "created_at": "2026-04-03T09:11:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11894,
+      "created_at": "2026-04-03T09:11:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11895,
+      "created_at": "2026-04-03T09:11:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11896,
+      "created_at": "2026-04-03T09:11:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11897,
+      "created_at": "2026-04-03T09:11:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11898,
+      "created_at": "2026-04-03T09:11:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11899,
+      "created_at": "2026-04-03T09:11:35",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11900,
+      "created_at": "2026-04-03T09:11:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11901,
+      "created_at": "2026-04-03T09:11:40",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11902,
+      "created_at": "2026-04-03T09:11:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11903,
+      "created_at": "2026-04-03T09:11:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11904,
+      "created_at": "2026-04-03T09:11:45",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11905,
+      "created_at": "2026-04-03T09:11:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11906,
+      "created_at": "2026-04-03T09:11:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11907,
+      "created_at": "2026-04-03T09:11:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11908,
+      "created_at": "2026-04-03T09:11:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11909,
+      "created_at": "2026-04-03T09:11:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11910,
+      "created_at": "2026-04-03T09:11:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11911,
+      "created_at": "2026-04-03T09:11:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11912,
+      "created_at": "2026-04-03T09:11:56",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11913,
+      "created_at": "2026-04-03T09:11:56",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11914,
+      "created_at": "2026-04-03T09:11:58",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11915,
+      "created_at": "2026-04-03T09:11:58",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11916,
+      "created_at": "2026-04-03T09:11:59",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11917,
+      "created_at": "2026-04-03T09:11:59",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11918,
+      "created_at": "2026-04-03T09:12:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11919,
+      "created_at": "2026-04-03T09:12:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11920,
+      "created_at": "2026-04-03T09:12:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11921,
+      "created_at": "2026-04-03T09:12:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11922,
+      "created_at": "2026-04-03T09:12:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11923,
+      "created_at": "2026-04-03T09:12:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11924,
+      "created_at": "2026-04-03T09:12:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11925,
+      "created_at": "2026-04-03T09:12:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11926,
+      "created_at": "2026-04-03T09:12:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11927,
+      "created_at": "2026-04-03T09:12:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11928,
+      "created_at": "2026-04-03T09:12:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11929,
+      "created_at": "2026-04-03T09:12:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11930,
+      "created_at": "2026-04-03T09:12:07",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11931,
+      "created_at": "2026-04-03T09:12:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11932,
+      "created_at": "2026-04-03T09:12:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11933,
+      "created_at": "2026-04-03T09:12:10",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11934,
+      "created_at": "2026-04-03T09:12:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11935,
+      "created_at": "2026-04-03T09:12:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11936,
+      "created_at": "2026-04-03T09:12:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11937,
+      "created_at": "2026-04-03T09:12:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11938,
+      "created_at": "2026-04-03T09:12:19",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11939,
+      "created_at": "2026-04-03T09:12:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11940,
+      "created_at": "2026-04-03T09:12:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11941,
+      "created_at": "2026-04-03T09:12:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11942,
+      "created_at": "2026-04-03T09:12:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11943,
+      "created_at": "2026-04-03T09:12:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11944,
+      "created_at": "2026-04-03T09:12:29",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11945,
+      "created_at": "2026-04-03T09:12:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11946,
+      "created_at": "2026-04-03T09:12:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11947,
+      "created_at": "2026-04-03T09:12:31",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11948,
+      "created_at": "2026-04-03T09:12:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11949,
+      "created_at": "2026-04-03T09:12:35",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11950,
+      "created_at": "2026-04-03T09:12:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11951,
+      "created_at": "2026-04-03T09:12:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11952,
+      "created_at": "2026-04-03T09:12:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11953,
+      "created_at": "2026-04-03T09:12:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11954,
+      "created_at": "2026-04-03T09:12:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11955,
+      "created_at": "2026-04-03T09:12:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11956,
+      "created_at": "2026-04-03T09:12:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11957,
+      "created_at": "2026-04-03T09:12:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11958,
+      "created_at": "2026-04-03T09:12:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11959,
+      "created_at": "2026-04-03T09:12:56",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11960,
+      "created_at": "2026-04-03T09:12:59",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11961,
+      "created_at": "2026-04-03T09:13:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11962,
+      "created_at": "2026-04-03T09:13:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11963,
+      "created_at": "2026-04-03T09:13:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11964,
+      "created_at": "2026-04-03T09:13:06",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11965,
+      "created_at": "2026-04-03T09:13:07",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11966,
+      "created_at": "2026-04-03T09:13:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11967,
+      "created_at": "2026-04-03T09:13:11",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11968,
+      "created_at": "2026-04-03T09:13:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11969,
+      "created_at": "2026-04-03T09:13:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11970,
+      "created_at": "2026-04-03T09:13:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11971,
+      "created_at": "2026-04-03T09:13:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11972,
+      "created_at": "2026-04-03T09:13:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11973,
+      "created_at": "2026-04-03T09:13:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11974,
+      "created_at": "2026-04-03T09:13:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11975,
+      "created_at": "2026-04-03T09:13:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11976,
+      "created_at": "2026-04-03T09:13:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11977,
+      "created_at": "2026-04-03T09:13:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11978,
+      "created_at": "2026-04-03T09:13:29",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11979,
+      "created_at": "2026-04-03T09:13:29",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11980,
+      "created_at": "2026-04-03T09:13:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11981,
+      "created_at": "2026-04-03T09:13:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11982,
+      "created_at": "2026-04-03T09:13:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11983,
+      "created_at": "2026-04-03T09:13:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11984,
+      "created_at": "2026-04-03T09:13:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11985,
+      "created_at": "2026-04-03T09:13:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11986,
+      "created_at": "2026-04-03T09:13:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11987,
+      "created_at": "2026-04-03T09:13:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11988,
+      "created_at": "2026-04-03T09:13:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11989,
+      "created_at": "2026-04-03T09:13:40",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11990,
+      "created_at": "2026-04-03T09:13:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11991,
+      "created_at": "2026-04-03T09:13:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11992,
+      "created_at": "2026-04-03T09:13:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11993,
+      "created_at": "2026-04-03T09:14:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11994,
+      "created_at": "2026-04-03T09:14:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11995,
+      "created_at": "2026-04-03T09:14:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11996,
+      "created_at": "2026-04-03T09:14:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11997,
+      "created_at": "2026-04-03T09:14:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11998,
+      "created_at": "2026-04-03T09:14:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 11999,
+      "created_at": "2026-04-03T09:14:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12000,
+      "created_at": "2026-04-03T09:14:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12001,
+      "created_at": "2026-04-03T09:15:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12002,
+      "created_at": "2026-04-03T09:15:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12003,
+      "created_at": "2026-04-03T09:15:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12004,
+      "created_at": "2026-04-03T09:15:19",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12005,
+      "created_at": "2026-04-03T09:15:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12006,
+      "created_at": "2026-04-03T09:15:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12007,
+      "created_at": "2026-04-03T09:15:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12008,
+      "created_at": "2026-04-03T09:15:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12009,
+      "created_at": "2026-04-03T09:15:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12010,
+      "created_at": "2026-04-03T09:15:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12011,
+      "created_at": "2026-04-03T09:15:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12012,
+      "created_at": "2026-04-03T09:15:28",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12013,
+      "created_at": "2026-04-03T09:15:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12014,
+      "created_at": "2026-04-03T09:15:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12015,
+      "created_at": "2026-04-03T09:15:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12016,
+      "created_at": "2026-04-03T09:15:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12017,
+      "created_at": "2026-04-03T09:15:38",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12018,
+      "created_at": "2026-04-03T09:15:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12019,
+      "created_at": "2026-04-03T09:15:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12020,
+      "created_at": "2026-04-03T09:15:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12021,
+      "created_at": "2026-04-03T09:15:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12022,
+      "created_at": "2026-04-03T09:15:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12023,
+      "created_at": "2026-04-03T09:15:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12024,
+      "created_at": "2026-04-03T09:15:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12025,
+      "created_at": "2026-04-03T09:15:51",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12026,
+      "created_at": "2026-04-03T09:15:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12027,
+      "created_at": "2026-04-03T09:15:56",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12028,
+      "created_at": "2026-04-03T09:15:57",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12029,
+      "created_at": "2026-04-03T09:15:59",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12030,
+      "created_at": "2026-04-03T09:16:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12031,
+      "created_at": "2026-04-03T09:16:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12032,
+      "created_at": "2026-04-03T09:16:05",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12033,
+      "created_at": "2026-04-03T09:16:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12034,
+      "created_at": "2026-04-03T09:16:10",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12035,
+      "created_at": "2026-04-03T09:16:10",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12036,
+      "created_at": "2026-04-03T09:16:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12037,
+      "created_at": "2026-04-03T09:16:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12038,
+      "created_at": "2026-04-03T09:16:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12039,
+      "created_at": "2026-04-03T09:16:18",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12040,
+      "created_at": "2026-04-03T09:16:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12041,
+      "created_at": "2026-04-03T09:16:22",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12042,
+      "created_at": "2026-04-03T09:16:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12043,
+      "created_at": "2026-04-03T09:16:26",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12044,
+      "created_at": "2026-04-03T09:16:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12045,
+      "created_at": "2026-04-03T09:16:30",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12046,
+      "created_at": "2026-04-03T09:16:32",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12047,
+      "created_at": "2026-04-03T09:16:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12048,
+      "created_at": "2026-04-03T09:16:36",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12049,
+      "created_at": "2026-04-03T09:16:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12050,
+      "created_at": "2026-04-03T09:16:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12051,
+      "created_at": "2026-04-03T09:16:42",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12052,
+      "created_at": "2026-04-03T09:16:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12053,
+      "created_at": "2026-04-03T09:16:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12054,
+      "created_at": "2026-04-03T09:16:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12055,
+      "created_at": "2026-04-03T09:16:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12056,
+      "created_at": "2026-04-03T09:16:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12057,
+      "created_at": "2026-04-03T09:16:54",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12058,
+      "created_at": "2026-04-03T09:16:55",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12059,
+      "created_at": "2026-04-03T09:16:57",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12060,
+      "created_at": "2026-04-03T09:17:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12061,
+      "created_at": "2026-04-03T09:17:02",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12062,
+      "created_at": "2026-04-03T09:17:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12063,
+      "created_at": "2026-04-03T09:17:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12064,
+      "created_at": "2026-04-03T09:17:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12065,
+      "created_at": "2026-04-03T09:17:07",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12066,
+      "created_at": "2026-04-03T09:17:09",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12067,
+      "created_at": "2026-04-03T09:17:11",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12068,
+      "created_at": "2026-04-03T09:17:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12069,
+      "created_at": "2026-04-03T09:17:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12070,
+      "created_at": "2026-04-03T09:17:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12071,
+      "created_at": "2026-04-03T09:17:16",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12072,
+      "created_at": "2026-04-03T09:17:19",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12073,
+      "created_at": "2026-04-03T09:17:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12074,
+      "created_at": "2026-04-03T09:17:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12075,
+      "created_at": "2026-04-03T09:17:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12076,
+      "created_at": "2026-04-03T09:17:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12077,
+      "created_at": "2026-04-03T09:17:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12078,
+      "created_at": "2026-04-03T09:17:25",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12079,
+      "created_at": "2026-04-03T09:17:26",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12080,
+      "created_at": "2026-04-03T09:28:29",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12081,
+      "created_at": "2026-04-03T09:29:07",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12082,
+      "created_at": "2026-04-03T09:46:24",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12083,
+      "created_at": "2026-04-03T09:46:44",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12084,
+      "created_at": "2026-04-03T09:46:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12085,
+      "created_at": "2026-04-03T09:57:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12086,
+      "created_at": "2026-04-03T09:58:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12087,
+      "created_at": "2026-04-03T09:59:35",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12088,
+      "created_at": "2026-04-03T10:08:14",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12089,
+      "created_at": "2026-04-03T10:09:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12090,
+      "created_at": "2026-04-03T10:09:55",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12091,
+      "created_at": "2026-04-03T10:11:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12092,
+      "created_at": "2026-04-03T10:11:33",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12093,
+      "created_at": "2026-04-03T10:13:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12094,
+      "created_at": "2026-04-03T10:19:15",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12095,
+      "created_at": "2026-04-03T10:20:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12096,
+      "created_at": "2026-04-03T10:36:23",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12097,
+      "created_at": "2026-04-03T10:36:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12098,
+      "created_at": "2026-04-03T10:53:52",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12099,
+      "created_at": "2026-04-03T10:54:12",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12100,
+      "created_at": "2026-04-03T10:54:20",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12101,
+      "created_at": "2026-04-03T10:54:27",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12102,
+      "created_at": "2026-04-03T10:55:57",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12103,
+      "created_at": "2026-04-03T11:39:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12104,
+      "created_at": "2026-04-03T20:21:39",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12105,
+      "created_at": "2026-04-03T20:21:46",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12106,
+      "created_at": "2026-04-03T20:22:04",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12107,
+      "created_at": "2026-04-03T20:22:11",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12108,
+      "created_at": "2026-04-03T20:23:08",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12109,
+      "created_at": "2026-04-03T20:23:13",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12110,
+      "created_at": "2026-04-03T20:23:21",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12111,
+      "created_at": "2026-04-03T20:23:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12112,
+      "created_at": "2026-04-03T20:23:45",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12113,
+      "created_at": "2026-04-03T20:25:45",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12114,
+      "created_at": "2026-04-03T20:46:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12115,
+      "created_at": "2026-04-03T21:21:43",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12116,
+      "created_at": "2026-04-03T21:21:47",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12117,
+      "created_at": "2026-04-03T21:21:49",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12118,
+      "created_at": "2026-04-03T21:22:01",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12119,
+      "created_at": "2026-04-03T21:22:03",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12120,
+      "created_at": "2026-04-03T21:25:41",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    }
+  ],
+  "fleet_inventory": {
+    "total_vehicles": 1,
+    "last_update": "2026-03-26T09:03:40+00:00",
+    "vehicles": [
+      {
+        "vin": "TMBCY46Y654251499",
+        "make": "Skoda",
+        "model": "6Y / Fabia",
+        "year": "2004",
+        "fuel": "benzina",
+        "plate": "BZ-39-ALZ",
+        "series": "AESK120011T35E4"
+      }
+    ]
+  },
+  "fleet_soft_score_snapshot": {
+    "by_vin": {
+      "TMBCY46Y654251499": 12.0
+    },
+    "avg": 12.0
+  },
+  "soft_score_delta_vs_previous": {
+    "note": "Nu există snapshot anterior (prima zi sau arhivă lipsă)."
+  },
+  "device_signature_authorized": "",
+  "technical_exo_intelligence": {
+    "recent_insights": [
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Verifică prețurile service în România → Caută oferte online",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T21:15:52"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Skoda Fabia 6Y: probleme cu cutia de viteze → Verifică istoricul vehiculului",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T21:15:52"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Verifică starea vehiculului la 0 km → Contactează service Skoda",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T21:15:52"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Inspecția tehnică periodică este obligatorie → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T21:15:52"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Asigurarea RCA este obligatorie în România → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T21:15:52"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Verifică valoarea de piață a vehiculului → Consultă site-uri de specialitate",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:42:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⛽ COMBUSTIBIL Monitorizează consumul de benzină → Verifică indicatorul de consum",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:42:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Verifică starea vehiculului la 0 km → Contactează service autorizat",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:42:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Inspectie tehnică periodică necesară → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:42:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Asigurare RCA obligatorie → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:42:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "👤 PERSONALIZAT Uzura estimată la 0 km este minimă → Monitorizează kilometrajul",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:12:51"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Verifică problemele cunoscute ale modelului → Caută pe forumuri și site-uri specializate",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:12:51"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Verifică prețurile combustibilului în România → Caută pe site-urile de petrol",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:12:51"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Efectuează o revisie inițială la service → Contactează service Skoda",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:12:51"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică și obține RCA și ITP → Contactează asigurător și ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T20:12:51"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Verifică valoarea de piață → Consultă site-uri de specialitate",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:42:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⛽ COMBUSTIBIL Verifică consumul de benzină → Monitorizează consumul",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:42:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Verifică și schimbă lichidele și filtrele → Contactează service",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:42:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Inspectie tehnică periodică necesară → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:42:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Asigurare RCA necesară → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:42:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC La 0 km, uzura este minimă → Monitorizează uzura",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:12:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⛽ COMBUSTIBIL Verifică nivelul de combustibil → Completează rezervorul",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:12:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Verifică starea vehiculului la 1000 km → Programează revizie",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:12:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Inspectia tehnică periodică este obligatorie → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:12:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Asigurarea RCA este obligatorie → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:12:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Verificați starea vehiculului → Efectuați o revizie",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:50"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Verificați valoarea de piață a vehiculului → Cercați oferte similare",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:50"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC Verificați consumul de benzină → Înregistrați consumul",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:50"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Inspecția tehnică periodică este obligatorie → Programați o inspecție ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:50"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Asigurarea RCA este necesara → Încheiați o poliță RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:50"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Caută prețuri service în România → Compară prețuri online",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⛽ COMBUSTIBIL Verifică consumul de benzina → Urmărește consumul",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Verifică problemele cunoscute ale modelului → Caută informații online",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Efectuează revizie inițială la 1000 km → Contactează service Skoda",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:47"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică și obține RCA și ITP → Contactează asigurător și ITL",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T19:02:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⛽ COMBUSTIBIL Monitorizează consumul de benzină → Înregistrează datele de consum",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:32:53"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Verifică valoarea de piață a vehiculului → Consultă site-uri de specialitate",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:32:53"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Verifică starea vehiculului la 0 km → Contactează service Skoda",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:32:53"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Inspectie tehnică periodică necesară → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:32:53"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Asigurare RCA obligatorie → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:32:53"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Verifică piața auto din România → Caută oferte și prețuri",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⛽ COMBUSTIBIL Verifică prețurile combustibilului în România → Caută stații de benzină",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Verifică problemele cunoscute ale modelului → Caută informații online",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Efectuează revizie inițială la service → Contactează service Skoda",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică și obține RCA și ITP → Contactează asigurător și ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T17:02:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⛽ COMBUSTIBIL Verifică consumul de benzină al vehiculului → Consultă manualul de utilizare",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Verifică valoarea de piață a vehiculului → Consultă site-uri de specialitate",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Verifică starea vehiculului la 0 km → Contactează service Skoda",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Inspectie tehnică periodică necesară → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Asigurare RCA necesară → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:32:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Caută prețuri competitive pentru service → Compară prețuri online",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⛽ COMBUSTIBIL Verifică consumul de benzina → Urmărește consumul",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Verifică problemele cunoscute ale modelului → Caută informații online",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Efectuează o revisie inițială la 1000 km → Contactează service Skoda",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică și obține RCA și ITP → Contactează asigurător și ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T16:02:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Verifică valoarea de piață → Consultă site-uri de specialitate",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⛽ COMBUSTIBIL Verifică consumul de benzină → Monitorizează consum",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Revizie inițială la 1000 km → Programează revizie",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Inspectie tehnică periodică necesară → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Asigurare RCA necesară → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:32:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "👤 PERSONALIZAT Revizuieste bugetul pentru service → Contactează service Skoda",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:03:07"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Caută informații despre problemele cunoscute ale modelului → Caută pe forumuri",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:03:07"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Verifică prețurile combustibil în România → Caută pe internet",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:03:07"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Efectuează o revisie inițială → Contactează service Skoda",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:03:07"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică și obține RCA și ITP → Contactează asigurător și ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T15:03:07"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⛽ COMBUSTIBIL Optimizează consumul de benzină → Verifică presiunea în pneuri",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Verifică valoarea de piață → Consultă site-uri de specialitate",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Verifică și schimbă lichidele → Contactează service",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Inspectie tehnică periodică necesară → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:32:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Asigurare RCA obligatorie → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:32:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Verifică problemele cunoscute ale modelului → Caută informații online",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Prețuri carburanți în creștere → Verifică prețuri",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Verifică starea vehiculului la 0 km → Contactează service autorizat",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Inspectie tehnică periodică necesară → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:02:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Asigurare RCA necesară → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T14:02:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⛽ COMBUSTIBIL Optimizează consumul de benzină → Verifică presiunea în pneuri",
+        "insight_type": "fuel",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T13:32:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Verifică valoarea de piață → Consultă site-uri de specialitate",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T13:32:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Verifică și schimbă lichidele → Contactează service",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T13:32:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Inspectie tehnică periodică necesară → Programează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T13:32:47"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Asigurare RCA obligatorie → Încheie RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-03T13:32:47"
+      }
+    ],
+    "suspected_errors": []
+  },
+  "market_research": {
+    "fuel_prices": {},
+    "last_cycle_summary": {
+      "updated_at": "2026-04-03T20:47:16Z",
+      "cycle": {
+        "articles_fetched": 70,
+        "articles_new": 12,
+        "insights_classified": 0,
+        "fuel_prices_updated": 0,
+        "errors": 0,
+        "chroma_indexed": 0
+      },
+      "bnr_eur": 5.0978,
+      "extra": {
+        "optional_urls_tried": [
+          "https://www.bnr.ro/nbrfxrates.xml",
+          "https://www.peco-online.ro/"
+        ]
+      }
+    },
+    "articles_recent_tail": [
+      {
+        "id": 399,
+        "url": "https://www.automarket.ro/stiri/reportaj-am-vizitat-uzina-chery-din-china-locul-unde-se-asambleaza-tiggo-126571.html",
+        "source": "automarket.ro",
+        "title": "REPORTAJ: Am vizitat uzina Chery din China. Locul unde se asamblează Tiggo 8 și 9",
+        "content": "\"Organizăm o deplasare în China. Momentan nu putem să vă oferim mai multe detalii, dar putem să vă spunem că, printre altele, vom vizita și fabrica din Wuhu, locul unde sunt asamblate modelele Tiggo 8 și 9.\"\r\nCam așa a sunat invitația pe care cei de la Chery ne-au lansat-o în urmă cu aproape o lună. Am acceptat numaidecât.\r\nCu doar câteva zile înainte de plecare, situația s-a înrăutățit în Orientul Mijlociu, iar plecarea noastră (care...",
+        "hash": "bb69e3165e539061abc3c18e8a022a0a",
+        "fetched_at": "2026-04-03T14:12:45"
+      },
+      {
+        "id": 400,
+        "url": "https://www.motorsport.com/f1/news/prince-albert-of-monacos-wedding-gift-to-charles-and-alexandra-leclerc-revealed/10810724/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Prince Albert of Monaco's wedding gift to Charles and Alexandra Leclerc revealed",
+        "content": "Charles Leclerc and his wife Alexandra have shared their wedding gift from Prince Albert of Monaco after the couple tied the knot ahead of the 2026 Formula 1 season.The Leclercs got married in a small, private civil ceremony in Monaco before a larger celebration with their extended friends and family next year. While they initially kept the ceremony quiet, news quickly spread of their ...Keep reading",
+        "hash": "99ad8e3d22ab4d60f5416a416821faa8",
+        "fetched_at": "2026-04-03T14:13:10"
+      },
+      {
+        "id": 401,
+        "url": "https://www.motorsport.com/f1/news/only-these-drivers-have-achieved-what-antonelli-has-done-/10810699/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "After Kimi Antonelli, this is every F1 driver to win their first two races back-to-back",
+        "content": "It is often said that the hard part is not getting there, but staying there – so perhaps the real challenge isn’t winning in Formula 1 (which it absolutely is, very much so), but repeating it.Kimi Antonelli has done just that: after becoming the second-youngest driver to win in F1 history at the Chinese Grand Prix, he followed it up by winning again in the Japanese Grand Prix a few weeks ...Keep reading",
+        "hash": "d500809cf75ce60e7843fd88d3a71065",
+        "fetched_at": "2026-04-03T14:13:10"
+      },
+      {
+        "id": 402,
+        "url": "https://www.motorsport.com/motogp/news/fri-joan-mir-explains-why-he-has-been-crashing-so-often-in-motogp/10810439/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Joan Mir explains why he crashes so often in MotoGP",
+        "content": "Joan Mir says his recent string of crashes in MotoGP was caused by him overcompensating for Honda’s weaknesses - and insists he has “no regrets” about this.The Spaniard has arguably been Honda’s fastest rider so far in 2026, but has just one points finish to his name from the opening three flyaways. At the season opener in Thailand, a tyre issue forced him out of fourth place ...Keep reading",
+        "hash": "2cb39239659661948481b9b2ca7f4b9a",
+        "fetched_at": "2026-04-03T14:13:10"
+      },
+      {
+        "id": 403,
+        "url": "https://www.motorsport.com/f1/news/why-aston-martin-has-no-need-to-make-peace-with-honda/10810627/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Why Aston Martin has no need to “make peace” with Honda",
+        "content": "Aston Martin chief trackside officer Mike Krack has stated “there are no issues” between the team and engine supplier Honda, despite their troubled start to the 2026 Formula 1 season.Aston Martin switched from a customer Mercedes engine supply to a works partnership with Honda for 2026, as it attempted to finally become a top team amid colossal investment by billionaire team owner Lawrence ...Keep reading",
+        "hash": "6588be48e2672d2847c70625216d34d0",
+        "fetched_at": "2026-04-03T14:13:10"
+      },
+      {
+        "id": 404,
+        "url": "https://www.motorsport.com/nascar/news/nascar-veteran-reacts-to-first-laps-around-nurburgring-scariest-race-track/10810556/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "NASCAR veteran reacts to first laps at the Nurburgring: \"Scariest race track\"",
+        "content": "The Wallace brothers are well-known stateside, and for good reason. Rusty is a NASCAR Hall of Famer and a former Cup Series champion, Mike is a winner in both the O'Reilly and Craftsmen Truck Series, and Kenny has 904 starts across all three national divisions.Kenny Wallace's career at the national level of NASCAR spanned from 1988 all the way into 2015. He started ten Daytona 500s, and won ...Keep reading",
+        "hash": "34abff114937b1cc69cb1a78fed85baf",
+        "fetched_at": "2026-04-03T14:13:10"
+      },
+      {
+        "id": 405,
+        "url": "https://www.motorsport.com/wrc/news/storm-damage-forces-changes-to-wrc-rally-islas-canarias-route-/10810658/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Storm damage forces changes to WRC Rally Islas Canarias route",
+        "content": "Organisers have been forced to make minor route changes for the World Rally Championship’s visit to the Canary Islands later this month due to damage caused by a recent weather event.Last month the Canary Islands were hit by Storm Therese, which resulted in high winds and heavy rain battering the Spanish archipelago. The storm caused widespread flooding, power cuts, road closures and ...Keep reading",
+        "hash": "9966df2817e4e938d673419543c50097",
+        "fetched_at": "2026-04-03T14:13:10"
+      },
+      {
+        "id": 406,
+        "url": "https://www.motorsport.com/f1/news/the-key-hurdle-in-max-verstappens-super-gt-ambitions/10810432/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "The key hurdle in Max Verstappen's Super GT ambitions",
+        "content": "Max Verstappen has expressed interest in racing in Super GT, but admits the lack of a true blue riband event makes a guest appearance difficult to justify.The four-time Formula 1 champion turned his first laps in a Nissan Z GT500 car at Fuji Speedway last month, as part of a promotional shoot organised by his employer Red Bull.It marked only his second in a contemporary Super GT prototype ...Keep reading",
+        "hash": "ceb097fcb5953d31b037ecfdc697135c",
+        "fetched_at": "2026-04-03T14:13:10"
+      },
+      {
+        "id": 407,
+        "url": "https://www.automarket.ro/stiri/romania-va-interzice-importurile-de-masini-sub-euro-3-126587.html",
+        "source": "automarket.ro",
+        "title": "România va interzice importurile de mașini sub Euro 3",
+        "content": "Parcul auto din România este unul dintre cele mai învechite din Uniunea Europeană, cu o vârstă medie de 14.9 ani, potrivit datelor oficiale pentru 2024. Doar 3 țări membre UE au un parc auto mai vechi decât la noi, acestea fiind Grecia, Estonia și Cehia. În acest parc auto se regăsesc și mașini aduse din import care sunt non-Euro, Euro 1 sau Euro 2.\r\nÎn încercarea de a limita importurile de mașini second hand vechi în România și de...",
+        "hash": "d60c3bd2414959785b8df9cfc34df06a",
+        "fetched_at": "2026-04-03T20:46:20"
+      },
+      {
+        "id": 408,
+        "url": "https://www.automarket.ro/stiri/volvo-vanzarile-totale-au-scazut-cu-11-in-primele-3-luni-ale-anului-2026-126585.html",
+        "source": "automarket.ro",
+        "title": "Volvo: vânzările totale au scăzut cu 11% în primele 3 luni ale anului 2026",
+        "content": "Volvo Cars, deținut majoritar de Geely Holding, a precizat într-un comunicat că volumele din regiunea Americii de Nord au scăzut cu 28%, din cauza încrederii scăzute a clienților, afectată suplimentar de conflictul din Orientul Mijlociu.\r\nCompania a mai anunțat că vânzările de modele complet electrice au crescut cu 12%, ajungând să reprezinte 24% din totalul automobilelor livrate.\r\nDe menționat că 72.579 de unități au fost vehicule electrificate, dintre...",
+        "hash": "0c17bb73d24f4a24563507e085084685",
+        "fetched_at": "2026-04-03T20:46:20"
+      },
+      {
+        "id": 409,
+        "url": "https://www.motorsport.com/nascar-truck/news/corey-lajoie-is-excited-to-be-a-dang-nascar-driver-at-kaulig-ram/10810779/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Corey Lajoie is excited to be a dang NASCAR driver at Kaulig RAM",
+        "content": "Corey Lajoie stopped by one of his favorite coffee shops on the way to Rockingham Speedway on Friday morning.Local Patriot Roasting CompanyWhile there, and after placing his order, engaged in a conversation that kind of encapsulated the head space for the 34-year-old heading into this new opportunity in the Craftsman Truck Series with RAM and Kaulig Racing.“We were just chopping it ...Keep reading",
+        "hash": "773b8aa67051055f56f234b892e684c8",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 410,
+        "url": "https://www.motorsport.com/nascar-truck/news/carson-ferguson-to-make-nascar-truck-debut-with-kaulig-ram-at-bristol/10810777/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Carson Ferguson to make NASCAR Truck debut in Kaulig Ram entry at Bristol",
+        "content": "Kaulig Racing has announced Carson Ferguson as the next driver of the team's No. 25 Ram 1500 'free agent' truck, with the accomplished dirt racer making his NASCAR Craftsman Truck Series debut at Bristol next weekend.Ferguson was the runner-up in the 'Ram: Race for the Seat' competition, which decided the full-time driver of the team's No. 14 truck for the 2026 season. He lost out to Mini ...Keep reading",
+        "hash": "4879c8fbf49b12ca858a99f329709049",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 411,
+        "url": "https://www.motorsport.com/nascar-os/news/nascar-oreilly-rockingham-starting-lineup-corey-day-earns-first-career-pole/10810774/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "NASCAR O'Reilly Rockingham starting lineup: Corey Day earns first career pole",
+        "content": "In qualifying ahead of Saturday's NASCAR O'Reilly Auto Parts Series race at Rockingham, Corey Day put the No. 17 Hendrick Motorsports Chevrolet on pole with a 27.717s lap. He will share the front row with reigning series champion Jesse Love in the No. 2 Richard Childress Racing Chevrolet, who fell 0.064s short of the top spot.\"I felt really good,\" said Day. \"We got a really good car, so thanks ...Keep reading",
+        "hash": "d874be5d1fcdd07fd1b4d67eed8075a1",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 412,
+        "url": "https://www.motorsport.com/nascar-os/news/what-nascar-oreilly-series-field-expects-of-cleetus-mcfarland-at-rockingam/10810769/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "What NASCAR O'Reilly Series field expects of Cleetus McFarland at Rockingam",
+        "content": "When it comes to the YouTuber known as Cleetus McFarland making his NASCAR O’Reilly Series debut this weekend at Rockingham Speedway, future NASCAR Hall of Famer Rodney Childers articulated the benefits and potential concerns as well as anyone.“We need the publicity and we need the personalities,” Childers told Motorsport.com on Friday morning. “You know, we have a lot of drivers these ...Keep reading",
+        "hash": "7fc1d892a3cb6d52d571b2bd0f6ff733",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 413,
+        "url": "https://www.motorsport.com/nascar-truck/news/nascar-truck-rockingham-starting-lineup-jake-garcia-earns-pole-position/10810763/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "NASCAR Truck Rockingham starting lineup: Jake Garcia earns pole position",
+        "content": "After a brief rain delay, qualifying got underway for the NASCAR Craftsman Truck Series at Rockingham on Friday.38 trucks were competing for 36 spots on the grid, with two missing the snow. One of those was Jonathan Shafer in the No. 69 MBM Motorsports Ford, after a crash in practice meant he could not take part in qualifying. The other DNQ was Justin Carroll in the No. 90 Terry Carroll ...Keep reading",
+        "hash": "61a5883e67cd4dc64f191da6c21b9579",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 414,
+        "url": "https://www.motorsport.com/f1/news/ayao-komatsu-admits-he-would-have-laughed-at-haas-being-p4-after-three-races/10810758/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Ayao Komatsu admits he would have “laughed” at Haas being P4 after three races",
+        "content": "Haas Formula 1 team principal Ayao Komatsu has admitted he would have laughed if he had been told the American outfit would be fourth in the constructors' championship after the first three rounds of the season. The Gene Haas-owned team has emerged as one of the paddock's most surprising challengers in the early stages of the new season. After the first three rounds, Haas sits fourth with 18 ...Keep reading",
+        "hash": "732161343b3b956099f681e961071615",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 415,
+        "url": "https://www.motorsport.com/f1/news/pierre-gasly-too-much-negativity-around-f1-2026-as-driver-skill-still-matters/10810687/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Pierre Gasly: \"Too much negativity\" around F1 2026 as driver skill still matters",
+        "content": "Alpine's Pierre Gasly backs calls to tweak the divisive 2026 Formula 1 regulations and improve qualifying, but disagrees with the negativity around the new rules taking away opportunities for the drivers to make a difference. The new regulations, which place a huge emphasis on electric energy management, have significantly changed how drivers and teams approach qualifying, with the need to ...Keep reading",
+        "hash": "2de8a57a2b210dc54c361bee709ea594",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 416,
+        "url": "https://www.motorsport.com/f1/news/f1-why-the-battle-between-hamilton-and-norris-highlighted-another-critical-flaw-in-the-2026-rules/10810625/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Why Lewis Hamilton's battle with Lando Norris highlights another critical 2026 F1 flaw",
+        "content": "The Suzuka race highlighted why the 2026 Formula 1 regulations can both create exciting races – thanks to hybrid energy deployment strategies that cause near-constant passing – but also what the critical issues are that need addressing, starting at next week’s meeting between F1, the FIA, and the teams.Precisely because of this dynamic of overtakes and counter-overtakes, the Japanese ...Keep reading",
+        "hash": "0fa7581bbfa0eb165105a92c11897f02",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 417,
+        "url": "https://www.motorsport.com/f1/news/george-russell-told-to-erode-kimi-antonellis-confidence-as-mercedes-title-battle-heats-up/10810736/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "George Russell told to 'erode' Kimi Antonelli’s confidence as Mercedes title battle heats up",
+        "content": "David Coulthard believes George Russell needs to \"start eroding\" his Mercedes team-mate Kimi Antonelli's confidence in order to fight for his first drivers' championship.Russell was tipped as a favourite for the 2026 drivers' championship title ahead of the season, but Antonelli's strong streak, which has included two grand prix wins in the first three rounds, has dented the Briton's title ...Keep reading",
+        "hash": "9ee87b7c1c11284eccd57be26b8da004",
+        "fetched_at": "2026-04-03T20:46:45"
+      },
+      {
+        "id": 418,
+        "url": "https://www.motorsport.com/endurance/news/bmw-m3-touring-24h-vs-bmw-m4-gt3-evo-hardly-any-difference-in-driving-dynamics/10810729/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "How the BMW M3 Touring Challenged the M4 GT3 Evo at the Nordschleife",
+        "content": "The second round of the Nurburgring Endurance Series (NLS) was dominated by two major talking points: the guest appearance of Max Verstappen and the highly anticipated racing debut of the BMW M3 Touring 24h. For factory drivers Jens Klingmann and Ugo de Wilde, the weekend provided a unique laboratory to test whether a performance estate can truly rival a purebred GT3 machine.Due to a ...Keep reading",
+        "hash": "40c64faf1a43c7ffe0a4d3f2d650df20",
+        "fetched_at": "2026-04-03T20:46:45"
+      }
+    ]
+  },
+  "frontend_errors_log_tail": [
+    "[2026-03-22T19:21:26] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:30] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:33] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:37] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:40] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:43] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:46] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:49] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:53] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:56] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:59] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:03] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:06] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:10] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:14] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:17] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:21] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:25] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:28] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:31] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:35] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:38] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:42] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:46] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:49] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:53] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:58] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:04] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:08] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:13] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:19] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:25] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:31] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:36] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:42] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:47] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:53] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:00] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:06] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:12] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:18] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:24] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:30] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:37] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:42] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:48] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:55] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:01] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:07] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:13] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:18] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:25] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:31] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:38] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:44] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:50] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:56] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:03] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:09] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:14] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:21] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:27] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:34] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:39] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:45] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:51] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:57] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:04] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:10] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:16] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:23] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:29] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:36] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:42] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:49] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:55] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:28:02] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:28:08] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:28:13] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:28:20] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n"
+  ],
+  "vehicles_index": [
+    {
+      "user_id": 2,
+      "vin": "TMBCY46Y654251499",
+      "make": "Skoda",
+      "model": "6Y / Fabia",
+      "year": "2004",
+      "fuel": "benzina",
+      "plate": "BZ-39-ALZ",
+      "series": "AESK120011T35E4",
+      "mlbr_code": "MLBR-F8C2-2CB3"
+    },
+    {
+      "user_id": 1,
+      "vin": "WVWZZZAUZNW123456",
+      "make": "Skoda",
+      "model": "Fabia",
+      "year": "2010",
+      "fuel": "benzina",
+      "plate": "B01MLB",
+      "series": "6Y",
+      "mlbr_code": "MLBR-F90A-37B2"
+    }
+  ]
+}

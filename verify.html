@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <!-- Pentru preview WhatsApp/Telegram cu titlu dinamic, folosește pe backend ruta GET /v/{UNIT_ID} (HTML server-side). Pe Vercel static, crawlerii văd doar aceste meta implicite. -->
+  <title>Verificare Mulberry</title>
+  <meta name="description" content="Verificare publică istoric vehicul Mulberry — fără login."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Verificare Mulberry"/>
+  <meta property="og:description" content="Istoric public scurt — descarcă aplicația pentru raport complet."/>
+  <style>
+    :root { --bg:#0f1419; --card:#1a222c; --text:#e8eef4; --muted:#8b9aab; --accent:#c9a227; --ok:#22c55e; --warn:#f59e0b; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+    .wrap { max-width:420px; margin:0 auto; padding:24px 20px 48px; }
+    .logo { width:120px; height:auto; display:block; margin:0 auto 20px; }
+    h1 { font-size:1.1rem; font-weight:600; text-align:center; margin:0 0 8px; line-height:1.35; }
+    .sub { text-align:center; color:var(--muted); font-size:0.85rem; margin-bottom:24px; }
+    .card { background:var(--card); border-radius:16px; padding:20px; margin-bottom:16px; border:1px solid rgba(255,255,255,.06); }
+    .row { display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.06); font-size:0.9rem; }
+    .row:last-child { border-bottom:none; }
+    .k { color:var(--muted); }
+    .badge { display:inline-flex; align-items:center; justify-content:center; min-width:36px; height:36px; border-radius:10px; font-weight:700; font-size:0.85rem; }
+    .badge.ok { background:#14532d; color:var(--ok); }
+    .badge.bad { background:#713f12; color:var(--warn); }
+    .records { text-align:center; font-size:2rem; font-weight:700; color:var(--accent); margin:8px 0 4px; }
+    .records-cap { text-align:center; color:var(--muted); font-size:0.8rem; margin-bottom:16px; }
+    .last { font-size:0.88rem; line-height:1.45; color:var(--text); background:rgba(0,0,0,.2); padding:12px; border-radius:10px; margin-top:12px; }
+    .cta { display:block; width:100%; text-align:center; text-decoration:none; background:linear-gradient(180deg,#d4af37,#a67c00); color:#0f1419; font-weight:700;
+      font-size:1rem; padding:16px 20px; border-radius:14px; margin-top:24px; box-shadow:0 4px 20px rgba(201,162,39,.35); }
+    .err { text-align:center; color:var(--warn); padding:16px; }
+    footer { text-align:center; color:var(--muted); font-size:0.75rem; margin-top:32px; }
+    .loading { text-align:center; color:var(--muted); padding:24px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="logo" src="assets/mulberry-logo.png" alt="Mulberry" onerror="this.style.display='none'"/>
+    <h1 id="titleEl">Verificare Mulberry</h1>
+    <p class="sub" id="subEl">Se încarcă…</p>
+    <div id="mainEl" class="loading">Se încarcă datele publice…</div>
+    <a class="cta" href="https://mulberry.autos/mulberry.html">Vrei raportul complet? Descarcă Mulberry App</a>
+    <footer>Verificare publică Mulberry · fără date personale ale posesorului</footer>
+  </div>
+  <script>
+(function () {
+  var pathMatch = location.pathname.match(/\/v\/([^/]+)/);
+  var unitId = pathMatch ? decodeURIComponent(pathMatch[1]) : null;
+  if (!unitId) unitId = new URLSearchParams(location.search).get('u');
+  if (!unitId) {
+    document.getElementById('mainEl').innerHTML = '<p class="err">Lipsește ID-ul unității (ex. <code>/v/MLBR-AB12-CD34</code>).</p>';
+    document.getElementById('subEl').textContent = '';
+    return;
+  }
+
+  /* Producție Vercel: setează URL-ul API Railway înainte de acest script sau aici. */
+  var API = (window.MULBERRY_VERIFY_API || '').replace(/\/+$/, '');
+  if (!API) {
+    var host = (location.hostname || '').toLowerCase();
+    if (host === 'mulberry.autos' || host.endsWith('.vercel.app')) {
+      API = 'https://mulberry-backend.up.railway.app';
+    } else {
+      API = location.origin.replace(/\/+$/, '');
+    }
+  }
+
+  function esc(s) {
+    if (s == null) return '';
+    var d = document.createElement('div');
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
+  fetch(API + '/api/public/unit/' + encodeURIComponent(unitId))
+    .then(function (r) {
+      if (!r.ok) throw new Error(r.status === 404 ? 'Unitate negăsită.' : 'Eroare ' + r.status);
+      return r.json();
+    })
+    .then(function (s) {
+      var ok = !!s.components_ok;
+      var title = 'Verificare Mulberry ID: ' + (s.label_short || 'Vehicul') + ' - ' + (s.status_label || '');
+      document.title = title;
+      var og = document.querySelector('meta[property="og:title"]');
+      if (og) og.setAttribute('content', title);
+      document.getElementById('titleEl').textContent = title;
+      document.getElementById('subEl').innerHTML = 'ID unitate: <strong>' + esc(s.unit_id) + '</strong>';
+
+      var badgeClass = ok ? 'ok' : 'bad';
+      var badgeText = ok ? 'OK' : '!';
+      var nrec = Number(s.recent_records_total || 0);
+      var last = s.last_service_summary || '—';
+
+      document.getElementById('mainEl').innerHTML =
+        '<div class="card">' +
+        '<div class="row"><span class="k">Marcă</span><span>' + esc(s.make || '—') + '</span></div>' +
+        '<div class="row"><span class="k">Model</span><span>' + esc(s.model || '—') + '</span></div>' +
+        '<div class="row"><span class="k">Număr</span><span>' + esc(s.plate_display || '—') + '</span></div>' +
+        '<div class="row"><span class="k">VIN (parțial)</span><span>' + esc(s.vin_masked || '—') + '</span></div>' +
+        '<div class="row"><span class="k">Componente scanate</span><span class="badge ' + badgeClass + '">' + badgeText + '</span></div>' +
+        '<div class="row"><span class="k">Status</span><span>' + esc(s.status_label || '—') + '</span></div>' +
+        '<p class="records">' + nrec + '</p>' +
+        '<p class="records-cap">înregistrări / articole în istoricul recent public</p>' +
+        '<div class="last"><strong>Ultimul eveniment</strong><br/>' + esc(last) + '</div>' +
+        '</div>';
+    })
+    .catch(function (e) {
+      document.getElementById('subEl').textContent = '';
+      document.getElementById('mainEl').innerHTML = '<p class="err">' + esc(e.message || String(e)) + '</p>';
+    });
+})();
+  </script>
+</body>
+</html>

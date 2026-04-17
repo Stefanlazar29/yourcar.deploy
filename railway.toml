@@ -1,0 +1,10 @@
+# Railway — start explicit + healthcheck pe ruta reală FastAPI.
+# Vezi: https://docs.railway.com/config-as-code/reference
+
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "python main.py"
+healthcheckPath = "/health"
+healthcheckTimeout = 60

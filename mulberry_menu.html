@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>MulberryHub · ID HUB · Vehicle BIOS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/mulberry_exo_menu.css" />
+</head>
+<body class="bios-page vorxs-hub">
+  <div class="vorxs-app-shell">
+  <header class="vorxs-header bios-header">
+    <div class="vorxs-hero">
+      <div class="vorxs-hero-top vorxs-hero-top--bar">
+        <button type="button" class="vorxs-hero-scan-btn" id="exo-scan-mulberry-qr" title="QR scanabil oriunde — prezentare vehicul">
+          Scan MulberryQR
+        </button>
+        <div class="vorxs-hero-bar-end">
+          <button
+            type="button"
+            class="vorxs-more-btn"
+            id="mulberry-hub-settings"
+            title="Setări și navigare"
+            aria-label="Setări"
+            aria-haspopup="menu"
+            aria-expanded="false"
+          >
+            ⋯
+          </button>
+          <a class="vorxs-exit bios-exit-btn" href="mulberry.html" id="bios-btn-exit" title="Ieșire la Mulberry">Înapoi</a>
+        </div>
+      </div>
+      <p class="vorxs-eyebrow">Mulberry · ID Hub</p>
+      <h1 class="vorxs-title">Get started with your vehicle</h1>
+      <p class="vorxs-subtitle">Identitate digitală, mentenanță și date flotă — același flux, design curat.</p>
+      <div class="vorxs-hero-actions bios-header-toolbar">
+        <div class="vorxs-chip bios-header-status" id="exo-sync-pill">
+          <span class="bios-status-dot status-dot" aria-hidden="true"></span>
+          <span id="exo-sync-label">Run</span>
+        </div>
+        <button
+          type="button"
+          class="vorxs-insight-btn"
+          id="exo-insight-bulb"
+          title="Insight flotă (analiză AI salvată)"
+          aria-label="Insight flotă"
+          hidden
+        >
+          <span class="vorxs-insight-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26A7 7 0 0 0 12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <button type="button" class="vorxs-pdf-cta" id="exo-hub-pdf" title="Descarcă etichetă Kanban / e-ink (PDF)">
+          <span class="vorxs-pdf-ring" aria-hidden="true"></span>
+          <span class="vorxs-pdf-plus">+</span>
+          <span class="vorxs-pdf-label">PDF</span>
+        </button>
+      </div>
+    </div>
+    <div class="vorxs-meta bios-header-meta">
+      <div class="vorxs-meta-item">
+        <span class="bios-meta-label">Unit</span>
+        <span class="bios-meta-val vorxs-mono" id="exo-mulberry-id">MLBR-────</span>
+      </div>
+      <div class="vorxs-meta-item">
+        <span class="bios-meta-label">Status</span>
+        <span class="bios-meta-val bios-accent-blink" id="exo-header-online">Online</span>
+      </div>
+      <div class="vorxs-meta-item">
+        <span class="bios-meta-label">Fleet</span>
+        <span class="bios-meta-val" id="vehicle-count" title="Vehicule înregistrate în backend (dev.db)">…</span>
+      </div>
+    </div>
+    <p class="vorxs-sync-detail bios-line-dim" id="exo-sync-detail">Last sync · —</p>
+  </header>
+
+  <nav class="bios-tabs" role="tablist" aria-label="Module HUB">
+    <button type="button" class="bios-tab is-active" role="tab" aria-selected="true" data-tab="overview" id="tab-btn-overview">OVERVIEW</button>
+    <button type="button" class="bios-tab" role="tab" aria-selected="false" data-tab="diagnostics" id="tab-btn-diagnostics">DIAGNOSTICS</button>
+    <button type="button" class="bios-tab" role="tab" aria-selected="false" data-tab="maintenance" id="tab-btn-maintenance">MAINTENANCE</button>
+    <button type="button" class="bios-tab" role="tab" aria-selected="false" data-tab="economy" id="tab-btn-economy">ECONOMY</button>
+    <button type="button" class="bios-tab" role="tab" aria-selected="false" data-tab="security" id="tab-btn-security">SECURITY</button>
+    <button type="button" class="bios-tab" role="tab" aria-selected="false" data-tab="archives" id="tab-btn-archives" hidden>ARCHIVES</button>
+    <button type="button" class="bios-tab" role="tab" aria-selected="false" data-tab="yourcar" id="tab-btn-yourcar">YOURCAR</button>
+  </nav>
+
+  <main class="bios-grid bios-tab-panels">
+
+    <!-- ========== OVERVIEW ========== -->
+    <div class="bios-tab-panel is-active" id="panel-overview" role="tabpanel" aria-labelledby="tab-btn-overview">
+
+      <section class="bios-card bios-card-wide" aria-label="Status band">
+        <h2 class="bios-card-title">SYSTEM STATUS</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-status-strip" id="bios-status-strip">
+          <span class="bios-st bios-st-ok" id="exo-strip-api">[OK] API</span>
+          <span class="bios-st bios-st-warn" id="exo-strip-exo">[!] EXO</span>
+          <span class="bios-st bios-st-ok" id="exo-strip-vin">[OK] VIN</span>
+          <span class="bios-st bios-st-off" id="exo-strip-obd">[OFFLINE] OBD</span>
+        </div>
+        <p class="bios-disclaimer">Indicatorii folosesc culori fixe: <span class="bios-st bios-st-ok">[OK]</span> <span class="bios-st bios-st-warn">[!]</span> <span class="bios-st bios-st-crit">[CRITICAL]</span> <span class="bios-st bios-st-off">[OFFLINE]</span></p>
+      </section>
+
+      <section class="bios-card bios-card-wide" aria-labelledby="bios-softscore-title">
+        <h2 class="bios-card-title" id="bios-softscore-title">SOFTSCORE · EVALUARE MULTI-FACTOR</h2>
+        <div class="bios-rule"></div>
+        <p class="bios-disclaimer">Scor 0–100 după vechime, rulaj și urgență ITP/RCA. Valoarea estimativă = preț bază (sinteză / Autovit) × scor/100. Indicativ, nu ofertă.</p>
+        <div class="exo-softscore-gauge" id="exo-softscore-gauge" role="group" aria-label="SoftScore vehicul">
+          <div class="exo-softscore-bar-track" aria-hidden="true">
+            <div class="exo-softscore-bar-fill" id="exo-softscore-fill" style="width: 0%"></div>
+          </div>
+          <div class="exo-softscore-meta">
+            <span class="exo-softscore-num" id="exo-softscore-val">—</span>
+            <span class="exo-softscore-eur" id="exo-softscore-eur"></span>
+          </div>
+          <p class="exo-softscore-source vorxs-mono" id="exo-softscore-source"></p>
+          <p class="exo-softscore-hint" id="exo-softscore-hint">Se încarcă…</p>
+          <button type="button" class="vorxs-pdf-cta exo-softscore-refresh" id="exo-softscore-refresh">Actualizează evaluarea</button>
+          <p class="bios-disclaimer" style="margin-top:14px;margin-bottom:0;text-align:center;">
+            <a href="mulberry_softscore.html" style="color:#e1ff00;text-decoration:underline;">Același scor — detalii piață (lei) în MyMulberry</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="bios-card bios-card-wide" aria-labelledby="bios-identity-title">
+        <h2 class="bios-card-title" id="bios-identity-title">VEHICLE IDENTITY</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-spec-table">
+          <div class="bios-spec-row"><span class="bios-k">MLBR ID</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-row-mlbr">—</span></div>
+          <div class="bios-spec-row"><span class="bios-k">PLATE</span><span class="bios-pipe">│</span><span class="bios-v" id="exo-plate">—</span></div>
+          <div class="bios-spec-row"><span class="bios-k">MAKE/MODEL</span><span class="bios-pipe">│</span><span class="bios-v" id="exo-make-model">—</span></div>
+          <div class="bios-spec-row"><span class="bios-k">YEAR</span><span class="bios-pipe">│</span><span class="bios-v" id="exo-year">—</span></div>
+          <div class="bios-spec-row"><span class="bios-k">FUEL TYPE</span><span class="bios-pipe">│</span><span class="bios-v" id="exo-fuel">—</span></div>
+          <div class="bios-spec-row"><span class="bios-k">YCR SERIES</span><span class="bios-pipe">│</span><span class="bios-v" id="exo-series">—</span></div>
+        </div>
+        <div class="bios-rule"></div>
+        <div class="bios-identity-footer">
+          <div class="bios-spec-row bios-status-row">
+            <span class="bios-k">STATUS</span><span class="bios-pipe">│</span>
+            <span class="bios-v bios-accent-blink" id="exo-verified-line">[● ACTIV]</span>
+          </div>
+          <div class="bios-qr-stack">
+            <div class="bios-qr-hud">
+              <button type="button" class="bios-qr-close" disabled aria-disabled="true" title="QR blocat — afișare permanentă">[X]</button>
+              <div class="bios-qr" id="exo-qr" aria-label="Cod QR identitate digitală"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bios-card bios-card-wide bios-dual-card" aria-label="Administrativ și hardware">
+        <div class="bios-dual-grid">
+          <div class="bios-dual-col">
+            <h2 class="bios-sector-tag">[01 // ADMIN]</h2>
+            <div class="bios-rule"></div>
+            <div class="bios-spec-table bios-spec-tight" id="bios-admin-specs">
+              <div class="bios-spec-row"><span class="bios-k">ITP</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-admin-itp">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">RCA</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-admin-rca">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">TALON</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-admin-talon">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">VAULT</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-admin-vault">—</span></div>
+            </div>
+          </div>
+          <div class="bios-dual-col bios-dual-col-line">
+            <h2 class="bios-sector-tag">[02 // HARDWARE]</h2>
+            <div class="bios-rule"></div>
+            <h3 class="bios-subsector">ENGINE CORE</h3>
+            <div class="bios-spec-table bios-spec-tight">
+              <div class="bios-spec-row"><span class="bios-k">ENGINE CODE</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-hw-engine">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">OIL SPEC</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-hw-oil">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">TIMING CHAIN</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-hw-timing">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">IDLE / MAX RPM</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-hw-rpm">—</span></div>
+            </div>
+            <h3 class="bios-subsector bios-subsector-spaced">TRANS · CHASSIS</h3>
+            <div class="bios-spec-table bios-spec-tight">
+              <div class="bios-spec-row"><span class="bios-k">GEARBOX</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-hw-gearbox">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">BRAKE SYS</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-hw-brake">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">TP BASELINE</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-hw-tires">—</span></div>
+              <div class="bios-spec-row"><span class="bios-k">BUSHINGS</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-hw-bush">—</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bios-card bios-card-wide" aria-labelledby="bios-health-title">
+        <h2 class="bios-card-title" id="bios-health-title">HEALTH REGISTRY · EXO</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-k bios-block-label">Jurnal sistem (informații interne)</div>
+        <div class="bios-log-frame" aria-label="Mesaj policy conținut">
+          <div class="bios-log-banner">Disponibil la următoarea actualizare.</div>
+          <div id="exo-health-anomalies" class="bios-feed bios-feed-system-log" role="log" aria-live="polite"></div>
+        </div>
+        <div class="bios-rule"></div>
+        <div class="bios-spec-table bios-spec-tight">
+          <div class="bios-spec-row"><span class="bios-k">CORROSION WATCH</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-corrosion-sill">—</span></div>
+          <div class="bios-spec-row"><span class="bios-k">CLUTCH WEAR EST</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-clutch-wear">—</span></div>
+        </div>
+      </section>
+
+      <section class="bios-card bios-card-wide" id="exo-intelligence-card" aria-labelledby="exo-intel-title">
+        <h2 class="bios-card-title" id="exo-intel-title">EXO INTELLIGENCE · PERSONALIZARE</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-spec-table bios-spec-tight">
+          <div class="bios-spec-row bios-spec-row-tall">
+            <span class="bios-k">UTILIZARE</span><span class="bios-pipe">│</span>
+            <span class="bios-v">
+              <span class="bios-mode-btns" role="group" aria-label="Utilizare" id="exo-pref-usage">
+                <button type="button" class="bios-mode-btn" data-usage="city">ORAȘ</button>
+                <button type="button" class="bios-mode-btn is-active" data-usage="mixed">MIXT</button>
+                <button type="button" class="bios-mode-btn" data-usage="highway">AUTO</button>
+              </span>
+            </span>
+          </div>
+          <div class="bios-spec-row bios-spec-row-tall">
+            <span class="bios-k">BUGET</span><span class="bios-pipe">│</span>
+            <span class="bios-v">
+              <span class="bios-mode-btns" role="group" aria-label="Buget service" id="exo-pref-budget">
+                <button type="button" class="bios-mode-btn" data-budget="low">MIC</button>
+                <button type="button" class="bios-mode-btn is-active" data-budget="medium">MEDIU</button>
+                <button type="button" class="bios-mode-btn" data-budget="high">MARE</button>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="bios-k bios-block-label">PREOCUPĂRI</div>
+        <div class="bios-exo-concerns" id="exo-pref-concerns">
+          <label class="bios-exo-lbl"><input type="checkbox" data-concern="consum" /> Consum</label>
+          <label class="bios-exo-lbl"><input type="checkbox" data-concern="rugina" /> Rugină</label>
+          <label class="bios-exo-lbl"><input type="checkbox" data-concern="frane" /> Frâne</label>
+          <label class="bios-exo-lbl"><input type="checkbox" data-concern="suspensie" /> Suspensie</label>
+          <label class="bios-exo-lbl"><input type="checkbox" data-concern="itp_rca" /> ITP/RCA</label>
+          <label class="bios-exo-lbl"><input type="checkbox" data-concern="valoare" /> Valoare</label>
+        </div>
+        <div class="bios-spec-table bios-spec-tight">
+          <div class="bios-spec-row"><span class="bios-k">NEXT CYCLE</span><span class="bios-pipe">│</span><span class="bios-v" id="exo-next-cycle">—</span></div>
+          <div class="bios-spec-row"><span class="bios-k">LAST CYCLE</span><span class="bios-pipe">│</span><span class="bios-v" id="exo-last-cycle">—</span></div>
+        </div>
+        <div class="bios-exo-actions">
+          <button type="button" class="bios-mode-btn" id="exo-prefs-save">[→ SALVEAZĂ]</button>
+          <button type="button" class="bios-mode-btn" id="exo-run-now">[▶ RULEAZĂ ACUM]</button>
+        </div>
+      </section>
+
+      <section class="bios-card bios-card-wide" aria-labelledby="bios-info-title">
+        <h2 class="bios-card-title" id="bios-info-title">SYSTEM · BIOS INFO</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-spec-table bios-spec-tight">
+          <div class="bios-spec-row"><span class="bios-k">LOCAL DB SYNC</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-local-sync">Disponibil la următoarea actualizare.</span></div>
+          <div class="bios-spec-row"><span class="bios-k">STORAGE LOAD</span><span class="bios-pipe">│</span><span class="bios-v" id="bios-storage-mb">Disponibil la următoarea actualizare.</span></div>
+          <div class="bios-spec-row bios-spec-row-tall"><span class="bios-k">HARDWARE ID</span><span class="bios-pipe">│</span><span class="bios-v bios-vin-mono" id="bios-hardware-vin">—</span></div>
+        </div>
+        <div class="bios-storage-inline">
+          <span class="bios-k">VAULT BAR</span>
+          <pre class="bios-charbar bios-charbar-inline" id="exo-storage-bar" aria-hidden="true">████████░░░░░░░░</pre>
+        </div>
+      </section>
+
+      <section class="bios-card bios-card-wide" aria-labelledby="bios-sys-title">
+        <h2 class="bios-card-title" id="bios-sys-title">SYSTEM CONFIG · OPERATION MODE</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-spec-row bios-mode-row">
+          <span class="bios-k">MODE</span><span class="bios-pipe">│</span>
+          <div class="bios-mode-btns" role="group" aria-label="Mod operațiune">
+            <button type="button" class="bios-mode-btn" data-mode="eco">ECO</button>
+            <button type="button" class="bios-mode-btn" data-mode="perf">PERFORMANCE</button>
+            <button type="button" class="bios-mode-btn" data-mode="sale">SALE</button>
+          </div>
+        </div>
+        <div class="bios-spec-row"><span class="bios-k">VERSION</span><span class="bios-pipe">│</span><span class="bios-v">MULBERRY ID HUB 2.8 · BUILD 20250320</span></div>
+      </section>
+
+      <section class="bios-card bios-card-wide bios-registry" id="exo-registry-card" hidden>
+        <h2 class="bios-card-title">FOUNDER REGISTRY · DEBUG</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-registry-toolbar">
+          <button type="button" class="bios-mode-btn" id="exo-registry-refresh">[R] REFRESH</button>
+        </div>
+        <div class="bios-registry-body">
+          <div class="bios-registry-col">
+            <div class="bios-k">STATUS</div>
+            <pre class="bios-registry-pre" id="exo-registry-status">—</pre>
+          </div>
+          <div class="bios-registry-col">
+            <div class="bios-k">VEHICLES</div>
+            <pre class="bios-registry-pre" id="exo-registry-vehicles">—</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="bios-card bios-card-wide exo-dev-console-card" id="exo-dev-console-card" hidden>
+        <h2 class="bios-card-title">DEVELOPER · REFAC_CODE (AI / Groq)</h2>
+        <div class="bios-rule"></div>
+        <p class="bios-line-dim">
+          REFAC trimite snippet-ul la backend; output-ul apare în panoul PREVIEW. APPLY copiază în EDITOR. Fără scriere pe disc.
+        </p>
+        <p class="exo-refac-status bios-line-dim" id="exo-refac-status" aria-live="polite">[○] REFAC_IDLE // READY</p>
+        <div class="exo-refac-workspace">
+          <div class="exo-dev-panel exo-dev-panel--editor">
+            <div class="exo-dev-panel-hdr">
+              <span class="exo-dev-panel-tag" aria-hidden="true">01</span>
+              <span>EDITOR · INPUT</span>
+            </div>
+            <textarea
+              id="developer-console"
+              class="exo-dev-textarea"
+              rows="12"
+              spellcheck="false"
+              autocomplete="off"
+              placeholder="// fragment cod MulberryEXO…"
+            ></textarea>
+          </div>
+          <div class="exo-dev-panel exo-dev-panel--preview">
+            <div class="exo-dev-panel-hdr">
+              <span class="exo-dev-panel-tag" aria-hidden="true">02</span>
+              <span>PREVIEW · MODEL OUTPUT</span>
+            </div>
+            <textarea
+              id="developer-console-preview"
+              class="exo-dev-textarea exo-dev-textarea--preview"
+              rows="12"
+              readonly
+              spellcheck="false"
+              tabindex="0"
+              aria-label="Rezultat refactor AI"
+              placeholder="[!] Rulează REFAC_CODE — output Groq apare aici…"
+            ></textarea>
+          </div>
+        </div>
+        <div class="exo-refac-toolbar">
+          <label class="bios-exo-lbl exo-refac-opt">
+            <input type="checkbox" id="dev-clean-include-req" checked /> requirements.txt în context
+          </label>
+          <div class="exo-refac-btns">
+            <button type="button" class="bios-mode-btn exo-refac-btn-primary" id="exo-refac-code">[≡] REFAC_CODE</button>
+            <button type="button" class="bios-mode-btn" id="exo-refac-apply-preview">[→] APPLY_TO_EDITOR</button>
+          </div>
+        </div>
+        <p class="exo-bios-notify-strip" id="exo-bios-notify" role="status" aria-live="polite"></p>
+        <p class="bios-line-dim bios-emergency-hint">
+          <strong>Emergency:</strong> Hard refresh — <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>.
+          Hub blocat: consolă <code>mulberryBiosEmergencyReset()</code>
+          · <code>POST /system/utils/clean-code</code> lent → terminal uvicorn (GROQ_API_KEY / model).
+        </p>
+      </section>
+    </div>
+
+    <!-- ========== DIAGNOSTICS ========== -->
+    <div class="bios-tab-panel" id="panel-diagnostics" role="tabpanel" aria-labelledby="tab-btn-diagnostics">
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">VEHICLE HEALTH SCORE</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-health-hero">
+          <span class="bios-k">OVERALL</span>
+          <pre class="bios-charbar bios-health-bar" id="diag-overall-bar">████████░░</pre>
+          <span class="bios-health-pct" id="diag-overall-pct">82%</span>
+        </div>
+        <div class="bios-spec-table bios-spec-tight" id="diag-subsystems"></div>
+        <p class="bios-disclaimer">Scoruri orientative · calibrate când există date OBD / EXO.</p>
+      </section>
+
+      <section class="bios-card bios-card-wide">
+        <div class="bios-live-head">
+          <h2 class="bios-card-title">LIVE SENSORS</h2>
+          <span class="bios-live-badge bios-live-badge-sm" aria-hidden="true">[LIVE]</span>
+        </div>
+        <div class="bios-rule"></div>
+        <p class="bios-disclaimer">Date aproximative / simulare (~2s) până la conexiune OBD reală.</p>
+        <div class="bios-spec-table bios-spec-tight" id="diag-live-sensors"></div>
+      </section>
+
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">DTC · STORED CODES</h2>
+        <div class="bios-rule"></div>
+        <pre class="bios-pre-block" id="diag-dtc-stored"></pre>
+        <h3 class="bios-subsector">CLEARED (30 DAYS)</h3>
+        <pre class="bios-pre-block" id="diag-dtc-cleared"></pre>
+      </section>
+    </div>
+
+    <!-- ========== MAINTENANCE ========== -->
+    <div class="bios-tab-panel" id="panel-maintenance" role="tabpanel" aria-labelledby="tab-btn-maintenance">
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">PREDICTIVE MAINTENANCE · AI</h2>
+        <div class="bios-rule"></div>
+        <pre class="bios-pre-block" id="maint-predict"></pre>
+        <h3 class="bios-subsector">WEAR INDICATORS</h3>
+        <div id="maint-wear"></div>
+      </section>
+
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">MAINTENANCE TIMELINE</h2>
+        <div class="bios-rule"></div>
+        <pre class="bios-timeline" id="maint-timeline"></pre>
+      </section>
+    </div>
+
+    <!-- ========== ECONOMY ========== -->
+    <div class="bios-tab-panel" id="panel-economy" role="tabpanel" aria-labelledby="tab-btn-economy">
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">CONSUMPTION · LAST 1000 KM</h2>
+        <div class="bios-rule"></div>
+        <pre class="bios-pre-block" id="eco-fuel"></pre>
+      </section>
+
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">FLEET COMPARISON</h2>
+        <div class="bios-rule"></div>
+        <pre class="bios-pre-block" id="eco-fleet"></pre>
+      </section>
+
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">CARBON FOOTPRINT</h2>
+        <div class="bios-rule"></div>
+        <pre class="bios-pre-block" id="eco-carbon"></pre>
+      </section>
+
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">MARKET VALUE · RESALE</h2>
+        <div class="bios-rule"></div>
+        <pre class="bios-pre-block" id="eco-market"></pre>
+      </section>
+    </div>
+
+    <!-- ========== SYSTEM ARCHIVES (Fondator) ========== -->
+    <div class="bios-tab-panel" id="panel-archives" role="tabpanel" aria-labelledby="tab-btn-archives">
+      <section class="bios-card bios-card-wide archive-section" id="section-system-archives">
+        <h2 class="bios-card-title">// SYSTEM_ARCHIVES</h2>
+        <div class="bios-rule"></div>
+        <p class="bios-line-dim" id="archive-notice">—</p>
+        <div class="bios-archive-actions">
+          <button type="button" class="bios-foot-btn" id="archive-refresh">[REFRESH LIST]</button>
+          <button type="button" class="bios-foot-btn" id="archive-generate">[GENERATE NOW]</button>
+        </div>
+        <p class="bios-disclaimer">Rapoarte JSON în <code>backend/research_data/archives/REPORTS_YYYY_MM/</code> · acces Fondator.</p>
+        <ul class="bios-archive-list" id="archive-list"></ul>
+      </section>
+    </div>
+
+    <!-- ========== SECURITY ========== -->
+    <div class="bios-tab-panel" id="panel-security" role="tabpanel" aria-labelledby="tab-btn-security">
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">SECURITY STATUS</h2>
+        <div class="bios-rule"></div>
+        <div class="bios-status-strip">
+          <span class="bios-st bios-st-ok">[OK] ARMED</span>
+          <span class="bios-st bios-st-ok" id="sec-vin-match">[OK] VIN MATCH</span>
+        </div>
+        <pre class="bios-pre-block" id="sec-detail"></pre>
+        <p class="bios-disclaimer">GPS / last unlock: demo static · nu înlocuiește sistemul vehicul.</p>
+      </section>
+    </div>
+
+    <!-- ========== YOURCAR ========== -->
+    <div class="bios-tab-panel" id="panel-yourcar" role="tabpanel" aria-labelledby="tab-btn-yourcar">
+      <section class="bios-card bios-card-wide">
+        <h2 class="bios-card-title">YOURCAR · ACȚIUNI</h2>
+        <div class="bios-rule"></div>
+        <p class="bios-line-dim">Integrare API YourCar (booking, marketplace) — legături rapide:</p>
+        <div class="bios-action-grid">
+          <a class="bios-action-btn" href="partners.html" id="act-schedule">[SCHEDULE SERVICE]</a>
+          <button type="button" class="bios-action-btn" id="act-share-qr">[SHARE VIA QR]</button>
+          <a class="bios-action-btn" href="reminder.html" id="act-reminder">[SET REMINDER]</a>
+          <a class="bios-action-btn" href="partners.html" id="act-parts">[FIND PARTS]</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- FOOTER (global) -->
+    <div class="bios-footer-actions bios-footer-global">
+      <button type="button" class="bios-foot-btn" id="exo-open-sheet">Scanează MulberryQR</button>
+      <button type="button" class="bios-foot-btn bios-foot-btn-danger" id="exo-logout">[⏻ DECONECTARE]</button>
+    </div>
+
+    <p class="bios-back-wrap">
+      <a class="bios-back" href="mulberry.html">← Înapoi la Mulberry</a>
+    </p>
+  </main>
+  </div>
+
+  <!-- Sheet: Digital ID -->
+  <div class="bios-sheet-overlay" id="exo-sheet-overlay" hidden aria-hidden="true"></div>
+  <aside class="bios-sheet" id="exo-sheet" hidden aria-hidden="true">
+    <div class="bios-sheet-handle-bar">
+      <button type="button" class="bios-sheet-arrow-close" id="exo-sheet-arrow" title="Închide Vault" aria-label="Închide panoul Vault — retrage">
+        <span class="bios-sheet-arrow-ico" aria-hidden="true">↓</span>
+        <span class="bios-sheet-arrow-txt">ÎNCHIDE</span>
+      </button>
+    </div>
+    <div class="bios-sheet-head">
+      <div>
+        <div class="bios-k">DIGITAL ID · PREVIEW</div>
+        <div class="bios-sheet-title" id="exo-sheet-title">—</div>
+      </div>
+      <button type="button" class="bios-sheet-close" id="exo-sheet-close" aria-label="Închide">[×]</button>
+    </div>
+    <div class="bios-rule"></div>
+    <div class="bios-sheet-body">
+      <div class="bios-sheet-qr" id="exo-sheet-qr"></div>
+      <div class="bios-spec-table bios-spec-tight" id="exo-sheet-specs"></div>
+    </div>
+    <div class="bios-sheet-foot">
+      <span class="bios-line-dim">SCAN FOR OFFLINE VERIFICATION</span>
+    </div>
+  </aside>
+
+  <!-- Insight flotă (răspuns salvat din /analyze/business) -->
+  <div class="exo-insight-overlay" id="exo-insight-overlay" hidden aria-hidden="true"></div>
+  <aside class="exo-insight-panel" id="exo-insight-panel" hidden aria-hidden="true" role="dialog" aria-labelledby="exo-insight-title">
+    <div class="exo-insight-head">
+      <div>
+        <div class="bios-k">FLEET INSIGHT</div>
+        <h2 class="exo-insight-title" id="exo-insight-title">Analiză AI</h2>
+      </div>
+      <button type="button" class="bios-sheet-close" id="exo-insight-close" aria-label="Închide">[×]</button>
+    </div>
+    <p class="exo-insight-meta" id="exo-insight-meta"></p>
+    <div class="exo-insight-body">
+      <p class="exo-insight-question" id="exo-insight-question"></p>
+      <pre class="exo-insight-reply" id="exo-insight-reply"></pre>
+    </div>
+  </aside>
+
+  <!-- Prezentare Scan MulberryQR — stil hub + QR public MulberryID (mobil / Chrome / Safari) -->
+  <div
+    class="pz-mulberry-qr-overlay"
+    id="pz-mulberry-qr-overlay"
+    hidden
+    aria-hidden="true"
+  >
+    <div class="pz-mulberry-qr-backdrop" id="pz-mulberry-qr-backdrop" tabindex="-1"></div>
+    <div
+      class="pz-mulberry-qr-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pz-mulberry-qr-title"
+    >
+      <button type="button" class="pz-mulberry-qr-x" id="pz-mulberry-qr-close" aria-label="Închide">×</button>
+      <div class="pz-mulberry-qr-inner">
+        <h2 class="pz-mulberry-qr-title" id="pz-mulberry-qr-title">
+          <span class="pz-dot">SCANEAZĂ.</span>
+          <span class="pz-mulberry-qr-muted"> DESCHIDE.</span>
+        </h2>
+        <p class="pz-mulberry-qr-lead">
+          <strong class="pz-mulberry-qr-strong">Codul QR</strong>
+          <span class="pz-mulberry-qr-muted"> deschide în browserul mobil pagina publică unde se afișează </span>
+          <strong class="pz-mulberry-qr-strong">MulberryID</strong>
+          <span class="pz-mulberry-qr-muted"> (Chrome, Safari sau orice browser pe Android / iOS).</span>
+        </p>
+
+        <div class="pz-hub-stage" aria-hidden="true">
+          <svg class="pz-spokes" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#d4d4d4" stroke-width="1" fill="none">
+              <line x1="160" y1="160" x2="160" y2="36" />
+              <line x1="160" y1="160" x2="248" y2="72" />
+              <line x1="160" y1="160" x2="284" y2="160" />
+              <line x1="160" y1="160" x2="248" y2="248" />
+              <line x1="160" y1="160" x2="160" y2="284" />
+              <line x1="160" y1="160" x2="72" y2="248" />
+              <line x1="160" y1="160" x2="36" y2="160" />
+              <line x1="160" y1="160" x2="72" y2="72" />
+            </g>
+            <g fill="#0a0a0a">
+              <circle cx="160" cy="36" r="3" />
+              <circle cx="248" cy="72" r="3" />
+              <circle cx="284" cy="160" r="3" />
+              <circle cx="248" cy="248" r="3" />
+              <circle cx="160" cy="284" r="3" />
+              <circle cx="72" cy="248" r="3" />
+              <circle cx="36" cy="160" r="3" />
+              <circle cx="72" cy="72" r="3" />
+            </g>
+          </svg>
+          <span class="pz-hub-label pz-hub-label--n">Telefon mobil</span>
+          <span class="pz-hub-label pz-hub-label--ne">Cameră QR</span>
+          <span class="pz-hub-label pz-hub-label--e">Chrome / Safari</span>
+          <span class="pz-hub-label pz-hub-label--se">HTTPS</span>
+          <span class="pz-hub-label pz-hub-label--s">Pagina MulberryID</span>
+          <span class="pz-hub-label pz-hub-label--sw">Link public</span>
+          <span class="pz-hub-label pz-hub-label--w">Acasă · flotă</span>
+          <span class="pz-hub-label pz-hub-label--nw">Scan instant</span>
+          <div class="pz-hub-core">
+            <div class="pz-hub-core-inner" id="pz-modal-qr" aria-label="Cod QR pagină MulberryID"></div>
+          </div>
+        </div>
+
+        <p class="pz-mulberry-qr-footline pz-dot">
+          MULBERRY<span class="pz-mulberry-qr-muted"> ID</span>
+        </p>
+        <div class="pz-mlbr-id pz-dot" id="pz-modal-mlbr">—</div>
+
+        <button type="button" class="pz-mulberry-qr-cta" id="pz-copy-qr-url">
+          <span class="pz-mulberry-qr-cta-dot" aria-hidden="true"></span>
+          Copiază linkul paginii
+        </button>
+        <p class="pz-url-preview" id="pz-url-preview"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Baseline SECURITY_HALT (403 HWID / politică dispozitiv) — nu redirect, overlay static BIOS -->
+  <div
+    id="exo-security-halt"
+    class="bios-security-halt"
+    hidden
+    aria-hidden="true"
+    role="alertdialog"
+    aria-modal="true"
+    aria-labelledby="exo-halt-title"
+  >
+    <div class="bios-security-halt-panel">
+      <div class="bios-security-halt-sticker">
+        <span class="bios-security-halt-model">MULBERRY · HUB</span>
+        <pre class="bios-security-halt-line" id="exo-halt-title">[!] SECURITY_HALT: HWID_MISMATCH // ACCESS_RESTRICTED.</pre>
+        <p class="bios-security-halt-detail" id="exo-halt-detail"></p>
+        <div class="bios-security-halt-meta">
+          <span>REV 01</span><span>│</span><span>CLASS: DEVICE_POLICY</span>
+        </div>
+      </div>
+      <div class="bios-security-halt-actions">
+        <a class="bios-mode-btn" href="mulberry.html">← MULBERRY</a>
+        <button type="button" class="bios-mode-btn" id="exo-halt-dismiss">[ACK] REVIEW_DEVICE</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/mulberry_device.js"></script>
+  <script src="js/mulberry_hub.js"></script>
+  <script src="js/mulberry_settings_library.js"></script>
+  <script src="js/api_poll_guard.js"></script>
+  <script src="js/api_client.js"></script>
+  <script src="js/vendor/qrcode-scannable.min.js"></script>
+  <script src="js/vendor/qr-code-styling.umd.js"></script>
+  <script src="js/mulberry_styled_qr.js"></script>
+  <script src="js/offline/appDB.js"></script>
+  <script src="js/mulberry_exo_menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.MulberrySettingsMenu) {
+        MulberrySettingsMenu.init({ triggerId: 'mulberry-hub-settings', theme: 'hub' });
+      }
+    });
+  </script>
+</body>
+</html>

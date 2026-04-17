@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mulberry · QData Catalog</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .qdata-wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 56px; display: flex; flex-direction: column; gap: 14px; }
+    .qdata-h2 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      margin: 0 0 14px;
+    }
+    .mlb-card--dark table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .mlb-card--dark th,
+    .mlb-card--dark td {
+      text-align: left;
+      padding: 11px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      vertical-align: top;
+    }
+    .mlb-card--dark tr:last-child td { border-bottom: none; }
+    .mlb-card--dark th {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(255, 255, 255, 0.48);
+    }
+    .mlb-card--dark code {
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      background: rgba(225, 255, 0, 0.15);
+      color: var(--mlb-neon);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .mlb-card--dark .src { font-size: 12px; color: rgba(255, 255, 255, 0.55); }
+    .qdata-t-neon { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .qdata-t-neon th, .qdata-t-neon td { text-align: left; padding: 10px 8px; border-bottom: 1px solid rgba(0,0,0,0.1); vertical-align: top; }
+    .qdata-t-neon tr:last-child td { border-bottom: none; }
+    .qdata-t-neon th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(0,0,0,0.45); }
+  </style>
+</head>
+<body class="mlb-page">
+  <header class="mlb-head">
+    <a class="mlb-back" href="mulberry_menu.html" aria-label="Înapoi la Hub">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <h1 class="mlb-h1">QData · catalog</h1>
+  </header>
+
+  <div class="qdata-wrap">
+    <div class="mlb-card mlb-card--neon">
+      <p class="mlb-eyebrow" style="margin-top:0;">Documentație</p>
+      <p class="mlb-muted" style="margin:0; font-size:15px; font-weight:600; color:#0a0a0a;">
+        Harta câmpurilor canonice și surselor: ce înseamnă fiecare, de unde vine, cum iese spre API.
+      </p>
+      <p class="mlb-muted" style="margin-top:12px; margin-bottom:0;">
+        Contractul unic vehicul este <code style="background:rgba(0,0,0,0.08);color:#0a0a0a;padding:2px 6px;border-radius:4px;font-size:12px;">MulberryVehicleDTO</code> (Pydantic) în backend.
+      </p>
+    </div>
+
+    <div class="mlb-card mlb-card--dark">
+      <h2 class="qdata-h2" style="margin-top:0;">API REST (FastAPI)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Rol</th>
+            <th>Sursă date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>GET /me/vehicle</code></td>
+            <td>JSON vehicul canonic (JWT)</td>
+            <td class="src">SQLite <code>cars</code> → filtru DTO</td>
+          </tr>
+          <tr>
+            <td><code>POST /analyze/business</code></td>
+            <td>Întrebare + vehicul (DB sau body) → analiză LLM</td>
+            <td class="src">DTO + Groq/Ollama (AIProxy)</td>
+          </tr>
+          <tr>
+            <td><code>GET /me/vehicles</code></td>
+            <td>Listă simplă (legacy redirect)</td>
+            <td class="src">SQLite <code>cars</code></td>
+          </tr>
+          <tr>
+            <td><code>POST /cars/sync</code></td>
+            <td>Sincronizare vehicul din client</td>
+            <td class="src">Body → upsert <code>cars</code></td>
+          </tr>
+          <tr>
+            <td><code>POST /assistant/exo</code></td>
+            <td>Chat asistent EXO</td>
+            <td class="src">Context + vector / reguli interne</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mlb-card mlb-card--neon">
+      <h2 class="mlb-eyebrow" style="margin-top:0; margin-bottom:14px;">MulberryVehicleDTO · câmpuri</h2>
+      <table class="qdata-t-neon">
+        <thead>
+          <tr>
+            <th>Câmp</th>
+            <th>Descriere</th>
+            <th>Mapare</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">vin</code></td><td>VIN 17 caractere</td><td class="src" style="color:rgba(0,0,0,0.55);">Obligatoriu; normalizat A–Z 0–9</td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">mlbr_id</code></td><td>ID public MLBR / YCR</td><td class="src" style="color:rgba(0,0,0,0.55);"><code style="background:rgba(0,0,0,0.08);">mlbr_code</code>, <code style="background:rgba(0,0,0,0.08);">ycr_id</code></td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">marca</code></td><td>Marcă</td><td class="src" style="color:rgba(0,0,0,0.55);"><code style="background:rgba(0,0,0,0.08);">make</code>, brandName…</td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">model</code></td><td>Model</td><td class="src" style="color:rgba(0,0,0,0.55);"><code style="background:rgba(0,0,0,0.08);">model</code>, modelName…</td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">series</code></td><td>Serie / generație</td><td class="src" style="color:rgba(0,0,0,0.55);"><code style="background:rgba(0,0,0,0.08);">series</code>, serie…</td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">an</code></td><td>An</td><td class="src" style="color:rgba(0,0,0,0.55);"><code style="background:rgba(0,0,0,0.08);">year</code>, an…</td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">plate</code></td><td>Nr. înmatriculare</td><td class="src" style="color:rgba(0,0,0,0.55);"><code style="background:rgba(0,0,0,0.08);">plate</code>, nr…</td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">fuel</code></td><td>Combustibil</td><td class="src" style="color:rgba(0,0,0,0.55);"><code style="background:rgba(0,0,0,0.08);">fuel</code>, combustibil…</td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">km_actuali</code></td><td>Kilometraj</td><td class="src" style="color:rgba(0,0,0,0.55);">SQLite / <code style="background:rgba(0,0,0,0.08);">km</code> client</td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">rca_expiry</code> / <code style="background:rgba(0,0,0,0.08);">itp_expiry</code></td><td>Expirări administrative</td><td class="src" style="color:rgba(0,0,0,0.55);">SQLite <code style="background:rgba(0,0,0,0.08);">cars</code></td></tr>
+          <tr><td><code style="background:rgba(0,0,0,0.08);color:#0a0a0a;">ycs_score</code></td><td>Scor software backend</td><td class="src" style="color:rgba(0,0,0,0.55);"><code style="background:rgba(0,0,0,0.08);">ycs_score</code> / soft_score în payload</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mlb-card mlb-card--dark">
+      <h2 class="qdata-h2" style="margin-top:0;">Stocare &amp; vector</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Componentă</th>
+            <th>Rol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>dev.db</code> · <code>cars</code></td>
+            <td class="src">Sursă de adevăr server pentru vehicul utilizator</td>
+          </tr>
+          <tr>
+            <td><code>localStorage</code> · AppDB</td>
+            <td class="src">Cache client; aliniat la contract prin sync</td>
+          </tr>
+          <tr>
+            <td>ChromaDB / RAG</td>
+            <td class="src">Căutare documente — nu înlocuiește DTO-ul vehicul</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

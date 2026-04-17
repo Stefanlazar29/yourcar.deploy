@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulberry Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="js/mulberry_chat.js"></script>
+  <style>
+    .chat-layout { display: flex; flex: 1; min-height: 0; width: 100%; max-width: 900px; margin: 0 auto; position: relative; }
+    .chat-sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 260px;
+      z-index: 200;
+      background: #f6f6f3;
+      border-right: 1px solid rgba(0,0,0,0.08);
+      display: flex; flex-direction: column;
+      transition: transform 0.25s ease;
+      transform: translateX(-100%);
+    }
+    .chat-sidebar.open { transform: translateX(0); }
+    .chat-sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      background: rgba(0,0,0,0.4);
+    }
+    .chat-sidebar-overlay.show { display: block; }
+    .sidebar-new { padding: 14px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .sidebar-new-btn {
+      display: flex; align-items: center; gap: 10px; width: 100%;
+      padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1);
+      background: #fff; color: #1a1a1a; font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .sidebar-new-btn:hover { background: #fff; border-color: rgba(225,255,0,0.65); box-shadow: 0 0 0 3px rgba(225,255,0,0.18); }
+    .sidebar-new-btn svg { width: 18px; height: 18px; stroke: currentColor; flex-shrink: 0; }
+    .sidebar-convs { flex: 1; overflow-y: auto; padding: 8px 0; }
+    .sidebar-section { padding: 8px 16px 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(0,0,0,0.45); }
+    .sidebar-conv {
+      display: flex; align-items: center; gap: 8px; padding: 10px 16px; margin: 2px 8px; border-radius: 10px;
+      cursor: pointer; color: #1a1a1a; font-size: 13px;
+      transition: background 0.2s;
+    }
+    .sidebar-conv:hover { background: rgba(0,0,0,0.05); }
+    .sidebar-conv.active { background: rgba(225,255,0,0.35); color: #0d0d0d; font-weight: 600; }
+    .sidebar-conv .conv-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sidebar-conv .conv-archive { padding: 4px; border: none; background: none; color: rgba(0,0,0,0.35); cursor: pointer; border-radius: 6px; }
+    .sidebar-conv .conv-archive:hover { color: #0d0d0d; background: rgba(0,0,0,0.06); }
+    .sidebar-conv .conv-archive svg { width: 14px; height: 14px; display: block; }
+    .chat-main { flex: 1; display: flex; flex-direction: column; min-width: 0; width: 100%; background: #ffffff; position: relative; }
+    .chat-scroll-stack {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .chat-scroll-stack .chat-scroll-area {
+      flex: 1;
+      min-height: 0;
+    }
+    .chat-jump-latest {
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      z-index: 25;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: linear-gradient(180deg, #fffff0 0%, #f2f2e8 100%);
+      box-shadow:
+        0 0 0 1px rgba(225, 255, 0, 0.35),
+        0 8px 28px rgba(0, 0, 0, 0.12);
+      color: #0d0d0d;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+    }
+    .chat-jump-latest:hover {
+      filter: brightness(1.05);
+      transform: scale(1.06);
+    }
+    .chat-jump-latest[hidden] {
+      display: none !important;
+    }
+    .chat-jump-latest svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    /* Ultimul mesaj user — fix sub header, vizibil în timpul generării (Gemini + stream EXO) */
+    .chat-pinned-user {
+      flex-shrink: 0;
+      padding: 10px 16px 12px;
+      background: linear-gradient(180deg, #fffef8 0%, #ffffff 100%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      border-left: 3px solid #e1ff00;
+      z-index: 15;
+    }
+    .chat-pinned-user[hidden] {
+      display: none !important;
+    }
+    .chat-pinned-user.is-generating .chat-pinned-label::after {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-left: 8px;
+      border-radius: 50%;
+      background: #e1ff00;
+      animation: chat-pin-pulse 1s ease-in-out infinite;
+    }
+    @keyframes chat-pin-pulse {
+      0%, 100% { opacity: 0.35; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    .chat-pinned-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(0, 0, 0, 0.45);
+      margin-bottom: 6px;
+    }
+    .chat-pinned-body {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.45;
+      max-height: 4.6em;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      word-break: break-word;
+    }
+    .chat-pinned-attach {
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.5);
+      margin-top: 6px;
+    }
+    .chat-header-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); background: #fff; }
+    .chat-toggle-sidebar { width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08); color: #1a1a1a; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .chat-toggle-sidebar svg { width: 20px; height: 20px; }
+    .chat-header-title { flex: 1; min-width: 0; }
+    .chat-back-home {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08);
+      color: #1a1a1a; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; text-decoration: none;
+    }
+    .chat-back-home:hover { background: rgba(225,255,0,0.25); border-color: rgba(225,255,0,0.5); color: #0d0d0d; }
+    .chat-back-home svg { width: 22px; height: 22px; }
+    .chat-messages, .chat-scroll-area { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+    #chat-history.chat-scroll-area { scroll-behavior: smooth; }
+    .chat-footer-wrap {
+      padding: 12px 16px max(20px, env(safe-area-inset-bottom));
+      border-top: 1px solid rgba(0,0,0,0.06);
+      background: #ffffff;
+    }
+    .chat-attach-preview {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 10px; min-height: 0;
+    }
+    .chat-attach-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 10px 6px 6px;
+      border-radius: 999px;
+      background: rgba(225,255,0,0.12);
+      border: 1px solid rgba(225,255,0,0.35);
+      font-size: 12px; color: #1a1a1a;
+      max-width: 100%;
+    }
+    .chat-attach-chip img { width: 36px; height: 36px; object-fit: cover; border-radius: 8px; }
+    .chat-attach-chip .rm {
+      border: none; background: rgba(0,0,0,0.08); color: #1a1a1a;
+      width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-size: 14px; line-height: 1;
+    }
+    .chat-composer {
+      display: flex; align-items: flex-end; gap: 8px;
+      padding: 10px 12px;
+      border-radius: 22px;
+      border: 2px solid rgba(225, 255, 0, 0.55);
+      background: linear-gradient(180deg, #fffff8 0%, #fafaf5 100%);
+      box-shadow:
+        0 0 0 1px rgba(225, 255, 0, 0.12),
+        0 4px 24px rgba(225, 255, 0, 0.12),
+        0 12px 40px rgba(0,0,0,0.06);
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .chat-composer:focus-within {
+      border-color: #E1FF00;
+      box-shadow:
+        0 0 0 4px rgba(225, 255, 0, 0.22),
+        0 0 28px rgba(225, 255, 0, 0.28),
+        0 12px 40px rgba(0,0,0,0.08);
+    }
+    .chat-composer::before { display: none; }
+    .chat-attach-btn {
+      flex-shrink: 0;
+      width: 42px; height: 42px; border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: rgba(225,255,0,0.15);
+      color: #1a1a1a;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .chat-attach-btn:hover:not(:disabled) {
+      background: rgba(225,255,0,0.35);
+      border-color: rgba(225,255,0,0.65);
+      color: #0d0d0d;
+    }
+    .chat-attach-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .chat-attach-btn svg { width: 20px; height: 20px; }
+    .chat-input-row { display: flex; align-items: flex-end; gap: 8px; flex: 1; min-width: 0; position: relative; z-index: 1; }
+    .chat-input-row #chat-input {
+      flex: 1; min-width: 0; min-height: 44px; max-height: 140px;
+      padding: 11px 12px; border-radius: 14px;
+      border: none; background: transparent; color: #0d0d0d;
+      font-size: 15px; line-height: 1.45; outline: none; resize: none;
+      font-family: inherit;
+      font-weight: 500;
+    }
+    .chat-input-row #chat-input::placeholder { color: rgba(0,0,0,0.38); }
+    .chat-input-row #chat-send-btn {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: var(--neon, #E1FF00);
+      border: 1px solid rgba(0,0,0,0.12); color: #0a0a0a; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(225,255,0,0.35);
+      transition: transform 0.15s, filter 0.15s, box-shadow 0.15s;
+    }
+    .chat-input-row #chat-send-btn:hover:not(:disabled) { filter: brightness(1.08); transform: scale(1.03); }
+    .chat-input-row #chat-send-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+    .chat-user-attachments {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+      font-size: 12px;
+      color: rgba(0,0,0,0.55);
+      line-height: 1.4;
+    }
+    .chat-user-attachments span { display: inline-block; margin-right: 8px; margin-bottom: 4px; }
+
+    /* Flux generare · stil Gemini (pași secvențiali + shimmer) */
+    .gemini-flow {
+      align-self: flex-start;
+      width: 100%; max-width: 440px;
+      margin: 4px 0 16px 0;
+      padding: 18px 20px 20px;
+      border-radius: 20px;
+      background: #fafaf8;
+      border: 1px solid rgba(225, 255, 0, 0.35);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .gemini-flow-head {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12px; font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 14px;
+      letter-spacing: 0.02em;
+    }
+    .gemini-orb {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: linear-gradient(135deg, #E1FF00, #c8e600);
+      box-shadow: 0 0 14px rgba(225,255,0,0.75);
+      animation: geminiOrbPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes geminiOrbPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.75; }
+    }
+    .gemini-steps { list-style: none; margin: 0; padding: 0; }
+    .gemini-steps li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 13px; line-height: 1.45;
+      color: rgba(0,0,0,0.38);
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: color 0.35s ease;
+    }
+    .gemini-steps li:last-child { border-bottom: none; }
+    .gemini-steps li .g-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      margin-top: 5px; flex-shrink: 0;
+      background: rgba(0,0,0,0.12);
+      transition: background 0.35s, box-shadow 0.35s;
+    }
+    .gemini-steps li.is-active { color: #0d0d0d; }
+    .gemini-steps li.is-active .g-dot {
+      background: #E1FF00;
+      box-shadow: 0 0 12px rgba(225,255,0,0.65);
+      animation: gDotPulse 1s ease-in-out infinite;
+    }
+    .gemini-steps li.is-done { color: rgba(0,0,0,0.55); }
+    .gemini-steps li.is-done .g-dot {
+      background: rgba(180, 200, 80, 0.85);
+      box-shadow: none;
+    }
+    @keyframes gDotPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+    .gemini-shimmer-bar {
+      height: 3px; border-radius: 2px;
+      margin-top: 14px;
+      background: linear-gradient(90deg, transparent, rgba(225,255,0,0.75), transparent);
+      background-size: 200% 100%;
+      animation: geminiShimmer 1.8s linear infinite;
+    }
+    @keyframes geminiShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .chat-suggestion-cards { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chat-suggestion-card {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: 12px;
+      background: #fff; border: 1px solid rgba(225,255,0,0.45);
+      color: #1a1a1a; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .chat-suggestion-card:hover { background: rgba(225,255,0,0.2); border-color: #E1FF00; color: #0d0d0d; box-shadow: 0 0 16px rgba(225,255,0,0.2); }
+    .chat-suggestion-card svg { width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor; }
+
+    /* Mulberry EXO — pipeline (în loc de bubble Messenger în timpul generării) */
+    .exo-pipeline {
+      align-self: flex-start;
+      width: 100%;
+      max-width: 420px;
+      margin: 4px 0 16px 0;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: #fafaf8;
+      border: 1px solid rgba(225,255,0,0.4);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .exo-pipeline::before {
+      content: '';
+      position: absolute;
+      inset: -40% -20%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(225,255,0,0.12), transparent 55%);
+      animation: exoAura 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes exoAura {
+      0%, 100% { opacity: 0.5; transform: translate(0,0) scale(1); }
+      50% { opacity: 1; transform: translate(4%, 2%) scale(1.05); }
+    }
+    .exo-pipeline-brand {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #4a4d00;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .exo-pipeline-brand::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(225,255,0,0.5), transparent);
+      animation: exoLinePulse 2s ease-in-out infinite;
+    }
+    @keyframes exoLinePulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .exo-steps { list-style: none; margin: 0; padding: 0; position: relative; z-index: 1; }
+    .exo-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(0,0,0,0.4);
+      padding: 8px 0;
+      border-left: 2px solid rgba(0,0,0,0.08);
+      padding-left: 12px;
+      margin-left: 11px;
+      transition: color 0.35s ease, border-color 0.35s ease;
+    }
+    .exo-steps li:last-child { border-left-color: transparent; }
+    .exo-steps li.active {
+      color: #0d0d0d;
+      border-left-color: rgba(225,255,0,0.85);
+    }
+    .exo-steps li.done { color: rgba(0,0,0,0.55); border-left-color: rgba(225,255,0,0.35); }
+    .exo-n {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(0,0,0,0.06);
+      color: rgba(0,0,0,0.45);
+      flex-shrink: 0;
+      margin-left: -23px;
+      margin-right: 4px;
+    }
+    .exo-steps li.active .exo-n {
+      background: rgba(225,255,0,0.2);
+      color: #E1FF00;
+      box-shadow: 0 0 12px rgba(225,255,0,0.35);
+      animation: exoNpulse 1.2s ease-in-out infinite;
+    }
+    @keyframes exoNpulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .exo-steps li.done .exo-n { background: rgba(225,255,0,0.12); color: #E1FF00; }
+    .exo-scanline {
+      position: absolute;
+      left: 0; right: 0; bottom: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(225,255,0,0.6), transparent);
+      animation: exoScan 2.2s linear infinite;
+      opacity: 0.7;
+    }
+    @keyframes exoScan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Răspuns final — card EXO, nu bubble Messenger */
+    .exo-reply-wrap { align-self: flex-start; max-width: 100%; width: 100%; margin: 8px 0 12px 0; }
+    .exo-reply-block {
+      padding: 16px 18px 18px;
+      border-radius: 14px;
+      background: #f7f7f4;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-left: 4px solid var(--neon, #E1FF00);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.06);
+    }
+    .exo-reply-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9aa000;
+      margin-bottom: 10px;
+    }
+    .exo-reply-body {
+      font-size: 14px; line-height: 1.65; color: #1a1a1a; white-space: pre-wrap; word-break: break-word;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-weight: 400;
+    }
+    .exo-stream-live { font-family: inherit; }
+    .exo-type-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.05em;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      background: #E1FF00;
+      border-radius: 1px;
+      box-shadow: 0 0 8px rgba(225,255,0,0.7);
+      animation: exoCursorBlink 0.85s step-end infinite;
+    }
+    @keyframes exoCursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Notificări proactive: pastilă laterală, nu peste zona de input */
+    body.page-mulberry-chat .proactive-toast {
+      left: auto;
+      right: 10px;
+      transform: translateX(0) translateY(120%);
+      bottom: auto;
+      top: 76px;
+      max-width: 260px;
+      width: auto;
+      font-size: 12px;
+      padding: 10px 12px;
+      opacity: 0.95;
+    }
+    body.page-mulberry-chat .proactive-toast-show {
+      transform: translateX(0) translateY(0);
+    }
+    body.page-mulberry-chat .proactive-toast-hide {
+      transform: translateX(0) translateY(-140%);
+    }
+    /* „Pastile” remindere — bandă discretă sub header (stub pentru extindere) */
+    .chat-reminder-rail {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      min-height: 0;
+      background: #fff;
+    }
+    .chat-reminder-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(225,255,0,0.2);
+      border: 1px solid rgba(225,255,0,0.45);
+      color: #1a1a1a;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ── Chat: fundal alb, neon ca pe main card ── */
+    body.page-mulberry-chat {
+      font-family: var(--mlb-font, system-ui, sans-serif);
+      font-weight: 400;
+      margin: 0;
+      min-height: 100vh;
+      color: #1a1a1a;
+      background: #e8e8e8;
+      --neon: #E1FF00;
+    }
+    body.page-mulberry-chat::before { display: none; }
+    body.page-mulberry-chat .app {
+      position: relative;
+      z-index: 1;
+      background: transparent;
+    }
+    body.page-mulberry-chat .chat-layout { max-width: 960px; }
+    body.page-mulberry-chat .chat-sidebar {
+      background: #f6f6f3;
+      border-right: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 4px 0 24px rgba(0,0,0,0.04);
+    }
+    body.page-mulberry-chat .chat-main { background: #ffffff; }
+    body.page-mulberry-chat .chat-header-row {
+      background: #ffffff;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      border-radius: 0;
+      margin: 0;
+    }
+    body.page-mulberry-chat .chat-title {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      font-size: 1.05rem;
+      color: #0d0d0d;
+    }
+    body.page-mulberry-chat .chat-subtitle {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-weight: 400;
+      font-size: 11px;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.04em;
+    }
+    body.page-mulberry-chat .chat-messages,
+    body.page-mulberry-chat .chat-scroll-area {
+      background: #ffffff;
+    }
+    body.page-mulberry-chat .chat-footer-wrap {
+      background: #ffffff;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      border-radius: 0;
+      margin: 0;
+      box-shadow: none;
+    }
+    /* Composer: păstrăm stilul neon din blocul principal (fără override glass) */
+    @keyframes msgFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    body.page-mulberry-chat .msg-fade-in {
+      animation: msgFadeIn 0.22s ease-out both;
+    }
+    body.page-mulberry-chat .chat-msg.user-msg {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      background: var(--neon, #E1FF00);
+      color: #0a0a0a;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 22px 22px 8px 22px;
+      box-shadow: 0 0 24px rgba(225,255,0,0.35), 0 8px 24px rgba(0,0,0,0.06);
+    }
+    body.page-mulberry-chat .chat-msg.assistant-msg {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-weight: 400;
+      font-size: 13px;
+      background: #f3f3f0;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 22px 22px 22px 8px;
+      color: #1a1a1a;
+    }
+    body.page-mulberry-chat .sidebar-conv.active {
+      background: rgba(225,255,0,0.35);
+      color: #0d0d0d;
+    }
+    body.page-mulberry-chat .chat-report-btn {
+      color: #5c6200;
+      border-color: rgba(225,255,0,0.5);
+    }
+    body.page-mulberry-chat .chat-report-btn:hover {
+      background: rgba(225,255,0,0.15);
+      color: #0d0d0d;
+    }
+
+    /* Blocare dispozitiv — overlay glass */
+    .device-lock-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .device-lock-screen.is-visible { display: flex; }
+    .device-lock-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(4, 5, 10, 0.72);
+      backdrop-filter: blur(12px);
+    }
+    .device-lock-glass {
+      position: relative;
+      max-width: 400px;
+      width: 100%;
+      padding: 28px 26px 26px;
+      border-radius: 24px;
+      background: rgba(22, 24, 32, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+    }
+    .device-lock-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: rgba(160, 175, 205, 0.55);
+      margin-bottom: 12px;
+    }
+    .device-lock-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+      color: rgba(248, 250, 255, 0.96);
+    }
+    .device-lock-copy {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(200, 205, 220, 0.72);
+      margin: 0 0 20px;
+    }
+    .device-lock-label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: rgba(160, 170, 190, 0.55);
+      margin-bottom: 6px;
+    }
+    .device-lock-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.25);
+      color: rgba(245, 247, 255, 0.95);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+    }
+    .device-lock-input:focus {
+      outline: none;
+      border-color: rgba(140, 180, 255, 0.4);
+    }
+    .device-lock-err {
+      font-size: 12px;
+      color: rgba(255, 160, 160, 0.9);
+      min-height: 1.2em;
+      margin: 0 0 12px;
+    }
+    .device-lock-submit {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      color: #0a0a10;
+      background: linear-gradient(135deg, rgba(200, 220, 255, 0.95), rgba(170, 190, 240, 0.85));
+      box-shadow: 0 8px 28px rgba(100, 140, 220, 0.25);
+    }
+    .device-lock-submit:hover { filter: brightness(1.05); }
+  </style>
+</head>
+<body class="mlb-page page-mulberry-chat">
+  <div class="app" id="app" style="display: flex; flex-direction: column; min-height: 100vh;">
+    <div class="chat-sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="chat-layout">
+      <aside class="chat-sidebar" id="chat-sidebar">
+        <div class="sidebar-new">
+          <button type="button" class="sidebar-new-btn" id="btn-new-chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Conversație nouă
+          </button>
+        </div>
+        <div class="sidebar-convs" id="sidebar-convs">
+          <div class="sidebar-section" id="section-active">Conversații</div>
+          <div id="conversation-list"></div>
+          <div class="sidebar-section" id="section-archived" style="display:none;">Librarie</div>
+          <div id="archived-list"></div>
+        </div>
+      </aside>
+      <main class="chat-main">
+        <div class="chat-header-row">
+          <button type="button" class="chat-toggle-sidebar" id="toggle-sidebar" aria-label="Meniu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="chat-header-title">
+            <div class="chat-title">Mulberry Assistant</div>
+            <div class="chat-subtitle">Co-pilot auto · conversația e memorată</div>
+          </div>
+          <a href="mulberry.html" class="chat-back-home" aria-label="Înapoi la Home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </a>
+        </div>
+        <div class="chat-reminder-rail" id="chat-reminder-rail" style="display:none;" aria-label="Remindere active"></div>
+        <div id="chat-pinned-user" class="chat-pinned-user" hidden aria-live="polite">
+          <div class="chat-pinned-label">Întrebarea ta · în curs</div>
+          <div class="chat-pinned-body" id="chat-pinned-body"></div>
+          <div class="chat-pinned-attach" id="chat-pinned-attach" hidden></div>
+        </div>
+        <div class="chat-scroll-stack">
+          <div id="chat-history" class="chat-scroll-area chat-messages chat-messages-container" role="log" aria-live="polite" aria-relevant="additions"></div>
+          <button type="button" id="chat-jump-latest" class="chat-jump-latest" hidden aria-label="Derulează la ultimul răspuns MulberryEXO" title="La ultimul răspuns (săgeată)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="chat-footer-wrap">
+          <input type="file" id="chat-file-input" accept="image/*,.pdf,.txt,.doc,.docx" multiple style="position:absolute;width:0;height:0;opacity:0;pointer-events:none;" aria-hidden="true" tabindex="-1">
+          <div class="chat-attach-preview" id="chat-attach-preview" aria-live="polite"></div>
+          <div class="chat-composer">
+            <button type="button" class="chat-attach-btn" id="chat-attach-btn" title="Atașează fișier sau imagine" aria-label="Atașează fișier">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            </button>
+            <div class="chat-input-row">
+              <textarea id="chat-input" rows="1" placeholder="Mesaj sau atașează o imagine…"></textarea>
+              <button id="chat-send-btn" type="button" aria-label="Trimite">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="device-lock-screen" class="device-lock-screen" aria-hidden="true">
+    <div class="device-lock-backdrop" aria-hidden="true"></div>
+    <div class="device-lock-glass" role="dialog" aria-labelledby="device-lock-title" aria-modal="true">
+      <div class="device-lock-kicker">MULBERRY · SESIUNE</div>
+      <h2 class="device-lock-title" id="device-lock-title">Re-autorizare dispozitiv</h2>
+      <p class="device-lock-copy">Profilul este legat de un dispozitiv master. Confirmă parola aici pentru a autoriza <strong>acest</strong> browser ca dispozitiv de încredere.</p>
+      <form id="device-lock-form" class="device-lock-form" autocomplete="on">
+        <label class="device-lock-label" for="device-lock-ident">IDENTIFICATOR</label>
+        <input type="text" id="device-lock-ident" class="device-lock-input" name="username" autocomplete="username" required />
+        <label class="device-lock-label" for="device-lock-pass">PAROLĂ</label>
+        <input type="password" id="device-lock-pass" class="device-lock-input" name="password" autocomplete="current-password" required />
+        <p id="device-lock-err" class="device-lock-err" role="alert"></p>
+        <button type="submit" class="device-lock-submit">Confirmă dispozitivul</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Raportare -->
+  <div class="report-modal" id="report-modal" onclick="if(event.target===this)closeReportModal()">
+    <div class="report-modal-inner">
+      <div class="report-modal-title">Raportează problema</div>
+      <p class="report-modal-sub">Mulberry va învăța din raportul tău (anonimizat).</p>
+      <div class="field">
+        <div class="flabel">Componentă</div>
+        <select class="finput" id="report-component">
+          <option value="">Alege...</option>
+          <option value="roți">Roți / suspensie</option>
+          <option value="frâne">Frâne</option>
+          <option value="motor">Motor</option>
+          <option value="prag">Praguri / rugină</option>
+          <option value="geam">Geamuri electrice</option>
+          <option value="abs">ABS / senzori</option>
+          <option value="infotainment">Infotainment</option>
+        </select>
+      </div>
+      <div class="field">
+        <div class="flabel">Descriere problemă</div>
+        <textarea class="finput" id="report-desc" rows="3" placeholder="ex: Rugină la praguri..."></textarea>
+      </div>
+      <div class="report-modal-actions">
+        <button class="btn" type="button" onclick="closeReportModal()">Anulează</button>
+        <button class="btn btn-neon" type="button" onclick="submitReport()">Trimite</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/mulberry_device.js"></script>
+  <script src="js/api_client.js"></script>
+  <script src="js/offline/appDB.js"></script>
+  <script src="js/offline/core.js"></script>
+  <script>
+    (function() {
+      var STORAGE_KEY = 'mulberry_conversations';
+      var CURRENT_KEY = 'mulberry_current_conversation_id';
+      /* API pe apiBase (implicit :9000). Pagina poate fi servită de alt origin (ex. Live Server :5500) — CORS pe backend trebuie să permită acel origin. */
+      var apiBase = (window.Config && window.Config.apiBaseUrl) || 'http://127.0.0.1:9000';
+      var pendingChatFiles = [];
+      var _ATT_B64_SOFT_MAX = 480000;
+
+      /** JWT chat/API: preferă api.getToken(), apoi storage; doar token-uri JWT (eyJ…). */
+      function getChatToken() {
+        if (window.api && typeof window.api.getToken === 'function') {
+          var t = window.api.getToken();
+          if (t && String(t).indexOf('eyJ') === 0) return String(t).trim();
+        }
+        var t2 = localStorage.getItem('mulberry_session') || localStorage.getItem('yourcar_token') || '';
+        t2 = (t2 && String(t2).trim()) || '';
+        return (t2.indexOf('eyJ') === 0) ? t2 : '';
+      }
+
+      function resizeChatTextarea() {
+        var ta = document.getElementById('chat-input');
+        if (!ta || ta.tagName !== 'TEXTAREA') return;
+        ta.style.height = 'auto';
+        ta.style.height = Math.min(ta.scrollHeight, 140) + 'px';
+      }
+
+      function syncComposerSendState() {
+        var ta = document.getElementById('chat-input');
+        var btn = document.getElementById('chat-send-btn');
+        if (!btn || !ta) return;
+        var has = ((ta.value || '').trim().length > 0) || pendingChatFiles.length > 0;
+        btn.disabled = !!ta.disabled || !has;
+      }
+
+      function renderAttachPreview() {
+        var el = document.getElementById('chat-attach-preview');
+        if (!el) return;
+        el.querySelectorAll('img').forEach(function (img) {
+          if (img.src && img.src.indexOf('blob:') === 0) URL.revokeObjectURL(img.src);
+        });
+        el.innerHTML = '';
+        pendingChatFiles.slice(0, 6).forEach(function (file) {
+          var chip = document.createElement('div');
+          chip.className = 'chat-attach-chip';
+          if (file.type && file.type.indexOf('image/') === 0) {
+            var img = document.createElement('img');
+            img.alt = '';
+            img.src = URL.createObjectURL(file);
+            chip.appendChild(img);
+          }
+          var lab = document.createElement('span');
+          lab.textContent = (file.name || 'fișier').slice(0, 40);
+          lab.style.overflow = 'hidden';
+          lab.style.textOverflow = 'ellipsis';
+          lab.style.whiteSpace = 'nowrap';
+          lab.style.flex = '1';
+          lab.style.minWidth = '0';
+          chip.appendChild(lab);
+          var rm = document.createElement('button');
+          rm.type = 'button';
+          rm.className = 'rm';
+          rm.setAttribute('aria-label', 'Elimină atașament');
+          rm.textContent = '×';
+          rm.onclick = function () {
+            var i = pendingChatFiles.indexOf(file);
+            if (i >= 0) pendingChatFiles.splice(i, 1);
+            renderAttachPreview();
+          };
+          chip.appendChild(rm);
+          el.appendChild(chip);
+        });
+        syncComposerSendState();
+      }
+
+      function readFileAsBase64(file) {
+        return new Promise(function (resolve, reject) {
+          var r = new FileReader();
+          r.onload = function () {
+            var s = String(r.result || '');
+            var j = s.indexOf(',');
+            resolve(j >= 0 ? s.slice(j + 1) : s);
+          };
+          r.onerror = reject;
+          r.readAsDataURL(file);
+        });
+      }
+
+      function compressImageToJpeg(file, maxW, maxB64Len) {
+        return new Promise(function (resolve) {
+          maxW = maxW || 1280;
+          maxB64Len = maxB64Len || _ATT_B64_SOFT_MAX;
+          var url = URL.createObjectURL(file);
+          var img = new Image();
+          img.onload = function () {
+            URL.revokeObjectURL(url);
+            var w = img.naturalWidth || img.width;
+            var h = img.naturalHeight || img.height;
+            var scale = w > maxW ? maxW / w : 1;
+            var cw = Math.max(1, Math.round(w * scale));
+            var ch = Math.max(1, Math.round(h * scale));
+            var c = document.createElement('canvas');
+            c.width = cw;
+            c.height = ch;
+            var ctx = c.getContext('2d');
+            ctx.drawImage(img, 0, 0, cw, ch);
+            var q = 0.88;
+            function attempt() {
+              var du = c.toDataURL('image/jpeg', q);
+              var b64 = (du.split(',')[1] || '');
+              if (b64.length > maxB64Len && q > 0.45) {
+                q -= 0.08;
+                attempt();
+              } else {
+                var base = (file.name || 'image').replace(/\.[^.]+$/, '');
+                resolve({ name: base + '.jpg', mime: 'image/jpeg', data_base64: b64 });
+              }
+            }
+            attempt();
+          };
+          img.onerror = function () {
+            URL.revokeObjectURL(url);
+            readFileAsBase64(file).then(function (b64) {
+              resolve({ name: file.name || 'fișier', mime: file.type || 'application/octet-stream', data_base64: b64 });
+            });
+          };
+          img.src = url;
+        });
+      }
+
+      function fileToAttachment(file) {
+        if (file.type && file.type.indexOf('image/') === 0) {
+          return compressImageToJpeg(file);
+        }
+        return readFileAsBase64(file).then(function (b64) {
+          return { name: file.name || 'fișier', mime: file.type || 'application/octet-stream', data_base64: b64 };
+        });
+      }
+
+      function deviceHeaders() {
+        try {
+          return window.MulberryDevice && window.MulberryDevice.headers ? window.MulberryDevice.headers() : {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function mergeAuthHeaders(base) {
+        var h = Object.assign({}, base || {});
+        var dh = deviceHeaders();
+        Object.keys(dh).forEach(function (k) {
+          h[k] = dh[k];
+        });
+        return h;
+      }
+
+      function setChatLocked(locked) {
+        var inp = document.getElementById('chat-input');
+        var btn = document.getElementById('chat-send-btn');
+        var ab = document.getElementById('chat-attach-btn');
+        var fi = document.getElementById('chat-file-input');
+        if (inp) inp.disabled = !!locked;
+        if (btn) btn.disabled = !!locked;
+        if (ab) ab.disabled = !!locked;
+        if (fi) fi.disabled = !!locked;
+      }
+
+      function showDeviceLock() {
+        var el = document.getElementById('device-lock-screen');
+        if (!el) return;
+        el.classList.add('is-visible');
+        el.setAttribute('aria-hidden', 'false');
+        setChatLocked(true);
+        var err = document.getElementById('device-lock-err');
+        if (err) err.textContent = '';
+        try {
+          var token = getChatToken();
+          if (token) {
+            fetch(apiBase + '/me', { headers: { Authorization: 'Bearer ' + token } })
+              .then(function (r) {
+                return r.ok ? r.json() : null;
+              })
+              .then(function (d) {
+                if (d && d.identifier) {
+                  var idEl = document.getElementById('device-lock-ident');
+                  if (idEl && !idEl.value) idEl.value = d.identifier;
+                }
+              })
+              .catch(function () {});
+          }
+        } catch (e) {}
+      }
+
+      function hideDeviceLock() {
+        var el = document.getElementById('device-lock-screen');
+        if (!el) return;
+        el.classList.remove('is-visible');
+        el.setAttribute('aria-hidden', 'true');
+        setChatLocked(false);
+      }
+
+      async function probeChatSession() {
+        var token = getChatToken();
+        if (!token) return true;
+        try {
+          var h = mergeAuthHeaders({ Authorization: 'Bearer ' + token });
+          var r = await fetch(apiBase + '/auth/session-probe', { headers: h });
+          if (r.status === 403) {
+            showDeviceLock();
+            return false;
+          }
+          return true;
+        } catch (e) {
+          return true;
+        }
+      }
+
+      function loadConversations() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+      }
+
+      function saveConversations(list) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
+      }
+
+      function getCurrentId() {
+        return localStorage.getItem(CURRENT_KEY) || '';
+      }
+
+      function setCurrentId(id) {
+        try { localStorage.setItem(CURRENT_KEY, id || ''); } catch (e) {}
+      }
+
+      function genId() {
+        return 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+      }
+
+      function getCurrentConversation() {
+        var list = loadConversations();
+        var id = getCurrentId();
+        return list.find(function(c) { return c.id === id; }) || null;
+      }
+
+      function ensureCurrentConversation() {
+        var list = loadConversations();
+        var id = getCurrentId();
+        var conv = list.find(function(c) { return c.id === id && !c.archived; });
+        if (conv) {
+          setCurrentId(conv.id);
+          return conv;
+        }
+        conv = { id: genId(), title: 'Conversație nouă', messages: [], archived: false, updatedAt: new Date().toISOString() };
+        list.unshift(conv);
+        saveConversations(list);
+        setCurrentId(conv.id);
+        return conv;
+      }
+
+      function newConversation() {
+        hidePinnedUserPrompt();
+        var conv = { id: genId(), title: 'Conversație nouă', messages: [], archived: false, updatedAt: new Date().toISOString() };
+        var list = loadConversations();
+        list.unshift(conv);
+        saveConversations(list);
+        setCurrentId(conv.id);
+        renderSidebar();
+        renderMessages(conv.messages);
+        refreshChatHeaderSubject();
+        renderReminderRail();
+        closeSidebar();
+        loadServerChatHistory();
+        return conv;
+      }
+
+      /** Titlu conversație: primele 3 cuvinte din ultimul mesaj user (fragment înainte de . ! ?). */
+      function summarizeTitleThreeWords(raw) {
+        var s = (raw || '').trim().replace(/\s+/g, ' ');
+        if (!s) return 'Conversație nouă';
+        var part = s.split(/[.!?\n]/)[0].trim();
+        var tokens = part.split(/[\s,;:·…\/]+/).filter(function (t) {
+          return t && t.replace(/^['"„«»]+|['"„»]+$/g, '').length > 0;
+        });
+        var words = [];
+        for (var i = 0; i < tokens.length && words.length < 3; i++) {
+          var w = tokens[i].replace(/^['"„«»\(\[\{]+|['"„»\)\]\}]+$/g, '');
+          if (w) words.push(w);
+        }
+        if (!words.length) return 'Conversație nouă';
+        var out = words.join(' ');
+        if (out.length > 42) out = out.slice(0, 39) + '\u2026';
+        return out.charAt(0).toUpperCase() + out.slice(1);
+      }
+
+      function refreshChatHeaderSubject() {
+        var c = getCurrentConversation();
+        var sub = document.querySelector('.chat-subtitle');
+        if (sub && c && c.title && c.title !== 'Conversație nouă') {
+          sub.textContent = c.title;
+        } else if (sub) {
+          sub.textContent = 'Co-pilot auto · conversația e memorată';
+        }
+      }
+
+      function archiveConversation(id) {
+        var list = loadConversations();
+        var conv = list.find(function(c) { return c.id === id; });
+        if (!conv) return;
+        conv.archived = true;
+        conv.updatedAt = new Date().toISOString();
+        if (getCurrentId() === id) {
+          var next = list.find(function(c) { return !c.archived && c.id !== id; });
+          setCurrentId(next ? next.id : '');
+          renderMessages(next ? next.messages : []);
+        }
+        saveConversations(list);
+        renderSidebar();
+      }
+
+      function closeSidebar() {
+        var sidebar = document.getElementById('chat-sidebar');
+        var overlay = document.getElementById('sidebar-overlay');
+        if (sidebar) sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('show');
+      }
+
+      function selectConversation(id) {
+        var list = loadConversations();
+        var conv = list.find(function(c) { return c.id === id; });
+        if (!conv) return;
+        setCurrentId(conv.id);
+        renderMessages(conv.messages);
+        refreshChatHeaderSubject();
+        renderReminderRail();
+        renderSidebar();
+        closeSidebar();
+        loadServerChatHistory();
+      }
+
+      function renderSidebar() {
+        var list = loadConversations();
+        var currentId = getCurrentId();
+        var active = list.filter(function(c) { return !c.archived; });
+        var archived = list.filter(function(c) { return c.archived; });
+        function byUpdatedDesc(a, b) {
+          var ta = new Date(a.updatedAt || 0).getTime();
+          var tb = new Date(b.updatedAt || 0).getTime();
+          return tb - ta;
+        }
+        active.sort(byUpdatedDesc);
+        archived.sort(byUpdatedDesc);
+        var listEl = document.getElementById('conversation-list');
+        var archEl = document.getElementById('archived-list');
+        var sectionArch = document.getElementById('section-archived');
+        if (!listEl) return;
+        listEl.innerHTML = '';
+        archEl.innerHTML = '';
+        sectionArch.style.display = archived.length ? 'block' : 'none';
+        active.forEach(function(c) {
+          var div = document.createElement('div');
+          div.className = 'sidebar-conv' + (c.id === currentId ? ' active' : '');
+          div.innerHTML = '<span class="conv-title">' + (c.title || 'Conversație nouă') + '</span><button type="button" class="conv-archive" title="Șterge din listă și mută în Librarie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8M1 3h22v5H1V3z"/><path d="M10 12h4"/></svg></button>';
+          div.onclick = function(e) { if (!e.target.closest('.conv-archive')) selectConversation(c.id); };
+          div.querySelector('.conv-archive').onclick = function(e) { e.stopPropagation(); archiveConversation(c.id); };
+          listEl.appendChild(div);
+        });
+        archived.forEach(function(c) {
+          var div = document.createElement('div');
+          div.className = 'sidebar-conv';
+          div.innerHTML = '<span class="conv-title">' + (c.title || 'Salvată în Librarie') + '</span>';
+          div.onclick = function() { c.archived = false; c.updatedAt = new Date().toISOString(); saveConversations(list); setCurrentId(c.id); renderMessages(c.messages); renderSidebar(); };
+          archEl.appendChild(div);
+        });
+      }
+
+      function addMessageToConv(role, text) {
+        var conv = getCurrentConversation();
+        if (!conv) conv = ensureCurrentConversation();
+        conv.messages.push({ role: role, text: text });
+        conv.updatedAt = new Date().toISOString();
+        if (role === 'user') {
+          conv.title = summarizeTitleThreeWords(text);
+        }
+        var list = loadConversations();
+        var idx = list.findIndex(function(c) { return c.id === conv.id; });
+        if (idx >= 0) list[idx] = conv;
+        else list.unshift(conv);
+        saveConversations(list);
+        renderSidebar();
+        if (role === 'user') {
+          refreshChatHeaderSubject();
+        }
+      }
+
+      var SUGGESTION_CARDS = [
+        { label: 'Adaugă ITP', sub: 'Documente la zi, fără griji pe drum', href: 'mulberry_cloud.html', icon: 'M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-8l-4-4m0 0L8 8m4-4v12' },
+        { label: 'Raport lunar', sub: 'Nu uita de revizie – setează un reminder', href: 'reminder.html', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z' },
+        { label: 'Ghid service', sub: 'Întrebări tehnice și întreținere', href: 'mulberry.html', icon: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z' },
+        { label: 'Încarcă RCA', sub: 'Asigură-te rapid – în Cloud', href: 'mulberry_cloud.html', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1 8.618 3.04A12.02 12.02 0 0 1 2 12c0 5.523 4.477 10 10 10' }
+      ];
+
+      function appendSuggestionCards(container) {
+        var wrap = document.createElement('div');
+        wrap.className = 'chat-suggestion-cards';
+        SUGGESTION_CARDS.forEach(function(s) {
+          var a = document.createElement('a');
+          a.className = 'chat-suggestion-card';
+          a.href = s.href;
+          a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="' + s.icon + '"/></svg><span>' + s.label + '</span>';
+          a.title = s.sub;
+          wrap.appendChild(a);
+        });
+        container.appendChild(wrap);
+      }
+
+      function getChatHistoryEl() {
+        return document.getElementById('chat-history');
+      }
+
+      /** Bara fixă de sus: ultimul mesaj user, vizibilă în timpul generării răspunsului. */
+      function showPinnedUserPrompt(displayText, attachNames) {
+        var wrap = document.getElementById('chat-pinned-user');
+        var body = document.getElementById('chat-pinned-body');
+        var attEl = document.getElementById('chat-pinned-attach');
+        if (!wrap || !body) return;
+        var t = (displayText || '').trim();
+        body.textContent = t || (attachNames && attachNames.length ? '' : '…');
+        if (attEl) {
+          if (attachNames && attachNames.length) {
+            attEl.textContent = '\uD83D\uDCE6 ' + attachNames.join(', ');
+            attEl.hidden = false;
+          } else {
+            attEl.textContent = '';
+            attEl.hidden = true;
+          }
+        }
+        wrap.classList.add('is-generating');
+        wrap.hidden = false;
+        updateChatJumpFab();
+      }
+
+      function hidePinnedUserPrompt() {
+        var wrap = document.getElementById('chat-pinned-user');
+        if (!wrap) return;
+        wrap.classList.remove('is-generating');
+        wrap.hidden = true;
+        var attEl = document.getElementById('chat-pinned-attach');
+        if (attEl) {
+          attEl.textContent = '';
+          attEl.hidden = true;
+        }
+      }
+
+      /** Buton flotant: vizibil când nu ești lângă ultimul răspuns. */
+      function updateChatJumpFab() {
+        var el = getChatHistoryEl();
+        var btn = document.getElementById('chat-jump-latest');
+        if (!el || !btn) return;
+        var gap = el.scrollHeight - el.scrollTop - el.clientHeight;
+        var nearBottom = gap < 96;
+        btn.hidden = nearBottom || el.scrollHeight <= el.clientHeight + 8;
+      }
+
+      /** Derulează la ultimul răspuns MulberryEXO (card EXO sau bubble assistant). */
+      function scrollToLatestMulberryReply() {
+        var hist = getChatHistoryEl();
+        if (!hist) return;
+        var nodes = hist.querySelectorAll('.exo-reply-wrap, .chat-msg-wrap.assistant, .gemini-flow');
+        var last = nodes.length ? nodes[nodes.length - 1] : null;
+        if (last && typeof last.scrollIntoView === 'function') {
+          last.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+        scrollChatToBottom();
+        setTimeout(updateChatJumpFab, 350);
+      }
+
+      /** Auto-scroll la ultimul mesaj (după răspuns server / stream MulberryEXO). */
+      function scrollChatToBottom() {
+        if (window.MulberryChatScroll && typeof window.MulberryChatScroll.scrollToLatest === 'function') {
+          window.MulberryChatScroll.scrollToLatest();
+        } else if (window.MulberryChatScroll && typeof window.MulberryChatScroll.scrollToBottom === 'function') {
+          window.MulberryChatScroll.scrollToBottom('chat-history');
+        } else {
+          var el = getChatHistoryEl();
+          if (el) el.scrollTop = el.scrollHeight;
+        }
+        setTimeout(updateChatJumpFab, 0);
+        requestAnimationFrame(function () {
+          requestAnimationFrame(updateChatJumpFab);
+        });
+      }
+
+      /** Efect typing (simulare stream) — chunk-uri mici ca la asistenți LLM */
+      function typewriterInto(el, fullText, opts, done) {
+        opts = opts || {};
+        var delay = opts.delayMs != null ? opts.delayMs : 5;
+        var chunk = opts.chunk != null ? opts.chunk : 8;
+        var i = 0;
+        var hist = getChatHistoryEl();
+        function step() {
+          if (i >= fullText.length) {
+            scrollChatToBottom();
+            if (done) done();
+            return;
+          }
+          i = Math.min(i + chunk, fullText.length);
+          el.textContent = fullText.slice(0, i);
+          scrollChatToBottom();
+          setTimeout(step, delay);
+        }
+        el.textContent = '';
+        step();
+      }
+
+      /**
+       * MulberryEXO — „generator”: afișare propoziție în timp real + cursor neon.
+       */
+      function streamExoReply(bodyEl, fullText, opts, done) {
+        opts = opts || {};
+        var delay = opts.delayMs != null ? opts.delayMs : 6;
+        var chunk = opts.chunk != null ? opts.chunk : 2;
+        var hist = getChatHistoryEl();
+        bodyEl.textContent = '';
+        var textSpan = document.createElement('span');
+        textSpan.className = 'exo-stream-live';
+        var cursor = document.createElement('span');
+        cursor.className = 'exo-type-cursor';
+        cursor.setAttribute('aria-hidden', 'true');
+        bodyEl.appendChild(textSpan);
+        bodyEl.appendChild(cursor);
+        var i = 0;
+        function step() {
+          if (i >= fullText.length) {
+            if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+            scrollChatToBottom();
+            if (done) done();
+            return;
+          }
+          i = Math.min(i + chunk, fullText.length);
+          textSpan.textContent = fullText.slice(0, i);
+          scrollChatToBottom();
+          setTimeout(step, delay);
+        }
+        step();
+      }
+
+      function addMessageBubble(text, isUser, canReport, skipSuggestions, attachNames) {
+        var messagesEl = getChatHistoryEl();
+        if (!messagesEl) return;
+        var wrap = document.createElement('div');
+        wrap.className = 'chat-msg-wrap msg-fade-in' + (isUser ? ' user' : ' assistant');
+        var msgDiv = document.createElement('div');
+        msgDiv.className = isUser ? 'chat-msg user-msg' : 'chat-msg assistant-msg';
+        var main = (text || '').trim();
+        msgDiv.textContent = main || (attachNames && attachNames.length ? '' : text);
+        if (isUser && attachNames && attachNames.length) {
+          var attEl = document.createElement('div');
+          attEl.className = 'chat-user-attachments';
+          attachNames.forEach(function (nm) {
+            var sp = document.createElement('span');
+            sp.textContent = '📎 ' + nm;
+            attEl.appendChild(sp);
+          });
+          msgDiv.appendChild(attEl);
+        }
+        wrap.appendChild(msgDiv);
+        if (!isUser && canReport) {
+          var reportBtn = document.createElement('button');
+          reportBtn.className = 'chat-report-btn';
+          reportBtn.textContent = 'Raportează problema';
+          reportBtn.onclick = function() { window.showReportModal && window.showReportModal(); };
+          wrap.appendChild(reportBtn);
+        }
+        if (!isUser && !skipSuggestions) appendSuggestionCards(wrap);
+        messagesEl.appendChild(wrap);
+        scrollChatToBottom();
+      }
+
+      /** Răspuns assistant — card Mulberry EXO (nu bubble Messenger). */
+      function addExoAssistantBlock(fullText, canReport, skipSuggestions, skipTypewriter, onComplete) {
+        var messagesEl = getChatHistoryEl();
+        if (!messagesEl) return;
+        var outer = document.createElement('div');
+        outer.className = 'exo-reply-wrap msg-fade-in';
+        var block = document.createElement('div');
+        block.className = 'exo-reply-block';
+        var label = document.createElement('div');
+        label.className = 'exo-reply-label';
+        label.textContent = 'MulberryEXO';
+        var body = document.createElement('div');
+        body.className = 'exo-reply-body';
+        block.appendChild(label);
+        block.appendChild(body);
+        outer.appendChild(block);
+        messagesEl.appendChild(outer);
+        scrollChatToBottom();
+
+        function afterText() {
+          if (canReport) {
+            var reportBtn = document.createElement('button');
+            reportBtn.className = 'chat-report-btn';
+            reportBtn.style.marginTop = '12px';
+            reportBtn.textContent = 'Raportează problema';
+            reportBtn.onclick = function() { window.showReportModal && window.showReportModal(); };
+            outer.appendChild(reportBtn);
+          }
+          if (!skipSuggestions) appendSuggestionCards(outer);
+          scrollChatToBottom();
+          if (onComplete) onComplete();
+        }
+
+        if (skipTypewriter) {
+          body.textContent = fullText;
+          afterText();
+        } else {
+          streamExoReply(body, fullText, { delayMs: 5, chunk: 2 }, function () {
+            afterText();
+          });
+        }
+      }
+
+      /** Flux generare secvențial (stil Gemini): analiză → comparare → scriere. */
+      function mountGeminiGeneratingFlow(vehicle) {
+        var marca = (vehicle && vehicle.marca) ? String(vehicle.marca).trim() : '';
+        var model = (vehicle && vehicle.model) ? String(vehicle.model).trim() : '';
+        var step1 = 'Analizează filtrele și contextul vehiculului…';
+        var step2 =
+          marca || model
+            ? 'Se compară rezultatele cu datele din profil' + (marca ? ' (' + marca + (model ? ' ' + model : '') + ')' : '') + '…'
+            : 'Se compară rezultatele cu datele din profil și istoricul conversației…';
+        var step3 = 'Mulberry scrie răspunsul…';
+
+        var wrap = document.createElement('div');
+        wrap.className = 'gemini-flow msg-fade-in';
+        wrap.setAttribute('role', 'status');
+        wrap.setAttribute('aria-live', 'polite');
+        wrap.innerHTML =
+          '<div class="gemini-flow-head"><span class="gemini-orb" aria-hidden="true"></span><span>Mulberry</span></div>' +
+          '<ul class="gemini-steps" role="list">' +
+          '<li data-step="1"><span class="g-dot" aria-hidden="true"></span><span class="gemini-step-txt"></span></li>' +
+          '<li data-step="2"><span class="g-dot" aria-hidden="true"></span><span class="gemini-step-txt"></span></li>' +
+          '<li data-step="3"><span class="g-dot" aria-hidden="true"></span><span class="gemini-step-txt"></span></li>' +
+          '</ul><div class="gemini-shimmer-bar" aria-hidden="true"></div>';
+
+        var txts = wrap.querySelectorAll('.gemini-step-txt');
+        if (txts[0]) txts[0].textContent = step1;
+        if (txts[1]) txts[1].textContent = step2;
+        if (txts[2]) txts[2].textContent = step3;
+
+        var hist = getChatHistoryEl();
+        if (!hist) return { el: wrap, destroy: function () {} };
+        hist.appendChild(wrap);
+        scrollChatToBottom();
+
+        var items = wrap.querySelectorAll('.gemini-steps li');
+        var timeouts = [];
+        function arm(fn, ms) {
+          timeouts.push(setTimeout(fn, ms));
+        }
+        function setPhase(n) {
+          for (var i = 0; i < items.length; i++) {
+            items[i].classList.remove('is-active', 'is-done');
+            if (i + 1 < n) items[i].classList.add('is-done');
+            else if (i + 1 === n) items[i].classList.add('is-active');
+          }
+          scrollChatToBottom();
+        }
+        setPhase(1);
+        arm(function () { setPhase(2); }, 850);
+        arm(function () { setPhase(3); }, 2100);
+
+        return {
+          el: wrap,
+          destroy: function () {
+            timeouts.forEach(function (id) { clearTimeout(id); });
+            if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
+          }
+        };
+      }
+
+      function renderMessages(messages) {
+        hidePinnedUserPrompt();
+        var messagesEl = getChatHistoryEl();
+        if (!messagesEl) return;
+        messagesEl.innerHTML = '';
+        (messages || []).forEach(function(m) {
+          if (m.role === 'user') {
+            addMessageBubble(m.text, true, false, false);
+          } else {
+            addExoAssistantBlock(m.text, true, true, true, null);
+          }
+        });
+        scrollChatToBottom();
+        refreshChatHeaderSubject();
+      }
+
+      window.showReportModal = function() {
+        var el = document.getElementById('report-modal');
+        if (el) el.classList.add('active');
+      };
+      window.closeReportModal = function() {
+        var el = document.getElementById('report-modal');
+        if (el) el.classList.remove('active');
+      };
+
+      window.submitReport = async function() {
+        var comp = document.getElementById('report-component');
+        var desc = document.getElementById('report-desc');
+        if (!comp || !desc) return;
+        var component = (comp.value || '').trim();
+        var fault = (desc.value || '').trim();
+        if (!component || !fault) {
+          (window.showToast || alert)('Completează componenta și descrierea.');
+          return;
+        }
+        var token = getChatToken();
+        if (!token) {
+          (window.showToast || alert)('Trebuie să fii conectat pentru a raporta.');
+          return;
+        }
+        try {
+          var r = await fetch(apiBase + '/assistant/report', {
+            method: 'POST',
+            headers: mergeAuthHeaders({ 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }),
+            body: JSON.stringify({ component: component, fault_description: fault })
+          });
+          var data = r.ok ? await r.json() : null;
+          if (!r.ok) throw new Error((data && data.detail) ? (typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail)) : 'Eroare');
+          window.closeReportModal();
+          desc.value = '';
+          (window.showToast || alert)('Mulțumim! Raportul a fost salvat.');
+        } catch (e) {
+          (window.showToast || alert)((e && e.message) || 'Eroare la raportare.');
+        }
+      };
+
+      async function sendMessage() {
+        var inputEl = document.getElementById('chat-input');
+        if (!inputEl) return;
+        var text = (inputEl.value || '').trim();
+        var files = pendingChatFiles.slice(0, 4);
+        if (!text && !files.length) return;
+
+        var attachPayload = [];
+        var attachNames = [];
+        for (var fi = 0; fi < files.length; fi++) {
+          try {
+            var one = await fileToAttachment(files[fi]);
+            if (one && one.data_base64 && one.data_base64.length > _ATT_B64_SOFT_MAX) {
+              (window.showToast || alert)('Un fișier este prea mare după procesare. Încearcă o imagine mai mică.');
+              return;
+            }
+            attachPayload.push(one);
+            attachNames.push(one.name || files[fi].name || 'fișier');
+          } catch (e1) {
+            console.warn('[Chat] atașament', e1);
+            (window.showToast || alert)('Nu am putut citi un fișier atașat.');
+            return;
+          }
+        }
+        pendingChatFiles.length = 0;
+        renderAttachPreview();
+
+        var histClear = getChatHistoryEl();
+        if (histClear) histClear.innerHTML = '';
+
+        var conv = getCurrentConversation();
+        if (!conv) conv = ensureCurrentConversation();
+        var persistUser = text || '[Fișiere atașate]';
+        if (attachNames.length) persistUser += ' · ' + attachNames.join(', ');
+        addMessageBubble(text || '', true, false, false, attachNames.length ? attachNames : null);
+        addMessageToConv('user', persistUser);
+        showPinnedUserPrompt(text || '', attachNames.length ? attachNames : null);
+        inputEl.value = '';
+        resizeChatTextarea();
+        syncComposerSendState();
+
+        conv = getCurrentConversation();
+        var historyPayload = [];
+        var vehicle = window.AppDB && window.AppDB.getSavedVehicle ? window.AppDB.getSavedVehicle() : {};
+        var pipeline = mountGeminiGeneratingFlow(vehicle);
+        try {
+          var headers = { 'Content-Type': 'application/json' };
+          var token = getChatToken();
+          if (token) headers['Authorization'] = 'Bearer ' + token;
+          headers = mergeAuthHeaders(headers);
+
+          var body = {
+            user_id: (window.AppDB && window.AppDB.currentUser && window.AppDB.currentUser.id) || 'guest',
+            thread_id: getCurrentId(),
+            message: text,
+            vin: vehicle.vin || null,
+            context: {
+              marca: vehicle.marca || null,
+              model: vehicle.model || null,
+              series: vehicle.series || null,
+              fuel: vehicle.combustibil || vehicle.fuel || null,
+              cloud_files: vehicle.cloud_files || [],
+              reminders: vehicle.reminders || [],
+              history: historyPayload
+            }
+          };
+          if (attachPayload.length) body.attachments = attachPayload;
+
+          var res = await fetch(apiBase + '/assistant/exo', {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(body)
+          });
+          if (res.status === 403) {
+            pipeline.destroy();
+            hidePinnedUserPrompt();
+            showDeviceLock();
+            return;
+          }
+          if (!res.ok) {
+            var errDetail = 'HTTP ' + res.status;
+            try {
+              var errJson = await res.json();
+              if (errJson && errJson.detail != null) {
+                errDetail = typeof errJson.detail === 'string' ? errJson.detail : JSON.stringify(errJson.detail);
+              }
+            } catch (ej) {}
+            throw new Error(errDetail);
+          }
+          var data = await res.json();
+          var reply = (data.reply || 'Nu am putut răspunde.').trim();
+          if (data.digital_twin_alert) {
+            try {
+              sessionStorage.setItem('mulberry_twin_alert', JSON.stringify(data.digital_twin_alert));
+            } catch (e1) {}
+          }
+          pipeline.destroy();
+          addExoAssistantBlock(reply, true, false, false, function() {
+            addMessageToConv('assistant', reply);
+            hidePinnedUserPrompt();
+          });
+        } catch (err) {
+          console.error('[Chat]', err);
+          pipeline.destroy();
+          hidePinnedUserPrompt();
+          var errMsg;
+          var errStr = String(err && err.message ? err.message : err);
+          if (errStr.indexOf('401') !== -1) {
+            errMsg = 'Sesiune expirată. Te reconectezi...';
+            setTimeout(function () { window.location.href = 'mulberry.html'; }, 2000);
+          } else if (errStr.indexOf('Failed to fetch') !== -1 || errStr.indexOf('NetworkError') !== -1) {
+            errMsg = 'Backend offline. Pornește uvicorn pe portul 9000 (sau verifică Config.apiBaseUrl).';
+          } else if (errStr.indexOf('500') !== -1) {
+            errMsg = 'Eroare server. Verifică GROQ_API_KEY în backend/.env';
+          } else if (errStr.indexOf('503') !== -1) {
+            errMsg = 'AI indisponibil momentan (Groq / Ollama). Încearcă din nou.';
+          } else {
+            errMsg = 'Mulberry nu este disponibil. ' + errStr;
+          }
+          addExoAssistantBlock(errMsg, false, true, true, null);
+          addMessageToConv('assistant', errMsg);
+        }
+      }
+
+      document.getElementById('btn-new-chat').addEventListener('click', newConversation);
+      document.getElementById('chat-send-btn').addEventListener('click', sendMessage);
+      var _chatIn = document.getElementById('chat-input');
+      var _chatFi = document.getElementById('chat-file-input');
+      var _chatAb = document.getElementById('chat-attach-btn');
+      if (_chatAb && _chatFi) {
+        _chatAb.addEventListener('click', function () { if (!_chatAb.disabled) _chatFi.click(); });
+        _chatFi.addEventListener('change', function () {
+          var list = _chatFi.files;
+          if (!list || !list.length) return;
+          for (var i = 0; i < list.length && pendingChatFiles.length < 6; i++) {
+            pendingChatFiles.push(list[i]);
+          }
+          _chatFi.value = '';
+          renderAttachPreview();
+        });
+      }
+      if (_chatIn) {
+        _chatIn.addEventListener('input', function () {
+          resizeChatTextarea();
+          syncComposerSendState();
+        });
+        _chatIn.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+          }
+        });
+      }
+      function toggleSidebar() {
+        var sidebar = document.getElementById('chat-sidebar');
+        var overlay = document.getElementById('sidebar-overlay');
+        sidebar.classList.toggle('open');
+        if (overlay) overlay.classList.toggle('show', sidebar.classList.contains('open'));
+      }
+      document.getElementById('toggle-sidebar').addEventListener('click', toggleSidebar);
+      document.getElementById('sidebar-overlay').addEventListener('click', function() {
+        document.getElementById('chat-sidebar').classList.remove('open');
+        document.getElementById('sidebar-overlay').classList.remove('show');
+      });
+
+      function renderReminderRail() {
+        var rail = document.getElementById('chat-reminder-rail');
+        if (!rail) return;
+        var v = window.AppDB && window.AppDB.getSavedVehicle ? window.AppDB.getSavedVehicle() : {};
+        var rem = v.reminders || [];
+        var pending = rem.filter(function(r) { return (r.status || 'pending') === 'pending'; });
+        rail.innerHTML = '';
+        if (!pending.length) {
+          rail.style.display = 'none';
+          return;
+        }
+        rail.style.display = 'flex';
+        pending.slice(0, 5).forEach(function(r) {
+          var p = document.createElement('span');
+          p.className = 'chat-reminder-pill';
+          p.textContent = (r.task || r.title || 'Reminder').slice(0, 42);
+          p.title = r.task || r.title || '';
+          rail.appendChild(p);
+        });
+      }
+
+      async function loadServerChatHistory() {
+        var tid = getCurrentId();
+        var token = getChatToken();
+        if (!token || !tid) return;
+        try {
+          var r = await fetch(apiBase + '/assistant/chat/history?thread_id=' + encodeURIComponent(tid), {
+            headers: mergeAuthHeaders({ Authorization: 'Bearer ' + token })
+          });
+          if (r.status === 403) {
+            showDeviceLock();
+            return;
+          }
+          if (!r.ok) return;
+          var data = await r.json();
+          if (!data.messages || !data.messages.length) return;
+          var list = loadConversations();
+          var conv = list.find(function(c) { return c.id === tid; });
+          if (!conv) return;
+          conv.messages = data.messages.map(function(m) {
+            return { role: m.role, text: m.text };
+          });
+          saveConversations(list);
+          renderMessages(conv.messages);
+          renderSidebar();
+        } catch (e) {
+          console.warn('[Chat] istoric server:', e);
+        }
+      }
+
+      var _dlf = document.getElementById('device-lock-form');
+      if (_dlf) _dlf.addEventListener('submit', async function (ev) {
+        ev.preventDefault();
+        var ident = (document.getElementById('device-lock-ident').value || '').trim();
+        var pass = document.getElementById('device-lock-pass').value || '';
+        var errEl = document.getElementById('device-lock-err');
+        if (errEl) errEl.textContent = '';
+        try {
+          var newId = window.MulberryDevice && window.MulberryDevice.getId ? window.MulberryDevice.getId() : '';
+          var r = await fetch(apiBase + '/auth/device/approve', {
+            method: 'POST',
+            headers: mergeAuthHeaders({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({ identifier: ident, password: pass, new_device_id: newId })
+          });
+          var data = await r.json().catch(function () {
+            return {};
+          });
+          if (!r.ok) {
+            var msg = data.detail;
+            if (typeof msg !== 'string') msg = msg ? JSON.stringify(msg) : 'Eroare la confirmare';
+            throw new Error(msg);
+          }
+          if (data.access_token && window.api && window.api.setToken) window.api.setToken(data.access_token);
+          hideDeviceLock();
+          document.getElementById('device-lock-pass').value = '';
+          await probeChatSession();
+          loadServerChatHistory();
+        } catch (e) {
+          if (errEl) errEl.textContent = (e && e.message) || 'Eroare';
+        }
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var _histScroll = getChatHistoryEl();
+        if (_histScroll) {
+          _histScroll.addEventListener('scroll', function () {
+            updateChatJumpFab();
+          }, { passive: true });
+        }
+        var _jumpBtn = document.getElementById('chat-jump-latest');
+        if (_jumpBtn) {
+          _jumpBtn.addEventListener('click', function () {
+            scrollToLatestMulberryReply();
+          });
+        }
+        resizeChatTextarea();
+        syncComposerSendState();
+        probeChatSession().then(function () {
+          var conv = ensureCurrentConversation();
+          renderSidebar();
+          renderMessages(conv.messages);
+          refreshChatHeaderSubject();
+          renderReminderRail();
+          loadServerChatHistory();
+          var params = new URLSearchParams(window.location.search);
+          var q = params.get('q');
+          if (q) {
+            var ci = document.getElementById('chat-input');
+            if (ci) ci.value = q;
+            resizeChatTextarea();
+            syncComposerSendState();
+            sendMessage();
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

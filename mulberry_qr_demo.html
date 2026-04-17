@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mulberry · QR Profile Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #000;
+      --border: #2a2a2a;
+      --text: #fff;
+      --dim: #666;
+      --accent: #e1ff00;
+      --ok: #00ff88;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Mono", ui-monospace, monospace;
+      font-size: 12px;
+      padding: 20px 16px 40px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .sub {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 20px;
+    }
+    .rule {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 14px 0;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 100px 8px 1fr;
+      gap: 6px;
+      font-size: 11px;
+      margin-bottom: 8px;
+      align-items: baseline;
+    }
+    .k { color: var(--dim); text-transform: uppercase; font-size: 9px; letter-spacing: 0.08em; }
+    .p { color: var(--border); }
+    .v { font-weight: 500; word-break: break-all; letter-spacing: 0.06em; }
+    .badge {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 8px 12px;
+      border: 1px solid var(--ok);
+      color: var(--ok);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .err {
+      border-color: #ff3333;
+      color: #ff3333;
+    }
+    a {
+      color: var(--dim);
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+    a:hover { color: var(--text); }
+    footer { margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <h1>Mulberry ID · scan ok</h1>
+  <div class="sub">Profil vehicul din cod QR permanent (demo)</div>
+  <hr class="rule" />
+  <div id="content"></div>
+  <footer>
+    <a href="mulberry_menu.html">← Mulberry ID HUB</a>
+    &nbsp;·&nbsp;
+    <a href="mulberry.html">Mulberry</a>
+  </footer>
+  <script>
+    (function () {
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      }
+      var p = new URLSearchParams(window.location.search);
+      var mlbr = p.get('mlbr') || p.get('m') || '';
+      var vin = p.get('vin') || '';
+      var plate = p.get('plate') || '';
+      var marca = p.get('marca') || '';
+      var model = p.get('model') || '';
+      var an = p.get('an') || '';
+      var serie = p.get('serie') || '';
+      var host = document.getElementById('content');
+
+      if (!mlbr && !vin) {
+        host.innerHTML =
+          '<p class="v" style="color:#888">Nu există parametri în URL. Generează QR din <strong>Mulberry ID HUB</strong> (același server / folder).</p>' +
+          '<div class="badge err">NO PAYLOAD</div>';
+        return;
+      }
+
+      function row(k, v) {
+        return (
+          '<div class="row"><span class="k">' +
+          esc(k) +
+          '</span><span class="p">│</span><span class="v">' +
+          esc(v || '—') +
+          '</span></div>'
+        );
+      }
+
+      host.innerHTML =
+        row('MLBR ID', mlbr) +
+        row('VIN', vin) +
+        row('PLATE', plate) +
+        row('MARCA', marca) +
+        row('MODEL', model) +
+        row('AN', an) +
+        row('SERIE', serie) +
+        '<div class="badge">DEMO VALID · PROFILE LOADED</div>';
+    })();
+  </script>
+</body>
+</html>

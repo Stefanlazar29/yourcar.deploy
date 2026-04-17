@@ -1,0 +1,3 @@
+# Rădăcină repo — Nixpacks / Railway caută acest fișier aici.
+# Dependențele reale sunt în backend/ (un singur loc de întreținut).
+-r backend/requirements.txt

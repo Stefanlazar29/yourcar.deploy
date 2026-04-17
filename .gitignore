@@ -1,0 +1,10 @@
+backend/.env
+.env
+backend/research_data/exo_research.db
+backend/research_data/articles_recent.jsonl
+*.pyc
+__pycache__/
+.pytest_cache/
+backend/errors.log
+data/conversations.json
+backend/data/softscore_market/history/

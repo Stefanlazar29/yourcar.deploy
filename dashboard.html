@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourCar — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="screen active" id="s-dash">
+      <div class="card" style="border-radius:14px;">
+        <div class="step-header">
+          <div>
+            <div class="step-title">YourCar ID</div>
+            <div class="step-sub" id="me-ident">Se încarcă…</div>
+          </div>
+          <button class="btn" id="btn-logout" type="button">Ieși</button>
+        </div>
+
+        <div class="step-body">
+          <div class="divider"><span>Index</span></div>
+
+          <div class="card" style="border-radius:14px; margin-top:12px;">
+            <div class="step-header">
+              <div>
+                <div class="step-title">YourCar Index</div>
+                <div class="step-sub">Blocat până încarci asigurarea (RCA)</div>
+              </div>
+            </div>
+            <div class="step-body">
+              <button class="btn btn-neon" id="btn-unlock" type="button">Deblochează YourCar Index — Pasul 1: Încarcă Asigurarea</button>
+              <div class="ferr" id="dash-msg" style="margin-top:10px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/mulberry_device.js"></script>
+  <script src="js/api_client.js"></script>
+  <script>
+    function setMsg(msg) {
+      var el = document.getElementById('dash-msg');
+      if (!el) return;
+      el.textContent = msg || '';
+      el.classList.toggle('show', !!msg);
+    }
+
+    async function bootstrap() {
+      try {
+        var me = await window.api.me();
+        document.getElementById('me-ident').textContent = (me && me.identifier) ? me.identifier : '—';
+      } catch (e) {
+        window.location.href = 'login.html';
+      }
+    }
+
+    document.getElementById('btn-logout').addEventListener('click', function() {
+      window.api.setToken('');
+      window.location.href = 'login.html';
+    });
+
+    document.getElementById('btn-unlock').addEventListener('click', function() {
+      setMsg('Pasul 1 (RCA) urmează: conectăm upload-ul la backend.');
+    });
+
+    bootstrap();
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourCar ID Profile | Dgital Co-pilot </title>
+    
+    <!-- Fără fonturi externe (viteza maximă) -->
+    
+    <!-- QRCode.js Library -->
+    <script>
+        // Minimal QR Code generator - inline for offline functionality
+        !function(){
+          function QR(el,opts){
+            if(typeof opts==='string') opts={text:opts};
+            this.el=el;
+            this.text=opts.text||'';
+            this.size=Math.min(opts.width||128,opts.height||128);
+            this.dark=opts.colorDark||'#000';
+            this.light=opts.colorLight||'#fff';
+            this._draw();
+          }
+          QR.prototype.makeCode=function(t){this.text=t;this._draw();};
+          QR.prototype._draw=function(){
+            var el=this.el,t=this.text,sz=this.size,dk=this.dark,lt=this.light;
+            el.innerHTML='';
+            var cv=document.createElement('canvas');
+            cv.width=sz; cv.height=sz;
+            var ctx=cv.getContext('2d');
+            var n=25;
+            var s=sz/n;
+            ctx.fillStyle=lt; ctx.fillRect(0,0,sz,sz);
+            
+            // Generate deterministic pattern from text
+            var hash=0;
+            for(var k=0;k<t.length;k++) hash=Math.imul(hash,31)+t.charCodeAt(k)|0;
+            for(var row=9;row<n-8;row++){
+              for(var col=9;col<n-8;col++){
+                var bit=((hash^Math.imul(row,1664525)^Math.imul(col,1013904223))>>>0)&1;
+                if(bit){
+                  ctx.fillStyle=dk;
+                  ctx.fillRect(Math.round(col*s),Math.round(row*s),Math.ceil(s),Math.ceil(s));
+                }
+              }
+            }
+            el.appendChild(cv);
+          };
+          window.QRCode=QR;
+        }();
+    </script>
+    
+    <style>
+        :root {
+            /* Premium Dark Theme */
+            --primary-black: #000000;
+            --surface-dark: #0a0a0a;
+            --surface-medium: #151515;
+            --surface-light: #1f1f1f;
+            
+            /* Gold Accents */
+            --accent-gold: #D4AF37;
+            --accent-gold-light: #F4D03F;
+            --accent-gold-dark: #B8860B;
+            
+            /* Text Colors */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            
+            /* Status Colors */
+            --status-excellent: #22c55e;
+            --status-good: #84cc16;
+            --status-warning: #f59e0b;
+            --status-critical: #ef4444;
+            
+            /* Fonts */
+            --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Orbitron', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--primary-black);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--primary-black);
+        }
+
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.01) 0%, transparent 100%);
+            animation: gradientShift 15s ease-in-out infinite;
+        }
+
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 80%);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(2deg); opacity: 0.8; }
+        }
+
+        /* Main Container */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+            padding: 24px 0;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .welcome-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .user-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { 
+                background-position: 0% 50%;
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            }
+            50% { 
+                background-position: 100% 50%;
+                text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            }
+        }
+
+        /* Main Content Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            flex: 1;
+            align-items: start;
+        }
+
+        /* YourCar ID Card */
+        .yourcar-id-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 32px;
+            grid-column: 1 / -1;
+        }
+
+        .yourcar-id-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+        }
+
+        .id-card-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .vehicle-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .vehicle-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #22c55e;
+        }
+
+        .verified-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .vehicle-name {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin: 8px 0;
+        }
+
+        .vehicle-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .detail-value.highlight {
+            color: var(--accent-gold);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* QR Code Section */
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .qr-container {
+            width: 120px;
+            height: 120px;
+            background: var(--text-primary);
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .qr-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .qr-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .ycr-code {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            margin: 8px 0;
+            letter-spacing: 0.1em;
+        }
+
+        /* YourCar Index Circle */
+        .health-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 500px;
+            justify-content: center;
+        }
+
+        .health-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0.5;
+        }
+
+        .health-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .health-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .health-circle {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin-bottom: 32px;
+        }
+
+        .circle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                var(--status-excellent) 0deg 270deg,
+                var(--glass-border) 270deg 360deg
+            );
+            padding: 8px;
+            animation: circleRotate 3s ease-in-out infinite;
+        }
+
+        .circle-inner {
+            width: 100%;
+            height: 100%;
+            background: var(--surface-dark);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .health-score {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--status-excellent);
+            line-height: 1;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+
+        .health-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes circleRotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .health-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        .health-metric {
+            text-align: center;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .metric-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--status-excellent);
+            margin-bottom: 4px;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Cloud Access Section */
+        .cloud-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 500px;
+            justify-content: center;
+        }
+
+        .cloud-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0.5;
+        }
+
+        .cloud-icon {
+            font-size: 5rem;
+            margin-bottom: 24px;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .cloud-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 3s ease-in-out infinite;
+        }
+
+        .cloud-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        @keyframes textShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .cloud-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 48px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 12px 40px rgba(212, 175, 55, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cloud-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .cloud-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 20px 60px rgba(212, 175, 55, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .cloud-button:hover::before {
+            left: 100%;
+        }
+
+        .cloud-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .cloud-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            width: 100%;
+            margin-top: 32px;
+        }
+
+        .cloud-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Floating Particles */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: particleFloat 20s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 24px 16px;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .yourcar-id-section {
+                padding: 24px 20px;
+            }
+
+            .id-card-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .vehicle-details {
+                grid-template-columns: 1fr;
+            }
+
+            .vehicle-name {
+                font-size: 1.5rem;
+            }
+
+            .qr-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .health-section,
+            .cloud-section {
+                padding: 32px 24px;
+                min-height: auto;
+            }
+
+            .health-circle {
+                width: 220px;
+                height: 220px;
+            }
+
+            .health-score {
+                font-size: 3rem;
+            }
+
+            .cloud-title {
+                font-size: 1.5rem;
+            }
+
+            .cloud-button {
+                padding: 16px 32px;
+                font-size: 1rem;
+            }
+
+            .health-details,
+            .cloud-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover Effects */
+        .health-section:hover {
+            border-color: rgba(34, 197, 94, 0.3);
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.1);
+        }
+
+        .cloud-section:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .abineContentPanel {
+          display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-effects">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header loading" style="animation-delay: 0.1s">
+            <div class="logo-section">
+                <div class="logo">YourCar</div>
+            </div>
+            <div class="user-info">
+                <div class="welcome-text">Bine ai revenit</div>
+                <div class="user-name" id="userName">Utilizator YourCar</div>
+            </div>
+        </header>
+
+        <!-- YourCar ID Card -->
+        <section class="yourcar-id-section loading" style="animation-delay: 0.15s">
+            <div class="id-card-content">
+                <div class="vehicle-info">
+                    <div class="vehicle-header">
+                        <div class="verified-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4"/>
+                                <circle cx="12" cy="12" r="10"/>
+                            </svg>
+                            <span>VERIFICAT</span>
+                        </div>
+                    </div>
+                    
+                    <div class="vehicle-name" id="vehicleName">Volkswagen Golf</div>
+                    
+                    <div class="vehicle-details">
+                        <div class="detail-item">
+                            <div class="detail-label">VIN</div>
+                            <div class="detail-value highlight" id="vehicleVIN">WVWZZZAUZNW123456</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Înmatriculare</div>
+                            <div class="detail-value" id="vehiclePlate">B 01 YCR</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">An Fabricație</div>
+                            <div class="detail-value" id="vehicleYear">2021</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Combustibil</div>
+                            <div class="detail-value" id="vehicleFuel">Benzină</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="qr-section">
+                    <div class="qr-container" id="qrContainer">
+                        <!-- QR Code will be generated here -->
+                    </div>
+                    <div class="qr-title">YCR Code</div>
+                    <div class="ycr-code" id="ycrCode">ABCD123456</div>
+                    <div class="qr-subtitle">Scanează pentru validare publică</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <div class="dashboard-grid">
+            <!-- YourCar Health Index -->
+            <section class="health-section loading" style="animation-delay: 0.2s">
+                <h2 class="health-title">YourCar Health Index</h2>
+                <p class="health-subtitle">Starea generală a vehiculului tău</p>
+                
+                <div class="health-circle">
+                    <div class="circle-bg">
+                        <div class="circle-inner">
+                            <div class="health-score" id="healthScore">92</div>
+                            <div class="health-label">Excelent</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="health-details">
+                    <div class="health-metric">
+                        <div class="metric-value">✓</div>
+                        <div class="metric-label">ITP Valid</div>
+                    </div>
+                    <div class="health-metric">
+                        <div class="metric-value">✓</div>
+                        <div class="metric-label">RCA Activ</div>
+                    </div>
+                    <div class="health-metric">
+                        <div class="metric-value">0</div>
+                        <div class="metric-label">Amenzi</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- YourCar Cloud Access -->
+            <section class="cloud-section loading" style="animation-delay: 0.3s">
+                <div class="cloud-icon">☁️</div>
+                <h2 class="cloud-title">YourCar Cloud</h2>
+                <p class="cloud-subtitle">
+                    Accesează toate documentele vehiculului tău în cloud-ul premium YourCar
+                </p>
+                
+                <a href="./mulberry.html" class="cloud-button" id="cloudBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                    </svg>
+                    <span>Acces YourCar Cloud</span>
+                </a>
+
+                <div class="cloud-features">
+                    <div class="cloud-feature">
+                        <div class="feature-icon">📋</div>
+                        <div class="feature-text">Documente Digitale</div>
+                    </div>
+                    <div class="cloud-feature">
+                        <div class="feature-icon">🔒</div>
+                        <div class="feature-text">Securitate Avansată</div>
+                    </div>
+                    <div class="cloud-feature">
+                        <div class="feature-icon">📱</div>
+                        <div class="feature-text">Acces Mobil</div>
+                    </div>
+                    <div class="cloud-feature">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-text">Sincronizare Instant</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[YourCar Dashboard] Initializing...');
+            
+            // Animate health score
+            animateHealthScore();
+            
+            // Create floating particles
+            createFloatingParticles();
+            
+            // Load user data
+            loadUserData();
+            
+            // Setup interactions
+            setupInteractions();
+            
+            console.log('[YourCar Dashboard] Ready!');
+        });
+
+        // Animate health score counter
+        function animateHealthScore() {
+            const scoreElement = document.getElementById('healthScore');
+            const targetScore = 92;
+            let currentScore = 0;
+            
+            const increment = targetScore / 50;
+            const timer = setInterval(() => {
+                currentScore += increment;
+                if (currentScore >= targetScore) {
+                    currentScore = targetScore;
+                    clearInterval(timer);
+                }
+                scoreElement.textContent = Math.round(currentScore);
+            }, 30);
+        }
+
+        // Create floating particles
+        function createFloatingParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Load user and vehicle data
+        function loadUserData() {
+            try {
+                // Try to get user data from localStorage or URL params
+                const urlParams = new URLSearchParams(window.location.search);
+                const userName = urlParams.get('user') || localStorage.getItem('yourcar_user') || 'Utilizator YourCar';
+                
+                document.getElementById('userName').textContent = userName;
+                
+                // Load vehicle data from localStorage
+                loadVehicleData();
+                
+                console.log('[YourCar Dashboard] User loaded:', userName);
+            } catch (error) {
+                console.log('[YourCar Dashboard] Using default user data');
+                loadDefaultVehicleData();
+            }
+        }
+        
+        // Load vehicle data from localStorage or use defaults
+        function loadVehicleData() {
+            try {
+                const vehicleData = {
+                    make: localStorage.getItem('yourcar_make') || 'Volkswagen',
+                    model: localStorage.getItem('yourcar_model') || 'Golf',
+                    vin: localStorage.getItem('yourcar_vin') || 'WVWZZZAUZNW123456',
+                    plate: localStorage.getItem('yourcar_plate') || 'B 01 YCR',
+                    year: localStorage.getItem('yourcar_year') || '2021',
+                    fuel: localStorage.getItem('yourcar_fuel') || 'Benzină',
+                    ycrId: localStorage.getItem('yourcar_ycrid') || 'YCR-DEMO-2026',
+                    ycrCode: localStorage.getItem('yourcar_ycrcode') || 'DEMO123456'
+                };
+                
+                // Update UI with vehicle data
+                document.getElementById('vehicleName').textContent = vehicleData.make + ' ' + vehicleData.model;
+                document.getElementById('vehicleVIN').textContent = vehicleData.vin;
+                document.getElementById('vehiclePlate').textContent = vehicleData.plate;
+                document.getElementById('vehicleYear').textContent = vehicleData.year;
+                document.getElementById('vehicleFuel').textContent = vehicleData.fuel;
+                document.getElementById('ycrCode').textContent = vehicleData.ycrCode;
+                
+                // Generate QR Code
+                generateYCRQRCode(vehicleData.ycrCode, vehicleData.vin);
+                
+                console.log('[YourCar Dashboard] Vehicle data loaded:', vehicleData);
+                
+            } catch (error) {
+                console.error('[YourCar Dashboard] Error loading vehicle data:', error);
+                loadDefaultVehicleData();
+            }
+        }
+        
+        // Load default vehicle data if no data available
+        function loadDefaultVehicleData() {
+            const defaultData = {
+                make: 'Vehicul',
+                model: 'Neînregistrat',
+                vin: 'VIN-NECUNOSCUT',
+                plate: 'NEÎNREGISTRAT',
+                year: 'N/A',
+                fuel: 'N/A',
+                ycrId: 'YCR-DEMO-2026',
+                ycrCode: 'DEMO000000'
+            };
+            
+            document.getElementById('vehicleName').textContent = defaultData.make + ' ' + defaultData.model;
+            document.getElementById('vehicleVIN').textContent = defaultData.vin;
+            document.getElementById('vehiclePlate').textContent = defaultData.plate;
+            document.getElementById('vehicleYear').textContent = defaultData.year;
+            document.getElementById('vehicleFuel').textContent = defaultData.fuel;
+            document.getElementById('ycrCode').textContent = defaultData.ycrCode;
+            
+            // Show registration button if no vehicle
+            showRegistrationPrompt();
+        }
+        
+        // Generate YCR QR Code
+        function generateYCRQRCode(ycrCode, vin) {
+            try {
+                const qrContainer = document.getElementById('qrContainer');
+                const qrData = `https://yourcar.app/verify/${ycrCode}`;
+                
+                // Clear existing QR
+                qrContainer.innerHTML = '';
+                
+                // Generate new QR Code
+                new QRCode(qrContainer, {
+                    text: qrData,
+                    width: 96,
+                    height: 96,
+                    colorDark: '#000000',
+                    colorLight: '#ffffff'
+                });
+                
+                console.log('[YourCar Dashboard] QR Code generated:', qrData);
+                
+            } catch (error) {
+                console.error('[YourCar Dashboard] QR generation failed:', error);
+                document.getElementById('qrContainer').innerHTML = '<div style="font-size: 0.8rem; color: #666;">QR indisponibil</div>';
+            }
+        }
+        
+        // Show registration prompt if no vehicle registered
+        function showRegistrationPrompt() {
+            const idSection = document.querySelector('.yourcar-id-section');
+            if (idSection) {
+                idSection.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 3rem; margin-bottom: 16px; opacity: 0.5;">🚗</div>
+                        <h3 style="color: var(--text-primary); margin-bottom: 8px;">Niciun vehicul înregistrat</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 24px;">Înregistrează primul tău vehicul pentru a accesa Dashboard-ul complet</p>
+                        <a href="./mulberry.html" class="cloud-button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12h14"/>
+                            </svg>
+                            <span>Înregistrează Prima Mașină</span>
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        // Setup interactions
+        function setupInteractions() {
+            const cloudBtn = document.getElementById('cloudBtn');
+            
+            cloudBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                cloudBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
+                        <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                    <span>Se încarcă...</span>
+                `;
+                
+                // Simulate loading then redirect
+                setTimeout(() => {
+                    console.log('[YourCar Dashboard] Redirecting to YourCar Cloud...');
+                    window.location.href = './mulberry.html';
+                }, 1000);
+            });
+
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 'c':
+                            e.preventDefault();
+                            cloudBtn.click();
+                            break;
+                    }
+                }
+            });
+
+            console.log('[YourCar Dashboard] Interactions ready');
+        }
+
+        // Utility function for animations
+        const spin = `@keyframes spin { to { transform: rotate(360deg); } }`;
+        if (!document.querySelector('#spin-style')) {
+            const style = document.createElement('style');
+            style.id = 'spin-style';
+            style.textContent = spin;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>

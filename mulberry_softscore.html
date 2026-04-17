@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulberry SoftScore</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .ss-donut-wrap {
+      width: 240px; height: 240px; margin: 0 auto 6px;
+      position: relative;
+    }
+    .ss-donut-wrap svg {
+      width: 100%; height: 100%;
+      transform: rotate(-90deg);
+      overflow: visible;
+    }
+    .ss-main-track {
+      fill: none;
+      stroke: rgba(0, 0, 0, 0.12);
+      stroke-width: 11;
+    }
+    .ss-main-fill {
+      fill: none;
+      stroke: #0a0a0a;
+      stroke-width: 11;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.55s ease;
+    }
+    /* Rânduri scor Hub / Cloud — nume clase neutre (unele extensii ascund *strip* / *pill* / *cloud* în clasă). */
+    .mulb-ss-metrics {
+      display: flex !important;
+      flex-direction: column;
+      gap: 10px;
+      margin: 8px 0 16px;
+      padding: 14px;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.78);
+      border: 2px solid rgba(0, 0, 0, 0.16);
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    .mulb-ss-mrow {
+      display: flex !important;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      min-height: 56px;
+      box-sizing: border-box;
+      width: 100%;
+      background: #111111 !important;
+      color: #f8f8f8 !important;
+      border-radius: 999px;
+      border: 2px solid #c8e600 !important;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    .mulb-ss-mring {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      min-height: 48px;
+      flex-shrink: 0;
+      overflow: visible;
+      display: block !important;
+    }
+    .mulb-ss-mring svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      transform: rotate(-90deg);
+      overflow: visible;
+    }
+    .ss-pr-track {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.12);
+      stroke-width: 3.2;
+    }
+    .ss-pr-fill {
+      fill: none;
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .ss-pr-fill--cyan { stroke: #2dd4bf; }
+    .ss-pr-fill--purple { stroke: #c084fc; }
+    .mulb-ss-mcopy {
+      min-width: 0;
+      flex: 1;
+      color: inherit !important;
+    }
+    .mulb-ss-mval {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: #fff !important;
+    }
+    .mulb-ss-mk {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55) !important;
+      margin-top: 2px;
+    }
+    .ss-circle-val {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 72%;
+    }
+    .ss-circle-val .ss-score-num {
+      font-size: 32px; font-weight: 700;
+      letter-spacing: -0.03em;
+      display: block;
+      line-height: 1.05;
+    }
+    .mlb-card--neon .ss-circle-val { color: #0a0a0a; }
+    .mlb-card--neon .ss-circle-val .pct { font-size: 18px; opacity: 0.65; font-weight: 600; }
+    .ss-center-sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.48);
+      margin-top: 6px;
+      line-height: 1.25;
+      word-break: break-word;
+    }
+    .ss-bd-list { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+    .ss-bd-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ss-bd-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .ss-bd-tone-mov .ss-bd-icon { background: #7c3aed; }
+    .ss-bd-tone-rosu .ss-bd-icon { background: #dc2626; }
+    .ss-bd-tone-albastru .ss-bd-icon { background: #2563eb; }
+    .ss-bd-icon svg { width: 20px; height: 20px; }
+    .ss-bd-main { flex: 1; min-width: 0; }
+    .ss-bd-labels { display: flex; flex-direction: column; gap: 2px; margin-bottom: 6px; }
+    .ss-bd-label { font-size: 14px; font-weight: 600; color: #0a0a0a; }
+    .ss-bd-sub { font-size: 11px; color: rgba(0, 0, 0, 0.45); }
+    .ss-bd-bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+    .ss-bd-tone-mov .ss-bd-fill { background: linear-gradient(90deg, #6d28d9, #a78bfa); }
+    .ss-bd-tone-rosu .ss-bd-fill { background: linear-gradient(90deg, #b91c1c, #f87171); }
+    .ss-bd-tone-albastru .ss-bd-fill { background: linear-gradient(90deg, #1d4ed8, #60a5fa); }
+    .ss-bd-fill {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+    .ss-bd-meta {
+      flex-shrink: 0;
+      text-align: right;
+      min-width: 52px;
+    }
+    .ss-bd-meta strong { display: block; font-size: 15px; font-weight: 700; color: #0a0a0a; }
+    .ss-bd-meta span { font-size: 11px; color: rgba(0, 0, 0, 0.45); }
+    .ss-bd-placeholder {
+      font-size: 13px;
+      line-height: 1.45;
+      color: rgba(0, 0, 0, 0.5);
+      margin: 0;
+      text-align: center;
+    }
+    .ss-status { text-align: center; font-size: 14px; margin: 0 0 8px; line-height: 1.4; }
+    .mlb-card--neon .ss-status { color: rgba(0,0,0,0.62); }
+    .val-price { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .val-note { font-size: 13px; line-height: 1.45; }
+    .val-formula { font-size: 11px; line-height: 1.4; margin-top: 10px; opacity: 0.75; }
+  </style>
+</head>
+<body>
+  <div class="app mlb-page">
+    <header class="mlb-head">
+      <button type="button" class="mlb-back" onclick="window.location.href='mulberry.html'" aria-label="Înapoi">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <h1 class="mlb-h1">SoftScore</h1>
+    </header>
+
+    <div class="mlb-stack">
+      <div class="mlb-card mlb-card--neon">
+        <p class="mlb-eyebrow" style="margin-top:0;">Index vehicul · scor per utilizator</p>
+        <div class="ss-donut-wrap" aria-hidden="false">
+          <svg viewBox="0 0 100 100" aria-label="Scor SoftScore principal">
+            <circle class="ss-main-track" cx="50" cy="50" r="40"/>
+            <circle
+              id="ss-main-fill"
+              class="ss-main-fill"
+              cx="50" cy="50" r="40"
+              fill="none"
+              stroke-dasharray="251.327 251.327"
+              stroke-dashoffset="251.327"
+            />
+          </svg>
+          <div class="ss-circle-val">
+            <span id="score-value"><span class="ss-score-num">—<span class="pct">%</span></span></span>
+            <span class="ss-center-sub" id="score-center-sub"></span>
+          </div>
+        </div>
+        <section class="mulb-ss-metrics" aria-label="Scor Mulberry Hub și scor evaluare Cloud">
+          <div class="mulb-ss-mrow">
+            <div class="mulb-ss-mring">
+              <svg viewBox="0 0 36 36" width="48" height="48" focusable="false" aria-hidden="true">
+                <circle class="ss-pr-track" cx="18" cy="18" r="15.5"/>
+                <circle
+                  id="ss-pill-ring-hub"
+                  class="ss-pr-fill ss-pr-fill--cyan"
+                  cx="18" cy="18" r="15.5"
+                  fill="none"
+                  stroke-dasharray="97.389 97.389"
+                  stroke-dashoffset="97.389"
+                />
+              </svg>
+            </div>
+            <div class="mulb-ss-mcopy">
+              <span class="mulb-ss-mval" id="ss-pill-hub-val">—</span>
+              <span class="mulb-ss-mk">Scor Mulberry (Hub)</span>
+            </div>
+          </div>
+          <div class="mulb-ss-mrow">
+            <div class="mulb-ss-mring">
+              <svg viewBox="0 0 36 36" width="48" height="48" focusable="false" aria-hidden="true">
+                <circle class="ss-pr-track" cx="18" cy="18" r="15.5"/>
+                <circle
+                  id="ss-pill-ring-cloud"
+                  class="ss-pr-fill ss-pr-fill--purple"
+                  cx="18" cy="18" r="15.5"
+                  fill="none"
+                  stroke-dasharray="97.389 97.389"
+                  stroke-dashoffset="97.389"
+                />
+              </svg>
+            </div>
+            <div class="mulb-ss-mcopy">
+              <span class="mulb-ss-mval" id="ss-pill-cloud-val">—</span>
+              <span class="mulb-ss-mk">Scor Cloud (client)</span>
+            </div>
+          </div>
+        </section>
+        <div class="ss-bd-list" id="ss-breakdown-list"></div>
+        <p class="ss-status" id="score-status">Se încarcă…</p>
+      </div>
+
+      <a href="mulberry_chat.html" class="mlb-link-dark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Întreabă Assistant
+      </a>
+
+      <div class="mlb-card mlb-card--dark">
+        <p class="mlb-eyebrow" style="color: rgba(255,255,255,0.5); margin-top:0;">Piață (estimativ)</p>
+        <div class="val-price" id="valuation-price">— lei</div>
+        <div class="val-note mlb-muted" id="valuation-note">Preț mediu și SoftScore</div>
+        <div class="val-formula mlb-muted" id="valuation-formula"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/mulberry_softscore_hub.js"></script>
+  <script src="js/offline/appDB.js"></script>
+  <script>
+    var apiBase = (window.Config && window.Config.apiBaseUrl) || 'http://127.0.0.1:9000';
+    var SS_DONUT_R = 40;
+    var SS_CIRC = 2 * Math.PI * SS_DONUT_R;
+    var SS_PILL_R = 15.5;
+    var SS_PILL_CIRC = 2 * Math.PI * SS_PILL_R;
+
+    var SS_ROWS = [
+      {
+        key: 'documente',
+        label: 'Documente Cloud',
+        sub: 'ITP, RCA, Talon verificate în Cloud',
+        max: 30,
+        tone: 'mov',
+        icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>',
+      },
+      {
+        key: 'rca',
+        label: 'RCA',
+        sub: 'Valabilitate poliță',
+        max: 15,
+        tone: 'mov',
+        icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+      },
+      {
+        key: 'itp',
+        label: 'ITP',
+        sub: 'Inspecție tehnică periodică',
+        max: 15,
+        tone: 'mov',
+        icon: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+      },
+      {
+        key: 'km',
+        label: 'Rulaj',
+        sub: 'Kilometraj declarat',
+        max: 20,
+        tone: 'rosu',
+        icon: '<path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="3"/>',
+      },
+      {
+        key: 'varsta',
+        label: 'Vârstă vehicul',
+        max: 10,
+        tone: 'rosu',
+        icon: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+      },
+      {
+        key: 'remindere',
+        label: 'Remindere întreținere',
+        sub: 'Finalizate vs. planificate',
+        max: 10,
+        tone: 'albastru',
+        icon: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>',
+      },
+    ];
+
+    function getVin() {
+      var v = window.AppDB && window.AppDB.getSavedVehicle ? window.AppDB.getSavedVehicle() : {};
+      return (v.vin || '').trim() || '';
+    }
+
+    function getBearerHeaders() {
+      var t = '';
+      try {
+        t =
+          localStorage.getItem('mulberry_session') ||
+          localStorage.getItem('yourcar_token') ||
+          sessionStorage.getItem('mulberry_session') ||
+          sessionStorage.getItem('yourcar_token') ||
+          '';
+      } catch (e) {}
+      t = t != null ? String(t).trim() : '';
+      if (!t || t.indexOf('eyJ') !== 0 || t.length < 51) return {};
+      return { Authorization: 'Bearer ' + t };
+    }
+
+    function formatPct(n) {
+      if (typeof n !== 'number' || isNaN(n)) return '—';
+      return n.toFixed(2).replace('.', ',');
+    }
+
+    function formatLei(n) {
+      if (typeof n !== 'number' || isNaN(n)) return '—';
+      return Math.round(n).toLocaleString('ro-RO') + ' lei';
+    }
+
+    function bdNum(bd, k) {
+      var v = bd && bd[k];
+      return typeof v === 'number' && !isNaN(v) ? v : 0;
+    }
+
+    function isValuationBreakdown(bd) {
+      return bd && typeof bd.documente === 'number';
+    }
+
+    function scoreCenterSubline(vin) {
+      var u = window.AppDB && window.AppDB.currentUser;
+      var nick = '';
+      if (u && u.email) nick = String(u.email).split('@')[0];
+      else if (u && u.name) nick = String(u.name);
+      var tail = (vin || '').replace(/\s+/g, '');
+      tail = tail.length >= 6 ? tail.slice(-6) : tail;
+      var when = new Date().toLocaleDateString('ro-RO', { month: 'short', year: 'numeric' });
+      if (nick && tail) return nick + ' · …' + tail;
+      if (nick) return nick + ' · ' + when;
+      if (tail) return 'VIN …' + tail;
+      return when;
+    }
+
+    function applyCenterScore(score, valueEl) {
+      if (!valueEl) return;
+      if (typeof score !== 'number' || isNaN(score)) {
+        valueEl.innerHTML = '<span class="ss-score-num">—<span class="pct">%</span></span>';
+        return;
+      }
+      valueEl.innerHTML =
+        '<span class="ss-score-num">' + formatPct(score) + '<span class="pct">%</span></span>';
+    }
+
+    function clampScorePct(n) {
+      if (typeof n !== 'number' || isNaN(n)) return null;
+      return Math.max(0, Math.min(100, n));
+    }
+
+    function applyStrokeRing(el, circumference, scorePct) {
+      if (!el) return;
+      var p = clampScorePct(scorePct);
+      if (p === null) {
+        el.setAttribute('stroke-dasharray', circumference + ' ' + circumference);
+        el.setAttribute('stroke-dashoffset', String(circumference));
+        return;
+      }
+      el.setAttribute('stroke-dasharray', circumference + ' ' + circumference);
+      el.setAttribute('stroke-dashoffset', String(circumference * (1 - p / 100)));
+    }
+
+    function applyMainRing(score) {
+      applyStrokeRing(document.getElementById('ss-main-fill'), SS_CIRC, score);
+    }
+
+    function applyMiniRing(ringId, score) {
+      applyStrokeRing(document.getElementById(ringId), SS_PILL_CIRC, score);
+    }
+
+    function formatPillPercent(score) {
+      var p = clampScorePct(score);
+      if (p === null) return '—';
+      return formatPct(p) + '%';
+    }
+
+    function updateTwinPills(hubScore, cloudScore) {
+      var hubTxt = document.getElementById('ss-pill-hub-val');
+      var cloudTxt = document.getElementById('ss-pill-cloud-val');
+      applyMiniRing('ss-pill-ring-hub', hubScore);
+      applyMiniRing('ss-pill-ring-cloud', cloudScore);
+      if (hubTxt) hubTxt.textContent = formatPillPercent(hubScore);
+      if (cloudTxt) cloudTxt.textContent = formatPillPercent(cloudScore);
+    }
+
+    function resetScoreRings() {
+      applyMainRing(NaN);
+      updateTwinPills(null, null);
+    }
+
+    function renderBreakdownRows(bd) {
+      var host = document.getElementById('ss-breakdown-list');
+      if (!host) return;
+      host.innerHTML = '';
+      var frag = document.createDocumentFragment();
+      SS_ROWS.forEach(function (row) {
+        var earned = bdNum(bd, row.key);
+        var pct = row.max > 0 ? Math.min(100, Math.round((earned / row.max) * 100)) : 0;
+        var el = document.createElement('div');
+        el.className = 'ss-bd-row ss-bd-tone-' + row.tone;
+        el.innerHTML =
+          '<div class="ss-bd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+          row.icon +
+          '</svg></div>' +
+          '<div class="ss-bd-main">' +
+          '<div class="ss-bd-labels"><span class="ss-bd-label">' +
+          row.label +
+          '</span>' +
+          (row.sub ? '<span class="ss-bd-sub">' + row.sub + '</span>' : '') +
+          '</div>' +
+          '<div class="ss-bd-bar"><span class="ss-bd-fill" style="width:' +
+          pct +
+          '%"></span></div></div>' +
+          '<div class="ss-bd-meta"><strong>' +
+          pct +
+          '%</strong><span>din plafon categorie</span></div>';
+        frag.appendChild(el);
+      });
+      host.appendChild(frag);
+    }
+
+    function setBreakdownPlaceholder(msg) {
+      var host = document.getElementById('ss-breakdown-list');
+      if (!host) return;
+      host.innerHTML = '<p class="ss-bd-placeholder">' + (msg || '') + '</p>';
+    }
+
+    function syncScoreDiagram(displayScore, breakdown, vin, placeholderMsg, hubScore, cloudScore) {
+      var valueEl = document.getElementById('score-value');
+      var subEl = document.getElementById('score-center-sub');
+      applyCenterScore(displayScore, valueEl);
+      applyMainRing(displayScore);
+      updateTwinPills(hubScore, cloudScore);
+      if (subEl) subEl.textContent = vin ? scoreCenterSubline(vin) : '';
+      if (isValuationBreakdown(breakdown)) {
+        renderBreakdownRows(breakdown);
+      } else {
+        setBreakdownPlaceholder(
+          placeholderMsg ||
+            'Procentele pe categorii (Cloud & profil) apar după evaluarea vehiculului pe server (VIN + brain Mulberry).'
+        );
+      }
+    }
+
+    function loadValuation() {
+      var vin = getVin();
+      var valueEl = document.getElementById('score-value');
+      var subEl = document.getElementById('score-center-sub');
+      var statusEl = document.getElementById('score-status');
+      var priceEl = document.getElementById('valuation-price');
+      var noteEl = document.getElementById('valuation-note');
+      var formulaEl = document.getElementById('valuation-formula');
+      var hub = window.MulberrySoftScoreHub;
+
+      if (!vin) {
+        applyCenterScore(NaN, valueEl);
+        if (subEl) subEl.textContent = '';
+        resetScoreRings();
+        setBreakdownPlaceholder('Adaugă vehiculul în profil pentru a vedea scorurile din Cloud.');
+        statusEl.textContent = 'Adaugă VIN în profil.';
+        priceEl.textContent = '— lei';
+        noteEl.textContent = 'Completează vehiculul în Mulberry.';
+        return;
+      }
+
+      var estUrl =
+        apiBase.replace(/\/+$/, '') +
+        '/valuation/estimate?vin=' +
+        encodeURIComponent(vin) +
+        '&live_market=1';
+      var h = getBearerHeaders();
+
+      var pLatest = hub ? hub.ensureLatestWithBootstrap({ bootstrap: true }) : Promise.resolve(null);
+      var pEst = fetch(estUrl, { headers: h })
+        .then(function (r) {
+          return r.ok ? r.json() : null;
+        })
+        .catch(function () {
+          return null;
+        });
+
+      Promise.all([pLatest, pEst]).then(function (pair) {
+        var j = pair[0];
+        var data = pair[1];
+
+        var hubScore = j && j.softscore != null ? Number(j.softscore) : null;
+        if (hubScore != null && isNaN(hubScore)) hubScore = null;
+        if (hubScore != null && window.AppDB && typeof window.AppDB.saveVehicle === 'function') {
+          window.AppDB.saveVehicle({ soft_score: hubScore });
+        }
+
+        var statusFromHub = '';
+        if (hub && j) {
+          statusFromHub = hub.statusHintFromPayload(j);
+          if (j.reply && String(j.reply).trim()) {
+            statusFromHub = String(j.reply).trim().slice(0, 280);
+          }
+        }
+
+        if (!data) {
+          if (hubScore != null) {
+            syncScoreDiagram(
+              hubScore,
+              null,
+              vin,
+              'Evaluarea în lei nu e disponibilă; detaliile pe categorii necesită răspuns de la /valuation/estimate (Cloud + brain). Inelul principal = Mulberry Hub.',
+              hubScore,
+              null
+            );
+            statusEl.textContent = statusFromHub || 'SoftScore (Hub)';
+            var mv = j.market_value;
+            var cur = j.currency || 'EUR';
+            if (typeof mv === 'number' && !isNaN(mv)) {
+              priceEl.textContent = '~' + String(Math.round(mv * 10) / 10) + ' ' + cur;
+              noteEl.textContent = 'Valoare estimată (aceeași sursă ca în ID Hub).';
+            } else {
+              priceEl.textContent = '— lei';
+              noteEl.textContent = 'Piață în lei indisponibilă; deschide Hub sau verifică rețeaua.';
+            }
+            formulaEl.textContent = j && j.base_source ? 'Sursă preț bază Hub: ' + j.base_source : '';
+          } else {
+            applyCenterScore(NaN, valueEl);
+            if (subEl) subEl.textContent = scoreCenterSubline(vin);
+            resetScoreRings();
+            setBreakdownPlaceholder('Nu s-a putut încărca evaluarea. Verifică rețeaua și token-ul JWT.');
+            statusEl.textContent = 'Nu s-a putut încărca.';
+            priceEl.textContent = '— lei';
+            noteEl.textContent = 'Verifică rețeaua și serverul.';
+            formulaEl.textContent = '';
+          }
+          return;
+        }
+
+        var missing =
+          (data.status_health && String(data.status_health).indexOf('negăsit') !== -1) ||
+          (Number(data.market_price_base_lei) === 0 && Number(data.estimated_value_lei) === 0);
+
+        var cloudScore = data.soft_score != null ? Number(data.soft_score) : null;
+        if (cloudScore != null && isNaN(cloudScore)) cloudScore = null;
+        var displayScore =
+          hubScore != null ? hubScore : cloudScore != null && !isNaN(cloudScore) ? cloudScore : NaN;
+        var bd = data.breakdown;
+
+        if (missing) {
+          if (hubScore != null) {
+            syncScoreDiagram(displayScore, bd, vin, null, hubScore, cloudScore);
+            statusEl.textContent =
+              statusFromHub || 'SoftScore (Hub) — sincronizează vehiculul pentru preț în lei.';
+            priceEl.textContent = '—';
+            noteEl.textContent =
+              'Mașina nu e încă în brain pentru evaluare lei; scorul afișat e cel din Hub (multi-factor).';
+            formulaEl.textContent = '';
+          } else {
+            syncScoreDiagram(cloudScore, bd, vin, null, null, cloudScore);
+            statusEl.textContent = data.status_health || 'Vehicul negăsit în Mulberry.';
+            priceEl.textContent = '—';
+            noteEl.textContent =
+              'Sincronizează mașina pe server (car + brain) ca să apară prețul.';
+            formulaEl.textContent = '';
+          }
+          return;
+        }
+
+        syncScoreDiagram(displayScore, bd, vin, null, hubScore, cloudScore);
+        statusEl.textContent = statusFromHub || data.status_health || 'Index vehicul';
+        priceEl.textContent = formatLei(data.estimated_value_lei);
+        var base =
+          data.market_value_temporal_lei != null ? data.market_value_temporal_lei : data.market_price_base_lei;
+        noteEl.textContent =
+          'Depreciere din preț tabel (lei): ' + formatLei(base) + ' · ajustat: ' + formatLei(data.estimated_value_lei);
+        if (typeof data.delta_vs_market_lei === 'number') {
+          var dAbs = Math.abs(Math.round(data.delta_vs_market_lei));
+          noteEl.textContent +=
+            data.delta_vs_market_lei >= 0
+              ? ' (+' + dAbs.toLocaleString('ro-RO') + ' lei)'
+              : ' (-' + dAbs.toLocaleString('ro-RO') + ' lei)';
+        }
+        var ml = data.market_live;
+        var liveLine = '';
+        if (ml && !ml.error && (ml.median != null || ml.avg != null)) {
+          var mid = ml.median != null ? ml.median : ml.avg;
+          liveLine =
+            ' Autovit (indicativ): median ~' +
+            mid +
+            (ml.count != null ? ' · n=' + ml.count : '') +
+            (ml.source ? ' · ' + ml.source : '') +
+            '.';
+        } else if (ml && ml.error) {
+          liveLine = ' Piață live: ' + ml.error;
+        }
+        var hubTag = hubScore != null ? ' Inel principal: sincron cu Mulberry Hub · ' : '';
+        formulaEl.textContent = hubTag + (data.formula_note || '') + liveLine;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadValuation);
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Comunitate Daily Insight · Mulberry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/daily_insights.css" />
+</head>
+<body class="insight-page-body">
+  <div class="insight-social-page">
+    <header class="insight-social-header">
+      <button type="button" class="insight-social-back" onclick="if (history.length > 1) { history.back(); } else { location.href='mulberry.html'; }" aria-label="Înapoi">←</button>
+      <div class="insight-social-title-block">
+        <h1 id="insight-social-h1">Daily Insight</h1>
+        <p id="insight-social-sub">Opinii</p>
+      </div>
+    </header>
+    <p class="insight-social-hint">Împărtășește perspectiva ta — la fel ca pe X sau Truth Social: scurt, direct, respectuos.</p>
+    <div class="insight-social-compose">
+      <textarea id="insight-social-text" maxlength="8000" placeholder="Scrie opinia ta aici…"></textarea>
+      <div class="insight-social-actions">
+        <button type="button" class="insight-btn-polish" id="insight-social-polish">Optimizare limbaj · MulberryEXO</button>
+        <button type="button" class="insight-btn-post" id="insight-social-post">Publică</button>
+      </div>
+    </div>
+    <div class="insight-social-feed" id="insight-social-list"></div>
+  </div>
+  <script src="js/config.js"></script>
+  <script src="js/daily_insights_community.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+# Nu include în Railway deploy
+.git/
+.pytest_cache/
+.vscode/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env.local
+.env.development
+node_modules/
+apps/web/
+dist/
+tests/
+docs/
+java/
+*.md
+*.txt
+!requirements.txt
+!runtime.txt
+!Procfile

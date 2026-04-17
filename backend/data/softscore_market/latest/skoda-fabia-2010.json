@@ -1,0 +1,30 @@
+{
+  "schema": "softscore_market_snapshot_v1",
+  "timestamp_utc": "2026-04-16T20:55:14.390265+00:00",
+  "model_key": "skoda-fabia-2010",
+  "vin": "WVWZZZAUZNW123456",
+  "marca": "Skoda",
+  "model": "Fabia",
+  "an": 2010,
+  "km": 0,
+  "autovit": {
+    "count": 1995,
+    "min": 511,
+    "max": 196843,
+    "avg": 18810,
+    "median": 5971,
+    "source": "autovit.ro",
+    "currency_hint": "mixed_or_page_default"
+  },
+  "groq_verification": {
+    "median_plausible": true,
+    "avg_consistent": false,
+    "confidence_0_1": 0.5,
+    "notes_ro": "Numărul de exemplare este mare, dar diferența mare între minim și maxim sugerează că eșantionul poate fi incomplet.",
+    "red_flags": [
+      "esantion_mic",
+      "variatie_max_min"
+    ]
+  },
+  "cached": false
+}

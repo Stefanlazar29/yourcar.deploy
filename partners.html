@@ -1,0 +1,199 @@
+<!-- ══════════ PARTNERS DASHBOARD ══════════ -->
+
+ <DOCTYPE html>
+<html lang="ro">
+<head>
+  <script src="js/config.js"></script>
+<script src="js/offline/appDB.js"></script>
+    
+<div class="screen" id="s-partners-dash">
+  <div class="pdash-hdr">
+    <div class="pdash-left">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+          <span class="pdash-badge" id="pdash-type-badge">Service</span>
+        </div>
+        <div class="pdash-name" id="pdash-name">Parteneri YourCar</div>
+        <div class="pdash-type" id="pdash-sub">Rețeaua de încredere</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <div style="width:32px;height:32px;border-radius:50%;background:var(--surf);border:1px solid var(--cb2);
+        display:flex;align-items:center;justify-content:center;cursor:pointer;"
+        onclick="show('partners-landing')" title="Înapoi">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" style="width:14px;height:14px;stroke:var(--dim)"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="pdash-logout" id="pdash-logout-btn" onclick="partnerLogout()" title="Deconectare" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="filter-tabs">
+    <button class="ftab active" type="button" id="ftab-all" onclick="filterPartners('all')">Toți</button>
+    <button class="ftab" type="button" id="ftab-service" onclick="filterPartners('service')">
+      🔧 Service Auto
+    </button>
+    <button class="ftab" type="button" id="ftab-insurance" onclick="filterPartners('insurance')">
+      🛡️ Asigurări
+    </button>
+    <button class="ftab" type="button" id="ftab-carshop" onclick="filterPartners('carshop')">
+      🛒 CarShop
+    </button>
+  </div>
+
+  <!-- Partners list -->
+  <div class="scroll-body" style="padding-bottom:20px;">
+    <div class="partners-list" id="partners-list">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ PARTNERS AUTH (Login + Register) ══════════ -->
+<div class="screen" id="s-partners-auth">
+  <div class="pauth-wrap scroll-body">
+    <div class="pauth-hdr">
+      <div class="pauth-back" onclick="show('partners-landing')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div>
+        <div class="pauth-title" id="pauth-title">Conectare Partener</div>
+        <div class="pauth-sub" id="pauth-sub">Accesează contul firmei tale</div>
+      </div>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="pauth-login-form">
+      <div class="field">
+        <div class="flabel">Email firmă</div>
+        <input class="finput" id="p-login-email" type="email" placeholder="contact@firma.ro"/>
+      </div>
+      <div class="field" style="margin-top:12px;">
+        <div class="flabel">Parolă</div>
+        <div class="pass-wrap">
+          <input class="finput" id="p-login-pass" type="password" placeholder="••••••••"/>
+          <button class="pass-eye" onclick="togglePassVis('p-login-pass',this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="ferr show" id="p-login-err" style="display:none;margin-top:6px;"></div>
+      <button class="btn btn-neon" onclick="submitPartnerLogin()" style="margin-top:20px;">
+        Intră în cont
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--dim);margin-top:14px;cursor:pointer;" onclick="showPartnersAuth('register')">
+        Nu ai cont? <span style="color:var(--neon);font-weight:700;">Înregistrează firma</span>
+      </p>
+    </div>
+
+    <!-- ══════════ PARTNERS LANDING ══════════ -->
+<div class="screen" id="s-partners-landing">
+  <div class="pland-hdr">
+    <div class="pland-back" onclick="show('dash');setNav('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </div>
+    <div class="pland-badge">Mulberry Partners</div>
+    <div class="pland-title">Rețeaua ta de<br><span>Încredere</span></div>
+    <div class="pland-sub">Service-uri auto, asigurători și CarShop-uri verificate pentru vehiculul tău.</div>
+  </div>
+  <div class="pland-btns">
+    <button class="btn btn-neon" onclick="showPartnersAuth('login')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      Conectare Partener
+    </button>
+    <button class="btn" onclick="show('partners-dash');loadPartners('all')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Vezi Parteneri
+    </button>
+    <div class="divider"><span>ești partener nou?</span></div>
+    <button class="btn" onclick="showPartnersAuth('register')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+      Înregistrează Firma
+    </button>
+  </div>
+</div>
+
+    <!-- REGISTER FORM -->
+    <div id="pauth-register-form" style="display:none;">
+      <!-- Tip partener -->
+      <div class="preg-section">
+        <div class="preg-section-title">Tip Partener</div>
+        <div class="type-grid">
+          <div class="type-card selected" id="ptype-service" onclick="selectPartnerType('service')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            <div class="tc-label">Service Auto</div>
+          </div>
+          <div class="type-card" id="ptype-insurance" onclick="selectPartnerType('insurance')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="tc-label">Asigurări</div>
+          </div>
+          <div class="type-card" id="ptype-carshop" onclick="selectPartnerType('carshop')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <div class="tc-label">CarShop</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date firmă -->
+      <div class="preg-section">
+        <div class="preg-section-title">Date Firmă</div>
+        <div class="field"><div class="flabel">Nume firmă</div>
+          <input class="finput" id="p-reg-name" type="text" placeholder="Ex: Auto Service SRL"/></div>
+        <div class="field" style="margin-top:10px;"><div class="flabel">Tip entitate</div>
+          <select class="finput" id="p-reg-entity">
+            <option value="SRL">SRL</option>
+            <option value="SA">S.A.</option>
+            <option value="PFA">PFA</option>
+            <option value="II">I.I.</option>
+            <option value="RA">RA</option>
+          </select></div>
+        <div class="field" style="margin-top:10px;"><div class="flabel">CUI / CIF</div>
+          <input class="finput" id="p-reg-cui" type="text" placeholder="RO12345678"/></div>
+        <div class="field" style="margin-top:10px;"><div class="flabel">Nr. Reg. Comerțului</div>
+          <input class="finput" id="p-reg-reg" type="text" placeholder="J40/1234/2020"/></div>
+      </div>
+
+      <!-- Contact -->
+      <div class="preg-section">
+        <div class="preg-section-title">Contact & Locație</div>
+        <div class="field"><div class="flabel">Adresă</div>
+          <input class="finput" id="p-reg-address" type="text" placeholder="Str. Exemplu nr. 1, București"/></div>
+        <div class="field" style="margin-top:10px;"><div class="flabel">Telefon</div>
+          <input class="finput" id="p-reg-phone" type="tel" placeholder="+40 7XX XXX XXX"/></div>
+        <div class="field" style="margin-top:10px;"><div class="flabel">Website (opțional)</div>
+          <input class="finput" id="p-reg-web" type="url" placeholder="https://firma.ro"/></div>
+        <div class="field" style="margin-top:10px;"><div class="flabel">Descriere scurtă</div>
+          <input class="finput" id="p-reg-desc" type="text" placeholder="Service autorizat, revizie, ITP..."/></div>
+      </div>
+
+      <!-- Cont -->
+      <div class="preg-section">
+        <div class="preg-section-title">Cont Acces</div>
+        <div class="field"><div class="flabel">Email</div>
+          <input class="finput" id="p-reg-email" type="email" placeholder="contact@firma.ro"/></div>
+        <div class="field" style="margin-top:10px;"><div class="flabel">Parolă</div>
+          <div class="pass-wrap">
+            <input class="finput" id="p-reg-pass" type="password" placeholder="Minim 8 caractere"/>
+            <button class="pass-eye" onclick="togglePassVis('p-reg-pass',this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ferr show" id="p-reg-err" style="display:none;margin-bottom:8px;"></div>
+      <button class="btn btn-neon" onclick="submitPartnerRegister()">
+        Înregistrează Firma →
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--dim);margin-top:14px;cursor:pointer;" onclick="showPartnersAuth('login')">
+        Ai deja cont? <span style="color:var(--neon);font-weight:700;">Conectează-te</span>
+      </p>
+    </div>
+  </div>
+</div>
