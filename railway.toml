@@ -1,12 +1,9 @@
-# Railway — deploy din Dockerfile
-# Dashboard: variabile DATABASE_URL, JWT_SECRET, etc. (același set ca pe Vercel dacă folosești Supabase)
+# Railway — Nixpacks + FastAPI din rădăcină (PYTHONPATH include . pentru pachetul backend).
+# Nu folosi app.py Streamlit în rădăcină — Nixpacks l-ar putea alege greșit ca intrare.
 
 [build]
-builder = "DOCKERFILE"
-dockerfilePath = "Dockerfile"
+builder = "nixpacks"
 
 [deploy]
-healthcheckPath = "/health"
-healthcheckTimeout = 120
-restartPolicyType = "ON_FAILURE"
-restartPolicyMaxRetries = 3
+startCommand = "PYTHONPATH=$PYTHONPATH:. python backend/main.py"
+healthcheckPath = "/api/health"
