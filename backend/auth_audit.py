@@ -26,7 +26,13 @@ def _now_iso() -> str:
     return datetime.utcnow().isoformat(timespec="seconds")
 
 
-def _connect() -> sqlite3.Connection:
+def _connect():
+    """Aceeași conexiune ca database (PostgreSQL sau SQLite)."""
+    raw = (os.getenv("DATABASE_URL") or "").strip()
+    if raw:
+        from backend import database as _db
+
+        return _db.connect()
     con = sqlite3.connect(AUTH_AUDIT_DB_PATH, check_same_thread=False)
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA foreign_keys = ON")

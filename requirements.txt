@@ -1,3 +1,3 @@
-# Rădăcină repo — Nixpacks / Railway caută acest fișier aici.
-# Dependențele reale sunt în backend/ (un singur loc de întreținut).
+# Rădăcină — Vercel / `pip install -r requirements.txt` local: delegă la backend.
+# Docker (Railway): Dockerfile folosește direct backend/requirements.txt.
 -r backend/requirements.txt

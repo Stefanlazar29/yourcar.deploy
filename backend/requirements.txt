@@ -6,7 +6,9 @@ email-validator
 python-jose[cryptography]
 bcrypt>=4.0.1,<5
 python-multipart
-streamlit
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.9
+supabase>=2.0.0
 chromadb
 apscheduler
 pytest

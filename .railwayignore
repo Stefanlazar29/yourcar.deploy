@@ -21,5 +21,8 @@ java/
 *.md
 *.txt
 !requirements.txt
+!backend/requirements.txt
 !runtime.txt
 !Procfile
+!Dockerfile
+!railway.toml

@@ -22,7 +22,7 @@ except ImportError:
 
 from fastapi import BackgroundTasks, Body, Depends, FastAPI, File, Form, Header, HTTPException, Request, status, UploadFile, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
@@ -499,8 +499,11 @@ def _resolve_cors_origins() -> List[str]:
     "https://localhost:9000",
     "https://mulberry.autos",
     "https://www.mulberry.autos",
+    # Preview Vercel (înlocuiește cu URL-ul din tab-ul tău Deployments dacă e altul)
+    "https://project-4gy67.vercel.app",
     "null",  # file:// (unele browsere trimit Origin: null)
   ]
+  # Alte origini (ex. alt preview *.vercel.app): MULBERRY_CORS_ORIGINS=https://foo.vercel.app,https://bar.vercel.app
   extra = (os.getenv("MULBERRY_CORS_ORIGINS") or "").strip()
   if extra:
     for part in extra.split(","):
@@ -528,8 +531,11 @@ def _startup():
   database.init_db()
   auth_audit.init_auth_audit_db()
   try:
-    from backend.scheduler import start_scheduler
-    start_scheduler()
+    if (os.getenv("SKIP_AP_SCHEDULER") or "").strip().lower() in ("1", "true", "yes", "on"):
+      print("[Startup] SKIP_AP_SCHEDULER=1 — fără APScheduler (ex. Vercel serverless).")
+    else:
+      from backend.scheduler import start_scheduler
+      start_scheduler()
   except Exception as e:
     print(f"[Startup] Scheduler eșuat: {e}")
 
@@ -537,6 +543,35 @@ def _startup():
 @app.get("/health")
 def health():
   return {"ok": True}
+
+
+@app.get("/api/health")
+def api_health():
+  """Deep health: verifică șițeava către Postgres (Supabase) sau SQLite local."""
+  try:
+    con = database.connect()
+    try:
+      cur = con.execute("SELECT 1 AS health_check")
+      row = cur.fetchone()
+      if row is None:
+        raise RuntimeError("SELECT 1 returned no row")
+    finally:
+      con.close()
+  except Exception as e:
+    return JSONResponse(
+      status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+      content={
+        "status": "degraded",
+        "database": "error",
+        "details": str(e)[:800],
+      },
+    )
+  db_kind = "postgresql" if (os.getenv("DATABASE_URL") or "").strip() else "sqlite"
+  return {
+    "status": "healthy",
+    "database": "connected",
+    "backend": db_kind,
+  }
 
 
 @app.get("/labels/kanban-pervasive-sample.pdf")
@@ -2583,7 +2618,7 @@ def serve_frontend_html(page: str):
   return FileResponse(str(target), media_type="text/html")
 
 
-# Railway/Nixpacks: start server cu python main.py
+# Local / container: pornește Uvicorn direct (Vercel folosește api/main.py ca serverless).
 if __name__ == "__main__":
   import uvicorn
   port = int(os.environ.get("PORT", 8000))

@@ -1,17 +1,13 @@
 /* config.js — Setări globale Mulberry */
 /**
- * API: local vs producție după hostname (fără să cauți laptopul vizitatorilor pe mulberry.autos).
+ * Frontend (Vercel, https://mulberry.autos) → Backend (Railway).
+ * URL-ul de mai jos trebuie să fie EXACT cel din Railway (Settings → Networking → Public URL),
+ * cu https:// și fără slash final — altfel: Mixed Content sau CORS greșit.
  *
- * Local (Cursor, Live Server, etc.): hostname 127.0.0.1 / localhost → backend http://127.0.0.1:9000
- *   (dacă pagina e servită direct de Uvicorn pe :9000, folosim același origin).
+ * Local: 127.0.0.1 / localhost → http://127.0.0.1:9000 (sau același origin pe :9000).
+ * Override: ?api=https://alt-backend.example (doar http/https).
  *
- * Producție (ex. mulberry.autos): → https://mulberry-backend.up.railway.app
- *
- * Override manual: adaugă ?api=https://alt-backend.example/health la URL (doar http/https).
- *
- * Pornire locală:
- *   uvicorn backend.main:app --host 127.0.0.1 --port 9000 --reload
- *   browser: http://127.0.0.1:9000/
+ * Test backend: (Railway public URL)/api/health
  */
 /** Global imediat — primul lucru util; mulberry.html: onclick pe ochiul parolei */
 window.togglePassVis = function (id, btn) {
@@ -21,9 +17,14 @@ window.togglePassVis = function (id, btn) {
   if (btn && btn.style) btn.style.opacity = input.type === 'password' ? '0.5' : '1';
 };
 
+/**
+ * Înlocuiește cu URL-ul real din Railway (ex. mulberry-production-xxxx.up.railway.app).
+ * Nu folosi http:// aici pe producție — browserul blochează Mixed Content de pe https://mulberry.autos.
+ */
+const API_BASE_URL = 'https://mulberry-production-d9db.up.railway.app'.replace(/\/+$/, '');
+
 var MULBERRY_API_LOCAL = 'http://127.0.0.1:9000';
-/** Fără slash final — același string ca Public URL din Railway */
-var MULBERRY_API_PRODUCTION = 'https://mulberry-backend.up.railway.app'.replace(/\/+$/, '');
+var MULBERRY_API_PRODUCTION = API_BASE_URL;
 
 function resolveMulberryApiBase() {
   try {
@@ -60,6 +61,15 @@ function resolveMulberryApiBase() {
       return MULBERRY_API_LOCAL;
     }
 
+    // Producție (mulberry.autos pe Vercel): backend pe Railway
+    if (host === 'mulberry.autos' || host === 'www.mulberry.autos') {
+      return MULBERRY_API_PRODUCTION;
+    }
+    
+    // Alte domenii (preview Vercel, etc.): încearcă same-origin, fallback Railway
+    if (l.origin && l.origin !== 'null') {
+      return String(l.origin).replace(/\/+$/, '');
+    }
     return MULBERRY_API_PRODUCTION;
   } catch (e) {
     return MULBERRY_API_LOCAL;

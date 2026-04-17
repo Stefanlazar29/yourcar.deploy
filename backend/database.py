@@ -1,9 +1,6 @@
 """
-database.py — SQLite local (viteza maximă, fără dependențe externe DB).
-Tabele: users, cars.
-
-Cars include: km_actuali, rca_expiry, itp_expiry, ycs_score (decimal, ex: 89.67).
-"""
+database.py — SQLite local (dev) sau PostgreSQL (Supabase / DATABASE_URL).
+Tabele: users, cars, exo_*, chat, MLBR, auth_audit, …"""
 
 import hashlib
 import os
@@ -11,13 +8,21 @@ import sqlite3
 import json
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from typing import List, Optional, Tuple
+from typing import Any, List, Optional, Tuple, Union
 
 
 DB_PATH = os.getenv("SQLITE_PATH", os.path.join(os.path.dirname(__file__), "dev.db"))
 
 
-def connect() -> sqlite3.Connection:
+def _uses_postgres() -> bool:
+    return bool((os.getenv("DATABASE_URL") or "").strip())
+
+
+def connect() -> Union[sqlite3.Connection, Any]:
+    if _uses_postgres():
+        from backend.pg_adapter import connect_pg
+
+        return connect_pg()
     con = sqlite3.connect(DB_PATH, check_same_thread=False)
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA foreign_keys = ON")
@@ -25,7 +30,47 @@ def connect() -> sqlite3.Connection:
     return con
 
 
+def _init_db_postgres() -> None:
+    from backend.pg_adapter import connect_pg, run_ddl_pg
+    from backend.schema_postgres import postgres_ddl
+
+    print("[DB] Init PostgreSQL (Supabase / DATABASE_URL)")
+    con = connect_pg()
+    try:
+        run_ddl_pg(con, postgres_ddl())
+        raw = con._conn
+        cur = raw.cursor()
+        cur.execute(
+            "INSERT INTO exo_scheduler_state (id) VALUES (1) ON CONFLICT (id) DO NOTHING"
+        )
+        cur.close()
+        raw.commit()
+        con.execute(
+            """
+            UPDATE users
+            SET identifier =
+              CASE
+                WHEN identifier IS NOT NULL AND identifier != '' THEN identifier
+                WHEN email IS NOT NULL AND email != '' THEN lower(email)
+                WHEN phone IS NOT NULL AND phone != '' THEN replace(replace(replace(replace(phone,' ',''), chr(9), ''), chr(10), ''), chr(13), '')
+                ELSE NULL
+              END
+            WHERE identifier IS NULL OR identifier = '';
+            """
+        )
+        con.commit()
+        print("[DB] PostgreSQL tables OK (users, cars, vehicle_brains, exo_*).")
+    except Exception as e:
+        print(f"[DB] init_db_postgres error: {e}")
+        raise
+    finally:
+        con.close()
+
+
 def init_db() -> None:
+    if _uses_postgres():
+        _init_db_postgres()
+        return
     con = connect()
     try:
         print(f"[DB] Init SQLite: {DB_PATH}")
@@ -376,7 +421,7 @@ class UserRow:
     device_hwid_hash: Optional[str] = None
 
 
-def _user_row_from_sqlite(row: sqlite3.Row) -> UserRow:
+def _user_row_from_db(row: Any) -> UserRow:
     role_val = row["role"] if "role" in row.keys() and row["role"] else "user"
     dev = None
     if "device_hwid_hash" in row.keys():
@@ -406,7 +451,7 @@ def get_user_by_identifier(identifier: str) -> Optional[UserRow]:
         row = con.execute("SELECT * FROM users WHERE identifier = ? LIMIT 1", (ident,)).fetchone()
         if not row:
             return None
-        return _user_row_from_sqlite(row)
+        return _user_row_from_db(row)
     finally:
         con.close()
 
@@ -417,7 +462,7 @@ def get_user_by_id(user_id: int) -> Optional[UserRow]:
         row = con.execute("SELECT * FROM users WHERE id = ? LIMIT 1", (int(user_id),)).fetchone()
         if not row:
             return None
-        return _user_row_from_sqlite(row)
+        return _user_row_from_db(row)
     finally:
         con.close()
 
@@ -585,7 +630,7 @@ def create_user(identifier: str, password_hash: str, phone: Optional[str] = None
         row = con.execute("SELECT * FROM users WHERE identifier = ? LIMIT 1", (ident,)).fetchone()
         if not row:
             raise RuntimeError("create_user: rând lipsă după INSERT")
-        return _user_row_from_sqlite(row)
+        return _user_row_from_db(row)
     finally:
         con.close()
 

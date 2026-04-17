@@ -1,8 +1,152 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
       "source": "/v/:unitId",
       "destination": "/verify.html?u=:unitId"
+    },
+    {
+      "source": "/health",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/docs",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/openapi.json",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/redoc",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/auth/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/me/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/assistant/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/cars/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/cars",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/sync",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/cloud/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/analyze/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/valuation/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/mlbr/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/chat",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/exo/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/research/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/events/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/reports/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/ingest",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/vector/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/brain/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/form/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/fleet/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/system/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/log-error",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/debug/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/labels/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/api/public/:path*",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/mlbr_file.html",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/style.css",
+      "destination": "/api/main"
+    },
+    {
+      "source": "/:page.html",
+      "destination": "/api/main"
     }
-  ]
+  ],
+  "functions": {
+    "api/main.py": {
+      "maxDuration": 60,
+      "memory": 1024,
+      "excludeFiles": "{.venv/**,apps/**,**/node_modules/**,**/.next/**,**/__pycache__/**,**/*.pyc,**/agent-transcripts/**,**/mcps/**}"
+    }
+  }
 }

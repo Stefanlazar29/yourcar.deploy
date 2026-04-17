@@ -54,15 +54,10 @@
     return;
   }
 
-  /* Producție Vercel: setează URL-ul API Railway înainte de acest script sau aici. */
+  /* Producție Vercel: același origin ca site-ul; override: window.MULBERRY_VERIFY_API */
   var API = (window.MULBERRY_VERIFY_API || '').replace(/\/+$/, '');
   if (!API) {
-    var host = (location.hostname || '').toLowerCase();
-    if (host === 'mulberry.autos' || host.endsWith('.vercel.app')) {
-      API = 'https://mulberry-backend.up.railway.app';
-    } else {
-      API = location.origin.replace(/\/+$/, '');
-    }
+    API = location.origin.replace(/\/+$/, '');
   }
 
   function esc(s) {
