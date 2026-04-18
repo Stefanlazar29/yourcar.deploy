@@ -1,5 +1,6 @@
 backend/.env
 .env
+backend/dev.db
 backend/research_data/exo_research.db
 backend/research_data/articles_recent.jsonl
 *.pyc
