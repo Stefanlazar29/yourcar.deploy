@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-04-16T20:55:47Z",
+  "updated_at": "2026-04-17T20:13:27Z",
   "cycle": {
     "articles_fetched": 70,
-    "articles_new": 52,
-    "insights_classified": 23,
+    "articles_new": 34,
+    "insights_classified": 0,
     "fuel_prices_updated": 0,
     "errors": 0,
-    "chroma_indexed": 23
+    "chroma_indexed": 0
   },
-  "bnr_eur": 5.0918,
+  "bnr_eur": 5.0987,
   "extra": {
     "optional_urls_tried": [
       "https://www.bnr.ro/nbrfxrates.xml",

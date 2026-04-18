@@ -1,6 +1,14 @@
 """
 database.py — SQLite local (dev) sau PostgreSQL (Supabase / DATABASE_URL).
-Tabele: users, cars, exo_*, chat, MLBR, auth_audit, …"""
+Tabele: users, cars, exo_*, chat, MLBR, auth_audit, …
+
+Prioritate:
+ 1. DATABASE_URL setat (Railway/Vercel/Supabase) → Postgres prin pg_adapter.
+  2. Altfel → SQLite la calea DB_PATH (implicit backend/dev.db sau SQLITE_PATH).
+
+Normalizare postgres://, sslmode, etc.: connect_pg() folosește backend.pg_adapter.normalize_database_url;
+aici corectăm doar prefixul în os.environ la import, ca și codul care citește DATABASE_URL direct să vadă postgresql://.
+"""
 
 import hashlib
 import os
@@ -12,6 +20,18 @@ from typing import Any, List, Optional, Tuple, Union
 
 
 DB_PATH = os.getenv("SQLITE_PATH", os.path.join(os.path.dirname(__file__), "dev.db"))
+
+
+def _coerce_database_url_environ() -> None:
+    """Dacă DATABASE_URL e Postgres, înlocuiește postgres:// cu postgresql:// (compat SQLAlchemy). Nu atinge SQLite."""
+    u = (os.getenv("DATABASE_URL") or "").strip()
+    if not u or "sqlite" in u.lower():
+        return
+    if u.startswith("postgres://"):
+        os.environ["DATABASE_URL"] = "postgresql://" + u[len("postgres://") :]
+
+
+_coerce_database_url_environ()
 
 
 def _uses_postgres() -> bool:

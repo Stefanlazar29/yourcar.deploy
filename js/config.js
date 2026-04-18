@@ -26,6 +26,20 @@ const API_BASE_URL = 'https://mulberry-production-d9db.up.railway.app'.replace(/
 var MULBERRY_API_LOCAL = 'http://127.0.0.1:9000';
 var MULBERRY_API_PRODUCTION = API_BASE_URL;
 
+/** Live Server „Go Live” pe IP LAN: același host, port Uvicorn 9000 (nu Railway). */
+function _isPrivateLanHost(host) {
+  if (!host) return false;
+  host = String(host).toLowerCase();
+  if (/^192\.168\.\d{1,3}\.\d{1,3}$/.test(host)) return true;
+  if (/^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(host)) return true;
+  var m = host.match(/^172\.(\d{1,3})\./);
+  if (m) {
+    var n = parseInt(m[1], 10);
+    if (n >= 16 && n <= 31) return true;
+  }
+  return false;
+}
+
 function resolveMulberryApiBase() {
   try {
     var l = window.location;
@@ -59,6 +73,10 @@ function resolveMulberryApiBase() {
         return String(l.origin).replace(/\/+$/, '');
       }
       return MULBERRY_API_LOCAL;
+    }
+
+    if (_isPrivateLanHost(host)) {
+      return ('http://' + host + ':9000').replace(/\/+$/, '');
     }
 
     // Producție (mulberry.autos pe Vercel): backend pe Railway
