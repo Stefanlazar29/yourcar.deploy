@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exoterra ID — Login</title>
   <link rel="stylesheet" href="style.css">
+<style>
+/* ── PURPLE GRADIENT BACKGROUND ──────────────────── */
+html { height: 100%; }
+body.mlb-page {
+  background:
+    radial-gradient(ellipse 120% 75% at 58% 108%,
+      rgba(160, 80, 255, 1)   0%,
+      rgba(100, 40, 220, 0.85) 22%,
+      rgba(50,  15, 150, 0.60) 45%,
+      rgba(12,   4,  50, 0.30) 65%,
+      transparent 78%),
+    #000 !important;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+body.mlb-page .app {
+  background: transparent !important;
+}
+body.mlb-page #s-auth {
+  background: transparent !important;
+}
+/* Glassmorphism card over the vivid background */
+body.mlb-page .mlb-card.mlb-card--dark {
+  background: rgba(6, 6, 8, 0.76) !important;
+  backdrop-filter: blur(22px) saturate(1.5) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  box-shadow: 0 16px 52px rgba(0,0,0,0.72), 0 0 0 0.5px rgba(255,255,255,0.06) !important;
+}
+</style>
 </head>
 <body class="mlb-page">
   <div class="app" id="app">
