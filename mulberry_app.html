@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulberry — App</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Outfit:wght@600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --yellow:#ECFF54;
+  --wine:#2C0E12;
+  --wine-dim:rgba(44,14,18,.09);
+  --black:#1a1a1a;
+  --white:#FFFFFF;
+  --gray:#F5F5F3;
+  --b1:rgba(0,0,0,.07);
+  --b2:rgba(0,0,0,.12);
+  --b3:rgba(0,0,0,.20);
+  --dim1:rgba(0,0,0,.65);
+  --dim2:rgba(0,0,0,.45);
+  --dim3:rgba(0,0,0,.28);
+  --red:#dc2626;
+  --green:#16a34a;
+  --font:'TT Firs Neue','Plus Jakarta Sans',system-ui,sans-serif;
+  --font-head:'Manrope','TT Firs Neue',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --sw:268px;--th:62px;--bh:66px;--r:12px;--rl:20px;
+}
+html,body{height:100%;background:var(--gray);color:var(--black);font-family:var(--font);overflow:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.hidden{display:none!important}
+
+/* ══ AUTH ══════════════════════════════════════════ */
+#auth-screen{
+  position:fixed;inset:0;display:flex;z-index:200;
+  background:
+    radial-gradient(ellipse 20% 88% at -4% 72%, rgba(18,55,255,1) 0%, rgba(10,35,210,.72) 32%, transparent 62%),
+    radial-gradient(ellipse 17% 80% at 22% 66%, rgba(255,148,8,.98) 0%, rgba(215,95,5,.62) 36%, transparent 63%),
+    radial-gradient(ellipse 5% 76% at 43% 62%, rgba(28,195,155,.92) 0%, rgba(14,145,112,.52) 46%, transparent 68%),
+    radial-gradient(ellipse 5% 76% at 57% 62%, rgba(28,195,155,.88) 0%, rgba(14,145,112,.48) 46%, transparent 68%),
+    radial-gradient(ellipse 17% 80% at 78% 66%, rgba(255,148,8,.95) 0%, rgba(215,95,5,.58) 36%, transparent 63%),
+    radial-gradient(ellipse 20% 88% at 104% 72%, rgba(18,55,255,.96) 0%, rgba(10,35,210,.66) 32%, transparent 62%),
+    radial-gradient(ellipse 100% 18% at 50% 100%, rgba(15,35,110,.38) 0%, transparent 70%),
+    #000;
+}
+
+.auth-left{
+  flex:1;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+  display:flex;flex-direction:column;padding:48px;
+  position:relative;overflow:hidden;
+}
+.auth-left::before{content:'';position:absolute;top:-120px;right:-120px;width:400px;height:400px;background:radial-gradient(circle,rgba(236,255,84,.07) 0%,transparent 70%);pointer-events:none}
+.auth-left::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(236,255,84,.04) 0%,transparent 70%);pointer-events:none}
+.al-logo{display:flex;align-items:center;gap:11px;margin-bottom:auto}
+.al-wordmark{height:36px;width:auto;display:block}
+.sb-wordmark{height:28px;width:auto;display:block}
+.al-hero{padding:60px 0 40px;position:relative;z-index:1}
+.al-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(236,255,84,.12);border:1px solid rgba(236,255,84,.22);color:var(--yellow);font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:22px;text-transform:uppercase;letter-spacing:.08em}
+.al-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--yellow)}
+/* ── HEADING FONT ── */
+.al-h1,.al-name,.af-title,.af-logo-name,.sb-logo-name,.tb-title,.ph-title,.sc-val,.yc-name,.oc-name{font-family:var(--font-head)}
+.al-h1{font-size:clamp(28px,3.5vw,42px);font-weight:900;line-height:1.12;letter-spacing:-.5px;margin-bottom:16px;color:#fff}
+.al-h1 em{color:var(--yellow);font-style:normal}
+.al-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.6;max-width:380px}
+.al-features{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.al-feat{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:600;color:rgba(255,255,255,.65)}
+.al-feat-ico{width:28px;height:28px;border-radius:8px;background:rgba(236,255,84,.12);border:1px solid rgba(236,255,84,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.al-feat-ico svg{width:13px;height:13px;stroke:var(--yellow);stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.al-foot{margin-top:auto;font-size:11px;color:rgba(255,255,255,.28)}
+
+.auth-right{
+  width:480px;flex-shrink:0;
+  background:rgba(8,8,8,0.82);
+  backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
+  border-left:1px solid rgba(255,255,255,0.08);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:48px 44px;overflow-y:auto;
+}
+/* ── AUTH FORM ELEMENTS ── */
+.auth-form-panel{width:100%;max-width:380px}
+.af-step{display:none}.af-step.active{display:block}
+.af-step-indicator{display:flex;align-items:center;gap:6px;margin-bottom:2rem}
+.af-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all .2s}
+.af-dot.active{background:var(--yellow);width:18px;border-radius:3px}
+.af-dot.done{background:rgba(34,197,94,0.6)}
+.af-title{font-size:1.5rem;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;color:#fff;font-family:var(--font-head)}
+.af-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:1.75rem;line-height:1.6}
+.af-sub strong{color:rgba(255,255,255,0.7)}
+.af-tabs{display:flex;width:100%;margin-bottom:1.5rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:4px}
+.af-tab{flex:1;padding:9px 0;border:none;background:transparent;color:rgba(255,255,255,0.45);font-family:var(--font);font-size:13px;font-weight:600;border-radius:7px;cursor:pointer;transition:all .2s}
+.af-tab.active{background:rgba(255,255,255,0.1);color:#fff}
+.btn-google{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:13px;background:#fff;color:#1a1a1a;border:none;border-radius:10px;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;margin-bottom:1.25rem}
+.btn-google:hover{opacity:.92}
+.btn-google svg{width:18px;height:18px;flex-shrink:0}
+.af-divider{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem}
+.af-divider-line{flex:1;height:1px;background:rgba(255,255,255,0.08)}
+.af-divider-text{font-size:12px;color:rgba(255,255,255,0.35)}
+.field{margin-bottom:14px;width:100%}
+.field label{display:block;font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em}
+.field input{width:100%;padding:13px 16px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;font-family:var(--font);font-size:15px;outline:none;transition:border-color .2s}
+.field input:focus{border-color:rgba(236,255,84,0.4)}
+.field input::placeholder{color:rgba(255,255,255,0.3)}
+.btn-primary{width:100%;padding:13px;background:var(--yellow);color:var(--wine);border:none;border-radius:10px;font-family:var(--font);font-size:14px;font-weight:800;cursor:pointer;transition:opacity .15s;margin-bottom:1rem;letter-spacing:.01em}
+.btn-primary:hover{opacity:.9}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed}
+.btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-family:var(--font);font-size:13.5px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.25);color:#fff}
+.otp-inputs{display:flex;gap:8px;margin-bottom:1.5rem}
+.otp-digit{flex:1;height:56px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;font-family:'DM Mono','JetBrains Mono',monospace;font-size:1.4rem;font-weight:500;color:#fff;text-align:center;outline:none;transition:border-color .2s}
+.otp-digit:focus{border-color:rgba(236,255,84,0.4)}
+.af-resend{text-align:center;margin-top:1rem;font-size:13px;color:rgba(255,255,255,0.45)}
+.af-resend-btn{background:none;border:none;color:var(--yellow);font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;padding:0}
+.af-resend-btn:disabled{color:rgba(255,255,255,0.35);cursor:not-allowed}
+.upload-zone{width:100%;border:2px dashed rgba(255,255,255,0.12);border-radius:10px;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:1.25rem;position:relative}
+.upload-zone:hover,.upload-zone.drag-over{border-color:rgba(236,255,84,0.4);background:rgba(236,255,84,0.04)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-icon{font-size:2rem;margin-bottom:.75rem}
+.upload-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:.4rem}
+.upload-sub{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5}
+.af-processing{display:none;text-align:center;padding:2rem 0}
+.af-processing.active{display:block}
+.af-spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,0.1);border-top-color:var(--yellow);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.af-processing-text{font-size:14px;color:rgba(255,255,255,0.5)}
+.af-extracted{display:none}.af-extracted.active{display:block}
+.af-data-table{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;margin-bottom:1.25rem}
+.af-data-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.af-data-row:last-child{border-bottom:none}
+.af-data-key{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:.08em;width:110px;flex-shrink:0}
+.af-data-val{font-family:'DM Mono','JetBrains Mono',monospace;font-size:13px;color:#fff;font-weight:500}
+.af-check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.25rem}
+.af-check-row input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--yellow);cursor:pointer}
+.af-check-label{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5;cursor:pointer}
+.af-alert{padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:1rem;display:none}
+.af-alert.active{display:block}
+.af-alert.error{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:#FCA5A5}
+.af-alert.success{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:#86EFAC}
+.af-foot{margin-top:1.5rem;text-align:center;font-size:12px;color:rgba(255,255,255,0.3)}
+.af-foot a{color:rgba(255,255,255,0.35);text-decoration:none}
+.af-foot a:hover{color:rgba(255,255,255,0.6)}
+.af-err{font-size:13px;color:var(--red);margin-top:10px;min-height:18px;text-align:center}
+
+@media(max-width:768px){
+  #auth-screen{flex-direction:column}
+  .auth-left{display:none}
+  .auth-right{width:100%;padding:32px 24px;justify-content:flex-start;padding-top:52px}
+}
+
+/* ══ APP SHELL ═════════════════════════════════════ */
+#app-shell{
+  position:fixed;inset:0;
+  display:grid;
+  grid-template-columns:var(--sw) 1fr;
+  grid-template-rows:var(--th) 1fr;
+  background:#0d0d0e;
+}
+
+/* SIDEBAR – black menu */
+.sidebar{
+  grid-row:1/-1;grid-column:1;
+  background:#000;
+  display:flex;flex-direction:column;
+  padding:18px 12px;overflow-y:auto;
+  transition:transform .26s cubic-bezier(.4,0,.2,1);
+  z-index:50;
+}
+.sb-logo{display:flex;align-items:center;gap:10px;padding:4px 10px 0;margin-bottom:28px}
+.sb-logo-mark{width:32px;height:32px;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 1px 6px rgba(0,0,0,.3)}
+.sb-logo-name{font-size:16px;font-weight:800;letter-spacing:-.2px;color:#fff}
+.sb-logo-ver{font-size:9px;color:rgba(255,255,255,.3);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+
+.sb-sep{height:1px;background:rgba(255,255,255,.1);margin:10px 10px 14px}
+.sb-label{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:.1em;padding:0 12px;margin-bottom:4px;font-family:'Urbanist',sans-serif}
+
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;
+  cursor:pointer;color:rgba(255,255,255,.6);font-size:13.5px;font-weight:600;
+  transition:all .15s;border:none;background:transparent;width:100%;text-align:left;
+  margin-bottom:1px;position:relative;
+}
+.nav-item:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav-item.active{background:rgba(236,255,84,.12);color:var(--yellow)}
+.nav-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;border-radius:0 3px 3px 0;background:var(--yellow);margin-left:-12px}
+.ni-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.08);transition:background .15s}
+.nav-item.active .ni-icon{background:rgba(236,255,84,.15)}
+.ni-icon svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ni-badge{margin-left:auto;font-size:10px;font-weight:700;background:rgba(236,255,84,.12);color:var(--yellow);padding:2px 7px;border-radius:10px}
+
+.sb-spacer{flex:1}
+.sb-user{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;transition:all .18s;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);margin-bottom:4px}
+.sb-user:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.14)}
+.sb-user.confirm-logout{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.28)}
+.sb-user.confirm-logout .sb-logout svg{stroke:#ef4444}
+.sb-user.confirm-logout .sb-uname::after{content:' · Confirmi?';color:rgba(239,68,68,.8);font-weight:400}
+.sb-avatar{width:34px;height:34px;border-radius:50%;background:var(--yellow);color:var(--wine);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.sb-uinfo{flex:1;min-width:0}
+.sb-uname{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff;font-family:'Urbanist',sans-serif}
+.sb-uemail{font-size:11px;color:rgba(255,255,255,.38);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-logout svg{width:15px;height:15px;stroke:rgba(255,255,255,.38);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* TOPBAR – black */
+.topbar{grid-column:2;grid-row:1;background:#0d0d0e;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 20px;gap:12px}
+.tb-hamburger{display:none;width:40px;height:40px;background:transparent;border:none;border-radius:10px;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;padding:0}
+.tb-hamburger img{width:30px;height:30px;border-radius:8px;object-fit:cover;display:block}
+/* Logo button in topbar (desktop) */
+.tb-logo-btn{display:flex;align-items:center;background:transparent;border:none;cursor:pointer;padding:6px 10px;border-radius:10px;transition:background .15s;flex-shrink:0}
+.tb-logo-btn:hover{background:rgba(255,255,255,.08)}
+.tb-wordmark-top{height:20px;width:auto;display:block;filter:brightness(0) invert(1)}
+/* Gemini AI bar */
+.tb-ai-bar{flex:1;max-width:480px;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:7px 12px;cursor:pointer;transition:background .15s;min-width:0}
+.tb-ai-bar:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.18)}
+.tb-ai-star{width:18px;height:18px;flex-shrink:0}
+.tb-ai-placeholder{flex:1;font-size:12.5px;color:rgba(255,255,255,.42);font-family:'Inter',sans-serif;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-ai-powered{font-size:10px;font-weight:500;color:rgba(255,255,255,.22);white-space:nowrap;font-family:'Inter',sans-serif}
+.tb-ai-kbd{font-size:10px;font-weight:600;color:rgba(255,255,255,.22);background:rgba(255,255,255,.07);padding:2px 6px;border-radius:5px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+/* Profile corner */
+.tb-profile{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.tb-status{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:5px 12px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.45)}
+.tb-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);transition:background .3s;flex-shrink:0}
+.tb-dot.on{background:var(--green);box-shadow:0 0 8px rgba(22,163,74,.4)}
+.tb-dot.off{background:var(--red)}
+.tb-profile-user{display:flex;align-items:center;gap:9px;cursor:pointer;padding:4px 10px 4px 4px;border-radius:24px;transition:background .15s;border:1px solid rgba(255,255,255,.09)}
+.tb-profile-user:hover{background:rgba(255,255,255,.07)}
+.tb-profile-av{width:30px;height:30px;border-radius:50%;background:var(--yellow);color:var(--wine);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;overflow:hidden}
+.tb-profile-info{display:flex;flex-direction:column;min-width:0}
+.tb-profile-name{font-size:12px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px;font-family:'Urbanist',sans-serif}
+.tb-profile-email{font-size:10px;color:rgba(255,255,255,.35);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+.tb-avatar{width:30px;height:30px;border-radius:50%;background:var(--yellow);color:var(--wine);border:none;cursor:pointer;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.tb-avatar-btn{display:none}
+
+/* CONTENT – curve moves here */
+.content{grid-column:2;grid-row:2;overflow-y:auto;padding:28px 32px;scroll-behavior:smooth;background:#f0f0ee;border-radius:20px 0 0 0}
+
+/* ══ MULBERRY AI — Full Gemini Panel ══════════════════════════ */
+.gm-overlay{position:fixed;top:var(--th);left:var(--sw);right:0;bottom:0;z-index:100;background:linear-gradient(160deg,#eef2ff 0%,#f4f7ff 45%,#fafbff 100%);display:flex;flex-direction:column;border-radius:20px 0 0 0;overflow:hidden}
+.gm-overlay.hidden{display:none}
+/* Top nav */
+.gm-topnav{display:flex;align-items:center;padding:14px 20px;flex-shrink:0;position:relative}
+.gm-back-btn{display:flex;align-items:center;gap:7px;background:transparent;border:none;cursor:pointer;font-size:13.5px;font-weight:500;color:#444;padding:8px 14px;border-radius:20px;transition:background .15s;font-family:'Inter',sans-serif;flex-shrink:0;position:relative;z-index:1}
+.gm-back-btn:hover{background:rgba(0,0,0,.07)}
+.gm-back-btn svg{transition:transform .15s}
+.gm-back-btn:hover svg{transform:translateX(-3px)}
+.gm-nav-brand{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:9px;font-size:15px;font-weight:500;color:#1f1f1f;font-family:'Inter',sans-serif;pointer-events:none}
+.gm-nav-star{width:20px;height:20px;flex-shrink:0}
+/* Body */
+.gm-body{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.gm-body[data-state="chat"] .gm-welcome-screen{display:none}
+.gm-body[data-state="chat"] .gm-messages{display:flex}
+.gm-body:not([data-state="chat"]) .gm-messages{display:none}
+/* Welcome screen */
+.gm-welcome-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 24px 10px;text-align:center;gap:0}
+.gm-big-greeting{font-size:clamp(34px,4vw,52px);font-weight:400;color:#1f1f1f;letter-spacing:-.5px;font-family:'Inter',sans-serif;line-height:1.15;margin-bottom:10px}
+.gm-big-sub{font-size:14px;color:rgba(0,0,0,.4);font-family:'Inter',sans-serif;margin-bottom:30px}
+.gm-welcome-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.gm-welcome-chip{font-size:13px;padding:9px 18px;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:22px;color:#444;cursor:pointer;font-family:'Inter',sans-serif;font-weight:400;transition:all .15s;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.gm-welcome-chip:hover{background:#eef2ff;border-color:rgba(66,133,244,.45);color:#1a6ef7}
+/* Messages */
+.gm-messages{flex:1;overflow-y:auto;padding:28px 20px 12px;flex-direction:column;gap:20px;scroll-behavior:smooth}
+.gm-messages::-webkit-scrollbar{width:4px}.gm-messages::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:4px}
+.gm-msg-user-wrap{display:flex;justify-content:flex-end}
+.gm-msg-user{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:18px 18px 4px 18px;padding:12px 18px;max-width:72%;font-size:14px;color:#1f1f1f;line-height:1.55;font-family:'Inter',sans-serif;word-wrap:break-word;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.gm-msg-ai{max-width:78%;font-size:14.5px;color:#1f1f1f;line-height:1.7;font-family:'Inter',sans-serif;word-wrap:break-word;padding:4px 0}
+.gm-thinking{display:flex;gap:6px;align-items:center;padding:10px 0}
+.gm-thinking span{width:9px;height:9px;border-radius:50%;animation:gmPulse 1.4s ease-in-out infinite}
+.gm-thinking span:nth-child(1){background:#4285F4}
+.gm-thinking span:nth-child(2){background:#EA4335;animation-delay:.18s}
+.gm-thinking span:nth-child(3){background:#FBBC04;animation-delay:.36s}
+@keyframes gmPulse{0%,80%,100%{opacity:.3;transform:scale(.75)}40%{opacity:1;transform:scale(1)}}
+/* Input area */
+.gm-input-area{flex-shrink:0;padding:14px 20px 18px}
+.gm-input-pill{display:flex;align-items:center;background:#fff;border:1.5px solid rgba(0,0,0,.12);border-radius:28px;padding:8px 8px 8px 18px;box-shadow:0 2px 10px rgba(0,0,0,.08);max-width:720px;margin:0 auto;transition:border-color .2s,box-shadow .2s}
+.gm-input-pill:focus-within{border-color:rgba(66,133,244,.5);box-shadow:0 2px 20px rgba(66,133,244,.13)}
+.gm-add-btn{width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.06);border:none;font-size:20px;font-weight:300;color:rgba(0,0,0,.5);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-right:10px;transition:background .15s;line-height:1}
+.gm-add-btn:hover{background:rgba(0,0,0,.11)}
+.gm-pill-input{flex:1;border:none;background:transparent;font-size:15px;color:#1f1f1f;outline:none;font-family:'Inter',sans-serif;min-width:0}
+.gm-pill-input::placeholder{color:rgba(0,0,0,.36)}
+.gm-input-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.gm-model-badge{font-size:11px;font-weight:500;color:rgba(0,0,0,.38);background:rgba(0,0,0,.055);padding:5px 11px;border-radius:14px;font-family:'Inter',sans-serif;white-space:nowrap}
+.gm-pill-send{width:38px;height:38px;border:none;background:linear-gradient(135deg,#4285F4,#9b59b6);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:opacity .15s;flex-shrink:0}
+.gm-pill-send:hover{opacity:.84}
+.gm-input-disclaimer{text-align:center;font-size:10.5px;color:rgba(0,0,0,.26);font-family:'Inter',sans-serif;margin-top:9px}
+@media(max-width:768px){.gm-overlay{top:var(--th);left:0;border-radius:0}.gm-big-greeting{font-size:28px}.gm-model-badge{display:none}}
+.panel{display:none}
+.panel.active{display:block;animation:fadeUp .24s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.ph{margin-bottom:24px}
+.ph-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--wine);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.ph-eyebrow::after{content:'';flex:1;height:1px;background:rgba(44,14,18,.1)}
+.ph-title{font-size:24px;font-weight:900;letter-spacing:-.3px;color:var(--black)}
+.ph-sub{font-size:13.5px;color:var(--dim2);margin-top:4px}
+
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.g2{display:grid;grid-template-columns:1fr 340px;gap:20px}
+
+/* STAT CARD */
+.stat-card{background:var(--white);border:1px solid var(--b1);border-radius:var(--r);padding:20px;transition:border-color .2s,transform .2s;cursor:default;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.stat-card:hover{border-color:var(--b2);transform:translateY(-1px)}
+.sc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim2);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.sc-ico{width:22px;height:22px;border-radius:6px;background:var(--gray);display:flex;align-items:center;justify-content:center}
+.sc-ico svg{width:11px;height:11px;stroke:var(--dim2);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sc-val{font-size:34px;font-weight:900;letter-spacing:-.5px;line-height:1;color:var(--black)}
+.sc-tag{font-size:11px;color:var(--dim2);margin-top:7px;font-weight:600}
+.sc-tag span{color:var(--green);font-weight:700}
+
+/* YELLOWCARD */
+.ycard{background:var(--yellow);border-radius:var(--rl);padding:26px 26px 80px;color:var(--wine);position:relative;overflow:hidden;min-height:210px;box-shadow:0 8px 40px rgba(236,255,84,.35)}
+.ycard::before{content:'';position:absolute;top:-100px;right:-100px;width:280px;height:280px;background:rgba(44,14,18,.06);border-radius:50%}
+.ycard::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:rgba(44,14,18,.04);border-radius:50%}
+.yc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;position:relative;z-index:1}
+.yc-brand{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;opacity:.5}
+.yc-name{font-size:22px;font-weight:900;letter-spacing:-.3px;margin-top:3px;color:var(--wine)}
+.yc-chip{width:38px;height:28px;border-radius:5px;background:rgba(44,14,18,.12);display:flex;align-items:center;justify-content:center}
+.yc-chip svg{width:22px;height:18px}
+.yc-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1}
+.yc-fl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.5;margin-bottom:3px}
+.yc-fv{font-size:13px;font-weight:700;font-family:var(--mono);letter-spacing:.02em}
+.yc-foot{position:absolute;bottom:20px;left:26px;right:26px;display:flex;align-items:center;justify-content:space-between;z-index:1}
+.yc-verify{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;opacity:.6}
+.yc-verify svg{width:12px;height:12px;stroke:var(--wine);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.yc-qr{width:52px;height:52px;border-radius:8px;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:3px}
+
+/* ACTIVITY CARD */
+.acard{background:var(--white);border:1px solid var(--b1);border-radius:var(--r);padding:20px;height:100%;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.acard-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:16px}
+.act-row{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--b1)}
+.act-row:last-child{border-bottom:none;padding-bottom:0}
+.act-ico{width:32px;height:32px;border-radius:8px;background:var(--gray);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.act-ico svg{width:14px;height:14px;stroke:var(--dim2);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.act-main{flex:1;min-width:0}
+.act-txt{font-size:13px;font-weight:600;color:var(--black)}
+.act-meta{font-size:11px;color:var(--dim3);margin-top:1px}
+.act-time{font-size:11px;color:var(--dim3);flex-shrink:0;font-family:var(--mono)}
+
+/* SECTION CARD */
+.section-card{background:var(--white);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.section-card-hdr{padding:16px 20px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between}
+.sch-title{font-size:14px;font-weight:700;color:var(--black)}
+.sch-sub{font-size:12px;color:var(--dim2);margin-top:2px}
+
+/* MARKETPLACE */
+.mkt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.offer-card{background:var(--white);border:1px solid var(--b1);border-radius:var(--r);padding:22px;cursor:pointer;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.offer-card:hover{border-color:rgba(44,14,18,.15);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.oc-ico{width:44px;height:44px;border-radius:10px;background:var(--gray);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.oc-ico svg{width:20px;height:20px;stroke:var(--dim2);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.oc-name{font-size:15px;font-weight:700;margin-bottom:5px;color:var(--black)}
+.oc-desc{font-size:12.5px;color:var(--dim2);line-height:1.55}
+.oc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.oc-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--wine-dim);color:var(--wine);border:1px solid rgba(44,14,18,.1)}
+.oc-arr svg{width:14px;height:14px;stroke:var(--dim3);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* SETTINGS */
+.set-section{background:var(--white);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;margin-bottom:14px;max-width:560px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.set-hdr{padding:14px 20px;border-bottom:1px solid var(--b1);font-size:11px;font-weight:700;color:var(--dim2);text-transform:uppercase;letter-spacing:.08em}
+.set-row{display:flex;align-items:center;gap:13px;padding:14px 20px;border-bottom:1px solid var(--b1);cursor:pointer;transition:background .15s}
+.set-row:last-child{border-bottom:none}
+.set-row:hover{background:var(--gray)}
+.set-row-ico{width:34px;height:34px;border-radius:8px;background:var(--gray);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.set-row-ico svg{width:15px;height:15px;stroke:var(--dim2);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.set-row-info{flex:1;min-width:0}
+.set-row-lbl{font-size:13.5px;font-weight:600;color:var(--black)}
+.set-row-desc{font-size:11px;color:var(--dim3);margin-top:2px}
+.set-row-end{font-size:12px;font-weight:600;color:var(--dim2);flex-shrink:0}
+.set-api{font-family:var(--mono);font-size:11.5px;color:var(--wine);background:var(--gray);border:1px solid rgba(44,14,18,.1);border-radius:7px;padding:9px 14px;margin:0 20px 16px;word-break:break-all;line-height:1.5}
+
+.ycard-page{max-width:460px;margin:0 auto}
+.ycard-page .ycard{padding:30px 30px 90px;margin-bottom:20px}
+.ycard-page .yc-name{font-size:26px}
+
+/* BOTTOM NAV */
+.bnav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--bh);background:var(--white);border-top:1px solid var(--b1);z-index:40;padding-bottom:env(safe-area-inset-bottom,0)}
+.bnav-inner{display:flex;height:100%}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:transparent;color:var(--dim3);font-family:var(--font);font-size:9.5px;font-weight:700;cursor:pointer;transition:color .15s;text-transform:uppercase;letter-spacing:.04em;padding-bottom:2px}
+.bn-item.active{color:var(--wine)}
+.bn-item svg{width:21px;height:21px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(44,14,18,.55);z-index:45;backdrop-filter:blur(3px)}
+.overlay.show{display:block}
+
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--white);border:1px solid var(--b2);border-radius:10px;padding:11px 22px;font-size:13px;font-weight:600;color:var(--black);pointer-events:none;opacity:0;transition:all .25s;z-index:300;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:rgba(22,163,74,.3);color:var(--green)}
+.toast.err{border-color:rgba(220,38,38,.3);color:var(--red)}
+
+.spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:rot .5s linear infinite;display:inline-block;vertical-align:middle}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* RESPONSIVE */
+@media(min-width:1920px){:root{--sw:290px}.content{padding:36px 48px}.g4{gap:18px}.sc-val{font-size:38px}.ph-title{font-size:28px}}
+@media(max-width:1439px) and (min-width:1025px){:root{--sw:240px}.g2{grid-template-columns:1fr 300px}.content{padding:24px 28px}}
+@media(max-width:1024px) and (min-width:769px){:root{--sw:200px}.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}.content{padding:20px}.sb-logo-ver{display:none}}
+@media(max-width:768px){
+  #app-shell{grid-template-columns:1fr;grid-template-rows:var(--th) 1fr}
+  .sidebar{position:fixed;top:0;left:0;bottom:0;width:285px;transform:translateX(-100%);grid-row:unset;grid-column:unset;transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s}
+  .sidebar.open{transform:translateX(0);box-shadow:8px 0 60px rgba(0,0,0,.6)}
+  .topbar{grid-column:1;grid-row:1;padding:0 14px;background:#0d0d0e;border-bottom:1px solid rgba(255,255,255,.08)}
+  .tb-logo-btn{display:none}
+  .tb-ai-bar{display:none}
+  .tb-profile{display:none}
+  .tb-hamburger{display:flex;background:rgba(255,255,255,.08);border-radius:10px}
+  .tb-hamburger:active{background:rgba(255,255,255,.15)}
+  .tb-avatar-btn{display:flex!important}
+  .content{grid-column:1;grid-row:2;padding:0;border-radius:20px 20px 0 0;overflow:hidden;background:#f0f0ee}
+  #panel-dashboard .gd,.panel{padding:16px 14px calc(var(--bh) + 16px)}
+  .panel:not(#panel-dashboard){padding:16px 14px calc(var(--bh) + 16px)}
+  .g4{grid-template-columns:repeat(2,1fr);gap:10px}.g2{grid-template-columns:1fr}
+  .bnav{display:block}.toast{bottom:calc(var(--bh) + 10px)}.ph-title{font-size:20px}.mkt-grid{grid-template-columns:1fr}
+}
+@media(max-width:400px){.g4{grid-template-columns:1fr 1fr}.sc-val{font-size:28px}.ph-title{font-size:18px}.content{padding:12px 10px calc(var(--bh) + 12px)}}
+
+/* ══ SPHERE-UI LIGHT DASHBOARD ═══════════════════════════════ */
+#panel-dashboard .gd-greeting{color:rgba(0,0,0,.45)}
+#panel-dashboard .gd-title{color:#111;font-weight:700}
+#panel-dashboard .gdc{background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.06)}
+#panel-dashboard .gdc-go{background:#fff!important}
+#panel-dashboard .gdc-yc{background:linear-gradient(145deg,#ccf73c,#b5f333)!important}
+#panel-dashboard .gdc-tile-name{color:#111}
+#panel-dashboard .gdc-tile-sub{color:rgba(0,0,0,.42)}
+#panel-dashboard .gdc-tile-arr{color:rgba(0,0,0,.18)}
+#panel-dashboard .gdc-tile:hover{background:#fafafa!important;box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-2px)}
+#panel-dashboard .gdc-blue{background:#111!important}
+#panel-dashboard .gd-ai-input{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.14)!important;color:#fff!important}
+#panel-dashboard .gd-ai-input::placeholder{color:rgba(255,255,255,.3)!important}
+#panel-dashboard .gd-ai-chip{background:rgba(255,255,255,.11)!important;border-color:rgba(255,255,255,.14)!important;color:rgba(255,255,255,.62)!important}
+#panel-dashboard .gdc-cloud,#panel-dashboard .gdc-drive,#panel-dashboard .gdc-hub{background:#fff!important}
+#panel-dashboard .gdc-cloud-name,#panel-dashboard .gdc-drive-name{color:#111!important;font-weight:400}
+#panel-dashboard .gdc-cloud-sub,#panel-dashboard .gdc-drive-sub{color:rgba(0,0,0,.38)!important}
+#panel-dashboard .gdc-cloud-item{color:rgba(0,0,0,.48)!important}
+#panel-dashboard .gdc-cloud-btn{background:rgba(124,58,237,.1)!important;border-color:rgba(124,58,237,.18)!important;color:#7c3aed!important}
+#panel-dashboard .gdc-map-box{background:#f2f2f0!important;border-radius:14px}
+#panel-dashboard .gdc-map-lbl{color:#111!important}
+#panel-dashboard .gdc-map-note{color:rgba(0,0,0,.38)!important}
+#panel-dashboard .gdc-map-btn{background:#111!important;color:#fff!important;border:none}
+#panel-dashboard .gdc-hub-name{color:#111!important;font-weight:500}
+#panel-dashboard .gdc-hub-badge{color:rgba(0,0,0,.3)!important}
+#panel-dashboard .gdc-hub-event{color:#111!important}
+#panel-dashboard .gdc-hub-time{color:rgba(0,0,0,.3)!important}
+#panel-dashboard .gdc-hub-row{border-color:rgba(0,0,0,.06)!important}
+#panel-dashboard .gdc-hub-ico{background:rgba(59,130,246,.12)!important}
+#panel-dashboard .gdc-cloud-item-ico{background:rgba(139,92,246,.1)!important}
+
+/* Dashboard header avatar */
+.gd-hdr-av{width:52px;height:52px;border-radius:50%;background:var(--yellow);color:var(--wine);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0;overflow:hidden;margin-left:auto;box-shadow:0 2px 12px rgba(0,0,0,.1)}
+
+/* ── MulberryAI card (Gemini style) ── */
+.gd-ai-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:24px;padding:24px 24px 22px;box-shadow:0 2px 14px rgba(0,0,0,.05)}
+.gd-ai-card-eyebrow{font-size:11px;font-weight:400;letter-spacing:.04em;color:rgba(0,0,0,.38);margin-bottom:10px;font-family:'Inter',sans-serif}
+.gd-ai-gemini-brand{display:flex;align-items:center;margin-bottom:18px}
+.gd-ai-gemini-logo-img{height:52px;width:auto;mix-blend-mode:multiply;display:block}
+/* ── AI Search Bar — gradient border (Gemini style) ── */
+.gd-ai-search-wrap{background:linear-gradient(to right,#8B5CF6,#3B82F6,#10B981,#F59E0B);border-radius:9999px;padding:2px;margin-top:8px;transition:box-shadow .35s ease,padding .2s ease;box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.06)}
+.gd-ai-search-wrap.gd-ai-sb-glow{box-shadow:0 0 0 4px rgba(139,92,246,.18),0 0 24px rgba(59,130,246,.3),0 0 52px rgba(16,185,129,.15),0 6px 20px rgba(0,0,0,.12);padding:2.5px}
+.gd-ai-search{display:flex;align-items:center;gap:13px;background:#fff;border:none;border-radius:9999px;padding:14px 22px;cursor:pointer;transition:background .2s}
+.gd-ai-search:hover{background:#fafafa}
+.gd-ai-search-star{width:26px;height:26px;flex-shrink:0;object-fit:contain}
+.gd-ai-search-text{font-size:15.5px;color:rgba(0,0,0,.42);font-family:'Inter',sans-serif;font-weight:400;flex:1}
+.gd-ai-search-kbd{font-size:10px;font-weight:600;color:rgba(0,0,0,.18);background:rgba(0,0,0,.055);padding:2px 8px;border-radius:5px;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+@media(max-width:768px){.gd-ai-search-kbd{display:none}}
+
+/* Period tabs */
+.sph-tabs{display:flex;gap:3px;background:rgba(0,0,0,.08);padding:3px;border-radius:9px;width:fit-content;margin-bottom:12px}
+.sph-tab{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;color:rgba(0,0,0,.38);background:transparent;border:none;padding:4px 11px;border-radius:6px;cursor:pointer;transition:all .18s;letter-spacing:.01em}
+.sph-tab.active{background:#fff;color:#111;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+/* Mini bar chart */
+.sph-mini-chart{display:flex;align-items:flex-end;gap:3px;height:44px;margin-top:auto;padding-top:10px}
+.sph-bar{border-radius:3px 3px 0 0;flex:1;min-width:0;transition:opacity .15s}
+.sph-bar.lime{background:#b5f333}
+.sph-bar.dark{background:#1a1a1a}
+.sph-bar.muted{background:rgba(0,0,0,.1)}
+
+/* Stat badge */
+.sph-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;font-family:'Inter',sans-serif}
+.sph-badge.up{background:rgba(181,243,51,.22);color:#3a6a00}
+
+/* Card top row (icon + arrow) */
+.sph-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.sph-card-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sph-arr{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(0,0,0,.45);transition:background .15s}
+.sph-arr:hover{background:rgba(0,0,0,.12);color:#111}
+
+/* ══ SERVICE CARDS ════════════════════════════════════════════ */
+.gd-services{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.gd-services{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.gd-services{grid-template-columns:1fr 1fr}}
+
+.gd-svc{
+  background:#111113;border:1px solid rgba(255,255,255,.07);border-radius:18px;
+  padding:20px 18px;cursor:pointer;transition:all .22s;
+  display:flex;flex-direction:column;gap:11px;text-decoration:none;
+}
+.gd-svc:hover{background:#1c1c1f;border-color:rgba(255,255,255,.16);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.gd-svc-ico{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gd-svc-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:400;color:#fff;letter-spacing:-.1px;line-height:1.2}
+.gd-svc-desc{font-size:11px;color:rgba(255,255,255,.32);font-weight:400;line-height:1.4;font-family:'Inter',sans-serif}
+.gd-svc-arr{margin-top:auto;font-size:18px;color:rgba(255,255,255,.2);transition:color .15s}
+.gd-svc:hover .gd-svc-arr{color:rgba(255,255,255,.6)}
+
+/* ══ DARK ANALYTICS DASHBOARD (Gogo-style) ══════════════════ */
+#panel-analytics{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#0d0d0e;color:#fff}
+#panel-dashboard{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#ebebea;color:#111}
+@media(max-width:768px){#panel-analytics{margin:-16px -14px;min-height:calc(100% + 32px)}}
+@media(max-width:768px){#panel-dashboard{margin:-16px -14px;min-height:calc(100% + 32px)}}
+.gd{display:flex;flex-direction:column;gap:14px;padding:28px 32px}
+@media(max-width:768px){.gd{padding:18px 16px;gap:12px}}
+
+/* Header */
+.gd-hdr{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.gd-greeting{font-size:13px;color:rgba(255,255,255,.45);font-weight:400;margin-bottom:4px;font-family:'Urbanist','Inter',sans-serif;letter-spacing:.01em}
+.gd-title{font-size:clamp(28px,3.2vw,46px);font-weight:600;letter-spacing:-.5px;line-height:1.05;font-family:'Urbanist','Inter',sans-serif;color:#fff}
+.gd-hstats{display:flex;gap:36px;align-items:center}
+.gd-hstat-lbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;margin-bottom:4px;letter-spacing:.04em}
+.gd-hstat-val{font-size:clamp(18px,2vw,26px);font-weight:800;color:#fff;letter-spacing:-.5px}
+.gd-hstat-val sup{font-size:12px;font-weight:500;color:rgba(255,255,255,.55)}
+
+/* Grid rows */
+.gd-r1{display:grid;grid-template-columns:1fr 1fr 1.8fr;gap:14px;align-items:stretch}
+.gd-r2{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:14px;align-items:stretch}
+@media(max-width:1100px){.gd-r1{grid-template-columns:1fr 1fr 1.6fr}}
+@media(max-width:900px){.gd-r1{grid-template-columns:1fr 1fr}.gd-r2{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.gd-r1,.gd-r2{grid-template-columns:1fr}}
+
+/* Base card */
+.gdc{border-radius:20px;padding:22px 20px;position:relative;overflow:hidden}
+
+/* Gray striped card */
+.gdc-gray{
+  background:repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1.5px,rgba(255,255,255,.01) 1.5px,rgba(255,255,255,.01) 10px),#2c2c2e;
+  flex:1;min-height:120px}
+
+/* Lime card */
+.gdc-lime{background:#b5f333;color:#1c1e00;flex:1;min-height:120px}
+
+.gdc-pct{font-size:clamp(38px,4vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1}
+.gdc-lbl{font-size:13px;font-weight:600;opacity:.65;margin-top:6px}
+.gdc-badge{position:absolute;top:16px;right:16px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.14);color:rgba(255,255,255,.8)}
+.gdc-lime .gdc-badge{background:rgba(0,0,0,.13);color:rgba(0,0,0,.65)}
+
+/* Blue analytics card */
+.gdc-blue{background:#1e4fd8;display:flex;align-items:stretch;padding:26px 24px}
+.gda-left{flex:1;display:flex;flex-direction:column}
+.gda-eyebrow{font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;font-family:'Inter',sans-serif}
+.gda-pct{font-size:clamp(50px,6vw,76px);font-weight:900;letter-spacing:-3px;line-height:.9;color:#fff}
+.gda-trend{display:flex;align-items:center;gap:10px;margin:12px 0 20px;font-size:17px;font-weight:700;color:#fff}
+.gda-chip{font-size:11px;font-weight:700;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:4px}
+.gda-pills{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.gda-pill{display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.13);border-radius:30px;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s;color:#fff;border:none;text-align:left;font-family:var(--font)}
+.gda-pill:hover{background:rgba(255,255,255,.2)}
+.gda-pill-ico{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+
+.gda-right{width:165px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.gda-donut-wrap{position:relative;width:134px;height:134px;display:flex;align-items:center;justify-content:center}
+.gda-donut{width:134px;height:134px}
+.gda-donut-inner{position:absolute;text-align:center;pointer-events:none}
+.gda-donut-val{font-size:18px;font-weight:800;color:#fff}
+.gda-donut-sub{font-size:9px;color:rgba(255,255,255,.45);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
+.gda-arr{position:absolute;bottom:0;right:0;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.35);border:none;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:background .15s}
+.gda-arr:hover{background:rgba(0,0,0,.55)}
+
+/* Cash card */
+.gdc-cash{background:#1c1c1e}
+.gdc-cash-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.gdc-cash-lbl{font-size:13px;color:rgba(255,255,255,.45);font-weight:600}
+.gdc-cash-amt{font-size:clamp(14px,1.5vw,18px);font-weight:800;color:#fff;display:flex;align-items:center;gap:6px}
+.gdc-cash-badge{font-size:9px;font-weight:800;background:rgba(255,255,255,.12);padding:2px 7px;border-radius:6px;color:rgba(255,255,255,.7)}
+.gdc-cash-growth{font-size:clamp(26px,3vw,36px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:2px}
+.gdc-cash-sub{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:18px}
+.gdc-bars{display:flex;align-items:flex-end;gap:8px;height:64px}
+.gdc-bar{flex:1;border-radius:6px 6px 0 0;background:rgba(255,255,255,.1)}
+.gdc-bar-mid{background:rgba(255,255,255,.22)}
+.gdc-bar-hi{background:rgba(255,255,255,.6)}
+.gdc-bar-blue{background:#1e4fd8}
+
+/* Period card */
+.gdc-period{background:#f4f4f2;color:#111}
+.gdc-period-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
+.gdc-period-title{font-size:15px;font-weight:800;color:#111;font-family:var(--font-head)}
+.gdc-period-sub{font-size:12px;color:rgba(0,0,0,.4);margin-top:2px}
+.gdc-period-lbl{font-size:11px;color:rgba(0,0,0,.4);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.gdc-period-val{font-size:clamp(32px,3.5vw,46px);font-weight:900;letter-spacing:-2px;color:#111;display:flex;align-items:center;gap:10px;font-family:var(--font-head)}
+.gdc-arr-green{width:40px;height:40px;border-radius:50%;background:#b5f333;border:none;color:#1c1e00;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:background .15s;flex-shrink:0}
+.gdc-arr-green:hover{background:#a3e020}
+
+/* Payment card */
+.gdc-pay{background:#232325}
+.gdc-pay-hd{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.gdc-pay-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-pay-title{font-size:13px;font-weight:700;color:#fff}
+.gdc-pay-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.gdc-pay-row:last-child{border-bottom:none;padding-bottom:0}
+.gdc-pay-amt{font-size:16px;font-weight:800;color:#fff}
+.gdc-pay-amt sup{font-size:9px;color:rgba(255,255,255,.55);vertical-align:super}
+.gdc-pay-name{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
+
+/* ── Service tiles (MulberryGO + YellowCard) ── */
+.gdc-tile{cursor:pointer;display:flex;flex-direction:column;border:none;text-align:left;font-family:var(--font);transition:all .22s;min-height:220px;width:100%}
+.gdc-tile:hover{transform:translateY(-3px)}
+.gdc-tile-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:auto}
+.gdc-tile-name{font-family:'Urbanist',sans-serif;font-size:20px;font-weight:600;letter-spacing:-.2px;color:#fff;margin:14px 0 4px;line-height:1.1}
+.gdc-tile-sub{font-size:12px;font-weight:400;color:rgba(255,255,255,.42);font-family:'Inter',sans-serif;letter-spacing:.01em}
+.gdc-tile-arr{margin-top:10px;font-size:20px;color:rgba(255,255,255,.25);transition:color .15s}
+.gdc-tile:hover .gdc-tile-arr{color:rgba(255,255,255,.6)}
+.gdc-go{background:repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1.5px,rgba(255,255,255,.01) 1.5px,rgba(255,255,255,.01) 10px),#1e2025}
+.gdc-yc{background:#b5f333;color:#1c1e00}
+.gdc-yc .gdc-tile-name{color:#1c1e00}
+.gdc-yc .gdc-tile-sub{color:rgba(0,0,0,.5)}
+.gdc-yc .gdc-tile-arr{color:rgba(0,0,0,.22)}
+.gdc-yc:hover .gdc-tile-arr{color:rgba(0,0,0,.5)}
+
+/* ── MulberryAI ── */
+.gda-ai-title{font-family:'Inter',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:300;letter-spacing:-.5px;color:#fff;line-height:1;margin:6px 0 16px}
+.gd-ai-bar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border-radius:30px;padding:7px 8px 7px 16px;margin-bottom:10px}
+.gd-ai-input{flex:1;background:transparent;border:none;color:#fff;font-family:var(--font);font-size:13px;outline:none;min-width:0}
+.gd-ai-input::placeholder{color:rgba(255,255,255,.4)}
+.gd-ai-photo{width:32px;height:32px;background:rgba(255,255,255,.14);border:none;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .15s}
+.gd-ai-photo:hover{background:rgba(255,255,255,.24)}
+.gd-ai-send{width:34px;height:34px;background:#b5f333;border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:opacity .15s}
+.gd-ai-send:hover{opacity:.85}
+.gd-ai-chips{display:flex;gap:7px;flex-wrap:wrap}
+.gd-ai-chip{font-family:var(--font);font-size:11px;font-weight:600;padding:6px 13px;background:rgba(255,255,255,.1);border:none;border-radius:20px;color:rgba(255,255,255,.7);cursor:pointer;transition:background .15s}
+.gd-ai-chip:hover{background:rgba(255,255,255,.18)}
+.gd-ai-resp{display:none;margin-top:12px;padding:11px 14px;background:rgba(255,255,255,.08);border-radius:14px;font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.55}
+
+/* ── MulberryCloud card ── */
+.gdc-cloud{background:#0e1017;cursor:pointer;transition:all .2s}
+.gdc-cloud:hover{background:#161920;transform:translateY(-2px)}
+.gdc-cloud-ico{width:42px;height:42px;border-radius:12px;background:rgba(139,92,246,.18);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.gdc-cloud-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:400;color:#fff;letter-spacing:-.1px}
+.gdc-cloud-sub{font-size:11px;color:rgba(255,255,255,.32);margin-top:3px;margin-bottom:14px;font-family:'Inter',sans-serif;font-weight:400}
+.gdc-cloud-items{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.gdc-cloud-item{display:flex;align-items:center;gap:8px;font-size:11.5px;color:rgba(255,255,255,.5)}
+.gdc-cloud-item-ico{width:24px;height:24px;border-radius:6px;background:rgba(139,92,246,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-cloud-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:7px 14px;background:rgba(139,92,246,.18);border:1px solid rgba(139,92,246,.28);border-radius:20px;color:#a78bfa;cursor:pointer;transition:background .15s;font-family:var(--font)}
+.gdc-cloud-btn:hover{background:rgba(139,92,246,.32)}
+
+/* ── MulberryDrive card ── */
+.gdc-drive{background:#0a0e14}
+.gdc-drive-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.gdc-drive-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:400;color:#fff}
+.gdc-drive-sub{font-size:11px;color:rgba(255,255,255,.32);margin-top:2px;font-family:'Inter',sans-serif;font-weight:400}
+.gdc-map-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;flex:1}
+.gdc-map-ico{width:46px;height:46px;background:rgba(236,255,84,.1);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.gdc-map-lbl{font-size:13px;font-weight:700;color:#fff}
+.gdc-map-note{font-size:11px;color:rgba(255,255,255,.35);line-height:1.4}
+.gdc-map-btn{font-size:11px;font-weight:700;padding:7px 18px;background:rgba(236,255,84,.1);border:1px solid rgba(236,255,84,.18);border-radius:20px;color:#ECFF54;cursor:pointer;transition:background .15s;font-family:var(--font)}
+.gdc-map-btn:hover{background:rgba(236,255,84,.2)}
+
+/* ── MulberryHUB Last Updates ── */
+.gdc-hub{background:#151618}
+.gdc-hub-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.gdc-hub-ico{width:34px;height:34px;background:rgba(59,130,246,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-hub-name{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:#fff}
+.gdc-hub-badge{font-size:9px;font-weight:400;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.07em;margin-top:1px;font-family:'Inter',sans-serif}
+.gdc-hub-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.gdc-hub-row:last-child{border-bottom:none;padding-bottom:0}
+.gdc-hub-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);margin-top:4px;flex-shrink:0}
+.gdc-hub-dot-new{background:#60a5fa;box-shadow:0 0 7px rgba(96,165,250,.55)}
+.gdc-hub-dot-feat{background:#b5f333;box-shadow:0 0 7px rgba(181,243,51,.4)}
+.gdc-hub-event{font-size:12px;font-weight:400;color:rgba(255,255,255,.82);line-height:1.35;font-family:'Inter',sans-serif}
+.gdc-hub-time{font-size:10.5px;color:rgba(255,255,255,.28);margin-top:2px;font-family:'Inter',sans-serif}
+  </style>
+</head>
+<body>
+
+<!-- ══ AUTH ══════════════════════════════════════════ -->
+<div id="auth-screen">
+
+  <div class="auth-left">
+    <div class="al-logo">
+      <img src="/mulberry-wordmark.svg" alt="Mulberry" class="al-wordmark">
+    </div>
+    <div class="al-hero">
+      <div class="al-h1">Radical clarity.<br>Absolute certainty.</div>
+      <div class="al-sub">We eliminate the friction of automotive maintenance by providing drivers and partners with a clean, intuitive, and guaranteed digital experience.</div>
+      <div class="al-features">
+        <div class="al-feat">
+          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          Identitate digitală verificată
+        </div>
+        <div class="al-feat">
+          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
+          YellowCard — asigurare + ITP + istoric
+        </div>
+        <div class="al-feat">
+          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          MulberryAI — analiză predictivă
+        </div>
+      </div>
+    </div>
+    <div class="al-foot">© 2025 Mulberry Technologies SRL · Toate drepturile rezervate</div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-form-panel">
+
+      <!-- Step indicator -->
+      <div class="af-step-indicator">
+        <div class="af-dot active" id="af-dot-1"></div>
+        <div class="af-dot" id="af-dot-2"></div>
+        <div class="af-dot" id="af-dot-3"></div>
+      </div>
+
+      <!-- STEP 1: Login -->
+      <div class="af-step active" id="af-step-1">
+        <div class="af-title">Bun venit înapoi</div>
+        <div class="af-sub">Intră în contul tău Mulberry</div>
+
+        <div class="af-tabs">
+          <button class="af-tab active" onclick="afSwitchTab(this)">Intră în cont</button>
+          <button class="af-tab" onclick="afSwitchTab(this)">Cont nou</button>
+        </div>
+
+        <div id="af-alert-1" class="af-alert error"></div>
+
+        <button class="btn-google" onclick="afSignInWithGoogle()">
+          <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continuă cu Google
+        </button>
+
+        <div class="af-divider">
+          <div class="af-divider-line"></div>
+          <span class="af-divider-text">sau cu email</span>
+          <div class="af-divider-line"></div>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="af-email" placeholder="email@exemplu.com" autocomplete="email">
+        </div>
+
+        <button class="btn-primary" onclick="afSendOTP()">Trimite cod de verificare →</button>
+
+        <div class="af-foot">
+          Continuând, ești de acord cu <a href="#">Termenii</a> și <a href="#">Politica de Confidențialitate</a>.
+        </div>
+      </div>
+
+      <!-- STEP 2: OTP -->
+      <div class="af-step" id="af-step-2">
+        <div class="af-title">Verifică emailul</div>
+        <div class="af-sub">Am trimis un cod de 6 cifre la <strong id="af-email-display"></strong></div>
+
+        <div id="af-alert-2" class="af-alert error"></div>
+
+        <div class="otp-inputs">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-0" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-1" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-2" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-3" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-4" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-5" inputmode="numeric">
+        </div>
+
+        <button class="btn-primary" onclick="afVerifyOTP()">Verifică codul →</button>
+
+        <div class="af-resend">
+          Nu ai primit codul?
+          <button class="af-resend-btn" id="af-resend-btn" onclick="afResendOTP()">Retrimite</button>
+          <span id="af-resend-timer"></span>
+        </div>
+
+        <div style="margin-top:1rem">
+          <button class="btn-ghost" onclick="afGoToStep(1)">← Înapoi</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Talon upload -->
+      <div class="af-step" id="af-step-3">
+        <div class="af-title">Scanează talonul</div>
+        <div class="af-sub">Încarcă o fotografie clară a certificatului de înmatriculare.</div>
+
+        <div id="af-alert-3" class="af-alert error"></div>
+
+        <div class="upload-zone" id="af-upload-zone">
+          <input type="file" accept="image/*" capture="environment" id="af-talon-input" onchange="afHandleUpload(event)">
+          <div class="upload-icon">📷</div>
+          <div class="upload-title">Fotografiază sau încarcă talonul</div>
+          <div class="upload-sub">VIN + număr înmatriculare lizibile • JPG, PNG • Max 10MB</div>
+        </div>
+
+        <div class="af-processing" id="af-processing">
+          <div class="af-spinner"></div>
+          <div class="af-processing-text" id="af-processing-text">Analizăm documentul...</div>
+        </div>
+
+        <div class="af-extracted" id="af-extracted">
+          <div class="af-data-table" id="af-data-table"></div>
+          <div class="af-check-row">
+            <input type="checkbox" id="af-confirm-check">
+            <label class="af-check-label" for="af-confirm-check">Certific că documentul încărcat este original și aparține vehiculului înregistrat pe numele meu.</label>
+          </div>
+          <button class="btn-primary" id="af-gen-btn" onclick="afGenerateCard()">Generează MulberryID →</button>
+          <button class="btn-ghost" onclick="afResetUpload()">Încearcă altă poză</button>
+        </div>
+
+        <div class="af-foot" style="margin-top:1.5rem">🔒 Nu stocăm poza. Extragem doar datele necesare.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP SHELL ═════════════════════════════════════ -->
+<div id="app-shell" class="hidden">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <img src="/mulberry-wordmark.svg" alt="Mulberry" class="sb-wordmark">
+        <div class="sb-logo-ver">B2B2C · Assurance</div>
+      </div>
+    </div>
+
+    <div class="sb-user" onclick="handleUserClick()">
+      <div class="sb-avatar" id="sb-avatar">M</div>
+      <div class="sb-uinfo">
+        <div class="sb-uname" id="sb-uname">—</div>
+        <div class="sb-uemail" id="sb-uemail">—</div>
+      </div>
+      <div class="sb-logout">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+
+    <div class="sb-sep"></div>
+    <div class="sb-label">Navigare</div>
+
+    <button class="nav-item active" data-p="dashboard" onclick="goPanel('dashboard')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+      Dashboard
+    </button>
+    <button class="nav-item" data-p="yellowcard" onclick="goPanel('yellowcard')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></span>
+      YellowCard
+      <span class="ni-badge">MLBR</span>
+    </button>
+    <button class="nav-item" data-p="marketplace" onclick="goPanel('marketplace')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
+      Marketplace
+    </button>
+
+    <div class="sb-sep" style="margin-top:10px"></div>
+    <div class="sb-label">Servicii</div>
+
+    <a class="nav-item" href="/mulberry_cloud.html">
+      <span class="ni-icon" style="background:rgba(139,92,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></span>
+      MulberryCloud
+    </a>
+    <a class="nav-item" href="/mulberry_menu.html">
+      <span class="ni-icon" style="background:rgba(59,130,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg></span>
+      MulberryHUB
+    </a>
+    <a class="nav-item" href="/mulberry_qdata.html">
+      <span class="ni-icon" style="background:rgba(236,255,84,.12)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
+      MulberryDrive
+    </a>
+    <button class="nav-item" data-p="analytics" onclick="goPanel('analytics')">
+      <span class="ni-icon" style="background:rgba(181,243,51,.15)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#b5f333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+      Analytics
+    </button>
+
+    <div class="sb-sep" style="margin-top:10px"></div>
+    <div class="sb-label">Cont</div>
+
+    <button class="nav-item" data-p="settings" onclick="goPanel('settings')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
+      Setări
+    </button>
+
+  </aside>
+
+  <header class="topbar">
+    <!-- Mobile hamburger -->
+    <button class="tb-hamburger" onclick="toggleSidebar()" aria-label="Meniu">
+      <img src="/favicon.png" alt="Mulberry">
+    </button>
+    <!-- Desktop logo → opens sidebar -->
+    <button class="tb-logo-btn" onclick="toggleSidebar()" aria-label="Meniu Mulberry">
+      <img src="/mulberry-wordmark.svg" alt="Mulberry" class="tb-wordmark-top">
+    </button>
+    <!-- MulberryAI Gemini search bar -->
+    <div class="tb-ai-bar" onclick="openGeminiModal()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openGeminiModal()">
+      <svg class="tb-ai-star" viewBox="0 0 24 24">
+        <defs><linearGradient id="tb-gstar" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4285F4"/><stop offset="55%" stop-color="#9b59b6"/><stop offset="100%" stop-color="#EA4335"/></linearGradient></defs>
+        <path fill="url(#tb-gstar)" d="M12 2.5C12 2.5 13.6 8.6 18 12C13.6 15.4 12 21.5 12 21.5C12 21.5 10.4 15.4 6 12C10.4 8.6 12 2.5 12 2.5Z"/>
+        <path fill="url(#tb-gstar)" opacity=".55" d="M12 7C12 7 15.8 8.4 18 12C15.8 15.6 12 17 12 17C12 17 8.2 15.6 6 12C8.2 8.4 12 7 12 7Z"/>
+      </svg>
+      <span class="tb-ai-placeholder">Întreabă MulberryAI...</span>
+      <span class="tb-ai-powered">powered by Gemini</span>
+      <kbd class="tb-ai-kbd">⌘K</kbd>
+    </div>
+    <!-- Profile corner -->
+    <div class="tb-profile">
+      <div class="tb-profile-user" onclick="goPanel('settings')">
+        <div class="tb-profile-av" id="tb-profile-av">M</div>
+        <div class="tb-profile-info">
+          <div class="tb-profile-name" id="tb-profile-name">—</div>
+          <div class="tb-profile-email" id="tb-profile-email">—</div>
+        </div>
+      </div>
+    </div>
+    <!-- Hidden: used by checkHealth() -->
+    <span id="tb-dot" style="display:none"></span>
+    <span id="tb-lbl" style="display:none"></span>
+    <!-- Mobile avatar button -->
+    <button class="tb-avatar tb-avatar-btn" id="tb-avatar" onclick="goPanel('settings')" style="display:none;margin-left:auto">M</button>
+    <!-- goPanel() compatibility -->
+    <span id="tb-title" style="display:none"></span>
+    <span id="tb-sub" style="display:none"></span>
+  </header>
+
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="gd">
+
+        <!-- Header -->
+        <div class="gd-hdr" style="align-items:center">
+          <div>
+            <div class="gd-greeting" id="gd-greeting-lbl">Bună dimineața,</div>
+            <div class="gd-title" id="gd-main-title">MulberryFAST</div>
+          </div>
+          <div class="gd-hdr-av" id="gd-hdr-av">M</div>
+        </div>
+
+        <!-- MulberryAI Gemini card -->
+        <div class="gd-ai-card">
+          <div class="gd-ai-card-eyebrow">powered by</div>
+          <!-- Gemini logo -->
+          <div class="gd-ai-gemini-brand">
+            <img class="gd-ai-gemini-logo-img" src="data:image/jpeg;base64,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7LZO1ak7/fL3bedj1jd14d3s4fB+Zim75ikB7cGXTDTuA/xqZNCYdL9iHB9x9f7xDv2YUU2njX9xlCHnQqAcBqwuXqCLTZQquunrHqstmPVZbtY5ZKFPRrKabEVd6srpaAhCCVXN3Ha2Ih3EZhtxHrjLOs624Nk2uiNyOQzWb4xArl+sPW6u1I3eAUwq/wAp/wC+nwU/+2gRBHO6/Lt3zA6UowfBV9P+m6kE1lSVO9c27WB8eLdMVI/EoQrMNf8A5zd8zRNXleQ27y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXP/aAAwDAQACAAMAAAAQ8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++m+++++++++++++++++++++++++++++++++8++++++++++4WW+++yXnS+++++++++a++89+++++++++++8++++++++++xw58+8P8ALvOHcdDTc0ZJqedFvvvvvvvvvvvvPvvvvvvvvYbk3776FfhT5UdQbf3X6VXeBVfvvvvvvvvvvvPvvvvvvvvvjoZ3fvu9OB8U+o/6/q6VffFVfvvvvvvvvvvvPvvvvvvvvvvjFfvvrKRTLLZfHPPLHrvrDvvvvvvvvvvvvvPvvvvvvvvvvrfvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvv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" alt="Gemini">
+          </div>
+          <!-- AI Search Bar — gradient border pill (Gemini) -->
+          <div class="gd-ai-search-wrap" id="gd-ai-sb-border">
+            <div class="gd-ai-search" onclick="openGeminiModal()">
+              <img src="/gemini-spark.png" class="gd-ai-search-star" alt="">
+              <span class="gd-ai-search-text">Întreabă MulberryAI orice despre vehiculul tău...</span>
+              <kbd class="gd-ai-search-kbd">⌘K</kbd>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 1: Tiles + MulberryAI -->
+        <div class="gd-r1">
+
+          <!-- MulberryGO → Marketplace -->
+          <button class="gdc gdc-go gdc-tile" onclick="goPanel('marketplace')">
+            <div class="sph-card-top">
+              <div class="sph-card-ico" style="background:rgba(181,243,51,.15)">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
+                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+              </div>
+              <button class="sph-arr" onclick="event.stopPropagation();goPanel('marketplace')">↗</button>
+            </div>
+            <div class="gdc-tile-name">MulberryGO</div>
+            <div class="gdc-tile-sub">Book a service</div>
+            <div class="sph-mini-chart" style="margin-top:auto">
+              <div class="sph-bar muted" style="height:32%"></div>
+              <div class="sph-bar dark" style="height:50%"></div>
+              <div class="sph-bar dark" style="height:42%"></div>
+              <div class="sph-bar dark" style="height:65%"></div>
+              <div class="sph-bar dark" style="height:55%"></div>
+              <div class="sph-bar dark" style="height:78%"></div>
+              <div class="sph-bar dark" style="height:60%"></div>
+              <div class="sph-bar dark" style="height:85%"></div>
+              <div class="sph-bar dark" style="height:70%"></div>
+              <div class="sph-bar dark" style="height:90%"></div>
+              <div class="sph-bar muted" style="height:28%"></div>
+              <div class="sph-bar lime" style="height:100%"></div>
+            </div>
+          </button>
+
+          <!-- YellowCard → panel -->
+          <button class="gdc gdc-yc gdc-tile" onclick="goPanel('yellowcard')">
+            <div class="sph-card-top">
+              <div class="sph-card-ico" style="background:rgba(0,0,0,.1)">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
+                </svg>
+              </div>
+              <div style="font-size:10px;font-weight:600;background:rgba(0,0,0,.12);padding:3px 9px;border-radius:20px;color:rgba(0,0,0,.55);font-family:'Urbanist',sans-serif;letter-spacing:.02em">Activ</div>
+            </div>
+            <div class="gdc-tile-name">YellowCard</div>
+            <div class="gdc-tile-sub">Cardul meu digital</div>
+            <div class="gdc-tile-arr" style="margin-top:auto;padding-top:14px;font-size:20px">→</div>
+          </button>
+
+          <!-- MulberryAI -->
+          <div class="gdc gdc-blue">
+            <div class="gda-left">
+              <div class="gda-eyebrow">Asistent inteligent</div>
+              <div class="gda-ai-title">Mulberry <span style="color:#b5f333">AI</span></div>
+              <div class="gd-ai-bar">
+                <label class="gd-ai-photo" title="Adaugă poză">
+                  <input type="file" accept="image/*" style="display:none" id="ai-photo-input" onchange="aiHandlePhoto(event)">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </label>
+                <input type="text" id="ai-query" class="gd-ai-input" placeholder="Întreabă asistentul Mulberry..." onkeydown="if(event.key==='Enter')aiSendQuery()">
+                <button class="gd-ai-send" onclick="aiSendQuery()">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1c1e00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+              <div class="gd-ai-chips">
+                <button class="gd-ai-chip" onclick="aiChip(this)">Verifică ITP</button>
+                <button class="gd-ai-chip" onclick="aiChip(this)">Status asigurare</button>
+                <button class="gd-ai-chip" onclick="aiChip(this)">Analiză vehicul</button>
+              </div>
+              <div id="ai-response" class="gd-ai-resp"></div>
+            </div>
+            <div class="gda-right">
+              <div class="gda-donut-wrap">
+                <svg class="gda-donut" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="#b5f333" stroke-width="17" stroke-dasharray="289 0" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                </svg>
+                <div class="gda-donut-inner">
+                  <div class="gda-donut-val" style="color:#b5f333;font-size:14px">AI</div>
+                  <div class="gda-donut-sub">online</div>
+                </div>
+              </div>
+              <button class="gda-arr" onclick="goPanel('analytics')">↗</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Cloud + Drive + HUB -->
+        <div class="gd-r2">
+
+          <!-- MulberryCloud -->
+          <div class="gdc gdc-cloud" onclick="location.href='/mulberry_cloud.html'" style="cursor:pointer">
+            <div class="sph-card-top">
+              <div class="gdc-cloud-ico" style="margin-bottom:0">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+              </div>
+              <button class="sph-arr" onclick="event.stopPropagation();location.href='/mulberry_cloud.html'">↗</button>
+            </div>
+            <div class="gdc-cloud-name" style="margin-top:10px">MulberryCloud</div>
+            <div class="gdc-cloud-sub">Stocare &amp; documente</div>
+            <div class="gdc-cloud-items" style="margin-top:12px">
+              <div class="gdc-cloud-item">
+                <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Documente vehicul
+              </div>
+              <div class="gdc-cloud-item">
+                <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 12 11 14 15 10"/></svg></div>
+                Asigurări &amp; ITP
+              </div>
+            </div>
+            <button class="gdc-cloud-btn" style="margin-top:14px">Deschide Cloud ↗</button>
+          </div>
+
+          <!-- MulberryDrive -->
+          <div class="gdc gdc-drive" style="display:flex;flex-direction:column;gap:12px">
+            <div class="sph-card-top">
+              <div>
+                <div class="gdc-drive-name">MulberryDrive</div>
+                <div class="gdc-drive-sub">Navigație powered by Mapbok</div>
+              </div>
+              <button class="sph-arr">↗</button>
+            </div>
+            <div class="gdc-map-box" style="flex:1">
+              <div class="gdc-map-ico">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="gdc-map-lbl">Navigație GPS</div>
+              <div class="gdc-map-note">Mapbok · timp real<br>Integrare activă</div>
+              <button class="gdc-map-btn">Pornește navigația →</button>
+            </div>
+          </div>
+
+          <!-- MulberryHUB Last Updates -->
+          <div class="gdc gdc-hub">
+            <div class="sph-card-top" style="margin-bottom:14px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="gdc-hub-ico">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 20V10M12 20V4M6 20v-6"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="gdc-hub-name">MulberryHUB</div>
+                  <div class="gdc-hub-badge">Last Updates</div>
+                </div>
+              </div>
+              <span class="sph-badge up">3 nou</span>
+            </div>
+            <div class="gdc-hub-row">
+              <div class="gdc-hub-dot gdc-hub-dot-new"></div>
+              <div><div class="gdc-hub-event">Sphere UI dashboard — redesign complet</div><div class="gdc-hub-time">Azi, 26 Mai 2026</div></div>
+            </div>
+            <div class="gdc-hub-row">
+              <div class="gdc-hub-dot gdc-hub-dot-feat"></div>
+              <div><div class="gdc-hub-event">Favicon PNG + Inter font thin</div><div class="gdc-hub-time">25 Mai 2026</div></div>
+            </div>
+            <div class="gdc-hub-row">
+              <div class="gdc-hub-dot"></div>
+              <div><div class="gdc-hub-event">MulberryFAST — 6 carduri servicii</div><div class="gdc-hub-time">25 Mai 2026</div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- YELLOWCARD PANEL -->
+    <div class="panel" id="panel-yellowcard">
+      <div class="ph">
+        <div class="ph-eyebrow">Identitate</div>
+        <div class="ph-title">YellowCard</div>
+        <div class="ph-sub">Cardul digital al vehiculului tău — asigurare, ITP și istoric într-un singur loc</div>
+      </div>
+      <div class="ycard-page">
+        <div class="ycard">
+          <div class="yc-head">
+            <div>
+              <div class="yc-brand">MulberryID · MLBR</div>
+              <div class="yc-name" id="ycp-name">YellowCard</div>
+            </div>
+            <div class="yc-chip">
+              <svg viewBox="0 0 24 20" fill="none">
+                <rect x="1" y="1" width="22" height="18" rx="3" stroke="#2C0E12" stroke-width="1.5" fill="rgba(44,14,18,0.12)"/>
+                <line x1="1" y1="7" x2="23" y2="7" stroke="#2C0E12" stroke-width="1"/>
+                <line x1="8" y1="1" x2="8" y2="19" stroke="#2C0E12" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
+          <div class="yc-fields">
+            <div><div class="yc-fl">Nr. Înmatriculare</div><div class="yc-fv" id="ycp-plate">B-12-MLB</div></div>
+            <div><div class="yc-fl">VIN</div><div class="yc-fv" id="ycp-vin">WA0ZZ8K9DA1</div></div>
+            <div><div class="yc-fl">Titular</div><div class="yc-fv" id="ycp-owner">—</div></div>
+            <div><div class="yc-fl">Asigurare</div><div class="yc-fv">RCA · Activ</div></div>
+          </div>
+          <div class="yc-foot">
+            <div class="yc-verify">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              100% web visibility
+            </div>
+            <div class="yc-qr">
+              <img src="/qr.png" alt="QR" style="width:46px;height:46px;display:block;border-radius:5px">
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-card-hdr">
+            <div>
+              <div class="sch-title">Detalii card</div>
+              <div class="sch-sub">Informații complete vehicul și asigurare</div>
+            </div>
+          </div>
+          <div class="act-row" style="padding:14px 20px">
+            <div class="act-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+            <div class="act-main"><div class="act-txt">Verified History</div><div class="act-meta">Verificabil prin QR public</div></div>
+            <div class="act-time" style="color:var(--green);font-weight:700">✓</div>
+          </div>
+          <div class="act-row" style="padding:14px 20px">
+            <div class="act-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div class="act-main"><div class="act-txt">Digital Insurance</div><div class="act-meta">RCA integrat în card</div></div>
+            <div class="act-time" style="color:var(--wine);font-weight:700">RCA</div>
+          </div>
+          <div class="act-row" style="padding:14px 20px;border:none">
+            <div class="act-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div class="act-main"><div class="act-txt">MulberryEXO</div><div class="act-meta">Istoric tehnic complet</div></div>
+            <div class="act-time" style="color:var(--dim2)">EXO</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKETPLACE -->
+    <div class="panel" id="panel-marketplace">
+      <div class="ph">
+        <div class="ph-eyebrow">Parteneri</div>
+        <div class="ph-title">Marketplace</div>
+        <div class="ph-sub">Servicii auto verificate de Mulberry — prețuri directe, fără intermediari</div>
+      </div>
+      <div class="mkt-grid">
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+          <div class="oc-name">RCA Rapid</div>
+          <div class="oc-desc">Asigurare RCA online în 5 minute. Preț direct, fără intermediari, integrat în YellowCard.</div>
+          <div class="oc-footer"><span class="oc-badge">Partner verificat</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 011.72 1h3.09a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.79 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div class="oc-name">ITP Express</div>
+          <div class="oc-desc">Programare ITP la stațiile partenere. Disponibilitate în timp real, confirmare instant.</div>
+          <div class="oc-footer"><span class="oc-badge">Disponibil</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+          <div class="oc-name">Service Auto</div>
+          <div class="oc-desc">Rețea de service-uri certificate MulberryEXO. Garanție lucrări, prețuri transparente.</div>
+          <div class="oc-footer"><span class="oc-badge">Nou</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="oc-name">Parcare Smart</div>
+          <div class="oc-desc">Abonamente parcare integrate cu YellowCard. Plată automată la intrare/ieșire.</div>
+          <div class="oc-footer"><span class="oc-badge">Beta</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <div class="oc-name">Asistență Rutieră</div>
+          <div class="oc-desc">Ajutor rapid prin rețeaua Mulberry. Localizare automată prin YellowCard.</div>
+          <div class="oc-footer"><span class="oc-badge">24/7</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="oc-name">MulberryAI</div>
+          <div class="oc-desc">Analiză predictivă pentru mașina ta. Alerte înainte de defecțiuni, optimizare costuri.</div>
+          <div class="oc-footer"><span class="oc-badge">AI</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings">
+      <div class="ph">
+        <div class="ph-eyebrow">Configurare</div>
+        <div class="ph-title">Setări</div>
+        <div class="ph-sub">Cont, securitate și configurare aplicație</div>
+      </div>
+
+      <div class="set-section">
+        <div class="set-hdr">Profil</div>
+        <div class="set-row" style="cursor:default">
+          <div class="set-row-ico" style="background:var(--yellow)">
+            <div style="font-size:14px;font-weight:800;color:var(--wine)" id="set-init">M</div>
+          </div>
+          <div class="set-row-info">
+            <div class="set-row-lbl" id="set-uname">—</div>
+            <div class="set-row-desc" id="set-uemail">—</div>
+          </div>
+          <div class="set-row-end" style="color:var(--wine);font-size:10px;font-weight:700;background:var(--wine-dim);padding:3px 10px;border-radius:20px">ACTIV</div>
+        </div>
+      </div>
+
+      <div class="set-section">
+        <div class="set-hdr">Conexiune</div>
+        <div class="set-row" style="cursor:default">
+          <div class="set-row-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="set-row-info">
+            <div class="set-row-lbl">Backend API</div>
+            <div class="set-row-desc">Mulberry API Server</div>
+          </div>
+          <div class="set-row-end" id="set-health-lbl">—</div>
+        </div>
+        <div class="set-api" id="set-api-url">—</div>
+      </div>
+
+      <div class="set-section">
+        <div class="set-hdr">Securitate</div>
+        <div class="set-row">
+          <div class="set-row-ico"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+          <div class="set-row-info">
+            <div class="set-row-lbl">Schimbă parola</div>
+            <div class="set-row-desc">Actualizează credențialele</div>
+          </div>
+          <div class="set-row-end"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <div class="set-row">
+          <div class="set-row-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
+          <div class="set-row-info">
+            <div class="set-row-lbl">YellowCard ID</div>
+            <div class="set-row-desc" id="set-cardid">—</div>
+          </div>
+          <div class="set-row-end" style="color:var(--wine)">MLBR</div>
+        </div>
+      </div>
+
+      <div class="set-section">
+        <div class="set-hdr">Sesiune</div>
+        <div class="set-row" onclick="doLogout()">
+          <div class="set-row-ico" style="background:rgba(220,38,38,.1)">
+            <svg viewBox="0 0 24 24" stroke="var(--red)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </div>
+          <div class="set-row-info">
+            <div class="set-row-lbl" style="color:var(--red)">Deconectare</div>
+            <div class="set-row-desc">Ieși din contul curent</div>
+          </div>
+          <div class="set-row-end"><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS — metrici focusate -->
+    <div class="panel" id="panel-analytics">
+      <div class="gd">
+        <div class="gd-hdr">
+          <div>
+            <div class="gd-greeting">Metrici &amp; rapoarte</div>
+            <div class="gd-title">Analytics</div>
+          </div>
+          <div class="gd-hstats">
+            <div><div class="gd-hstat-lbl">Balanță</div><div class="gd-hstat-val">1.655,00 <sup>$</sup></div></div>
+            <div><div class="gd-hstat-lbl">Venit</div><div class="gd-hstat-val">950,00 <sup>$</sup></div></div>
+            <div><div class="gd-hstat-lbl">Cheltuieli</div><div class="gd-hstat-val">382,00 <sup>$</sup></div></div>
+          </div>
+        </div>
+        <!-- Full analytics card -->
+        <div class="gdc gdc-blue" style="min-height:220px">
+          <div class="gda-left">
+            <div class="gda-eyebrow">Performanță financiară</div>
+            <div class="gda-pct">78%</div>
+            <div class="gda-trend">Creștere <span class="gda-chip">71.2% <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span></div>
+            <div class="gda-pills">
+              <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Îmbunătățiri stocaj anual</button>
+              <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Creștere investiții proprietăți</button>
+            </div>
+          </div>
+          <div class="gda-right">
+            <div class="gda-donut-wrap">
+              <svg class="gda-donut" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="17" stroke-dasharray="225 64" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+              </svg>
+              <div class="gda-donut-inner"><div class="gda-donut-val">78%</div><div class="gda-donut-sub">score</div></div>
+            </div>
+            <button class="gda-arr">↗</button>
+          </div>
+        </div>
+        <!-- Bottom: Cash + Period + Payment -->
+        <div class="gd-r2">
+          <div class="gdc gdc-cash">
+            <div class="gdc-cash-top"><div class="gdc-cash-lbl">Cash</div><div class="gdc-cash-amt">816,752 <span class="gdc-cash-badge">USD</span></div></div>
+            <div class="gdc-cash-growth">+36%</div>
+            <div class="gdc-cash-sub">grow since last week</div>
+            <div class="gdc-bars"><div class="gdc-bar" style="height:28%"></div><div class="gdc-bar gdc-bar-mid" style="height:45%"></div><div class="gdc-bar gdc-bar-hi" style="height:66%"></div><div class="gdc-bar gdc-bar-blue" style="height:100%"></div></div>
+          </div>
+          <div class="gdc gdc-period">
+            <div class="gdc-period-hd"><div><div class="gdc-period-title">Period Analytic</div><div class="gdc-period-sub">3 Month</div></div><button class="gdc-arr-green">↗</button></div>
+            <div class="gdc-period-lbl">User Authorized</div>
+            <div class="gdc-period-val">18,785 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          </div>
+          <div class="gdc gdc-pay">
+            <div class="gdc-pay-hd"><div class="gdc-pay-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="17 7 12 2 7 7"/><polyline points="7 17 12 22 17 17"/></svg></div><div class="gdc-pay-title">Payment Transaction</div></div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">1,120 <sup>$</sup></div><div class="gdc-pay-name">Repayment cash</div></div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">3,810 <sup>$</sup></div><div class="gdc-pay-name">Office leasing</div></div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">12,760 <sup>$</sup></div><div class="gdc-pay-name">Employee salary</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <nav class="bnav">
+    <div class="bnav-inner">
+      <button class="bn-item" data-p="dashboard" onclick="goPanel('dashboard')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Home
+      </button>
+      <button class="bn-item" data-p="yellowcard" onclick="goPanel('yellowcard')">
+        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg>
+        Card
+      </button>
+      <button class="bn-item" data-p="marketplace" onclick="goPanel('marketplace')">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+        Market
+      </button>
+      <button class="bn-item active" data-p="analytics" onclick="goPanel('analytics')">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Chart
+      </button>
+      <button class="bn-item" data-p="settings" onclick="goPanel('settings')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Setări
+      </button>
+    </div>
+  </nav>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="toast" id="toast"></div>
+
+<!-- ══ MULBERRY AI — Full Gemini Panel ══════════════════════════ -->
+<div class="gm-overlay hidden" id="gm-overlay">
+  <!-- Top navigation -->
+  <div class="gm-topnav">
+    <button class="gm-back-btn" onclick="closeGeminiModal()">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <div class="gm-nav-brand">
+      <svg class="gm-nav-star" viewBox="0 0 24 24">
+        <defs><linearGradient id="gm-nav-g" x1="0" y1="1" x2="0.7" y2="0"><stop offset="0%" stop-color="#FBBC04"/><stop offset="40%" stop-color="#EA4335"/><stop offset="100%" stop-color="#4285F4"/></linearGradient></defs>
+        <path fill="url(#gm-nav-g)" d="M12 2.5C12 2.5 13.6 8.6 18 12C13.6 15.4 12 21.5 12 21.5C12 21.5 10.4 15.4 6 12C10.4 8.6 12 2.5 12 2.5Z"/>
+        <path fill="url(#gm-nav-g)" opacity=".45" d="M12 6C12 6 15.4 8.2 17 12C15.4 15.8 12 18 12 18C12 18 8.6 15.8 7 12C8.6 8.2 12 6 12 6Z"/>
+      </svg>
+      MulberryAI
+    </div>
+  </div>
+
+  <!-- Body: welcome screen OR chat messages -->
+  <div class="gm-body" id="gm-body">
+    <!-- Welcome (default state) -->
+    <div class="gm-welcome-screen" id="gm-welcome-screen">
+      <div class="gm-big-greeting" id="gm-big-greeting">Bună ziua,</div>
+      <div class="gm-big-sub">Asistentul tău automotive, powered by Gemini</div>
+      <div class="gm-welcome-chips">
+        <button class="gm-welcome-chip" onclick="gmChip(this)">Verifică ITP</button>
+        <button class="gm-welcome-chip" onclick="gmChip(this)">Status asigurare</button>
+        <button class="gm-welcome-chip" onclick="gmChip(this)">Analiză vehicul</button>
+        <button class="gm-welcome-chip" onclick="gmChip(this)">Programare service</button>
+      </div>
+    </div>
+    <!-- Chat messages (shown after first send) -->
+    <div class="gm-messages" id="gm-messages"></div>
+  </div>
+
+  <!-- Fixed input bar -->
+  <div class="gm-input-area">
+    <div class="gm-input-pill">
+      <label class="gm-add-btn" title="Adaugă poză" style="cursor:pointer">
+        <input type="file" accept="image/*" style="display:none" onchange="gmHandlePhoto(event)">
+        +
+      </label>
+      <input type="text" class="gm-pill-input" id="gm-input" placeholder="Întreabă MulberryAI..." onkeydown="if(event.key==='Enter')gmSend()">
+      <div class="gm-input-right">
+        <span class="gm-model-badge">✦ Gemini</span>
+        <button class="gm-pill-send" onclick="gmSend()" title="Trimite">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="gm-input-disclaimer">MulberryAI poate greși. Verifică informațiile importante.</div>
+  </div>
+</div>
+
+<script>
+const API = (window.Config && window.Config.apiBaseUrl) || 'http://46.225.100.151:8080';
+let currentUser = null;
+
+function saveSession(d) { localStorage.setItem('mlbr_s', JSON.stringify(d)); currentUser = d; }
+function loadSession() {
+  try { const r = localStorage.getItem('mlbr_s'); if(r){ currentUser=JSON.parse(r); return currentUser; } } catch(e){}
+  return null;
+}
+function clearSession() { localStorage.removeItem('mlbr_s'); currentUser = null; }
+
+let _tt;
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'toast show' + (type ? ' '+type : '');
+  clearTimeout(_tt); _tt = setTimeout(() => el.className='toast', 2800);
+}
+
+async function apiPost(path, body) {
+  const r = await fetch(API + path, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.detail || 'Eroare server');
+  return d;
+}
+async function apiGet(path) {
+  const headers = currentUser?.token ? {'Authorization':'Bearer '+currentUser.token} : {};
+  const r = await fetch(API + path, { headers, signal: AbortSignal.timeout(5000) });
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+async function checkHealth() {
+  const dot = document.getElementById('tb-dot');
+  const lbl = document.getElementById('tb-lbl');
+  try {
+    await fetch(API + '/health', { signal: AbortSignal.timeout(5000) });
+    dot.className = 'tb-dot on'; lbl.textContent = 'online';
+    const t = new Date().toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('at-health-time').textContent = t;
+    document.getElementById('at-api').textContent = API;
+    document.getElementById('set-api-url').textContent = API;
+    document.getElementById('set-health-lbl').textContent = '● online';
+    document.getElementById('set-health-lbl').style.color = 'var(--green)';
+  } catch(e) {
+    dot.className = 'tb-dot off'; lbl.textContent = 'offline';
+    document.getElementById('set-health-lbl').textContent = '● offline';
+    document.getElementById('set-health-lbl').style.color = 'var(--red)';
+  }
+}
+
+async function loadStats() {
+  try {
+    const s = await apiGet('/api/stats');
+    document.getElementById('st-drivers').textContent  = s.drivers  ?? '—';
+    document.getElementById('st-partners').textContent = s.partners ?? '—';
+    document.getElementById('st-vehicles').textContent = s.vehicles ?? '—';
+    document.getElementById('st-offers').textContent   = s.offers   ?? '—';
+  } catch(e) {}
+}
+
+// ─── SUPABASE AUTH ────────────────────────────────────────────
+const SB_URL  = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
+const sb = supabase.createClient(SB_URL, SB_ANON);
+
+// Whitelist guard — runs on every page load
+(async () => {
+  const ALLOWED_EMAILS = ['sefanlazar7@gmail.com'];
+  const { data: { user } } = await sb.auth.getUser();
+  if (user && !ALLOWED_EMAILS.includes(user.email)) {
+    await sb.auth.signOut();
+    window.location.href = '/mulberry_login.html';
+  } else if (user && ALLOWED_EMAILS.includes(user.email)) {
+    currentUser = {
+      email: user.email,
+      name: user.user_metadata?.full_name || null,
+      avatar: user.user_metadata?.avatar_url || null
+    };
+    enterApp();
+  }
+})();
+
+let afCurrentEmail = '';
+let afResendInterval = null;
+
+function afGoToStep(n) {
+  document.querySelectorAll('.af-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`af-step-${n}`).classList.add('active');
+  document.querySelectorAll('.af-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i + 1 < n) d.classList.add('done');
+    else if (i + 1 === n) d.classList.add('active');
+  });
+}
+
+function afSwitchTab(btn) {
+  document.querySelectorAll('.af-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function afSignInWithGoogle() {
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: 'https://mulberry.autos/mulberry_app.html' }
+  });
+  if (error) afShowAlert('af-alert-1', error.message);
+}
+
+async function afSendOTP() {
+  const email = (document.getElementById('af-email').value || '').trim();
+  if (!email || !email.includes('@')) return afShowAlert('af-alert-1', 'Introdu un email valid.');
+  afCurrentEmail = email;
+  const { error } = await sb.auth.signInWithOtp({ email });
+  if (error) return afShowAlert('af-alert-1', error.message);
+  document.getElementById('af-email-display').textContent = email;
+  afGoToStep(2);
+  afSetupOTP();
+  afStartResendTimer();
+}
+
+async function afVerifyOTP() {
+  const token = Array.from({length:6}, (_, i) => document.getElementById(`af-otp-${i}`).value).join('');
+  if (token.length !== 6) return afShowAlert('af-alert-2', 'Introdu toate cele 6 cifre.');
+  const { data, error } = await sb.auth.verifyOtp({ email: afCurrentEmail, token, type: 'email' });
+  if (error) return afShowAlert('af-alert-2', 'Cod incorect sau expirat. Încearcă din nou.');
+  if (data?.session) { currentUser = { email: afCurrentEmail }; enterApp(); } else { afGoToStep(3); }
+}
+
+async function afResendOTP() {
+  await sb.auth.signInWithOtp({ email: afCurrentEmail });
+  afStartResendTimer();
+}
+
+function afStartResendTimer() {
+  let s = 60;
+  const btn = document.getElementById('af-resend-btn');
+  const timer = document.getElementById('af-resend-timer');
+  btn.disabled = true;
+  if (afResendInterval) clearInterval(afResendInterval);
+  afResendInterval = setInterval(() => {
+    s--;
+    timer.textContent = ` (${s}s)`;
+    if (s <= 0) { clearInterval(afResendInterval); btn.disabled = false; timer.textContent = ''; }
+  }, 1000);
+}
+
+function afSetupOTP() {
+  for (let i = 0; i < 6; i++) {
+    const inp = document.getElementById(`af-otp-${i}`);
+    inp.value = '';
+    inp.oninput = e => {
+      if (e.target.value.length > 1) e.target.value = e.target.value.slice(-1);
+      if (e.target.value && i < 5) document.getElementById(`af-otp-${i+1}`).focus();
+    };
+    inp.onkeydown = e => { if (e.key === 'Backspace' && !e.target.value && i > 0) document.getElementById(`af-otp-${i-1}`).focus(); };
+  }
+  document.getElementById('af-otp-0').focus();
+}
+
+async function afHandleUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) return afShowAlert('af-alert-3', 'Fișier prea mare. Max 10MB.');
+  document.getElementById('af-upload-zone').style.display = 'none';
+  document.getElementById('af-processing').classList.add('active');
+  document.getElementById('af-processing-text').textContent = 'Analizăm documentul...';
+  try {
+    const base64 = await afFileToBase64(file);
+    setTimeout(() => { document.getElementById('af-processing-text').textContent = 'Verificăm calitatea imaginii...'; }, 1000);
+    setTimeout(() => { document.getElementById('af-processing-text').textContent = 'Extragem datele cu AI...'; }, 2500);
+    const res  = await fetch('/api/scan-talon', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ image: base64, mime_type: file.type }) });
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || 'Nu am putut extrage datele. Încearcă o poză mai clară.');
+    document.getElementById('af-processing').classList.remove('active');
+    afShowExtracted(data);
+  } catch(err) {
+    document.getElementById('af-processing').classList.remove('active');
+    document.getElementById('af-upload-zone').style.display = 'block';
+    afShowAlert('af-alert-3', err.message || 'Eroare. Încearcă o poză mai clară.');
+  }
+}
+
+function afShowExtracted(data) {
+  const fields = [{k:'VIN',v:data.vin},{k:'NUMĂR',v:data.plate},{k:'PROPRIETAR',v:data.owner},{k:'MARCĂ',v:data.brand},{k:'MODEL',v:data.model},{k:'AN',v:data.year}];
+  document.getElementById('af-data-table').innerHTML = fields.filter(f=>f.v).map(f=>`<div class="af-data-row"><span class="af-data-key">${f.k}</span><span class="af-data-val">${f.v}</span></div>`).join('');
+  document.getElementById('af-extracted').classList.add('active');
+}
+
+async function afGenerateCard() {
+  if (!document.getElementById('af-confirm-check').checked) return afShowAlert('af-alert-3', 'Confirmă că documentul este original.');
+  const btn = document.getElementById('af-gen-btn');
+  btn.textContent = 'Se generează...'; btn.disabled = true;
+  setTimeout(() => { enterApp(); }, 1500);
+}
+
+function afResetUpload() {
+  document.getElementById('af-upload-zone').style.display = 'block';
+  document.getElementById('af-extracted').classList.remove('active');
+  document.getElementById('af-talon-input').value = '';
+}
+
+function afFileToBase64(file) {
+  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(file); });
+}
+
+function afShowAlert(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.classList.add('active');
+  setTimeout(() => el.classList.remove('active'), 5000);
+}
+
+// Drag & drop on upload zone
+document.addEventListener('DOMContentLoaded', () => {
+  const zone = document.getElementById('af-upload-zone');
+  if (zone) {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault(); zone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) afHandleUpload({ target: { files: [file] } });
+    });
+  }
+});
+
+// Curăță URL-ul după auth
+if (window.location.hash.includes('access_token')) {
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+// Supabase OAuth redirect
+sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN' && session) {
+    currentUser = {
+      email: session.user.email,
+      name: session.user.user_metadata?.full_name || null,
+      avatar: session.user.user_metadata?.avatar_url || null
+    };
+    enterApp();
+  }
+});
+
+function switchTab(t) {} // legacy stub
+
+function setBtnLoad(id, loading, label) {
+  const b = document.getElementById(id); if(!b) return;
+  b.disabled = loading;
+  b.innerHTML = loading ? '<span class="spin"></span>' : label;
+}
+
+let _logoutConfirmTimer = null;
+function handleUserClick() {
+  const el = document.querySelector('.sb-user');
+  if (el.classList.contains('confirm-logout')) {
+    clearTimeout(_logoutConfirmTimer);
+    el.classList.remove('confirm-logout');
+    doLogout();
+  } else {
+    el.classList.add('confirm-logout');
+    _logoutConfirmTimer = setTimeout(() => el.classList.remove('confirm-logout'), 3000);
+  }
+}
+
+function doLogout() {
+  clearSession();
+  document.getElementById('app-shell').classList.add('hidden');
+  document.getElementById('auth-screen').classList.remove('hidden');
+  toast('Deconectat', '');
+}
+
+function hashStr(s) {
+  let h = 0;
+  for(let i=0;i<s.length;i++) h = Math.imul(31,h)+s.charCodeAt(i)|0;
+  return h;
+}
+function greeting() {
+  const h = new Date().getHours();
+  return (h < 5 || h >= 22) ? 'Hello' : h < 12 ? 'Bună dimineața' : h < 18 ? 'Bună ziua' : 'Bună seara';
+}
+
+function setAvatar(el, avatarUrl, init) {
+  if (!el) return;
+  if (avatarUrl) {
+    el.innerHTML = `<img src="${avatarUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block" onerror="this.parentElement.textContent='${init}'">`;
+  } else {
+    el.innerHTML = '';
+    el.textContent = init;
+  }
+}
+
+function syncUser() {
+  if (!currentUser) return;
+  const raw      = currentUser.email || currentUser.identifier || 'User';
+  const fullName = currentUser.name || null;
+  const name     = fullName || (raw.includes('@') ? raw.split('@')[0] : raw);
+  const init     = name[0].toUpperCase();
+  const cardId   = 'MLB-' + name.slice(0,4).toUpperCase() + '-' + Math.abs(hashStr(raw) % 9000 + 1000);
+  const avatar   = currentUser.avatar || null;
+
+  // Avatar elements (profile picture or initial)
+  setAvatar(document.getElementById('sb-avatar'), avatar, init);
+  setAvatar(document.getElementById('tb-avatar'), avatar, init);
+  setAvatar(document.getElementById('tb-profile-av'), avatar, init);
+  setAvatar(document.getElementById('gd-hdr-av'), avatar, init);
+
+  // Topbar profile info
+  const tbName = document.getElementById('tb-profile-name');
+  if (tbName) tbName.textContent = fullName || name;
+  const tbEmail = document.getElementById('tb-profile-email');
+  if (tbEmail) tbEmail.textContent = raw;
+
+  // Personalize Gemini modal input placeholder with first name
+  const firstName = (fullName || name).split(' ')[0];
+  const firstCap  = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  const gmInput = document.getElementById('gm-input');
+  if (gmInput) gmInput.placeholder = 'Ce vrei să știi astăzi, ' + firstCap + '?';
+
+  // Sidebar & settings
+  [['sb-uname', fullName || name], ['sb-uemail', raw],
+   ['set-uname', fullName || name], ['set-uemail', raw],
+   ['set-init',  init]].forEach(([id, v]) => {
+    const el = document.getElementById(id); if(el) el.textContent = v;
+  });
+  ['yc-owner','ycp-owner'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.textContent = fullName || name;
+  });
+  ['yc-name','ycp-name'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.textContent = (fullName || name) + "'s Card";
+  });
+  const cardEl = document.getElementById('set-cardid');
+  if(cardEl) cardEl.textContent = cardId;
+}
+
+function enterApp() {
+  document.getElementById('auth-screen').classList.add('hidden');
+  document.getElementById('app-shell').classList.remove('hidden');
+  syncUser();
+  checkHealth();
+  loadStats();
+  const now = new Date();
+  const t = now.toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'});
+  const el = document.getElementById('at-login'); if(el) el.textContent = t;
+  const ex = document.getElementById('at-expire');
+  if(ex) {
+    const exp = new Date(now.getTime()+86400000);
+    ex.textContent = exp.toLocaleDateString('ro-RO',{day:'2-digit',month:'2-digit'});
+  }
+  goPanel('dashboard');
+  const gl = document.getElementById('gd-greeting-lbl');
+  if (gl) gl.textContent = greeting() + ',';
+  const gt = document.getElementById('gd-main-title');
+  if (gt) {
+    const fullName = currentUser?.name;
+    let displayName;
+    if (fullName) {
+      displayName = fullName.split(' ')[0];
+    } else {
+      const raw = currentUser?.email || '';
+      displayName = raw.includes('@') ? raw.split('@')[0] : (raw || 'Mulberry');
+    }
+    gt.textContent = displayName.charAt(0).toUpperCase() + displayName.slice(1) + '!';
+  }
+}
+
+const PANEL_META = {
+  dashboard:   ['MulberryFAST', () => greeting()],
+  yellowcard:  ['YellowCard',  () => 'Identitatea digitală a vehiculului tău'],
+  marketplace: ['Marketplace', () => 'Servicii auto verificate Mulberry'],
+  analytics:   ['Analytics',   () => 'Metrici și rapoarte financiare'],
+  settings:    ['Setări',      () => 'Configurare cont și aplicație']
+};
+
+function goPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+name)?.classList.add('active');
+  if (name === 'analytics') {
+    const gl = document.getElementById('gd-greeting-lbl');
+    if (gl) gl.textContent = greeting();
+  }
+  document.querySelectorAll('[data-p]').forEach(n =>
+    n.classList.toggle('active', n.dataset.p === name)
+  );
+  const [title, sub] = PANEL_META[name] || [name, () => ''];
+  const titleEl = document.getElementById('tb-title');
+  const subEl   = document.getElementById('tb-sub');
+  if (titleEl) titleEl.textContent = title;
+  if (subEl)   subEl.textContent   = sub();
+  closeSidebar();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    openGeminiModal();
+    return;
+  }
+  if (e.key === 'Escape') { closeGeminiModal(); return; }
+  if (e.key !== 'Enter') return;
+  const regEl = document.getElementById('form-register');
+  if (regEl && !regEl.classList.contains('hidden')) doRegister();
+});
+
+(function() {
+  const s = loadSession();
+  if (s && s.token) enterApp();
+})();
+
+function aiChip(btn) {
+  document.getElementById('ai-query').value = btn.textContent;
+  aiSendQuery();
+}
+
+async function aiSendQuery() {
+  const q = (document.getElementById('ai-query')?.value || '').trim();
+  if (!q) return;
+  const resp = document.getElementById('ai-response');
+  resp.style.display = 'block';
+  resp.textContent = '⏳ Se procesează...';
+  try {
+    const r = await fetch(API + '/api/ai-chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ query: q, user: currentUser?.email })
+    });
+    const d = await r.json();
+    resp.textContent = d.response || d.message || 'Răspuns primit.';
+  } catch(e) {
+    resp.textContent = 'Mulberry AI analizează: "' + q + '". Funcționalitate completă în curând.';
+  }
+}
+
+function aiHandlePhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const resp = document.getElementById('ai-response');
+  resp.style.display = 'block';
+  resp.textContent = '📷 Poză primită: ' + file.name + '. Analiza AI în curând...';
+}
+
+// ─── GEMINI MODAL ─────────────────────────────────────────────
+function gmFirstName() {
+  const fullName = currentUser?.name || currentUser?.email || '';
+  const raw = fullName.includes('@') ? fullName.split('@')[0] : fullName.split(' ')[0];
+  return raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : 'tu';
+}
+function openGeminiModal() {
+  const overlay = document.getElementById('gm-overlay');
+  const input   = document.getElementById('gm-input');
+  const sb      = document.getElementById('gd-ai-sb-border');
+  // Personalize greeting
+  const greetEl = document.getElementById('gm-big-greeting');
+  if (greetEl && currentUser) greetEl.textContent = 'Bună ziua, ' + gmFirstName();
+  sb?.classList.add('gd-ai-sb-glow');
+  overlay?.classList.remove('hidden');
+  setTimeout(() => input?.focus(), 80);
+}
+function closeGeminiModal() {
+  document.getElementById('gm-overlay').classList.add('hidden');
+  document.getElementById('gd-ai-sb-border')?.classList.remove('gd-ai-sb-glow');
+}
+function gmChip(btn) {
+  document.getElementById('gm-input').value = btn.textContent.trim();
+  gmSend();
+}
+function gmSwitchToChat() {
+  const body = document.getElementById('gm-body');
+  if (body && body.dataset.state !== 'chat') body.dataset.state = 'chat';
+}
+async function gmSend() {
+  const input = document.getElementById('gm-input');
+  const q = (input?.value || '').trim();
+  if (!q) return;
+  input.value = '';
+  gmSwitchToChat();
+  const msgs = document.getElementById('gm-messages');
+  // User bubble
+  const userWrap = document.createElement('div');
+  userWrap.className = 'gm-msg-user-wrap';
+  const userDiv = document.createElement('div');
+  userDiv.className = 'gm-msg-user';
+  userDiv.textContent = q;
+  userWrap.appendChild(userDiv);
+  msgs.appendChild(userWrap);
+  // AI thinking bubble
+  const thinkDiv = document.createElement('div');
+  thinkDiv.className = 'gm-msg-ai';
+  thinkDiv.innerHTML = '<div class="gm-thinking"><span></span><span></span><span></span></div>';
+  msgs.appendChild(thinkDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+  try {
+    const r = await fetch(API + '/api/ai-chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ query: q, user: currentUser?.email })
+    });
+    const d = await r.json();
+    thinkDiv.textContent = d.response || d.message || 'Răspuns primit.';
+  } catch(e) {
+    thinkDiv.textContent = 'MulberryAI analizează: "' + q + '". Funcționalitate completă în curând.';
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function gmHandlePhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  gmSwitchToChat();
+  const msgs = document.getElementById('gm-messages');
+  const userWrap = document.createElement('div');
+  userWrap.className = 'gm-msg-user-wrap';
+  const userDiv = document.createElement('div');
+  userDiv.className = 'gm-msg-user';
+  userDiv.textContent = '📷 ' + file.name;
+  userWrap.appendChild(userDiv);
+  msgs.appendChild(userWrap);
+  const aiDiv = document.createElement('div');
+  aiDiv.className = 'gm-msg-ai';
+  aiDiv.textContent = 'Imaginea a fost primită. Analiza vehiculului în curând...';
+  msgs.appendChild(aiDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+</script>
+</body>
+</html>
