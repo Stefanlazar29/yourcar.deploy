@@ -301,6 +301,10 @@ class ExoChatOut(BaseModel):
   reply: str
 
 
+class GeminiChatIn(BaseModel):
+  contents: List[dict]
+
+
 # ────────────────────────────────────────────────────────────────
 # Form submit (fără pop-up / fără Supabase)
 # ────────────────────────────────────────────────────────────────
@@ -729,6 +733,35 @@ def exo_chat(inp: ExoChatIn, current: database.UserRow = Depends(require_device_
     raise HTTPException(status_code=503, detail=str(e))
   except Exception as e:
     raise HTTPException(status_code=500, detail=f"Chat EXO: {e}")
+
+
+@app.post("/api/gemini-chat")
+async def gemini_chat_proxy(inp: GeminiChatIn):
+  """Proxy Gemini 2.0 Flash — cheia API rămâne pe server, nu în sursa paginii."""
+  import urllib.request as _urlreq
+  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyDNqrg7_tIZ0COV8mpQqI1FmLoAa0HOR_Q")
+  _GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={_GEMINI_KEY}"
+  _SYSTEM = (
+    "Ești MulberryAI, asistentul auto inteligent al platformei Mulberry. "
+    "Ajuți utilizatorii cu întrebări despre vehiculele lor, mentenanță, diagnosticare, "
+    "asigurări și servicii auto. Fii concis, prietenos și profesionist. "
+    "Răspunde în limba utilizatorului."
+  )
+  payload = json.dumps({
+    "systemInstruction": {"parts": [{"text": _SYSTEM}]},
+    "contents": inp.contents
+  }).encode("utf-8")
+  def _call():
+    req = _urlreq.Request(_GEMINI_URL, data=payload, headers={"Content-Type": "application/json"})
+    with _urlreq.urlopen(req, timeout=30) as resp:
+      return json.loads(resp.read())
+  try:
+    loop = asyncio.get_event_loop()
+    data = await loop.run_in_executor(None, _call)
+    text = data["candidates"][0]["content"]["parts"][0]["text"]
+    return {"response": text}
+  except Exception as e:
+    raise HTTPException(status_code=502, detail=f"Gemini error: {e}")
 
 
 @app.get("/debug/status")
