@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulberry for Business — Înregistrare Companie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --yellow: #ECFF54; --white: #FFFFFF; --black: #0A0A0A;
+  --gray: #F5F5F3; --muted: #6B6B6B; --border: #E2E2E0;
+  --navy: #050D1A; --green: #00B86A; --green-light: #10D878;
+  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-head: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+  --max: 1200px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+input, select, textarea, button { font-family: var(--font); }
+
+/* ── NAV ──────────────────────────────────────────── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #000; border-bottom: 1px solid rgba(255,255,255,.08);
+  height: 66px; display: flex; align-items: center;
+}
+.nav-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 32px;
+  width: 100%; display: flex; align-items: center; gap: 14px;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; text-decoration: none; }
+.nav-wordmark { height: 36px; width: auto; display: block; }
+.nav-logo-img { height: 34px; width: auto; display: block; }
+.nav-logo-name { font-family: var(--font-head); font-size: 20px; font-weight: 800; letter-spacing: -.3px; color: var(--white); }
+.nav-biz-badge {
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  color: var(--green); background: rgba(0,184,106,.15);
+  border: 1px solid rgba(0,184,106,.28); padding: 3px 9px; border-radius: 6px;
+}
+.nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.nav-back {
+  font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,.5);
+  padding: 8px 13px; border-radius: 8px; display: flex; align-items: center; gap: 5px;
+  transition: background .15s, color .15s;
+}
+.nav-back:hover { background: rgba(255,255,255,.09); color: var(--white); }
+.nav-login { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.65); padding: 9px 15px; border-radius: 8px; transition: background .15s; }
+.nav-login:hover { background: rgba(255,255,255,.1); }
+
+/* ── HERO ─────────────────────────────────────────── */
+.biz-hero {
+  background: linear-gradient(125deg, #000000 0%, #000A04 26%, #004832 58%, #00B86A 84%, #10D878 100%);
+  padding: 68px 32px 80px;
+  position: relative; overflow: hidden;
+  min-height: 540px; display: flex; align-items: center;
+}
+.biz-hero::before {
+  content: ''; position: absolute; top: -100px; left: -60px;
+  width: 600px; height: 500px;
+  background: radial-gradient(ellipse at center, rgba(236,255,84,.08) 0%, transparent 56%);
+  pointer-events: none;
+}
+.biz-hero-bg-mark {
+  position: absolute; right: -4%; top: 50%; transform: translateY(-50%);
+  width: 50%; pointer-events: none; z-index: 0;
+}
+.biz-hero-bg-mark svg { width: 100%; height: auto; display: block; }
+.biz-hero-inner {
+  max-width: var(--max); margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 500px;
+  gap: 56px; align-items: center;
+  position: relative; z-index: 1;
+}
+.biz-hero-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--yellow); opacity: .8; margin-bottom: 18px;
+}
+.biz-hero-h1 {
+  font-family: var(--font-head);
+  font-size: clamp(28px, 3.2vw, 48px);
+  font-weight: 700; line-height: 1.08; letter-spacing: -.4px;
+  color: var(--white); margin-bottom: 16px;
+}
+.biz-hero-h1 .acc { color: var(--yellow); }
+.biz-hero-desc {
+  font-size: 14px; font-weight: 300; color: rgba(255,255,255,.52);
+  line-height: 1.72; max-width: 400px; margin-bottom: 28px;
+}
+.biz-pills { display: flex; gap: 9px; flex-wrap: wrap; }
+.biz-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.1); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 20px; padding: 6px 13px;
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,.72);
+}
+.biz-pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+/* ── REGISTRATION CARD ────────────────────────────── */
+.biz-form-card {
+  background: var(--white); border-radius: 20px;
+  padding: 32px 28px 26px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.45);
+  max-height: 88vh; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+.biz-form-card::-webkit-scrollbar { width: 4px; }
+.biz-form-card::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.biz-form-ttl { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 3px; }
+.biz-form-sub { font-size: 12px; font-weight: 400; color: var(--muted); margin-bottom: 20px; }
+
+/* Tabs */
+.biz-tabs {
+  display: flex; gap: 0; margin-bottom: 22px;
+  background: var(--gray); border-radius: 10px; padding: 3px;
+}
+.biz-tab {
+  flex: 1; text-align: center; padding: 8px 6px;
+  font-size: 13px; font-weight: 600; color: var(--muted);
+  border-radius: 8px; cursor: pointer; border: none;
+  background: transparent; font-family: var(--font);
+  transition: background .15s, color .15s, box-shadow .15s;
+}
+.biz-tab.active {
+  background: var(--white); color: var(--black);
+  box-shadow: 0 1px 6px rgba(0,0,0,.1);
+}
+
+/* Form panels */
+.biz-form-panel { display: none; flex-direction: column; gap: 13px; }
+.biz-form-panel.active { display: flex; }
+.biz-section-sep {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+  border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-top: 4px;
+}
+.biz-row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.biz-field { display: flex; flex-direction: column; gap: 4px; }
+.biz-label { font-size: 11.5px; font-weight: 600; color: var(--black); }
+.biz-label em { font-style: normal; font-weight: 400; color: var(--muted); }
+.biz-input {
+  height: 40px; padding: 0 11px;
+  font-size: 13px; font-weight: 400;
+  border: 1.5px solid var(--border); border-radius: 9px;
+  background: var(--white); color: var(--black);
+  outline: none; transition: border-color .14s, box-shadow .14s;
+  font-family: var(--font);
+}
+.biz-input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(0,184,106,.11); }
+.biz-input::placeholder { color: #C0C0BE; }
+.biz-select {
+  height: 40px; padding: 0 11px;
+  font-size: 13px; border: 1.5px solid var(--border); border-radius: 9px;
+  background: var(--white); color: var(--black); outline: none;
+  cursor: pointer; font-family: var(--font); transition: border-color .14s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 11px center;
+  padding-right: 32px;
+}
+.biz-select:focus { border-color: var(--green); }
+.biz-submit {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; background: var(--yellow); color: var(--black);
+  font-family: var(--font-head); font-size: 14px; font-weight: 800;
+  padding: 13px 20px; border-radius: 10px; border: none;
+  cursor: pointer; margin-top: 4px; transition: opacity .15s;
+}
+.biz-submit:hover { opacity: .88; }
+.biz-terms {
+  font-size: 10.5px; color: var(--muted); text-align: center;
+  line-height: 1.65;
+}
+.biz-terms a { color: var(--black); font-weight: 600; }
+
+/* ── BENEFITS ─────────────────────────────────────── */
+.biz-benefits { background: var(--white); padding: 88px 32px; }
+.biz-benefits-inner { max-width: var(--max); margin: 0 auto; }
+.biz-ben-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 12px;
+}
+.biz-ben-h2 {
+  font-family: var(--font-head);
+  font-size: clamp(24px, 2.8vw, 38px);
+  font-weight: 700; letter-spacing: -.3px; color: var(--black);
+  line-height: 1.12; margin-bottom: 40px;
+}
+.biz-ben-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.biz-ben-card {
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 26px 22px; transition: border-color .15s, box-shadow .15s;
+}
+.biz-ben-card:hover { border-color: var(--green); box-shadow: 0 4px 24px rgba(0,184,106,.1); }
+.biz-ben-ico {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: #00B86A;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; flex-shrink: 0;
+}
+.biz-ben-ico svg { width: 22px; height: 22px; }
+.biz-ben-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 8px; }
+.biz-ben-desc { font-size: 13px; font-weight: 400; color: var(--muted); line-height: 1.58; }
+
+/* ── FOOTER ───────────────────────────────────────── */
+footer {
+  background: var(--navy); padding: 32px;
+  text-align: center; border-top: 1px solid rgba(255,255,255,.06);
+}
+.ft-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+.ft-copy a { color: rgba(255,255,255,.45); transition: color .15s; }
+.ft-copy a:hover { color: var(--white); }
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 960px) {
+  .biz-hero-inner { grid-template-columns: 1fr; }
+  .biz-hero-bg-mark { display: none; }
+  .biz-ben-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .biz-form-card { max-height: none; }
+}
+@media (max-width: 600px) {
+  .biz-hero { padding: 48px 20px 56px; min-height: auto; }
+  .biz-benefits { padding: 56px 20px; }
+  .biz-form-card { padding: 24px 16px 20px; }
+  .biz-row { grid-template-columns: 1fr; }
+  .biz-ben-grid { grid-template-columns: 1fr; }
+  .nav-inner { padding: 0 16px; }
+  .nav-biz-badge { display: none; }
+}
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">
+      <img src="/mulberry-wordmark.svg" alt="Mulberry" class="nav-wordmark">
+      <span class="nav-biz-badge">for Business</span>
+    </a>
+    <div class="nav-actions">
+      <a class="nav-back" href="/">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Înapoi la Mulberry
+      </a>
+      <a class="nav-login" href="/mulberry_app.html">Autentificare</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<section class="biz-hero">
+  <div class="biz-hero-bg-mark" aria-hidden="true">
+    <svg viewBox="0 0 262 218" xmlns="http://www.w3.org/2000/svg">
+      <path fill="white" d="M96.861572,118.084030 C97.029518,120.882790 96.421371,122.099976 93.577713,122.066284 C80.934906,121.916496 68.289314,122.001328 55.668179,122.001328 C52.690945,93.419327 78.224258,51.846504 123.023270,47.175724 C165.442413,42.753059 204.047531,77.584503 204.885315,121.617363 C191.185471,121.617363 177.484940,121.617363 163.402390,121.617363 C162.654221,110.776733 158.437820,101.565544 149.385803,94.948090 C143.248291,90.461281 136.361481,88.336647 128.801987,88.683388 C112.131081,89.448067 99.432487,101.043526 96.861572,118.084030z"/>
+      <path fill="white" d="M157.999786,138.830322 C164.162888,138.832779 169.827957,138.923935 175.488495,138.803558 C178.753693,138.734116 181.614380,139.966537 181.718506,143.108810 C181.796234,145.455154 180.415695,148.918320 178.556488,150.082153 C168.557007,156.341690 158.388382,162.390366 147.926956,167.837357 C135.168152,174.480591 122.200729,173.649734 109.718468,166.750534 C100.405632,161.603149 91.313904,156.057098 82.076164,150.771667 C78.995720,149.009171 77.178337,146.646027 78.089699,143.043259 C79.061211,139.202698 82.118904,138.789703 85.544411,138.798706 C109.529427,138.861725 133.514679,138.831039 157.999786,138.830322z"/>
+    </svg>
+  </div>
+
+  <div class="biz-hero-inner">
+
+    <!-- Left: headline -->
+    <div>
+      <div class="biz-hero-tag">Mulberry · For Business</div>
+      <h1 class="biz-hero-h1">Șoferi verificați.<br><span class="acc">Date protejate.</span></h1>
+      <p class="biz-hero-desc">Conectează-ți firma la o rețea de șoferi cu istoric de asigurare verificat. Date în timp real, alerte automate, fără hârtii — construit pentru business-urile din România.</p>
+      <div class="biz-pills">
+        <div class="biz-pill"><span class="biz-pill-dot"></span>SRL · SA · PFA</div>
+        <div class="biz-pill"><span class="biz-pill-dot"></span>Verificare instantă</div>
+        <div class="biz-pill"><span class="biz-pill-dot"></span>Date stocate în România</div>
+      </div>
+    </div>
+
+    <!-- Right: registration form -->
+    <div class="biz-form-card">
+      <div class="biz-form-ttl">Înregistrare companie</div>
+      <div class="biz-form-sub">Completează datele firmei sau PFA-ului tău</div>
+
+      <div class="biz-tabs">
+        <button class="biz-tab active" data-panel="srl">SRL</button>
+        <button class="biz-tab" data-panel="sa">SA</button>
+        <button class="biz-tab" data-panel="pfa">PFA</button>
+      </div>
+
+      <!-- ── SRL ── -->
+      <div class="biz-form-panel active" id="panel-srl">
+        <div class="biz-section-sep">Identificare firmă</div>
+        <div class="biz-field">
+          <label class="biz-label">Denumire SRL <em>*</em></label>
+          <input class="biz-input" type="text" placeholder="Ex: Mulberry Technologies SRL">
+        </div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">CUI / CIF <em>*</em></label>
+            <input class="biz-input" type="text" placeholder="RO12345678">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Nr. Reg. Comerțului <em>*</em></label>
+            <input class="biz-input" type="text" placeholder="J40/1234/2024">
+          </div>
+        </div>
+        <div class="biz-field">
+          <label class="biz-label">Adresă sediu social <em>*</em></label>
+          <input class="biz-input" type="text" placeholder="Str. Exemplu nr. 1, sector 1, București">
+        </div>
+        <div class="biz-section-sep">Reprezentant legal</div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">Nume complet <em>*</em></label>
+            <input class="biz-input" type="text" placeholder="Ion Popescu">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Calitate</label>
+            <select class="biz-select">
+              <option value="">Selectează...</option>
+              <option>Administrator</option>
+              <option>Director General</option>
+              <option>Asociat unic</option>
+              <option>Împuternicit</option>
+              <option>Altele</option>
+            </select>
+          </div>
+        </div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">Email business <em>*</em></label>
+            <input class="biz-input" type="email" placeholder="contact@firma.ro">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Telefon <em>*</em></label>
+            <input class="biz-input" type="tel" placeholder="+40 7xx xxx xxx">
+          </div>
+        </div>
+        <div class="biz-section-sep">Cont Mulberry Business</div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">Parolă <em>*</em></label>
+            <input class="biz-input" type="password" placeholder="Min. 8 caractere">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Confirmare parolă <em>*</em></label>
+            <input class="biz-input" type="password" placeholder="Repetă parola">
+          </div>
+        </div>
+        <button class="biz-submit">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Creează cont SRL →
+        </button>
+        <p class="biz-terms">Prin continuare, accepți <a href="#">Termenii</a> și <a href="#">Politica de confidențialitate</a>. Date stocate în România.</p>
+      </div>
+
+      <!-- ── SA ── -->
+      <div class="biz-form-panel" id="panel-sa">
+        <div class="biz-section-sep">Identificare societate</div>
+        <div class="biz-field">
+          <label class="biz-label">Denumire SA <em>*</em></label>
+          <input class="biz-input" type="text" placeholder="Ex: Mulberry Technologies SA">
+        </div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">CUI / CIF <em>*</em></label>
+            <input class="biz-input" type="text" placeholder="RO12345678">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Nr. Reg. Comerțului <em>*</em></label>
+            <input class="biz-input" type="text" placeholder="J40/1234/2024">
+          </div>
+        </div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">Capital social <em>(RON)</em></label>
+            <input class="biz-input" type="text" placeholder="Ex: 250.000">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Număr acțiuni</label>
+            <input class="biz-input" type="text" placeholder="Ex: 25.000">
+          </div>
+        </div>
+        <div class="biz-field">
+          <label class="biz-label">Adresă sediu social <em>*</em></label>
+          <input class="biz-input" type="text" placeholder="Str. Exemplu nr. 1, București">
+        </div>
+        <div class="biz-section-sep">Director general</div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">Nume complet <em>*</em></label>
+            <input class="biz-input" type="text" placeholder="Ion Popescu">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Email business <em>*</em></label>
+            <input class="biz-input" type="email" placeholder="director@firma.ro">
+          </div>
+        </div>
+        <div class="biz-field">
+          <label class="biz-label">Telefon <em>*</em></label>
+          <input class="biz-input" type="tel" placeholder="+40 7xx xxx xxx">
+        </div>
+        <div class="biz-section-sep">Cont Mulberry Business</div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">Parolă <em>*</em></label>
+            <input class="biz-input" type="password" placeholder="Min. 8 caractere">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Confirmare parolă <em>*</em></label>
+            <input class="biz-input" type="password" placeholder="Repetă parola">
+          </div>
+        </div>
+        <button class="biz-submit">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Creează cont SA →
+        </button>
+        <p class="biz-terms">Prin continuare, accepți <a href="#">Termenii</a> și <a href="#">Politica de confidențialitate</a>. Date stocate în România.</p>
+      </div>
+
+      <!-- ── PFA ── -->
+      <div class="biz-form-panel" id="panel-pfa">
+        <div class="biz-section-sep">Identificare PFA</div>
+        <div class="biz-field">
+          <label class="biz-label">Denumire PFA <em>*</em></label>
+          <input class="biz-input" type="text" placeholder="Ex: Popescu Ion PFA">
+        </div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">CNP <em>*</em></label>
+            <input class="biz-input" type="text" placeholder="1234567890123" maxlength="13">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">CUI <em>(dacă există)</em></label>
+            <input class="biz-input" type="text" placeholder="RO12345678">
+          </div>
+        </div>
+        <div class="biz-field">
+          <label class="biz-label">Cod CAEN <em>(activitate principală)</em></label>
+          <input class="biz-input" type="text" placeholder="Ex: 6612 — Activități ale dealerilor">
+        </div>
+        <div class="biz-field">
+          <label class="biz-label">Adresă sediu profesional <em>*</em></label>
+          <input class="biz-input" type="text" placeholder="Str. Exemplu nr. 1, Județ">
+        </div>
+        <div class="biz-section-sep">Contact</div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">Email <em>*</em></label>
+            <input class="biz-input" type="email" placeholder="email@exemplu.ro">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Telefon <em>*</em></label>
+            <input class="biz-input" type="tel" placeholder="+40 7xx xxx xxx">
+          </div>
+        </div>
+        <div class="biz-section-sep">Cont Mulberry Business</div>
+        <div class="biz-row">
+          <div class="biz-field">
+            <label class="biz-label">Parolă <em>*</em></label>
+            <input class="biz-input" type="password" placeholder="Min. 8 caractere">
+          </div>
+          <div class="biz-field">
+            <label class="biz-label">Confirmare parolă <em>*</em></label>
+            <input class="biz-input" type="password" placeholder="Repetă parola">
+          </div>
+        </div>
+        <button class="biz-submit">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Creează cont PFA →
+        </button>
+        <p class="biz-terms">Prin continuare, accepți <a href="#">Termenii</a> și <a href="#">Politica de confidențialitate</a>. Date stocate în România.</p>
+      </div>
+
+    </div><!-- /form card -->
+  </div><!-- /hero-inner -->
+</section>
+
+<!-- ── BENEFITS ──────────────────────────────────────── -->
+<section class="biz-benefits">
+  <div class="biz-benefits-inner">
+    <div class="biz-ben-eyebrow">De ce Mulberry Business</div>
+    <h2 class="biz-ben-h2">Tot ce are nevoie o firmă<br>pentru a gestiona parcul auto.</h2>
+    <div class="biz-ben-grid">
+      <div class="biz-ben-card">
+        <div class="biz-ben-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 9 3 3 9 3"/><polyline points="21 9 21 3 15 3"/>
+            <polyline points="3 15 3 21 9 21"/><polyline points="21 15 21 21 15 21"/>
+            <rect x="8" y="8" width="8" height="8" rx="1"/>
+          </svg>
+        </div>
+        <div class="biz-ben-title">Verificare instantă QR</div>
+        <p class="biz-ben-desc">Scanezi orice YellowCard și primești instant istoricul de asigurare, ITP și service. Fără telefoane, fără hârtii.</p>
+      </div>
+      <div class="biz-ben-card">
+        <div class="biz-ben-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="biz-ben-title">Date validate ANAF</div>
+        <p class="biz-ben-desc">CUI-ul și datele firmei sunt validate automat. Fiecare partener din rețea este identificat și autentificat.</p>
+      </div>
+      <div class="biz-ben-card">
+        <div class="biz-ben-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 01-3.46 0"/>
+          </svg>
+        </div>
+        <div class="biz-ben-title">Alerte expirare automate</div>
+        <p class="biz-ben-desc">MulberryEXO trimite notificări înainte ca orice RCA sau ITP să expire pentru întregul tău parc de vehicule.</p>
+      </div>
+      <div class="biz-ben-card">
+        <div class="biz-ben-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+          </svg>
+        </div>
+        <div class="biz-ben-title">Rețea de asigurători</div>
+        <p class="biz-ben-desc">Allianz, Generali, OMNIASIG, ASIROM și Groupama — toți recunosc și validează datele Mulberry.</p>
+      </div>
+      <div class="biz-ben-card">
+        <div class="biz-ben-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 17H3v-5l3-6h12l3 6v5h-2"/>
+            <circle cx="7" cy="17" r="2"/>
+            <circle cx="17" cy="17" r="2"/>
+            <path d="M9 17h6"/>
+          </svg>
+        </div>
+        <div class="biz-ben-title">MulberryID pentru flote</div>
+        <p class="biz-ben-desc">Gestionezi toate vehiculele companiei dintr-un singur dashboard. Un cod MLRB per mașină, un QR per șofer.</p>
+      </div>
+      <div class="biz-ben-card">
+        <div class="biz-ben-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <div class="biz-ben-title">AI pentru oferte RCA</div>
+        <p class="biz-ben-desc">MulberryAI propune automat cele mai bune oferte RCA și CASCO pentru fiecare vehicul din parc.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────── -->
+<footer>
+  <span class="ft-copy">© 2025 Mulberry Technologies SRL &nbsp;·&nbsp; <a href="/">mulberry.autos</a> &nbsp;·&nbsp; <a href="#">Termeni</a> &nbsp;·&nbsp; <a href="#">Confidențialitate</a></span>
+</footer>
+
+<script>
+document.querySelectorAll('.biz-tab').forEach(function (tab) {
+  tab.addEventListener('click', function () {
+    var panel = tab.dataset.panel;
+    document.querySelectorAll('.biz-tab').forEach(function (t) { t.classList.remove('active'); });
+    document.querySelectorAll('.biz-form-panel').forEach(function (p) { p.classList.remove('active'); });
+    tab.classList.add('active');
+    document.getElementById('panel-' + panel).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

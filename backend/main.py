@@ -351,7 +351,6 @@ def make_token(user_id: int, identifier: str, role: str = "user") -> str:
   payload = {"sub": str(user_id), "identifier": identifier, "role": role, "exp": exp}
   return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALG)
 
-
 def _user_from_jwt_token(token: str) -> database.UserRow:
   try:
     payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALG])
@@ -485,6 +484,32 @@ def optional_device_fingerprint(
 # ────────────────────────────────────────────────────────────────
 
 app = FastAPI(title="Mulberry API", version="1.2")
+
+
+@app.post("/auth/google/exchange")
+def google_token_exchange(body: dict = Body(...)):
+  """Schimbă tokenul Supabase cu un JWT backend."""
+  supabase_token = body.get("access_token")
+  if not supabase_token:
+    raise HTTPException(status_code=400, detail="Token lipsă")
+  try:
+    from supabase import create_client
+    _sb_url = os.getenv("SUPABASE_URL", "")
+    _sb_key = os.getenv("SUPABASE_SERVICE_KEY", "")
+    sb = create_client(_sb_url, _sb_key)
+    user_resp = sb.auth.get_user(supabase_token)
+    email = user_resp.user.email
+  except Exception:
+    raise HTTPException(status_code=401, detail="Token Supabase invalid")
+  user = database.get_user_by_identifier(email)
+  if not user:
+    import secrets, bcrypt as _bcrypt
+    fake_pw = secrets.token_hex(32).encode("utf-8")
+    fake_hash = _bcrypt.hashpw(fake_pw, _bcrypt.gensalt()).decode("ascii")
+    user = database.create_user(identifier=email, password_hash=fake_hash)
+  token = make_token(user_id=user.id, identifier=email, role=user.role or "user")
+  return TokenOut(access_token=token, role=user.role or "user")
+
 
 # CORS: dev local + producție Mulberry/Vercel + supliment din MULBERRY_CORS_ORIGINS
 def _resolve_cors_origins() -> List[str]:
@@ -739,7 +764,9 @@ def exo_chat(inp: ExoChatIn, current: database.UserRow = Depends(require_device_
 async def gemini_chat_proxy(inp: GeminiChatIn):
   """Proxy Gemini 2.0 Flash — cheia API rămâne pe server, nu în sursa paginii."""
   import urllib.request as _urlreq
-  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyDNqrg7_tIZ0COV8mpQqI1FmLoAa0HOR_Q")
+  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+  if not _GEMINI_KEY:
+    raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured on server")
   _GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={_GEMINI_KEY}"
   _SYSTEM = (
     "Ești MulberryAI, asistentul auto inteligent al platformei Mulberry. "
@@ -762,6 +789,58 @@ async def gemini_chat_proxy(inp: GeminiChatIn):
     return {"response": text}
   except Exception as e:
     raise HTTPException(status_code=502, detail=f"Gemini error: {e}")
+
+
+class TalonScanIn(BaseModel):
+  image: str      # base64
+  mime_type: str  # image/jpeg | image/png
+
+
+@app.post("/api/scan-talon")
+async def scan_talon(inp: TalonScanIn):
+  """OCR certificat de înmatriculare (talon) via Gemini Vision."""
+  import urllib.request as _urlreq
+  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+  if not _GEMINI_KEY:
+    raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured on server")
+  _GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={_GEMINI_KEY}"
+  prompt = (
+    "Ești un expert în documente auto românești. Analizează această imagine a unui certificat de înmatriculare "
+    "(talon) și extrage EXACT următoarele câmpuri în format JSON:\n"
+    "{\n"
+    '  "vin": "...",\n'
+    '  "plate": "...",\n'
+    '  "owner": "...",\n'
+    '  "brand": "...",\n'
+    '  "model": "...",\n'
+    '  "year": "..."\n'
+    "}\n"
+    "Dacă un câmp nu este vizibil sau lizibil, pune null. Răspunde DOAR cu JSON-ul, fără explicații."
+  )
+  payload = json.dumps({
+    "contents": [{
+      "parts": [
+        {"text": prompt},
+        {"inline_data": {"mime_type": inp.mime_type, "data": inp.image}}
+      ]
+    }]
+  }).encode("utf-8")
+  def _call():
+    req = _urlreq.Request(_GEMINI_URL, data=payload, headers={"Content-Type": "application/json"})
+    with _urlreq.urlopen(req, timeout=30) as resp:
+      return json.loads(resp.read())
+  try:
+    loop = asyncio.get_event_loop()
+    data = await loop.run_in_executor(None, _call)
+    raw = data["candidates"][0]["content"]["parts"][0]["text"]
+    # Curăță markdown code blocks dacă Gemini le adaugă
+    raw = raw.strip().lstrip("```json").lstrip("```").rstrip("```").strip()
+    extracted = json.loads(raw)
+    return extracted
+  except json.JSONDecodeError:
+    raise HTTPException(status_code=422, detail="Nu am putut interpreta răspunsul AI. Încearcă o poză mai clară.")
+  except Exception as e:
+    raise HTTPException(status_code=502, detail=f"Eroare OCR: {e}")
 
 
 @app.get("/debug/status")

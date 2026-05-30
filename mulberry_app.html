@@ -799,32 +799,6 @@ a{color:inherit;text-decoration:none}
 .nd-act-sub{font-size:11px;color:#999}
 .nd-act-arr{color:rgba(0,0,0,.2)}
 
-/* module card grid */
-.nd-mod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 10px}
-.nd-mod-card{background:var(--nd-card);border:.5px solid rgba(0,0,0,.06);border-radius:var(--nd-r);padding:14px;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:var(--nd-shadow);-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
-.nd-mod-card:hover{transform:translateY(-2px);box-shadow:var(--nd-shadow-lg)}
-.nd-mod-card:active{transform:scale(.97)}
-.nd-mod-tag{display:inline-flex;align-items:center;background:rgba(0,0,0,.06);border-radius:20px;padding:3px 8px;font-size:10px;font-weight:600;color:var(--nd-dim);letter-spacing:.1px;align-self:flex-start;margin-bottom:6px}
-.nd-mod-name{font-size:13px;font-weight:700;color:var(--nd-ink);line-height:1.3;letter-spacing:-.2px}
-.nd-mod-sub{font-size:11px;color:var(--nd-dim);margin-top:2px}
-.nd-mod-chart{display:flex;align-items:flex-end;gap:2px;height:28px;margin-top:10px}
-.nd-mod-bar{width:4px;border-radius:2px;flex-shrink:0;background:rgba(0,0,0,.10)}
-.nd-mod-bar.on{background:#3366ff}
-.nd-mod-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.nd-mod-arr{color:rgba(0,0,0,.22);flex-shrink:0}
-.nd-mod-screen{width:100%;height:36px;border-radius:10px;background:linear-gradient(135deg,#667eea,#764ba2,#f093fb);margin:8px 0 2px;position:relative;overflow:hidden}
-.nd-mod-screen::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.15)}
-.nd-mod-card.nd-mod-exo{background:var(--nd-yellow);border-color:rgba(0,0,0,.04)}
-.nd-mod-card.nd-mod-exo .nd-mod-tag{background:rgba(0,0,0,.1);color:rgba(0,0,0,.55)}
-.nd-mod-card.nd-mod-exo .nd-mod-bar{background:rgba(0,0,0,.12)}
-.nd-mod-card.nd-mod-exo .nd-mod-bar.on{background:rgba(0,0,0,.42)}
-.nd-mod-card.nd-mod-exo .nd-mod-arr{color:rgba(0,0,0,.3)}
-.nd-mod-card.nd-mod-ai{background:#1A1A1A;border-color:transparent}
-.nd-mod-card.nd-mod-ai .nd-mod-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.6)}
-.nd-mod-card.nd-mod-ai .nd-mod-name{color:#fff}
-.nd-mod-card.nd-mod-ai .nd-mod-sub{color:rgba(255,255,255,.45)}
-.nd-mod-card.nd-mod-ai .nd-mod-arr{color:rgba(255,255,255,.3)}
-
 /* family banner */
 .nd-family-banner{margin:0;background:linear-gradient(135deg,#6D28D9,#9333EA);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 4px 20px rgba(109,40,217,.25)}
 .nd-family-ico{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -898,9 +872,6 @@ a{color:inherit;text-decoration:none}
 
   /* activity card visible */
   .nd-activity-card{display:block;margin:0 0 10px;background:var(--nd-card);border:none;backdrop-filter:none;border-radius:var(--nd-r)}
-
-  /* module grid desktop */
-  .nd-mod-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:0 0 10px}
 
   /* family banner */
   .nd-family-banner{margin:0}
@@ -1312,94 +1283,92 @@ a{color:inherit;text-decoration:none}
           <!-- RIGHT: actions + features -->
           <div class="nd-col-right">
 
-            <!-- Module grid -->
-            <div class="nd-mod-grid">
-
-              <!-- MulberryGO -->
-              <div class="nd-mod-card" onclick="goPanel('marketplace')">
-                <div>
-                  <div class="nd-mod-tag">MulberryGO</div>
-                  <div class="nd-mod-name">Servicii auto</div>
-                  <div class="nd-mod-sub">Marketplace verificat</div>
-                </div>
-                <div class="nd-mod-foot">
-                  <span></span>
-                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                </div>
+            <!-- Sort bar -->
+            <div class="nd-sortbar">
+              <div class="nd-sort-item">
+                <svg viewBox="0 0 18 14" width="15" height="13" fill="none"><rect x="0" y="0" width="18" height="2.5" rx="1.25" fill="#999"/><rect x="2" y="5.5" width="14" height="2.5" rx="1.25" fill="#999"/><rect x="4" y="11" width="10" height="2.5" rx="1.25" fill="#999"/></svg>
+                Sort by
               </div>
-
-              <!-- MulberryEXO -->
-              <div class="nd-mod-card nd-mod-exo" onclick="goPanel('analytics')">
-                <div>
-                  <div class="nd-mod-tag">MulberryEXO · Activ</div>
-                  <div class="nd-mod-name">Notificări</div>
-                  <div class="nd-mod-sub">Motor de alertare AI</div>
-                </div>
-                <div class="nd-mod-chart">
-                  <div class="nd-mod-bar" style="height:40%"></div><div class="nd-mod-bar on" style="height:70%"></div>
-                  <div class="nd-mod-bar" style="height:30%"></div><div class="nd-mod-bar on" style="height:90%"></div>
-                  <div class="nd-mod-bar" style="height:55%"></div><div class="nd-mod-bar on" style="height:100%"></div>
-                  <div class="nd-mod-bar" style="height:65%"></div><div class="nd-mod-bar on" style="height:50%"></div>
-                </div>
+              <div class="nd-sort-item">
+                MulberryFAST
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
+            </div>
 
-              <!-- MulberryID -->
-              <div class="nd-mod-card" onclick="goPanel('yellowcard')">
-                <div>
-                  <div class="nd-mod-tag">MulberryID</div>
-                  <div class="nd-mod-name">YCR Identity</div>
-                  <div class="nd-mod-sub">QR · HMAC signed</div>
-                </div>
-                <div class="nd-mod-foot">
-                  <svg width="22" height="22" viewBox="0 0 28 28" fill="none" opacity=".18">
-                    <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="4" width="6" height="6" fill="#000"/>
-                    <rect x="16" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="18" y="4" width="6" height="6" fill="#000"/>
-                    <rect x="2" y="16" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="18" width="6" height="6" fill="#000"/>
-                    <rect x="16" y="16" width="4" height="4" fill="#000"/><rect x="22" y="16" width="4" height="4" fill="#000"/>
-                    <rect x="16" y="22" width="4" height="4" fill="#000"/><rect x="22" y="22" width="4" height="4" fill="#000"/>
+            <!-- Icon grid — bold filled icons -->
+            <div class="nd-icons-row">
+              <button class="nd-icon-btn" onclick="goPanel('marketplace')">
+                <div class="nd-icon-circle">
+                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+                    <rect x="2" y="9" width="18" height="13" rx="2.5" fill="rgba(255,255,255,0.9)"/>
+                    <path d="M20 13h5l3 3.5V22h-8V13z" fill="rgba(255,255,255,0.72)"/>
+                    <circle cx="8" cy="24.5" r="3.5" fill="rgba(255,255,255,0.9)"/>
+                    <circle cx="23" cy="24.5" r="3.5" fill="rgba(255,255,255,0.72)"/>
                   </svg>
-                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
-              </div>
+                <span class="nd-icon-lbl">Mulberry<br>GO</span>
+              </button>
+              <button class="nd-icon-btn" onclick="goPanel('yellowcard')">
+                <div class="nd-icon-circle">
+                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+                    <rect x="4" y="4" width="10" height="10" rx="2" fill="rgba(255,255,255,0.9)"/>
+                    <rect x="18" y="4" width="10" height="10" rx="2" fill="rgba(255,255,255,0.72)"/>
+                    <rect x="4" y="18" width="10" height="10" rx="2" fill="rgba(255,255,255,0.72)"/>
+                    <rect x="18" y="18" width="10" height="10" rx="2" fill="rgba(255,255,255,0.5)"/>
+                  </svg>
+                </div>
+                <span class="nd-icon-lbl">Mulberry<br>ID</span>
+              </button>
+              <button class="nd-icon-btn" onclick="goPanel('analytics')">
+                <div class="nd-icon-circle">
+                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+                    <path d="M16 4C11 4 8 8.5 8 12.5V21L5 24H27L24 21V12.5C24 8.5 21 4 16 4Z" fill="rgba(255,255,255,0.88)"/>
+                    <rect x="13" y="24" width="6" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+                    <circle cx="23" cy="7" r="4" fill="#E1FF00"/>
+                  </svg>
+                </div>
+                <span class="nd-icon-lbl">Mulberry<br>EXO</span>
+              </button>
+              <button class="nd-icon-btn" onclick="goPanel('cloud')">
+                <div class="nd-icon-circle">
+                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+                    <path d="M11 24Q6 24 6 19Q6 14 11 14Q10 8 17 8Q24 8 23 14Q27 14 27 19Q27 24 23 24Z" fill="rgba(255,255,255,0.88)"/>
+                    <path d="M17 12L17 21M14 15.5L17 12L20 15.5" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="nd-icon-lbl">Mulberry<br>Cloud</span>
+              </button>
+            </div>
 
-              <!-- MulberryCloud -->
-              <div class="nd-mod-card" onclick="goPanel('cloud')">
-                <div>
-                  <div class="nd-mod-tag">MulberryCloud</div>
-                  <div class="nd-mod-name">Documente</div>
-                  <div class="nd-mod-sub">Fișiere vehicul</div>
-                </div>
-                <div class="nd-mod-foot">
-                  <span></span>
-                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                </div>
+            <!-- MulberryAI -->
+            <div class="nd-feat-card" onclick="openGeminiModal()">
+              <div class="nd-feat-ico">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
+                  <circle cx="16" cy="16" r="4.5" fill="rgba(255,255,255,0.95)"/>
+                  <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="rgba(255,255,255,0.6)" stroke-width="2.4" stroke-linecap="round"/>
+                  <path d="M7.8 7.8l2.8 2.8M21.4 21.4l2.8 2.8M7.8 24.2l2.8-2.8M21.4 10.6l2.8-2.8" stroke="rgba(255,255,255,0.32)" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
               </div>
-
-              <!-- MulberryHUB -->
-              <div class="nd-mod-card" onclick="goPanel('hub')">
-                <div>
-                  <div class="nd-mod-tag">MulberryHUB</div>
-                  <div class="nd-mod-screen"></div>
-                </div>
-                <div class="nd-mod-foot">
-                  <span class="nd-mod-sub" id="nd-hub-sub">History · PDF</span>
-                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                </div>
+              <div class="nd-feat-content">
+                <div class="nd-feat-title">MulberryAI</div>
+                <div class="nd-feat-search" id="nd-ai-hint">Întreabă orice...</div>
               </div>
+            </div>
 
-              <!-- MulberryAI -->
-              <div class="nd-mod-card nd-mod-ai" onclick="openGeminiModal()">
-                <div>
-                  <div class="nd-mod-tag">MulberryAI</div>
-                  <div class="nd-mod-name">Asistent auto</div>
-                  <div class="nd-mod-sub" id="nd-ai-hint">Întreabă orice...</div>
-                </div>
-                <div class="nd-mod-foot">
-                  <span></span>
-                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                </div>
+            <!-- MulberryHUB -->
+            <div class="nd-feat-card" onclick="goPanel('hub')">
+              <div class="nd-feat-ico">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
+                  <rect x="8" y="5" width="16" height="22" rx="2.5" fill="rgba(255,255,255,0.72)"/>
+                  <line x1="12" y1="12" x2="20" y2="12" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="12" y1="17" x2="20" y2="17" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="12" y1="22" x2="16" y2="22" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+                </svg>
               </div>
-
+              <div class="nd-feat-content">
+                <div class="nd-feat-title">MulberryHUB</div>
+                <div class="nd-feat-sub" id="nd-hub-sub">History · PDF</div>
+              </div>
             </div>
 
             <!-- Activity (desktop only) -->

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid — Servicii Client</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./grid-base.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #F5F5F7;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    /* ── Page header ── */
+    .grid-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: rgba(0,0,0,.35);
+      margin-bottom: 16px;
+    }
+
+    /* ════════════════════════════════════════════════
+       MULBERRY DASHBOARD GRID
+       Desktop: 3 coloane egale
+       Mobil:   carusel horizontal cu snap
+    ════════════════════════════════════════════════ */
+    .mulberry-dashboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    /* ── Card universal — Apple-inspired ── */
+    .card {
+      background-color: #ffffff;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Card 1: YellowCard */
+    .card:first-child {
+      background-color: #ECFF54;
+      color: #000000;
+    }
+
+    /* ── Card header ── */
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: inherit;
+      opacity: .55;
+      margin-bottom: 12px;
+    }
+
+    .card-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-value {
+      font-family: 'Manrope', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+      color: inherit;
+    }
+
+    .card-sub {
+      font-size: 13px;
+      font-weight: 500;
+      opacity: .5;
+    }
+
+    /* ── Card footer ── */
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0,0,0,.07);
+    }
+
+    .card:first-child .card-footer {
+      border-top-color: rgba(0,0,0,.12);
+    }
+
+    .card-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(0,0,0,.07);
+      color: inherit;
+    }
+
+    .card-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    .card-arrow:hover { background: rgba(0,0,0,.13); }
+
+    .card-arrow svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── Progress bar (card 2) ── */
+    .progress-wrap { margin-top: 12px; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0,0,0,.45);
+      margin-bottom: 6px;
+    }
+    .progress-bar {
+      height: 6px;
+      background: rgba(0,0,0,.07);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: #1a1a1a;
+      transition: width .4s ease;
+    }
+
+    /* ── Avatar contact (card 3) ── */
+    .contact-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #f0f0ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+    }
+
+    .contact-name {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+
+    .contact-role {
+      font-size: 12px;
+      color: rgba(0,0,0,.4);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      justify-content: center;
+      transition: opacity .15s;
+    }
+
+    .contact-btn:hover { opacity: .85; }
+
+    .contact-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ════════════════════════════════════════════════
+       MOBIL: carusel horizontal cu snap
+    ════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      body { padding: 16px; }
+
+      .mulberry-dashboard {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        padding-bottom: 8px;
+        /* ascunde scrollbar vizual */
+        scrollbar-width: none;
+      }
+
+      .mulberry-dashboard::-webkit-scrollbar { display: none; }
+
+      .card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        min-height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-label">Mulberry · Servicii Client</div>
+
+  <div class="mulberry-dashboard">
+
+    <!-- Card 1: Vehicle ID (YellowCard) -->
+    <div class="card">
+      <div>
+        <div class="card-title">Vehicle ID</div>
+        <div class="card-main">
+          <div class="card-value" id="sc-plate">B-12-MLB</div>
+          <div class="card-sub" id="sc-model">Volkswagen Golf · 2021</div>
+          <div class="card-sub" id="sc-vin" style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:4px;opacity:.4">VIN: WA0ZZ8K9DA1</div>
+        </div>
+      </div>
+      <!-- QR placeholder -->
+      <div style="width:60px;height:60px;background:rgba(0,0,0,.1);border-radius:10px;margin:12px 0;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="rgba(0,0,0,.4)" stroke-width="1.5">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <path d="M14 14h2v2h-2zM18 14h3v3h-3zM14 18h3v3h-3z"/>
+        </svg>
+      </div>
+      <div class="card-footer">
+        <span class="card-badge">Verificat ✓</span>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Service Progress -->
+    <div class="card">
+      <div>
+        <div class="card-title">Service Progress</div>
+        <div class="card-main">
+          <div class="card-value">Revizie completă</div>
+          <div class="card-sub">Estimat finalizare: 16:00</div>
+
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span>Progres</span>
+              <span id="sc-progress-pct">65%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="sc-progress-bar" style="width:65%"></div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(0,0,0,.6)">
+              <span style="color:#16a34a;font-size:15px">✓</span> Diagnoză OBD
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(0,0,0,.6)">
+              <span style="color:#16a34a;font-size:15px">✓</span> Schimb ulei + filtru
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(0,0,0,.45)">
+              <span style="color:#f59e0b;font-size:15px">○</span> Verificare frâne
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(0,0,0,.3)">
+              <span style="color:rgba(0,0,0,.2);font-size:15px">○</span> Spălătorie
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-badge">În lucru</span>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Contact Person -->
+    <div class="card">
+      <div>
+        <div class="card-title">Contact Person</div>
+        <div class="card-main">
+          <div class="contact-avatar" id="sc-avatar">A</div>
+          <div class="contact-name" id="sc-contact-name">Alexandru Ionescu</div>
+          <div class="contact-role" id="sc-contact-role">Tehnician Service · Autorizat Mulberry</div>
+
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+            <button class="contact-btn" onclick="window.location.href='tel:+40700000000'">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+              Sună acum
+            </button>
+            <button class="contact-btn" style="background:#f5f5f5;color:#1a1a1a;" onclick="window.location.href='sms:+40700000000'">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              Trimite mesaj
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-badge">Disponibil</span>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

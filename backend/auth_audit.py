@@ -97,7 +97,7 @@ def init_auth_audit_db() -> None:
         con.execute(
             """
             CREATE TABLE IF NOT EXISTS auth_audit (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              id SERIAL PRIMARY KEY,
               created_at TEXT NOT NULL,
               status TEXT NOT NULL,
               user_id INTEGER,

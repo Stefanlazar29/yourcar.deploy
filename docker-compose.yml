@@ -1,0 +1,61 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PORT: "8000"
+      SQLITE_PATH: /data/mulberry.db
+      AUTH_AUDIT_PATH: /data/auth_audit.db
+      CHROMA_PERSIST_PATH: /data/chroma_db
+      MULBERRY_UPLOAD_DIR: /data/uploads
+    volumes:
+      - mulberry_data:/data
+    networks:
+      - mulberry_net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+  nginx:
+    image: nginx:1.25-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./frontend:/usr/share/nginx/html:ro
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - mulberry_net
+  backup:
+    build:
+      context: .
+      dockerfile: Dockerfile.backup
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      SQLITE_PATH: /data/mulberry.db
+      AUTH_AUDIT_PATH: /data/auth_audit.db
+      BACKUP_INTERVAL_SEC: "3600"
+    volumes:
+      - mulberry_data:/data:ro
+    networks:
+      - mulberry_net
+    depends_on:
+      api:
+        condition: service_healthy
+volumes:
+  mulberry_data:
+networks:
+  mulberry_net:
+    driver: bridge

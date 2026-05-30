@@ -1,0 +1,14 @@
+# Job backup SQLite + upload S3-compatible (opțional boto3)
+FROM python:3.11-slim-bookworm
+
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir boto3
+
+COPY scripts/mulberry_backup.py /scripts/mulberry_backup.py
+COPY scripts/backup_loop.sh /scripts/backup_loop.sh
+RUN chmod +x /scripts/backup_loop.sh
+
+WORKDIR /scripts
+CMD ["/scripts/backup_loop.sh"]

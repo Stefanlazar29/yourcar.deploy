@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulberry ID</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .mlb-id-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+    .btn-mlb-neon {
+      display: block; width: 100%; text-align: center; padding: 14px 16px;
+      border-radius: 16px; border: none; font-family: var(--mlb-font); font-weight: 700;
+      font-size: 15px; cursor: pointer; background: var(--mlb-neon); color: #0a0a0a;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body class="mlb-page mlb-page--dark">
+  <div class="app" id="app" style="background:transparent;max-width:420px;margin:0 auto;">
+    <header class="mlb-head" style="background:#111;">
+      <div style="flex:1;">
+        <h1 class="mlb-h1" style="color:#fff;">Mulberry ID</h1>
+        <p class="mlb-muted" style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.5);">Vehicul legat de cont</p>
+      </div>
+    </header>
+    <div class="mlb-stack">
+      <div class="mlb-card mlb-card--neon">
+        <p class="mlb-eyebrow">Status</p>
+        <p style="font-size:18px;font-weight:800;margin:0;color:#0a0a0a;">Vehicul găsit</p>
+        <p class="mlb-muted" style="margin-top:12px;margin-bottom:0;">
+          Marcă: <strong id="display-marca">—</strong><br>
+          Nr: <strong id="display-nr">—</strong>
+        </p>
+      </div>
+      <div class="mlb-id-actions">
+        <button type="button" class="btn-mlb-neon" id="btn-go-dash">Mergi la MyMulberry</button>
+        <a href="mulberry_menu.html" class="mlb-link-dark" style="margin:0;">Deschide ID Hub (raport · PDF)</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/offline/appDB.js"></script>
+  <script src="js/offline/core.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var vehicle = (window.AppDB && typeof window.AppDB.getSavedVehicle === 'function')
+        ? window.AppDB.getSavedVehicle()
+        : null;
+
+      if (vehicle && (vehicle.marca || vehicle.nr || vehicle.plate || vehicle.vin)) {
+        var m = document.getElementById('display-marca');
+        var n = document.getElementById('display-nr');
+        if (m) m.textContent = vehicle.marca || vehicle.make || '—';
+        if (n) n.textContent = vehicle.nr || vehicle.plate || '—';
+      } else {
+        alert('Nu ai niciun vehicul înregistrat!');
+        window.location.href = 'mulberry.html';
+      }
+    });
+
+    document.getElementById('btn-go-dash').addEventListener('click', function() {
+      window.location.href = 'mulberry.html';
+    });
+  </script>
+</body>
+</html>

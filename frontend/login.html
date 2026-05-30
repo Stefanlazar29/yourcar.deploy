@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exoterra ID — Login</title>
+  <link rel="stylesheet" href="style.css">
+<style>
+/* ── GLASS PANELS BACKGROUND ─────────────────────── */
+html { height: 100%; }
+body.mlb-page {
+  background:
+    /* far-left cobalt blue panel */
+    radial-gradient(ellipse 20% 88% at -4% 72%,
+      rgba(18, 55, 255, 1)    0%,
+      rgba(10, 35, 210, 0.72) 32%,
+      transparent 62%),
+    /* left orange/gold panel */
+    radial-gradient(ellipse 17% 80% at 22% 66%,
+      rgba(255, 148, 8, 0.98)  0%,
+      rgba(215, 95,  5, 0.62)  36%,
+      transparent 63%),
+    /* center-left thin teal spike */
+    radial-gradient(ellipse 5% 76% at 43% 62%,
+      rgba(28, 195, 155, 0.92) 0%,
+      rgba(14, 145, 112, 0.52) 46%,
+      transparent 68%),
+    /* center-right thin teal spike */
+    radial-gradient(ellipse 5% 76% at 57% 62%,
+      rgba(28, 195, 155, 0.88) 0%,
+      rgba(14, 145, 112, 0.48) 46%,
+      transparent 68%),
+    /* right orange/gold panel */
+    radial-gradient(ellipse 17% 80% at 78% 66%,
+      rgba(255, 148, 8, 0.95)  0%,
+      rgba(215, 95,  5, 0.58)  36%,
+      transparent 63%),
+    /* far-right cobalt blue panel */
+    radial-gradient(ellipse 20% 88% at 104% 72%,
+      rgba(18, 55, 255, 0.96)  0%,
+      rgba(10, 35, 210, 0.66)  32%,
+      transparent 62%),
+    /* floor ambient */
+    radial-gradient(ellipse 100% 18% at 50% 100%,
+      rgba(15, 35, 110, 0.38)  0%,
+      transparent 70%),
+    #000 !important;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+body.mlb-page .app {
+  background: transparent !important;
+}
+body.mlb-page #s-auth {
+  background: transparent !important;
+}
+/* Glassmorphism card over the vivid background */
+body.mlb-page .mlb-card.mlb-card--dark {
+  background: rgba(6, 6, 8, 0.76) !important;
+  backdrop-filter: blur(22px) saturate(1.5) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  box-shadow: 0 16px 52px rgba(0,0,0,0.72), 0 0 0 0.5px rgba(255,255,255,0.06) !important;
+}
+</style>
+</head>
+<body class="mlb-page">
+  <div class="app" id="app">
+    <div class="screen active" id="s-auth" style="position:relative;inset:auto;background:transparent;">
+      <div class="auth-wrap" style="padding-top:24px;">
+        <div class="mlb-card mlb-card--dark" style="margin-bottom:16px;padding:22px;">
+          <div class="step-header" style="margin-bottom:16px;">
+            <div>
+              <div class="step-title" style="color:#fff;">Exoterra ID</div>
+              <div class="step-sub" style="color:rgba(255,255,255,0.55);">Telefon / email + parolă</div>
+            </div>
+          </div>
+
+        <div class="step-body" style="padding:0;">
+          <div class="field">
+            <div class="flabel">Telefon sau Email</div>
+            <input class="finput" id="si-id" type="text" placeholder="+40 7XX XXX XXX sau email@exemplu.com" autocomplete="username">
+            <div class="ferr" id="si-err-id"></div>
+          </div>
+          <div class="field">
+            <div class="flabel">Parolă</div>
+            <input class="finput" id="si-pass" type="password" placeholder="Parola" autocomplete="current-password">
+            <div class="ferr" id="si-err-pass"></div>
+          </div>
+
+          <button class="btn btn-neon" id="btn-login" type="button">Intră în cont</button>
+          <button class="btn" id="btn-register" type="button" style="margin-top:10px;">Creează cont</button>
+
+          <div class="divider" style="margin-top:14px;"><span>viteză maximă · zero pop-up</span></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/mulberry_device.js"></script>
+  <script src="js/api_client.js"></script>
+  <script>
+    function showErr(id, msg) {
+      var el = document.getElementById(id);
+      if (el) { el.textContent = msg || ''; el.classList.toggle('show', !!msg); }
+    }
+
+    async function doLogin() {
+    var ident = document.getElementById('si-id').value;
+    var pass = document.getElementById('si-pass').value;
+    
+    if(!ident || !pass) return alert("Completează câmpurile!");
+
+    // Folosim Mulberry LocalBase
+    if (window.AppDB && typeof window.AppDB.login === 'function') {
+      await window.AppDB.login(ident, pass);
+    }
+    window.location.href = 'mulberry.html';
+   }
+
+    async function doRegister() {
+      showErr('si-err-id', '');
+      showErr('si-err-pass', '');
+      var ident = (document.getElementById('si-id').value || '').trim();
+      var pass = document.getElementById('si-pass').value || '';
+      if (!ident) { showErr('si-err-id', 'Introdu telefonul sau emailul.'); return; }
+      if (!pass || pass.length < 8) { showErr('si-err-pass', 'Parola trebuie să aibă minim 8 caractere.'); return; }
+      try {
+        await window.api.registerFromInputs();
+        window.location.href = 'mulberry.html';
+      } catch (e) {
+        showErr('si-err-pass', (e && e.message) ? e.message : 'Eroare la înregistrare.');
+      }
+    }
+
+    document.getElementById('btn-login').addEventListener('click', doLogin);
+    document.getElementById('btn-register').addEventListener('click', doRegister);
+    document.getElementById('si-pass').addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
+  </script>
+</body>
+</html>
+

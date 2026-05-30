@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulberry — MulberryFAST Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --lime:    #D4FF00;
+      --black:   #0a0a0a;
+      --white:   #ffffff;
+      --bg:      #F4F4F4;
+      --card:    #ffffff;
+      --card-dark: #111111;
+      --border:  rgba(0,0,0,.07);
+      --green:  #34C759;
+      --orange: #FF9500;
+      --blue:   #007AFF;
+      --dim:    rgba(0,0,0,.38);
+      --dim2:   rgba(0,0,0,.22);
+      --font:   'Inter', system-ui, sans-serif;
+      --sidebar: 80px;
+      --gap:     24px;
+      --pad:     32px;
+      --r-lg: 32px; --r-md: 28px; --r-sm: 24px;
+    }
+    html, body {
+      height: 100%; background: var(--bg);
+      font-family: var(--font); -webkit-font-smoothing: antialiased;
+      color: var(--black); overflow: hidden;
+    }
+
+    /* ── SHELL ── */
+    .shell { display: flex; height: 100vh; min-width: calc(var(--sidebar) + 1024px); }
+
+    /* ════════════════════════════════════════════════
+       SIDEBAR 80px — icon-only dark
+    ════════════════════════════════════════════════ */
+    .sidebar {
+      width: var(--sidebar); flex-shrink: 0;
+      background: var(--black);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 20px 0; gap: 2px; z-index: 10;
+    }
+    .sb-mark {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: var(--lime); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px; flex-shrink: 0;
+    }
+    .sb-mark svg { width: 22px; height: 22px; }
+    .sb-nav { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; padding: 0 12px; }
+    .si {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: none; background: transparent;
+      transition: background .15s; position: relative;
+    }
+    .si:hover { background: rgba(255,255,255,.08); }
+    .si.active { background: rgba(212,255,0,.15); }
+    .si svg {
+      width: 18px; height: 18px; stroke: rgba(255,255,255,.35);
+      stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round;
+      transition: stroke .15s;
+    }
+    .si:hover svg { stroke: rgba(255,255,255,.7); }
+    .si.active svg { stroke: var(--lime); }
+    .si::after {
+      content: attr(data-tip);
+      position: absolute; left: calc(100% + 10px); top: 50%; transform: translateY(-50%);
+      background: #222; color: #fff; font-size: 11px; font-weight: 600;
+      padding: 5px 10px; border-radius: 8px; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity .15s;
+    }
+    .si:hover::after { opacity: 1; }
+    .sb-sep { width: 32px; height: 1px; background: rgba(255,255,255,.08); margin: 8px 0; }
+    .sb-spacer { flex: 1; }
+    .sb-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--lime); color: var(--black);
+      font-size: 13px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; margin-top: 12px;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1; min-width: 1024px; overflow-y: auto;
+      padding: var(--pad); display: flex; flex-direction: column; gap: var(--gap);
+    }
+    .page-header { display: flex; align-items: flex-end; justify-content: space-between; }
+    .page-greeting { font-size: 12px; font-weight: 500; color: var(--dim); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .page-title { font-size: 28px; font-weight: 800; letter-spacing: -.6px; line-height: 1; }
+    .page-meta { font-size: 12px; font-weight: 500; color: var(--dim); }
+
+    /* ════════════════════════════════════════════════
+       BENTO GRID — 4 coloane
+    ════════════════════════════════════════════════ */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--gap);
+    }
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    .row-2  { grid-row: span 2; }
+
+    /* ════════ 1. YELLOWCARD 400×260 r:32 ════════ */
+    .card-yellow {
+      grid-column: span 2; height: 260px;
+      background: var(--lime); border-radius: var(--r-lg);
+      padding: 24px; display: flex; flex-direction: column;
+      justify-content: space-between; position: relative; overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(212,255,0,.2), 0 8px 32px rgba(212,255,0,.15);
+    }
+    .card-yellow::before {
+      content: 'M'; position: absolute; right: -12px; bottom: -24px;
+      font-size: 140px; font-weight: 900; color: rgba(0,0,0,.06);
+      line-height: 1; letter-spacing: -6px; pointer-events: none;
+    }
+    .yc-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+      background: rgba(0,0,0,.1); padding: 4px 10px; border-radius: 20px;
+      color: rgba(0,0,0,.55); width: fit-content;
+    }
+    .yc-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,.5); }
+    .yc-plate { font-size: 30px; font-weight: 900; letter-spacing: -1px; line-height: 1; }
+    .yc-model { font-size: 13px; font-weight: 600; color: rgba(0,0,0,.5); margin-top: 3px; }
+    .yc-footer { display: flex; align-items: center; justify-content: space-between; }
+    .yc-vin { font-size: 10px; font-weight: 700; color: rgba(0,0,0,.38); font-family: 'Courier New', monospace; letter-spacing: .06em; }
+    .yc-verify { display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; color: rgba(0,0,0,.45); }
+    .yc-verify svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ════════ 2. ACTION CARDS 188×188 r:28 dark ════════ */
+    .card-action {
+      height: 188px; background: var(--card-dark); border-radius: var(--r-md);
+      padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
+      cursor: pointer; border: 1px solid rgba(255,255,255,.06);
+      transition: transform .15s, background .15s; position: relative; overflow: hidden;
+    }
+    .card-action:hover { transform: translateY(-2px); background: #1a1a1a; }
+    .card-action::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity .2s;
+    }
+    .card-action:hover::before { opacity: 1; }
+    .ca-go::before   { background: linear-gradient(135deg, rgba(52,199,89,.1) 0%, transparent 65%); }
+    .ca-id::before   { background: linear-gradient(135deg, rgba(212,255,0,.1) 0%, transparent 65%); }
+    .ca-exo::before  { background: linear-gradient(135deg, rgba(255,149,0,.1) 0%, transparent 65%); }
+    .ca-cloud::before{ background: linear-gradient(135deg, rgba(0,122,255,.1) 0%, transparent 65%); }
+    .ca-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ca-icon svg { width: 20px; height: 20px; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .ca-label { font-size: 13px; font-weight: 700; color: rgba(255,255,255,.85); }
+    .ca-sub   { font-size: 11px; font-weight: 500; color: rgba(255,255,255,.3); margin-top: 2px; }
+
+    /* ════════ 3. STATUS CARD span:2 r:24 ════════ */
+    .card-status {
+      grid-column: span 2; background: var(--card);
+      border-radius: var(--r-sm); border: 1px solid var(--border);
+      padding: 18px 22px; display: flex; flex-direction: column; gap: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .status-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--dim2); }
+    .status-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .spill {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 20px;
+    }
+    .spill-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .spill.ok   { background: rgba(52,199,89,.1); color: #1a7a35; }
+    .spill.ok   .spill-dot { background: var(--green); }
+    .spill.warn { background: rgba(255,149,0,.1);  color: #9a5800; }
+    .spill.warn .spill-dot { background: var(--orange); }
+    .status-rows { display: flex; flex-direction: column; }
+    .status-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .status-row:last-child { border-bottom: none; }
+    .sr-lbl { font-weight: 500; color: rgba(0,0,0,.55); }
+    .sr-val { font-weight: 700; }
+
+    /* ════════ 4. WIDE CARDS 3col×188 r:32 glassmorphism ════════ */
+    .card-wide {
+      grid-column: span 3; height: 188px;
+      background: rgba(255,255,255,.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--r-lg); border: 1px solid rgba(255,255,255,.9);
+      padding: 22px 24px; display: flex; align-items: center; gap: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.05); position: relative; overflow: hidden;
+    }
+    .card-wide::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
+    }
+    .cw-icon {
+      width: 52px; height: 52px; border-radius: 14px; background: var(--black);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cw-icon svg { width: 22px; height: 22px; stroke: var(--lime); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .cw-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+    .cw-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--dim2); }
+    .cw-title { font-size: 17px; font-weight: 800; letter-spacing: -.3px; color: var(--black); }
+    .cw-sub   { font-size: 12.5px; font-weight: 500; color: var(--dim); }
+    .cw-input {
+      flex: 1; display: flex; align-items: center; gap: 10px;
+      background: rgba(0,0,0,.05); border: 1px solid var(--border);
+      border-radius: 12px; padding: 10px 14px;
+      font-size: 13px; color: var(--dim); cursor: text;
+    }
+    .cw-input svg { width: 15px; height: 15px; stroke: var(--dim2); stroke-width: 1.8; fill: none; flex-shrink: 0; stroke-linecap: round; stroke-linejoin: round; }
+    .cw-btn {
+      width: 36px; height: 36px; border-radius: 10px;
+      border: none; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; transition: opacity .15s;
+    }
+    .cw-btn svg { width: 15px; height: 15px; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .cw-btn:hover { opacity: .8; }
+
+    /* ════════ 5. ACTIVITY CARD 1col×row-2 r:32 ════════ */
+    .card-activity {
+      background: var(--card); border-radius: var(--r-lg);
+      border: 1px solid var(--border); padding: 22px 20px;
+      display: flex; flex-direction: column; gap: 14px;
+      grid-row: span 2; box-shadow: 0 4px 24px rgba(0,0,0,.04);
+    }
+    .act-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--dim2); }
+    .act-list  { display: flex; flex-direction: column; }
+    .act-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 0; border-bottom: 1px solid var(--border);
+      animation: slideIn .3s ease both;
+    }
+    .act-row:last-child { border-bottom: none; }
+    .act-row:nth-child(1){animation-delay:.04s} .act-row:nth-child(2){animation-delay:.08s}
+    .act-row:nth-child(3){animation-delay:.12s} .act-row:nth-child(4){animation-delay:.16s}
+    .act-row:nth-child(5){animation-delay:.20s}
+    @keyframes slideIn { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:translateX(0)} }
+    .act-ico {
+      width: 34px; height: 34px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .act-ico svg { width: 15px; height: 15px; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .act-main { flex: 1; min-width: 0; }
+    .act-name { font-size: 13px; font-weight: 600; }
+    .act-meta { font-size: 11px; color: var(--dim2); font-weight: 500; margin-top: 1px; }
+    .act-arr svg { width: 13px; height: 13px; stroke: var(--dim2); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ════════ 6. SMALL DATA CARDS 288×200 r:24 ════════ */
+    .card-metric {
+      height: 200px; background: var(--card); border-radius: var(--r-sm);
+      border: 1px solid var(--border); padding: 20px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04); position: relative; overflow: hidden;
+    }
+    /* Soft gradient per card */
+    .cm-green  { background: linear-gradient(135deg, rgba(52,199,89,.07)  0%, var(--card) 55%); }
+    .cm-lime   { background: linear-gradient(135deg, rgba(212,255,0,.10) 0%, var(--card) 55%); }
+    .cm-orange { background: linear-gradient(135deg, rgba(255,149,0,.08) 0%, var(--card) 55%); }
+    .cm-blue   { background: linear-gradient(135deg, rgba(0,122,255,.07) 0%, var(--card) 55%); }
+
+    .cm-label  { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--dim2); }
+    .cm-val    { font-size: 36px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; }
+    .cm-unit   { font-size: 16px; font-weight: 600; color: var(--dim); margin-left: 2px; }
+    .cm-footer { display: flex; align-items: center; justify-content: space-between; }
+    .cm-sub    { font-size: 11.5px; font-weight: 500; color: var(--dim); }
+
+    .tag {
+      font-size: 10.5px; font-weight: 700; padding: 3px 8px; border-radius: 20px;
+    }
+    .tag-green  { background: rgba(52,199,89,.12);  color: #1a7a35; }
+    .tag-orange { background: rgba(255,149,0,.12);  color: #9a5800; }
+    .tag-blue   { background: rgba(0,122,255,.12);  color: #004dcc; }
+    .tag-red    { background: rgba(255,59,48,.1);   color: #c0241b; }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ══════════ SIDEBAR 80px ══════════ -->
+  <aside class="sidebar">
+    <div class="sb-mark">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M5 17c2-5 4-7 7-7s5 2 7 7" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="12" cy="8" r="3" fill="#0a0a0a"/>
+        <path d="M9 21h6" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="sb-nav">
+      <button class="si active" data-tip="MulberryFAST">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+      </button>
+      <button class="si" data-tip="YellowCard">
+        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><rect x="5" y="9" width="5" height="3.5" rx="1"/><path d="M5 16h3.5M11 16h2.5"/></svg>
+      </button>
+      <button class="si" data-tip="MulberryGO">
+        <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><rect x="5" y="10.5" width="14" height="10.5" rx="2"/></svg>
+      </button>
+      <div class="sb-sep"></div>
+      <button class="si" data-tip="Cloud">
+        <svg viewBox="0 0 24 24"><path d="M16.5 16H8a4.5 4.5 0 010-9 5 5 0 019.5 1H18a3.5 3.5 0 010 7h-1.5z"/></svg>
+      </button>
+      <button class="si" data-tip="HUB">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+      </button>
+      <button class="si" data-tip="Analytics">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </button>
+    </div>
+
+    <div class="sb-spacer"></div>
+    <button class="si" data-tip="Setări">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <div class="sb-avatar">S</div>
+  </aside>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <div class="page-greeting">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 2.5"/></svg>
+          Bună seara, Ștefan
+        </div>
+        <div class="page-title">MulberryFAST</div>
+      </div>
+      <div class="page-meta">29 Mai 2026 · 19:10</div>
+    </div>
+
+    <div class="bento">
+
+      <!-- ① YELLOWCARD 2col 260px -->
+      <div class="card-yellow span-2">
+        <div class="yc-badge">
+          <div class="yc-badge-dot"></div>
+          Yellowcard · MLBR
+        </div>
+        <div>
+          <div class="yc-plate">B – – – MLB</div>
+          <div class="yc-model">Volkswagen Golf · 2021</div>
+        </div>
+        <div class="yc-footer">
+          <div class="yc-vin">VIN: WA0ZZ8K9DA1</div>
+          <div class="yc-verify">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            100% verified
+          </div>
+        </div>
+      </div>
+
+      <!-- ② ACTION: MulberryGO -->
+      <div class="card-action ca-go">
+        <div class="ca-icon"><svg viewBox="0 0 24 24" style="stroke:#34C759"><path d="M3 10.5L12 3l9 7.5"/><rect x="5" y="10.5" width="14" height="10.5" rx="2"/><rect x="9.5" y="15" width="5" height="6" rx="1.5"/></svg></div>
+        <div><div class="ca-label">Mulberry GO</div><div class="ca-sub">Servicii auto</div></div>
+      </div>
+
+      <!-- ③ ACTION: MulberryID -->
+      <div class="card-action ca-id">
+        <div class="ca-icon"><svg viewBox="0 0 24 24" style="stroke:#D4FF00"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></div>
+        <div><div class="ca-label">Mulberry ID</div><div class="ca-sub">Identitate digitală</div></div>
+      </div>
+
+      <!-- ④ STATUS 2col -->
+      <div class="card-status">
+        <div class="status-label">Stare vehicul</div>
+        <div class="status-pills">
+          <div class="spill ok"><div class="spill-dot"></div>ITP Valid</div>
+          <div class="spill ok"><div class="spill-dot"></div>RCA Valid</div>
+          <div class="spill warn"><div class="spill-dot"></div>Revizie 32 zile</div>
+        </div>
+        <div class="status-rows">
+          <div class="status-row"><span class="sr-lbl">ITP</span><span class="sr-val" style="color:var(--green)">—</span></div>
+          <div class="status-row"><span class="sr-lbl">RCA</span><span class="sr-val" style="color:var(--green)">—</span></div>
+          <div class="status-row"><span class="sr-lbl">Revizie</span><span class="sr-val" style="color:var(--orange)">—</span></div>
+        </div>
+      </div>
+
+      <!-- ⑤ ACTION: EXO -->
+      <div class="card-action ca-exo">
+        <div class="ca-icon"><svg viewBox="0 0 24 24" style="stroke:#FF9500"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg></div>
+        <div><div class="ca-label">Mulberry EXO</div><div class="ca-sub">Istoric tehnic</div></div>
+      </div>
+
+      <!-- ⑥ ACTION: Cloud -->
+      <div class="card-action ca-cloud">
+        <div class="ca-icon"><svg viewBox="0 0 24 24" style="stroke:#007AFF"><path d="M16.5 16H8a4.5 4.5 0 010-9 5 5 0 019.5 1H18a3.5 3.5 0 010 7h-1.5z"/><path d="M12 12v4M9.5 14.5L12 12l2.5 2.5"/></svg></div>
+        <div><div class="ca-label">Mulberry Cloud</div><div class="ca-sub">Documente</div></div>
+      </div>
+
+      <!-- ⑦ MULBERRY AI wide 3col glassmorphism -->
+      <div class="card-wide">
+        <div class="cw-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg>
+        </div>
+        <div class="cw-body">
+          <div class="cw-label">MulberryAI</div>
+          <div class="cw-input">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Întreabă despre vehicul, ITP, asigurare...
+          </div>
+        </div>
+        <button class="cw-btn" style="background:var(--black)">
+          <svg viewBox="0 0 24 24" style="stroke:var(--lime)"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor" stroke="none" style="fill:var(--lime);opacity:.7"/></svg>
+        </button>
+      </div>
+
+      <!-- ⑧ ACTIVITY 1col × 2 rows cu animatie staggered -->
+      <div class="card-activity row-2">
+        <div class="act-title">Activitate recentă</div>
+        <div class="act-list">
+          <div class="act-row">
+            <div class="act-ico" style="background:rgba(52,199,89,.1)"><svg viewBox="0 0 24 24" stroke="#34C759"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+            <div class="act-main"><div class="act-name">Schimb ulei programat</div><div class="act-meta">Ieri · MulberryGO</div></div>
+            <div class="act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="act-row">
+            <div class="act-ico" style="background:rgba(0,122,255,.1)"><svg viewBox="0 0 24 24" stroke="#007AFF"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div class="act-main"><div class="act-name">RCA reînnoit</div><div class="act-meta">Acum 3 zile · YellowCard</div></div>
+            <div class="act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="act-row">
+            <div class="act-ico" style="background:rgba(212,255,0,.12)"><svg viewBox="0 0 24 24" stroke="#7a9200"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+            <div class="act-main"><div class="act-name">ITP verificat</div><div class="act-meta">Săptămâna trecută</div></div>
+            <div class="act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="act-row">
+            <div class="act-ico" style="background:rgba(255,149,0,.1)"><svg viewBox="0 0 24 24" stroke="#FF9500"><path d="M16.5 16H8a4.5 4.5 0 010-9 5 5 0 019.5 1H18a3.5 3.5 0 010 7h-1.5z"/></svg></div>
+            <div class="act-main"><div class="act-name">Document Cloud</div><div class="act-meta">Acum 2 săpt.</div></div>
+            <div class="act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="act-row">
+            <div class="act-ico" style="background:rgba(0,0,0,.05)"><svg viewBox="0 0 24 24" stroke="rgba(0,0,0,.35)"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+            <div class="act-main"><div class="act-name">Profil actualizat</div><div class="act-meta">Acum 3 săpt.</div></div>
+            <div class="act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ⑨ MULBERRYHUB wide 3col glassmorphism -->
+      <div class="card-wide">
+        <div class="cw-icon" style="background:#1c1c1c">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="cw-body">
+          <div class="cw-label">MulberryHUB</div>
+          <div class="cw-title">History · PDF</div>
+          <div class="cw-sub">Documente tehnice, rapoarte, istoric intervenții</div>
+        </div>
+        <button class="cw-btn" style="background:#f0f0ee; border:1px solid rgba(0,0,0,.08)">
+          <svg viewBox="0 0 24 24" style="stroke:#0a0a0a"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- ⑩ SMALL DATA CARDS 4×1col — soft gradients -->
+      <div class="card-metric cm-green">
+        <div class="cm-label">SoftScore</div>
+        <div class="cm-val">76<span class="cm-unit">%</span></div>
+        <div class="cm-footer"><div class="cm-sub">Vehicul în stare bună</div><span class="tag tag-green">+4</span></div>
+      </div>
+
+      <div class="card-metric cm-lime">
+        <div class="cm-label">ITP</div>
+        <div class="cm-val" style="font-size:22px;letter-spacing:-.3px">Nov 2026</div>
+        <div class="cm-footer"><div class="cm-sub">Valabil 6 luni</div><span class="tag tag-green">OK</span></div>
+      </div>
+
+      <div class="card-metric cm-orange">
+        <div class="cm-label">Revizie</div>
+        <div class="cm-val">32<span class="cm-unit">zile</span></div>
+        <div class="cm-footer"><div class="cm-sub">15 Iunie 2026</div><span class="tag tag-orange">Curând</span></div>
+      </div>
+
+      <div class="card-metric cm-blue">
+        <div class="cm-label">Kilometri</div>
+        <div class="cm-val">42<span class="cm-unit">k</span></div>
+        <div class="cm-footer"><div class="cm-sub">+4k față de luna trecută</div><span class="tag tag-blue">+4k</span></div>
+      </div>
+
+    </div><!-- /bento -->
+  </main>
+</div>
+</body>
+</html>

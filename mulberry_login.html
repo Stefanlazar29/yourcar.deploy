@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mulberry — Intră în cont</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --yellow: #F5C21A;
+  --maroon: #3D0C11;
+  --white: #FFFFFF;
+  --bg: #0A0A0A;
+  --surface: #141414;
+  --border: rgba(255,255,255,0.08);
+  --border-focus: rgba(245,194,26,0.4);
+  --text: #FFFFFF;
+  --text-muted: rgba(255,255,255,0.45);
+  --text-mid: rgba(255,255,255,0.7);
+  --success: #22C55E;
+  --error: #EF4444;
+  --radius: 12px;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* BACKGROUND */
+.bg-visual {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 20% 88% at -4% 72%, rgba(18,55,255,1) 0%, rgba(10,35,210,.72) 32%, transparent 62%),
+    radial-gradient(ellipse 17% 80% at 22% 66%, rgba(255,148,8,.98) 0%, rgba(215,95,5,.62) 36%, transparent 63%),
+    radial-gradient(ellipse 5% 76% at 43% 62%, rgba(28,195,155,.92) 0%, rgba(14,145,112,.52) 46%, transparent 68%),
+    radial-gradient(ellipse 5% 76% at 57% 62%, rgba(28,195,155,.88) 0%, rgba(14,145,112,.48) 46%, transparent 68%),
+    radial-gradient(ellipse 17% 80% at 78% 66%, rgba(255,148,8,.95) 0%, rgba(215,95,5,.58) 36%, transparent 63%),
+    radial-gradient(ellipse 20% 88% at 104% 72%, rgba(18,55,255,.96) 0%, rgba(10,35,210,.66) 32%, transparent 62%),
+    radial-gradient(ellipse 100% 18% at 50% 100%, rgba(15,35,110,.38) 0%, transparent 70%),
+    #000;
+}
+
+/* LAYOUT */
+.layout {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+}
+
+/* LEFT SIDE */
+.left {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo img { height: 34px; width: auto; display: block; }
+
+.left-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 2rem;
+  max-width: 520px;
+}
+
+.left-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.75rem;
+}
+.tag-dot { width: 6px; height: 6px; background: var(--yellow); border-radius: 50%; }
+
+.left-headline {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+.left-headline em { font-style: normal; color: var(--yellow); }
+
+.left-desc {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.72;
+  margin-bottom: 3rem;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-mid);
+}
+.feature-icon {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+/* RIGHT SIDE — FORM PANEL */
+.right {
+  background: rgba(10,10,10,0.7);
+  backdrop-filter: blur(40px);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+  min-height: 100vh;
+}
+
+.form-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  text-decoration: none;
+}
+.form-logo img { height: 28px; width: auto; display: block; }
+
+.form-panel {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* STEPS */
+.step { display: none; }
+.step.active { display: block; }
+
+.step-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.step-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.step-sub strong { color: var(--text-mid); }
+
+/* TAB SWITCHER */
+.tab-switcher {
+  display: flex;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px;
+  margin-bottom: 1.75rem;
+}
+.tab-btn {
+  flex: 1; padding: 9px;
+  background: none; border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px; font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tab-btn.active {
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+}
+
+/* GOOGLE BUTTON */
+.btn-google {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px;
+  background: var(--white);
+  color: #1a1a1a;
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin-bottom: 1.25rem;
+}
+.btn-google:hover { opacity: 0.92; }
+.btn-google svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* DIVIDER */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-text { font-size: 12px; color: var(--text-muted); }
+
+/* FORM ELEMENTS */
+.form-group { margin-bottom: 1rem; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input::placeholder { color: var(--text-muted); }
+.form-input:focus { border-color: var(--border-focus); }
+
+/* OTP INPUT */
+.otp-inputs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+.otp-digit {
+  flex: 1;
+  height: 56px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'DM Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.otp-digit:focus { border-color: var(--border-focus); }
+
+/* BUTTONS */
+.btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: var(--yellow);
+  color: var(--maroon);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin-bottom: 1rem;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-ghost {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+/* UPLOAD ZONE */
+.upload-zone {
+  width: 100%;
+  border: 2px dashed rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+.upload-zone:hover, .upload-zone.drag-over {
+  border-color: rgba(245,194,26,0.4);
+  background: rgba(245,194,26,0.04);
+}
+.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.upload-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.upload-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+.upload-sub { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+/* PROCESSING STATE */
+.processing {
+  display: none;
+  text-align: center;
+  padding: 2rem 0;
+}
+.processing.active { display: block; }
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: var(--yellow);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.processing-text { font-size: 14px; color: var(--text-muted); }
+
+/* EXTRACTED DATA */
+.extracted-data { display: none; }
+.extracted-data.active { display: block; }
+.data-table {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+.data-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.data-row:last-child { border-bottom: none; }
+.data-key {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  width: 120px;
+  flex-shrink: 0;
+}
+.data-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ERROR & SUCCESS */
+.alert {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  margin-bottom: 1rem;
+  display: none;
+}
+.alert.active { display: block; }
+.alert.error { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #FCA5A5; }
+.alert.success { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #86EFAC; }
+
+/* CHECKBOX */
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+.checkbox-row input[type="checkbox"] {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--yellow);
+  cursor: pointer;
+}
+.checkbox-label { font-size: 12px; color: var(--text-muted); line-height: 1.5; cursor: pointer; }
+
+/* RESEND */
+.resend-row {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.resend-btn {
+  background: none; border: none;
+  color: var(--yellow);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+.resend-btn:disabled { color: var(--text-muted); cursor: not-allowed; }
+
+/* STEP INDICATOR */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2rem;
+}
+.step-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: all 0.2s;
+}
+.step-dot.active { background: var(--yellow); width: 18px; border-radius: 3px; }
+.step-dot.done { background: rgba(34,197,94,0.6); }
+
+/* FOOTER */
+.form-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.form-footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.form-footer a:hover { color: var(--text-mid); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .left { display: none; }
+  .right {
+    border-left: none;
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+    justify-content: flex-start;
+    padding-top: 3rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-visual"></div>
+
+<div class="layout">
+
+  <!-- LEFT -->
+  <div class="left">
+    <a href="/" class="logo">
+      <img src="/mulberry-wordmark.svg" alt="Mulberry">
+    </a>
+    <div class="left-content">
+      <div class="left-tag"><span class="tag-dot"></span>B2B2C INSURANCE PLATFORM</div>
+      <h1 class="left-headline">Radical clarity.<br><em>Absolute certainty.</em></h1>
+      <p class="left-desc">We eliminate the friction of automotive maintenance by providing drivers and partners with a clean, intuitive, and guaranteed digital experience.</p>
+      <div class="features">
+        <div class="feature"><div class="feature-icon">🛡️</div>Identitate digitală verificată</div>
+        <div class="feature"><div class="feature-icon">📄</div>YellowCard — asigurare + ITP + istoric</div>
+        <div class="feature"><div class="feature-icon">✨</div>MulberryAI — analiză predictivă</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <a href="/" class="form-logo">
+      <img src="/mulberry-wordmark.svg" alt="Mulberry">
+    </a>
+
+    <div class="form-panel">
+
+      <!-- STEP INDICATOR -->
+      <div class="step-indicator">
+        <div class="step-dot active" id="dot-1"></div>
+        <div class="step-dot" id="dot-2"></div>
+        <div class="step-dot" id="dot-3"></div>
+      </div>
+
+      <!-- STEP 1: LOGIN -->
+      <div class="step active" id="step-1">
+        <h2 class="step-title">Bun venit înapoi</h2>
+        <p class="step-sub">Intră în contul tău Mulberry</p>
+
+        <div class="tab-switcher">
+          <button class="tab-btn active" onclick="switchTab(this)">Intră în cont</button>
+          <button class="tab-btn" onclick="switchTab(this)">Cont nou</button>
+        </div>
+
+        <div id="alert-1" class="alert error"></div>
+
+        <button class="btn-google" onclick="signInWithGoogle()">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continuă cu Google
+        </button>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">sau cu email</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">EMAIL SAU TELEFON</label>
+          <input type="email" class="form-input" id="email-input" placeholder="email@exemplu.com" />
+        </div>
+
+        <button class="btn-primary" onclick="sendOTP()">Trimite cod de verificare →</button>
+        <button class="btn-ghost" onclick="signInWithGoogle()">Continuă cu Google</button>
+
+        <p class="form-footer">
+          Continuând, ești de acord cu <a href="#">Termenii</a> și <a href="#">Politica de Confidențialitate</a>. Date stocate în România.
+        </p>
+      </div>
+
+      <!-- STEP 2: OTP -->
+      <div class="step" id="step-2">
+        <h2 class="step-title">Verifică emailul</h2>
+        <p class="step-sub">Am trimis un cod de 6 cifre la <strong id="email-display"></strong></p>
+
+        <div id="alert-2" class="alert error"></div>
+
+        <div class="otp-inputs">
+          <input type="text" class="otp-digit" maxlength="1" id="otp-0" inputmode="numeric" />
+          <input type="text" class="otp-digit" maxlength="1" id="otp-1" inputmode="numeric" />
+          <input type="text" class="otp-digit" maxlength="1" id="otp-2" inputmode="numeric" />
+          <input type="text" class="otp-digit" maxlength="1" id="otp-3" inputmode="numeric" />
+          <input type="text" class="otp-digit" maxlength="1" id="otp-4" inputmode="numeric" />
+          <input type="text" class="otp-digit" maxlength="1" id="otp-5" inputmode="numeric" />
+        </div>
+
+        <button class="btn-primary" onclick="verifyOTP()">Verifică codul →</button>
+
+        <div class="resend-row">
+          Nu ai primit codul?
+          <button class="resend-btn" id="resend-btn" onclick="resendOTP()">Retrimite</button>
+          <span id="resend-timer"></span>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <button class="btn-ghost" onclick="goToStep(1)">← Înapoi</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: TALON UPLOAD -->
+      <div class="step" id="step-3">
+        <h2 class="step-title">Scanează talonul</h2>
+        <p class="step-sub">Încarcă o fotografie clară a certificatului de înmatriculare. AI-ul va extrage automat datele.</p>
+
+        <div id="alert-3" class="alert error"></div>
+        <div id="success-3" class="alert success"></div>
+
+        <!-- UPLOAD ZONE -->
+        <div class="upload-zone" id="upload-zone">
+          <input type="file" accept="image/*" capture="environment" id="talon-input" onchange="handleUpload(event)" />
+          <div class="upload-icon">📷</div>
+          <div class="upload-title">Fotografiază sau încarcă talonul</div>
+          <div class="upload-sub">Asigură-te că VIN-ul și numărul de înmatriculare sunt lizibile<br>JPG, PNG • Max 10MB</div>
+        </div>
+
+        <!-- PROCESSING -->
+        <div class="processing" id="processing">
+          <div class="spinner"></div>
+          <div class="processing-text" id="processing-text">Analizăm documentul...</div>
+        </div>
+
+        <!-- EXTRACTED DATA -->
+        <div class="extracted-data" id="extracted-data">
+          <div class="data-table" id="data-table"></div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="confirm-checkbox" />
+            <label class="checkbox-label" for="confirm-checkbox">
+              Certific că documentul încărcat este original și aparține vehiculului înregistrat pe numele meu.
+            </label>
+          </div>
+
+          <button class="btn-primary" onclick="generateYellowCard()">Generează MulberryID →</button>
+          <button class="btn-ghost" onclick="resetUpload()">Încearcă altă poză</button>
+        </div>
+
+        <p class="form-footer" style="margin-top: 1.5rem;">
+          🔒 Nu stocăm poza. Extragem doar datele necesare pentru validare.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── SUPABASE CONFIG ───────────────────────────────────────────
+const SUPABASE_URL = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+let currentEmail = '';
+let resendTimer = null;
+
+// ─── STEP NAVIGATION ──────────────────────────────────────────
+function goToStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`step-${n}`).classList.add('active');
+
+  document.querySelectorAll('.step-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i + 1 < n) d.classList.add('done');
+    else if (i + 1 === n) d.classList.add('active');
+  });
+}
+
+function switchTab(btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ─── FORȚEAZĂ LOGOUT LA FIECARE VIZITĂ ───────────────────────
+window.addEventListener('load', async () => {
+  await sb.auth.signOut();
+  sessionStorage.clear();
+});
+
+// ─── GOOGLE SIGN IN ───────────────────────────────────────────
+async function signInWithGoogle() {
+  await sb.auth.signOut();
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: 'https://mulberry.autos/mulberry_verify.html',
+      queryParams: { prompt: 'select_account' }
+    }
+  });
+  if (error) showAlert('alert-1', error.message);
+}
+
+// ─── EMAIL OTP ────────────────────────────────────────────────
+async function sendOTP() {
+  const email = document.getElementById('email-input').value.trim();
+  if (!email || !email.includes('@')) {
+    return showAlert('alert-1', 'Introdu un email valid.');
+  }
+
+  currentEmail = email;
+  sessionStorage.setItem('pending_email', email);
+  const { error } = await sb.auth.signInWithOtp({ email });
+
+  if (error) return showAlert('alert-1', error.message);
+
+  document.getElementById('email-display').textContent = email;
+  goToStep(2);
+  setupOTPInputs();
+  startResendTimer();
+}
+
+async function verifyOTP() {
+  const token = Array.from({length: 6}, (_, i) =>
+    document.getElementById(`otp-${i}`).value
+  ).join('');
+
+  if (token.length !== 6) return showAlert('alert-2', 'Introdu toate cele 6 cifre.');
+
+  const { error } = await sb.auth.verifyOtp({
+    email: currentEmail,
+    token,
+    type: 'email'
+  });
+
+  if (error) return showAlert('alert-2', 'Cod incorect sau expirat. Încearcă din nou.');
+  goToStep(3);
+}
+
+async function resendOTP() {
+  await sb.auth.signInWithOtp({ email: currentEmail });
+  startResendTimer();
+}
+
+function startResendTimer() {
+  let seconds = 60;
+  const btn = document.getElementById('resend-btn');
+  const timer = document.getElementById('resend-timer');
+  btn.disabled = true;
+  if (resendTimer) clearInterval(resendTimer);
+
+  resendTimer = setInterval(() => {
+    seconds--;
+    timer.textContent = ` (${seconds}s)`;
+    if (seconds <= 0) {
+      clearInterval(resendTimer);
+      btn.disabled = false;
+      timer.textContent = '';
+    }
+  }, 1000);
+}
+
+function setupOTPInputs() {
+  for (let i = 0; i < 6; i++) {
+    const input = document.getElementById(`otp-${i}`);
+    input.value = '';
+    input.oninput = (e) => {
+      if (e.target.value.length > 1) e.target.value = e.target.value.slice(-1);
+      if (e.target.value && i < 5) document.getElementById(`otp-${i+1}`).focus();
+    };
+    input.onkeydown = (e) => {
+      if (e.key === 'Backspace' && !e.target.value && i > 0)
+        document.getElementById(`otp-${i-1}`).focus();
+    };
+  }
+  document.getElementById('otp-0').focus();
+}
+
+// ─── TALON UPLOAD & OCR ───────────────────────────────────────
+async function handleUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (file.size > 10 * 1024 * 1024) {
+    return showAlert('alert-3', 'Fișierul este prea mare. Maxim 10MB.');
+  }
+
+  document.getElementById('upload-zone').style.display = 'none';
+  showProcessing('Analizăm documentul...');
+
+  try {
+    const base64 = await fileToBase64(file);
+
+    setTimeout(() => updateProcessingText('Verificăm calitatea imaginii...'), 1000);
+    setTimeout(() => updateProcessingText('Extragem datele cu AI...'), 2500);
+
+    const response = await fetch('/api/scan-talon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: base64, mime_type: file.type })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || data.error) {
+      throw new Error(data.error || 'Nu am putut extrage datele. Încearcă o poză mai clară.');
+    }
+
+    hideProcessing();
+    showExtractedData(data);
+
+  } catch (err) {
+    hideProcessing();
+    document.getElementById('upload-zone').style.display = 'block';
+    showAlert('alert-3', err.message || 'Eroare la procesare. Încearcă o poză mai clară, cu codurile vizibile.');
+  }
+}
+
+function showExtractedData(data) {
+  const table = document.getElementById('data-table');
+  const fields = [
+    { key: 'VIN',       val: data.vin },
+    { key: 'NUMĂR',     val: data.plate },
+    { key: 'PROPRIETAR',val: data.owner },
+    { key: 'MARCĂ',     val: data.brand },
+    { key: 'MODEL',     val: data.model },
+    { key: 'AN',        val: data.year }
+  ];
+
+  table.innerHTML = fields.filter(f => f.val).map(f => `
+    <div class="data-row">
+      <span class="data-key">${f.key}</span>
+      <span class="data-val">${f.val}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('extracted-data').classList.add('active');
+}
+
+async function generateYellowCard() {
+  if (!document.getElementById('confirm-checkbox').checked) {
+    return showAlert('alert-3', 'Confirmă că documentul este original.');
+  }
+
+  const btn = document.querySelector('#step-3 .btn-primary');
+  btn.textContent = 'Se generează...';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    window.location.href = '/mulberry_app.html';
+  }, 1500);
+}
+
+function resetUpload() {
+  document.getElementById('upload-zone').style.display = 'block';
+  document.getElementById('extracted-data').classList.remove('active');
+  document.getElementById('talon-input').value = '';
+  hideAlert('alert-3');
+}
+
+// ─── UTILS ────────────────────────────────────────────────────
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function showProcessing(text) {
+  document.getElementById('processing').classList.add('active');
+  document.getElementById('processing-text').textContent = text;
+}
+function updateProcessingText(text) {
+  document.getElementById('processing-text').textContent = text;
+}
+function hideProcessing() {
+  document.getElementById('processing').classList.remove('active');
+}
+function showAlert(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.add('active');
+  setTimeout(() => el.classList.remove('active'), 5000);
+}
+function hideAlert(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+// ─── DRAG & DROP ──────────────────────────────────────────────
+const zone = document.getElementById('upload-zone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) handleUpload({ target: { files: [file] } });
+});
+
+// ─── AUTH STATE — ignorat pe pagina de login ──────────────────
+sb.auth.onAuthStateChange((event, session) => {
+  // Nu face nimic — userul trebuie să treacă prin OTP
+});
+</script>
+</body>
+</html>
