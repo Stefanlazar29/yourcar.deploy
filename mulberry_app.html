@@ -59,9 +59,17 @@ a{color:inherit;text-decoration:none}
 }
 .auth-left::before{content:'';position:absolute;top:-120px;right:-120px;width:400px;height:400px;background:radial-gradient(circle,rgba(236,255,84,.07) 0%,transparent 70%);pointer-events:none}
 .auth-left::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(236,255,84,.04) 0%,transparent 70%);pointer-events:none}
+.al-back-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-family:var(--font);font-size:13px;font-weight:600;padding:8px 14px;border-radius:20px;cursor:pointer;transition:all .15s;align-self:flex-start}
+.al-back-btn:hover{background:rgba(255,255,255,.18);color:#fff}
+.al-back-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;flex-shrink:0}
 .al-logo{display:flex;align-items:center;gap:11px;margin-bottom:auto}
+.al-wordmark{height:76px;width:auto;display:block}
 .al-wordmark{height:36px;width:auto;display:block}
 .sb-wordmark{height:28px;width:auto;display:block}
+.al-logo-center{flex:1;display:flex;align-items:center;justify-content:center}
+.al-logo-full{height:48px;width:auto;filter:invert(1);opacity:.95}
+.af-brand-logo{margin-bottom:28px}
+.af-login-logo{height:30px;width:auto;mix-blend-mode:screen;opacity:.95}
 .al-hero{padding:60px 0 40px;position:relative;z-index:1}
 .al-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(236,255,84,.12);border:1px solid rgba(236,255,84,.22);color:var(--yellow);font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:22px;text-transform:uppercase;letter-spacing:.08em}
 .al-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--yellow)}
@@ -113,8 +121,8 @@ a{color:inherit;text-decoration:none}
 .btn-primary:disabled{opacity:.45;cursor:not-allowed}
 .btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-family:var(--font);font-size:13.5px;font-weight:500;cursor:pointer;transition:all .15s}
 .btn-ghost:hover{border-color:rgba(255,255,255,0.25);color:#fff}
-.otp-inputs{display:flex;gap:8px;margin-bottom:1.5rem}
-.otp-digit{flex:1;height:56px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;font-family:'DM Mono','JetBrains Mono',monospace;font-size:1.4rem;font-weight:500;color:#fff;text-align:center;outline:none;transition:border-color .2s}
+.otp-inputs{display:flex;gap:6px;margin-bottom:1.5rem}
+.otp-digit{flex:1;height:48px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-family:'DM Mono','JetBrains Mono',monospace;font-size:1.1rem;font-weight:500;color:#fff;text-align:center;outline:none;transition:border-color .2s;min-width:0}
 .otp-digit:focus{border-color:rgba(236,255,84,0.4)}
 .af-resend{text-align:center;margin-top:1rem;font-size:13px;color:rgba(255,255,255,0.45)}
 .af-resend-btn{background:none;border:none;color:var(--yellow);font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;padding:0}
@@ -131,11 +139,12 @@ a{color:inherit;text-decoration:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 .af-processing-text{font-size:14px;color:rgba(255,255,255,0.5)}
 .af-extracted{display:none}.af-extracted.active{display:block}
-.af-data-table{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;margin-bottom:1.25rem}
-.af-data-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.06)}
-.af-data-row:last-child{border-bottom:none}
-.af-data-key{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:.08em;width:110px;flex-shrink:0}
-.af-data-val{font-family:'DM Mono','JetBrains Mono',monospace;font-size:13px;color:#fff;font-weight:500}
+.yellowcard{background:linear-gradient(145deg,#f5d020,#f0a500);border-radius:14px;padding:18px 16px;margin-bottom:1.25rem;box-shadow:0 6px 24px rgba(245,165,0,0.25)}
+.yellowcard-header{font-size:0.6rem;font-weight:700;letter-spacing:.12em;color:rgba(0,0,0,0.4);text-transform:uppercase;margin-bottom:14px}
+.yellowcard-field{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.yellowcard-code{font-size:0.68rem;font-weight:700;color:rgba(0,0,0,0.5);width:30px;flex-shrink:0;font-family:'DM Mono','JetBrains Mono',monospace}
+.yellowcard-input{flex:1;background:rgba(255,255,255,0.55);border:1px solid rgba(0,0,0,0.12);border-radius:6px;padding:7px 10px;font-size:0.85rem;color:#111;outline:none;font-family:inherit;transition:background .2s;min-width:0}
+.yellowcard-input:focus{background:rgba(255,255,255,0.85)}
 .af-check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.25rem}
 .af-check-row input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--yellow);cursor:pointer}
 .af-check-label{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5;cursor:pointer}
@@ -149,9 +158,23 @@ a{color:inherit;text-decoration:none}
 .af-err{font-size:13px;color:var(--red);margin-top:10px;min-height:18px;text-align:center}
 
 @media(max-width:768px){
-  #auth-screen{flex-direction:column}
-  .auth-left{display:none}
-  .auth-right{width:100%;padding:32px 24px;justify-content:flex-start;padding-top:52px}
+  #auth-screen{flex-direction:column;align-items:center;justify-content:center;padding:24px 20px}
+  .auth-left{
+    position:absolute;inset:0;z-index:0;
+    display:flex;padding:0;
+    background:rgba(0,0,0,.25);
+  }
+  .auth-left .al-logo,.auth-left .al-hero,.auth-left .al-features,.auth-left .al-foot{display:none}
+  .auth-right{
+    position:relative;z-index:1;
+    width:100%;max-width:420px;
+    background:rgba(8,8,8,.52);
+    backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:28px;
+    padding:36px 28px 32px;
+    justify-content:flex-start;
+  }
 }
 
 /* ══ APP SHELL ═════════════════════════════════════ */
@@ -237,7 +260,7 @@ a{color:inherit;text-decoration:none}
 .tb-avatar-btn{display:none}
 
 /* CONTENT – curve moves here */
-.content{grid-column:2;grid-row:2;overflow-y:auto;padding:28px 32px;scroll-behavior:smooth;background:#f0f0ee;border-radius:20px 0 0 0}
+.content{grid-column:2;grid-row:2;overflow:hidden;padding:0;background:#f0f0ee;border-radius:20px 0 0 0}
 
 /* ══ MULBERRY AI — Full Gemini Panel ══════════════════════════ */
 .gm-overlay{position:fixed;top:var(--th);left:var(--sw);right:0;bottom:0;z-index:100;background:linear-gradient(160deg,#eef2ff 0%,#f4f7ff 45%,#fafbff 100%);display:flex;flex-direction:column;border-radius:20px 0 0 0;overflow:hidden}
@@ -290,9 +313,21 @@ a{color:inherit;text-decoration:none}
 .gm-pill-send:hover{opacity:.84}
 .gm-input-disclaimer{text-align:center;font-size:10.5px;color:rgba(0,0,0,.26);font-family:'Inter',sans-serif;margin-top:9px}
 @media(max-width:768px){.gm-overlay{top:var(--th);left:0;border-radius:0}.gm-big-greeting{font-size:28px}.gm-model-badge{display:none}}
-.panel{display:none}
-.panel.active{display:block;animation:fadeUp .24s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* ── FRAME NAVIGATION ─────────────────────────────────────────────
+   Fiecare panel = position:absolute inset:0 → acoperă complet .content
+   Nu există continuitate de scroll între panele — fiecare e un frame real
+──────────────────────────────────────────────────────────────────── */
+.content{position:relative;overflow:hidden!important}
+.panel{position:absolute;inset:0;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.panel.active{display:block;animation:fadeIn .18s ease}
+#panel-dashboard{overflow:hidden}
+#panel-dashboard.active{overflow:hidden}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.panel.panel-iframe.active{display:flex;flex-direction:column;overflow:hidden}
+.pif-header{display:flex;align-items:center;gap:10px;padding:10px 18px;background:#fff;border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0;min-height:50px}
+.pif-back{background:none;border:none;cursor:pointer;font-size:1.5rem;line-height:1;padding:2px 10px 2px 0;color:#8B5CF6;font-weight:500}
+.pif-title{font-weight:600;font-size:.95rem;color:var(--black)}
+.pif-frame{flex:1;border:none;width:100%;display:block}
 
 .ph{margin-bottom:24px}
 .ph-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--wine);margin-bottom:8px;display:flex;align-items:center;gap:7px}
@@ -404,51 +439,27 @@ a{color:inherit;text-decoration:none}
   #app-shell{grid-template-columns:1fr;grid-template-rows:var(--th) 1fr}
   .sidebar{position:fixed;top:0;left:0;bottom:0;width:285px;transform:translateX(-100%);grid-row:unset;grid-column:unset;transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s}
   .sidebar.open{transform:translateX(0);box-shadow:8px 0 60px rgba(0,0,0,.6)}
-  .topbar{grid-column:1;grid-row:1;padding:0 14px;background:#0d0d0e;border-bottom:1px solid rgba(255,255,255,.08)}
+  .topbar{grid-column:1;grid-row:1;padding:0 14px;background:#fff;border-bottom:1px solid rgba(0,0,0,.07)}
   .tb-logo-btn{display:none}
   .tb-ai-bar{display:none}
   .tb-profile{display:none}
-  .tb-hamburger{display:flex;background:rgba(255,255,255,.08);border-radius:10px}
-  .tb-hamburger:active{background:rgba(255,255,255,.15)}
+  .tb-hamburger{display:flex;background:transparent;border-radius:10px;width:auto;padding:6px 8px;gap:8px}
+  .tb-hamburger img{width:28px;height:28px;border-radius:8px}
+  .tb-hamburger:active{background:rgba(0,0,0,.06)}
+  .tb-mobile-brand{display:block}
   .tb-avatar-btn{display:flex!important}
-  .content{grid-column:1;grid-row:2;padding:0;border-radius:20px 20px 0 0;overflow:hidden;background:#f0f0ee}
-  #panel-dashboard .gd,.panel{padding:16px 14px calc(var(--bh) + 16px)}
-  .panel:not(#panel-dashboard){padding:16px 14px calc(var(--bh) + 16px)}
+  .tb-avatar{background:#1c1c1e!important;color:#fff!important;border:none!important}
+  .content{grid-column:1;grid-row:2;border-radius:20px 20px 0 0;background:#F5F5F7}
+  .panel.active:not(#panel-dashboard):not(.panel-iframe){padding:16px 14px calc(var(--bh) + 16px)}
   .g4{grid-template-columns:repeat(2,1fr);gap:10px}.g2{grid-template-columns:1fr}
   .bnav{display:block}.toast{bottom:calc(var(--bh) + 10px)}.ph-title{font-size:20px}.mkt-grid{grid-template-columns:1fr}
+  /* dashboard mobile tweaks */
+  .nd-gr-sub{display:none!important}
+  .nd-hello{font-size:26px!important;font-weight:700!important;letter-spacing:-.5px!important}
+  .nd-feat-card{background:#fff!important;border:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 2px 14px rgba(0,0,0,.07)!important}
+  .nd-status-card{background:#fff!important;border:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 2px 14px rgba(0,0,0,.07)!important}
 }
 @media(max-width:400px){.g4{grid-template-columns:1fr 1fr}.sc-val{font-size:28px}.ph-title{font-size:18px}.content{padding:12px 10px calc(var(--bh) + 12px)}}
-
-/* ══ SPHERE-UI LIGHT DASHBOARD ═══════════════════════════════ */
-#panel-dashboard .gd-greeting{color:rgba(0,0,0,.45)}
-#panel-dashboard .gd-title{color:#111;font-weight:700}
-#panel-dashboard .gdc{background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.06)}
-#panel-dashboard .gdc-go{background:#fff!important}
-#panel-dashboard .gdc-yc{background:linear-gradient(145deg,#ccf73c,#b5f333)!important}
-#panel-dashboard .gdc-tile-name{color:#111}
-#panel-dashboard .gdc-tile-sub{color:rgba(0,0,0,.42)}
-#panel-dashboard .gdc-tile-arr{color:rgba(0,0,0,.18)}
-#panel-dashboard .gdc-tile:hover{background:#fafafa!important;box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-2px)}
-#panel-dashboard .gdc-blue{background:#111!important}
-#panel-dashboard .gd-ai-input{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.14)!important;color:#fff!important}
-#panel-dashboard .gd-ai-input::placeholder{color:rgba(255,255,255,.3)!important}
-#panel-dashboard .gd-ai-chip{background:rgba(255,255,255,.11)!important;border-color:rgba(255,255,255,.14)!important;color:rgba(255,255,255,.62)!important}
-#panel-dashboard .gdc-cloud,#panel-dashboard .gdc-drive,#panel-dashboard .gdc-hub{background:#fff!important}
-#panel-dashboard .gdc-cloud-name,#panel-dashboard .gdc-drive-name{color:#111!important;font-weight:400}
-#panel-dashboard .gdc-cloud-sub,#panel-dashboard .gdc-drive-sub{color:rgba(0,0,0,.38)!important}
-#panel-dashboard .gdc-cloud-item{color:rgba(0,0,0,.48)!important}
-#panel-dashboard .gdc-cloud-btn{background:rgba(124,58,237,.1)!important;border-color:rgba(124,58,237,.18)!important;color:#7c3aed!important}
-#panel-dashboard .gdc-map-box{background:#f2f2f0!important;border-radius:14px}
-#panel-dashboard .gdc-map-lbl{color:#111!important}
-#panel-dashboard .gdc-map-note{color:rgba(0,0,0,.38)!important}
-#panel-dashboard .gdc-map-btn{background:#111!important;color:#fff!important;border:none}
-#panel-dashboard .gdc-hub-name{color:#111!important;font-weight:500}
-#panel-dashboard .gdc-hub-badge{color:rgba(0,0,0,.3)!important}
-#panel-dashboard .gdc-hub-event{color:#111!important}
-#panel-dashboard .gdc-hub-time{color:rgba(0,0,0,.3)!important}
-#panel-dashboard .gdc-hub-row{border-color:rgba(0,0,0,.06)!important}
-#panel-dashboard .gdc-hub-ico{background:rgba(59,130,246,.12)!important}
-#panel-dashboard .gdc-cloud-item-ico{background:rgba(139,92,246,.1)!important}
 
 /* Dashboard header avatar */
 .gd-hdr-av{width:52px;height:52px;border-radius:50%;background:var(--yellow);color:var(--wine);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0;overflow:hidden;margin-left:auto;box-shadow:0 2px 12px rgba(0,0,0,.1)}
@@ -510,10 +521,7 @@ a{color:inherit;text-decoration:none}
 .gd-svc:hover .gd-svc-arr{color:rgba(255,255,255,.6)}
 
 /* ══ DARK ANALYTICS DASHBOARD (Gogo-style) ══════════════════ */
-#panel-analytics{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#0d0d0e;color:#fff}
-#panel-dashboard{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#ebebea;color:#111}
-@media(max-width:768px){#panel-analytics{margin:-16px -14px;min-height:calc(100% + 32px)}}
-@media(max-width:768px){#panel-dashboard{margin:-16px -14px;min-height:calc(100% + 32px)}}
+#panel-analytics{margin:0;padding:0;background:#0d0d0e;color:#fff}
 .gd{display:flex;flex-direction:column;gap:14px;padding:28px 32px}
 @media(max-width:768px){.gd{padding:18px 16px;gap:12px}}
 
@@ -526,12 +534,17 @@ a{color:inherit;text-decoration:none}
 .gd-hstat-val{font-size:clamp(18px,2vw,26px);font-weight:800;color:#fff;letter-spacing:-.5px}
 .gd-hstat-val sup{font-size:12px;font-weight:500;color:rgba(255,255,255,.55)}
 
-/* Grid rows */
-.gd-r1{display:grid;grid-template-columns:1fr 1fr 1.8fr;gap:14px;align-items:stretch}
-.gd-r2{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:14px;align-items:stretch}
-@media(max-width:1100px){.gd-r1{grid-template-columns:1fr 1fr 1.6fr}}
-@media(max-width:900px){.gd-r1{grid-template-columns:1fr 1fr}.gd-r2{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){.gd-r1,.gd-r2{grid-template-columns:1fr}}
+/* 4-card equal grid */
+.gd-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.gd-cards-grid{grid-template-columns:1fr}}
+.gd-svc-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:20px;padding:22px;cursor:pointer;text-align:left;font-family:var(--font);transition:all .22s;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(0,0,0,.05);width:100%;min-height:160px}
+.gd-svc-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.gd-svc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:auto}
+.gd-svc-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gd-svc-arr{font-size:16px;color:rgba(0,0,0,.18);transition:color .15s}
+.gd-svc-card:hover .gd-svc-arr{color:rgba(0,0,0,.5)}
+.gd-svc-name{font-family:'Urbanist',sans-serif;font-size:19px;font-weight:700;color:#111;letter-spacing:-.2px;margin:18px 0 4px}
+.gd-svc-sub{font-size:12px;color:rgba(0,0,0,.42);font-family:'Inter',sans-serif}
 
 /* Base card */
 .gdc{border-radius:20px;padding:22px 20px;position:relative;overflow:hidden}
@@ -671,6 +684,233 @@ a{color:inherit;text-decoration:none}
 .gdc-hub-dot-feat{background:#b5f333;box-shadow:0 0 7px rgba(181,243,51,.4)}
 .gdc-hub-event{font-size:12px;font-weight:400;color:rgba(255,255,255,.82);line-height:1.35;font-family:'Inter',sans-serif}
 .gdc-hub-time{font-size:10.5px;color:rgba(255,255,255,.28);margin-top:2px;font-family:'Inter',sans-serif}
+
+/* ══ NEW DASHBOARD — Responsive (mobile carousel + desktop two-col) ══ */
+:root{
+  --nd-bg:#F0F0F2;--nd-card:#FFFFFF;--nd-yellow:#E1FF00;--nd-ink:#111111;
+  --nd-dim:rgba(60,60,67,0.6);--nd-sep:rgba(60,60,67,0.1);--nd-icon:#1A1A1A;
+  --nd-green:#1DB87A;--nd-orange:#F59E0B;--nd-trust:#7C3AED;
+  --nd-shadow:0 2px 16px rgba(0,0,0,0.07);--nd-shadow-lg:0 6px 28px rgba(0,0,0,0.1);
+  --nd-r:20px;
+}
+#panel-dashboard{background:var(--nd-bg);min-height:100%;padding:0;margin:0}
+.nd-wrap{padding:0 0 calc(var(--bh,72px)+16px)}
+
+/* greeting */
+.nd-greet-card{padding:18px 20px 10px}
+.nd-greet-top{display:flex;justify-content:space-between;align-items:center}
+.nd-gr-sub{font-size:12px;color:var(--nd-dim);margin-bottom:2px;font-weight:500;letter-spacing:.01em}
+.nd-hello{font-size:22px;font-weight:600;color:var(--nd-ink);letter-spacing:-.4px}
+.nd-greet-avatar{width:36px;height:36px;border-radius:50%;background:#4A5568;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0}
+.nd-greet-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.nd-gr-actions{display:none;flex-direction:column;gap:6px;margin-top:14px}
+.nd-gr-action{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:12px;background:#F5F5F7;cursor:pointer;transition:background .15s}
+.nd-gr-action:hover{background:#EBEBEE}
+.nd-gr-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nd-gr-txt{font-size:12.5px;font-weight:500;color:var(--nd-ink);flex:1}
+.nd-gr-arr{color:rgba(0,0,0,0.25)}
+
+/* two-col layout (mobile: single column) */
+.nd-two-col{display:flex;flex-direction:column}
+.nd-col-left{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+.nd-col-right{display:flex;flex-direction:column;padding:0 16px}
+
+/* carousel */
+.nd-carousel-wrap{overflow:hidden;margin:0;border-radius:20px}
+.nd-carousel-track{display:flex;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.nd-ycard{min-width:100%;border-radius:20px;padding:18px 20px;flex-shrink:0;cursor:pointer}
+.nd-ycard-yellow{
+  background:linear-gradient(145deg,#E1FF00 0%,#C8EC00 100%);
+  position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),0 6px 28px rgba(200,235,0,.28);
+}
+.nd-ycard-yellow::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:52%;
+  background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 100%);
+  border-radius:20px 20px 0 0;pointer-events:none;z-index:2;
+}
+.nd-ycard-wm{position:absolute;right:-12px;bottom:-28px;font-size:130px;font-weight:900;color:rgba(0,0,0,.06);font-family:var(--font-head);line-height:1;pointer-events:none;user-select:none;letter-spacing:-4px;z-index:0}
+.nd-ycard-yellow > *:not(.nd-ycard-wm){position:relative;z-index:3}
+.nd-ycard-brand-logo{height:22px;width:auto;opacity:.88}
+.nd-ycard-trust{background:#7C3AED}
+.nd-ycard-add{background:#F5F5F5;border:1.5px dashed rgba(0,0,0,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px}
+.nd-ycard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+.nd-ycard-badge{font-size:11px;font-weight:600;color:#111;background:rgba(255,255,255,.55);padding:3px 10px;border-radius:20px}
+.nd-ycard-badge-trust{font-size:11px;font-weight:600;color:#fff;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px}
+.nd-ycard-logo{height:26px;width:auto;filter:invert(1);opacity:.8}
+.nd-ycard-logo-trust{height:26px;width:auto;opacity:.7}
+.nd-ycard-vin{font-size:10px;color:rgba(0,0,0,.4);margin-bottom:3px;font-family:'DM Mono',monospace;letter-spacing:.3px}
+.nd-ycard-vin-trust{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px;font-family:'DM Mono',monospace}
+.nd-ycard-plate{font-size:22px;font-weight:700;color:#111;letter-spacing:2px}
+.nd-ycard-plate-trust{font-size:22px;font-weight:700;color:#fff;letter-spacing:2px}
+.nd-ycard-chev{display:flex;justify-content:center;margin-top:14px}
+.nd-ycard-add-icon{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;margin-bottom:7px}
+.nd-ycard-add-lbl{font-size:12px;font-weight:500;color:#888}
+
+/* dots */
+.nd-dots{display:flex;justify-content:center;gap:5px;margin:10px 0 0;padding:0 16px}
+.nd-dot{height:5px;border-radius:3px;background:rgba(0,0,0,.2);width:6px;transition:all .3s}
+.nd-dot.active{width:18px;background:#1A1A1A}
+
+/* pills */
+.nd-pills{display:none;gap:7px;flex-wrap:wrap;padding:10px 0 0}
+.nd-pill{display:flex;align-items:center;gap:4px;padding:5px 11px;border-radius:20px;font-size:11px;font-weight:600}
+.nd-pill-ok{background:rgba(29,184,122,.1);color:#1DB87A}
+.nd-pill-warn{background:rgba(245,158,11,.1);color:#F59E0B}
+.nd-pdot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* sortbar */
+.nd-sortbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 10px}
+.nd-sort-item{display:flex;align-items:center;gap:4px;font-size:12px;color:#999;cursor:pointer;font-weight:500}
+
+/* icons */
+.nd-icons-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:0 20px 18px;text-align:center}
+.nd-icon-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
+.nd-icon-circle{width:54px;height:54px;border-radius:50%;background:var(--nd-icon);display:flex;align-items:center;justify-content:center;border:.5px solid rgba(255,255,255,.1);transition:transform .15s;box-shadow:0 3px 14px rgba(0,0,0,.2)}
+.nd-icon-btn:hover .nd-icon-circle{transform:scale(1.06)}
+.nd-icon-btn:active .nd-icon-circle{transform:scale(.92)}
+.nd-icon-lbl{font-size:11px;color:#222;font-weight:500;line-height:1.3}
+
+/* feat cards */
+.nd-feat-card{margin:0 16px 10px;background:rgba(255,255,255,.85);border:.5px solid rgba(255,255,255,.9);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .15s;box-shadow:var(--nd-shadow)}
+.nd-feat-card:hover{transform:translateY(-1px);box-shadow:var(--nd-shadow-lg)}
+.nd-feat-card:active{transform:scale(.98)}
+.nd-feat-ico{width:44px;height:44px;border-radius:50%;background:var(--nd-icon);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nd-feat-content{flex:1}
+.nd-feat-title{font-size:14px;font-weight:600;color:#111;margin-bottom:6px;letter-spacing:-.2px}
+.nd-feat-search{background:rgba(0,0,0,.05);border-radius:20px;padding:6px 12px;font-size:12px;color:#bbb;border:.5px solid rgba(0,0,0,.06)}
+.nd-feat-sub{font-size:12px;color:#aaa}
+
+/* status card */
+.nd-status-card{background:rgba(255,255,255,.85);border:.5px solid rgba(255,255,255,.9);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 16px;box-shadow:var(--nd-shadow)}
+.nd-status-title{font-size:10px;color:#999;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.nd-status-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:.5px solid rgba(0,0,0,.05);font-size:12px}
+.nd-status-row:last-child{border-bottom:none}
+.nd-status-lbl{color:#555}
+
+/* activity card (desktop only by default) */
+.nd-activity-card{display:none;margin:0 16px 10px;background:rgba(255,255,255,.85);border:.5px solid rgba(255,255,255,.9);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 16px;box-shadow:var(--nd-shadow)}
+.nd-act-title{font-size:10px;color:#999;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.nd-act-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:.5px solid rgba(0,0,0,.05);cursor:pointer;transition:background .1s}
+.nd-act-row:last-child{border-bottom:none}
+.nd-act-ic{width:34px;height:34px;border-radius:10px;background:#F2F2F5;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nd-act-name{font-size:13px;font-weight:500;color:#111;flex:1}
+.nd-act-sub{font-size:11px;color:#999}
+.nd-act-arr{color:rgba(0,0,0,.2)}
+
+/* module card grid */
+.nd-mod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 10px}
+.nd-mod-card{background:var(--nd-card);border:.5px solid rgba(0,0,0,.06);border-radius:var(--nd-r);padding:14px;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:var(--nd-shadow);-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
+.nd-mod-card:hover{transform:translateY(-2px);box-shadow:var(--nd-shadow-lg)}
+.nd-mod-card:active{transform:scale(.97)}
+.nd-mod-tag{display:inline-flex;align-items:center;background:rgba(0,0,0,.06);border-radius:20px;padding:3px 8px;font-size:10px;font-weight:600;color:var(--nd-dim);letter-spacing:.1px;align-self:flex-start;margin-bottom:6px}
+.nd-mod-name{font-size:13px;font-weight:700;color:var(--nd-ink);line-height:1.3;letter-spacing:-.2px}
+.nd-mod-sub{font-size:11px;color:var(--nd-dim);margin-top:2px}
+.nd-mod-chart{display:flex;align-items:flex-end;gap:2px;height:28px;margin-top:10px}
+.nd-mod-bar{width:4px;border-radius:2px;flex-shrink:0;background:rgba(0,0,0,.10)}
+.nd-mod-bar.on{background:#3366ff}
+.nd-mod-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.nd-mod-arr{color:rgba(0,0,0,.22);flex-shrink:0}
+.nd-mod-screen{width:100%;height:36px;border-radius:10px;background:linear-gradient(135deg,#667eea,#764ba2,#f093fb);margin:8px 0 2px;position:relative;overflow:hidden}
+.nd-mod-screen::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.15)}
+.nd-mod-card.nd-mod-exo{background:var(--nd-yellow);border-color:rgba(0,0,0,.04)}
+.nd-mod-card.nd-mod-exo .nd-mod-tag{background:rgba(0,0,0,.1);color:rgba(0,0,0,.55)}
+.nd-mod-card.nd-mod-exo .nd-mod-bar{background:rgba(0,0,0,.12)}
+.nd-mod-card.nd-mod-exo .nd-mod-bar.on{background:rgba(0,0,0,.42)}
+.nd-mod-card.nd-mod-exo .nd-mod-arr{color:rgba(0,0,0,.3)}
+.nd-mod-card.nd-mod-ai{background:#1A1A1A;border-color:transparent}
+.nd-mod-card.nd-mod-ai .nd-mod-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.6)}
+.nd-mod-card.nd-mod-ai .nd-mod-name{color:#fff}
+.nd-mod-card.nd-mod-ai .nd-mod-sub{color:rgba(255,255,255,.45)}
+.nd-mod-card.nd-mod-ai .nd-mod-arr{color:rgba(255,255,255,.3)}
+
+/* family banner */
+.nd-family-banner{margin:0;background:linear-gradient(135deg,#6D28D9,#9333EA);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 4px 20px rgba(109,40,217,.25)}
+.nd-family-ico{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nd-family-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.nd-family-sub{font-size:11px;color:rgba(255,255,255,.65)}
+.nd-family-btn{font-size:12px;font-weight:600;color:#fff;background:rgba(255,255,255,.2);padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-left:auto}
+
+/* bottom nav */
+.bnav{background:rgba(249,249,251,.92)!important;backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;border-top:1px solid rgba(0,0,0,.07)!important;height:auto!important;padding:10px 0 22px!important}
+.bnav-inner{justify-content:space-around!important}
+.bn-item{color:#1c1c1e!important}
+.bn-item svg{stroke:#1c1c1e!important;width:24px!important;height:24px!important}
+.bn-center-logo{background:#1c1c1e!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;flex:0 0 46px!important}
+.bn-center-logo img{filter:invert(1);width:26px;height:26px;border-radius:50%}
+
+/* mobile topbar brand text */
+.tb-mobile-brand{display:none;font-size:17px;font-weight:800;color:#111;font-family:var(--font-head);letter-spacing:-.4px}
+
+/* YellowCard logo in dark circle */
+.nd-ycard-logo-circle{width:40px;height:40px;border-radius:50%;background:#1A1A1A;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.nd-ycard-logo-circle img{width:24px;height:24px;object-fit:contain;filter:invert(1);opacity:.92}
+
+/* empty vehicle slot cards */
+.nd-ycard-slot{background:#F2F2F7;border:1.5px dashed rgba(0,0,0,.10)!important;box-shadow:none!important}
+.nd-ycard-slot-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;gap:8px;padding:20px 0}
+.nd-ycard-slot-ico{width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.055);display:flex;align-items:center;justify-content:center}
+.nd-ycard-slot-lbl{font-size:13px;font-weight:600;color:#888;letter-spacing:-.1px}
+.nd-ycard-slot-sub{font-size:11px;color:#bbb;font-weight:400}
+
+/* ── Desktop layout ── */
+@media(min-width:769px){
+  /* padding intern per panel (înlocuiește .content padding) */
+  .panel.active:not(#panel-dashboard):not(.panel-iframe):not(#panel-analytics){padding:28px 32px}
+  #panel-analytics{padding:0;margin:0;min-height:100%}
+  #panel-dashboard{height:100%;display:flex;flex-direction:column}
+  .nd-wrap{
+    height:100%;overflow:hidden;display:flex;flex-direction:column;
+    padding:20px 32px 12px;max-width:1060px;margin:0 auto;width:100%
+  }
+
+  /* greeting → compact header, no card */
+  .nd-greet-card{padding:0 0 12px;background:none;border-radius:0;box-shadow:none;margin-bottom:0}
+  .nd-gr-sub{display:block}
+  .nd-greet-avatar{display:none}
+
+  /* two-col grid — fills remaining height */
+  .nd-two-col{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:stretch;flex:1;min-height:0;overflow:hidden}
+  .nd-col-left{display:flex;flex-direction:column;gap:12px;overflow:hidden;padding:0}
+  .nd-col-right{display:flex;flex-direction:column;overflow:hidden;padding:0}
+
+  /* carousel → single card (no drag) */
+  .nd-carousel-wrap{margin:0;border-radius:22px;box-shadow:0 6px 24px rgba(200,220,0,.22)}
+  .nd-carousel-track{transform:none!important;transition:none!important}
+  #nd-trust-card,#nd-add-card{display:none!important}
+  .nd-dots{display:none}
+  .nd-ycard{min-width:100%}
+
+  /* pills visible */
+  .nd-pills{display:flex}
+
+  /* status card solid on desktop */
+  .nd-status-card{background:var(--nd-card);border:none;backdrop-filter:none;border-radius:var(--nd-r)}
+
+  /* icon circles bigger */
+  .nd-icon-circle{width:60px;height:60px}
+  .nd-icons-row{padding:0 0 14px;gap:8px}
+  .nd-sortbar{padding:0 0 14px}
+
+  /* feat cards solid */
+  .nd-feat-card{margin:0 0 10px;background:var(--nd-card);border:none;backdrop-filter:none;border-radius:var(--nd-r)}
+
+  /* activity card visible */
+  .nd-activity-card{display:block;margin:0 0 10px;background:var(--nd-card);border:none;backdrop-filter:none;border-radius:var(--nd-r)}
+
+  /* module grid desktop */
+  .nd-mod-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:0 0 10px}
+
+  /* family banner */
+  .nd-family-banner{margin:0}
+}
+
+@media(max-width:768px){
+  .nd-icon-circle{width:50px;height:50px}
+  .nd-icon-lbl{font-size:10px}
+}
+
   </style>
 </head>
 <body>
@@ -679,32 +919,51 @@ a{color:inherit;text-decoration:none}
 <div id="auth-screen">
 
   <div class="auth-left">
+    <!-- Logo wordmark (yellow icon + Mulberry text) -->
     <div class="al-logo">
-      <img src="/mulberry-wordmark.svg" alt="Mulberry" class="al-wordmark">
+      <img src="/mulberry-logo.png" alt="Mulberry" class="al-wordmark">
     </div>
+
+    <!-- Hero -->
     <div class="al-hero">
-      <div class="al-h1">Radical clarity.<br>Absolute certainty.</div>
-      <div class="al-sub">We eliminate the friction of automotive maintenance by providing drivers and partners with a clean, intuitive, and guaranteed digital experience.</div>
-      <div class="al-features">
-        <div class="al-feat">
-          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
-          Identitate digitală verificată
-        </div>
-        <div class="al-feat">
-          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
-          YellowCard — asigurare + ITP + istoric
-        </div>
-        <div class="al-feat">
-          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          MulberryAI — analiză predictivă
-        </div>
+      <h1 class="al-h1">Radical clarity.<br><em>Absolute certainty.</em></h1>
+      <p class="al-sub">We eliminate the friction of automotive maintenance by providing drivers and partners with a clean, intuitive, and guaranteed digital experience.</p>
+    </div>
+
+    <!-- Features -->
+    <div class="al-features">
+      <div class="al-feat">
+        <div class="al-feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+        Identitate digitală verificată
+      </div>
+      <div class="al-feat">
+        <div class="al-feat-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        YellowCard — asigurare + ITP + istoric
+      </div>
+      <div class="al-feat">
+        <div class="al-feat-ico"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg></div>
+        MulberryAI — analiză predictivă
       </div>
     </div>
+
     <div class="al-foot">© 2025 Mulberry Technologies SRL · Toate drepturile rezervate</div>
   </div>
 
   <div class="auth-right">
     <div class="auth-form-panel">
+
+      <!-- Back button — dreapta -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:24px">
+        <button class="al-back-btn" onclick="history.back()">
+          Înapoi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- Brand logo — versiunea hero (galben pe negru) -->
+      <div class="af-brand-logo">
+        <img src="/mulberry-logo.png" alt="Mulberry" style="height:46px;width:auto;display:block">
+      </div>
 
       <!-- Step indicator -->
       <div class="af-step-indicator">
@@ -725,7 +984,7 @@ a{color:inherit;text-decoration:none}
 
         <div id="af-alert-1" class="af-alert error"></div>
 
-        <button class="btn-google" onclick="afSignInWithGoogle()">
+        <button class="btn-google" onclick="afSignInWithGoogle()" style="display:none">
           <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Continuă cu Google
         </button>
@@ -797,12 +1056,34 @@ a{color:inherit;text-decoration:none}
         </div>
 
         <div class="af-extracted" id="af-extracted">
-          <div class="af-data-table" id="af-data-table"></div>
+          <div class="yellowcard">
+            <div class="yellowcard-header">Certificat de înmatriculare</div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">A</span>
+              <input class="yellowcard-input" id="yc-brand" placeholder="Marcă" autocomplete="off">
+            </div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">D.1</span>
+              <input class="yellowcard-input" id="yc-model" placeholder="Model" autocomplete="off">
+            </div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">E</span>
+              <input class="yellowcard-input" id="yc-vin" placeholder="Serie șasiu (VIN)" autocomplete="off" style="font-family:'DM Mono','JetBrains Mono',monospace;font-size:0.78rem">
+            </div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">K</span>
+              <input class="yellowcard-input" id="yc-plate" placeholder="Număr înmatriculare" autocomplete="off" style="text-transform:uppercase">
+            </div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">C.2</span>
+              <input class="yellowcard-input" id="yc-regdate" placeholder="Data primei înmatriculări" type="date">
+            </div>
+          </div>
           <div class="af-check-row">
             <input type="checkbox" id="af-confirm-check">
-            <label class="af-check-label" for="af-confirm-check">Certific că documentul încărcat este original și aparține vehiculului înregistrat pe numele meu.</label>
+            <label class="af-check-label" for="af-confirm-check">Certific că datele sunt corecte și vehiculul este înregistrat pe numele meu.</label>
           </div>
-          <button class="btn-primary" id="af-gen-btn" onclick="afGenerateCard()">Generează MulberryID →</button>
+          <button class="btn-primary" id="af-gen-btn" onclick="afSaveVehicle()">Salvează vehiculul →</button>
           <button class="btn-ghost" onclick="afResetUpload()">Încearcă altă poză</button>
         </div>
 
@@ -839,36 +1120,36 @@ a{color:inherit;text-decoration:none}
     <div class="sb-label">Navigare</div>
 
     <button class="nav-item active" data-p="dashboard" onclick="goPanel('dashboard')">
-      <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
-      Dashboard
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></span>
+      MulberryFAST
     </button>
     <button class="nav-item" data-p="yellowcard" onclick="goPanel('yellowcard')">
-      <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></span>
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><rect x="5" y="9" width="5" height="3.5" rx="1"/><path d="M5 16h3.5M11 16h2.5"/></svg></span>
       YellowCard
       <span class="ni-badge">MLBR</span>
     </button>
     <button class="nav-item" data-p="marketplace" onclick="goPanel('marketplace')">
-      <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
-      Marketplace
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><rect x="5" y="10.5" width="14" height="10.5" rx="2"/><rect x="9.5" y="15" width="5" height="6" rx="1.5"/></svg></span>
+      MulberryGO
     </button>
 
     <div class="sb-sep" style="margin-top:10px"></div>
     <div class="sb-label">Servicii</div>
 
-    <a class="nav-item" href="/mulberry_cloud.html">
-      <span class="ni-icon" style="background:rgba(139,92,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></span>
+    <button class="nav-item" data-p="cloud" onclick="goPanel('cloud')">
+      <span class="ni-icon" style="background:rgba(139,92,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 16H8a4.5 4.5 0 010-9 5 5 0 019.5 1H18a3.5 3.5 0 010 7h-1.5z"/><path d="M12 12v4M9.5 14.5L12 12l2.5 2.5"/></svg></span>
       MulberryCloud
-    </a>
-    <a class="nav-item" href="/mulberry_menu.html">
-      <span class="ni-icon" style="background:rgba(59,130,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg></span>
+    </button>
+    <button class="nav-item" data-p="hub" onclick="goPanel('hub')">
+      <span class="ni-icon" style="background:rgba(59,130,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M19.07 4.93l-1.77 1.77M6.7 17.3l-1.77 1.77"/></svg></span>
       MulberryHUB
-    </a>
-    <a class="nav-item" href="/mulberry_qdata.html">
-      <span class="ni-icon" style="background:rgba(236,255,84,.12)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
+    </button>
+    <button class="nav-item" data-p="drive" onclick="goPanel('drive')">
+      <span class="ni-icon" style="background:rgba(236,255,84,.12)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l2-4h12l2 4"/><rect x="2" y="10.5" width="20" height="8" rx="2.5"/><circle cx="6.5" cy="19.5" r="2"/><circle cx="17.5" cy="19.5" r="2"/></svg></span>
       MulberryDrive
-    </a>
-    <button class="nav-item" data-p="analytics" onclick="goPanel('analytics')">
-      <span class="ni-icon" style="background:rgba(181,243,51,.15)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#b5f333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+    </button>
+    <button class="nav-item" data-p="analytics" style="opacity:0.32;filter:blur(0.6px);pointer-events:none;cursor:default" tabindex="-1">
+      <span class="ni-icon" style="background:rgba(181,243,51,.15)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#b5f333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 12 7 12 10 4 14 20 17 12 22 12"/></svg></span>
       Analytics
     </button>
 
@@ -876,7 +1157,7 @@ a{color:inherit;text-decoration:none}
     <div class="sb-label">Cont</div>
 
     <button class="nav-item" data-p="settings" onclick="goPanel('settings')">
-      <span class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.8"/><path d="M12 2v2.5M12 19.5V22M4.22 4.22l1.77 1.77M18.01 18.01l1.77 1.77M2 12h2.5M19.5 12H22M4.22 19.78l1.77-1.77M18.01 5.99l1.77-1.77"/></svg></span>
       Setări
     </button>
 
@@ -886,6 +1167,7 @@ a{color:inherit;text-decoration:none}
     <!-- Mobile hamburger -->
     <button class="tb-hamburger" onclick="toggleSidebar()" aria-label="Meniu">
       <img src="/favicon.png" alt="Mulberry">
+      <span class="tb-mobile-brand">Mulberry</span>
     </button>
     <!-- Desktop logo → opens sidebar -->
     <button class="tb-logo-btn" onclick="toggleSidebar()" aria-label="Meniu Mulberry">
@@ -915,201 +1197,243 @@ a{color:inherit;text-decoration:none}
 
     <!-- DASHBOARD -->
     <div class="panel active" id="panel-dashboard">
-      <div class="gd">
+      <div class="nd-wrap">
 
-        <!-- Header -->
-        <div class="gd-hdr" style="align-items:center">
-          <div>
-            <div class="gd-greeting" id="gd-greeting-lbl">Bună dimineața,</div>
-            <div class="gd-title" id="gd-main-title">MulberryFAST</div>
-          </div>
-          <div class="gd-hdr-av" id="gd-hdr-av">M</div>
-        </div>
-
-        <!-- MulberryAI Gemini card -->
-        <div class="gd-ai-card">
-          <div class="gd-ai-card-eyebrow">
-            <span class="gd-ai-eyebrow-name">MulberryAI</span>
-            <span class="gd-ai-eyebrow-powered">powered by Gemini</span>
-          </div>
-          <!-- Gemini logo -->
-          <div class="gd-ai-gemini-brand">
-            <img class="gd-ai-gemini-logo-img" src="data:image/jpeg;base64,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7LZO1ak7/fL3bedj1jd14d3s4fB+Zim75ikB7cGXTDTuA/xqZNCYdL9iHB9x9f7xDv2YUU2njX9xlCHnQqAcBqwuXqCLTZQquunrHqstmPVZbtY5ZKFPRrKabEVd6srpaAhCCVXN3Ha2Ih3EZhtxHrjLOs624Nk2uiNyOQzWb4xArl+sPW6u1I3eAUwq/wAp/wC+nwU/+2gRBHO6/Lt3zA6UowfBV9P+m6kE1lSVO9c27WB8eLdMVI/EoQrMNf8A5zd8zRNXleQ27y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXP/aAAwDAQACAAMAAAAQ8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++m+++++++++++++++++++++++++++++++++8++++++++++4WW+++yXnS+++++++++a++89+++++++++++8++++++++++xw58+8P8ALvOHcdDTc0ZJqedFvvvvvvvvvvvvPvvvvvvvvYbk3776FfhT5UdQbf3X6VXeBVfvvvvvvvvvvvPvvvvvvvvvjoZ3fvu9OB8U+o/6/q6VffFVfvvvvvvvvvvvPvvvvvvvvvvjFfvvrKRTLLZfHPPLHrvrDvvvvvvvvvvvvvPvvvvvvvvvvrfvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvv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" alt="Gemini">
-          </div>
-          <!-- AI Search Bar — gradient border pill (Gemini) -->
-          <div class="gd-ai-search-wrap" id="gd-ai-sb-border">
-            <div class="gd-ai-search" onclick="openGeminiModal()">
-              <img src="/gemini-spark.png" class="gd-ai-search-star" alt="">
-              <span class="gd-ai-search-text">Întreabă MulberryAI orice despre vehiculul tău...</span>
-              <kbd class="gd-ai-search-kbd">⌘K</kbd>
+        <!-- Greeting: compact row above YellowCard -->
+        <div class="nd-greet-card">
+          <div class="nd-greet-top">
+            <div>
+              <div class="nd-gr-sub" style="display:flex;align-items:center;gap:5px">
+                <img src="/favicon.png" style="height:13px;width:auto;opacity:.55" alt="">
+                <span id="gd-greeting-lbl">Bună ziua,</span>
+              </div>
+              <div class="nd-hello">Hello, <span id="gd-main-title">there</span></div>
             </div>
+            <div class="nd-greet-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
           </div>
         </div>
 
-        <!-- Row 1: Tiles + MulberryAI -->
-        <div class="gd-r1">
+        <div class="nd-two-col">
 
-          <!-- MulberryGO → Marketplace -->
-          <button class="gdc gdc-go gdc-tile" onclick="goPanel('marketplace')">
-            <div class="sph-card-top">
-              <div class="sph-card-ico" style="background:rgba(181,243,51,.15)">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
-                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-                </svg>
-              </div>
-              <button class="sph-arr" onclick="event.stopPropagation();goPanel('marketplace')">↗</button>
-            </div>
-            <div class="gdc-tile-name">MulberryGO</div>
-            <div class="gdc-tile-sub">Book a service</div>
-            <div class="sph-mini-chart" style="margin-top:auto">
-              <div class="sph-bar muted" style="height:32%"></div>
-              <div class="sph-bar dark" style="height:50%"></div>
-              <div class="sph-bar dark" style="height:42%"></div>
-              <div class="sph-bar dark" style="height:65%"></div>
-              <div class="sph-bar dark" style="height:55%"></div>
-              <div class="sph-bar dark" style="height:78%"></div>
-              <div class="sph-bar dark" style="height:60%"></div>
-              <div class="sph-bar dark" style="height:85%"></div>
-              <div class="sph-bar dark" style="height:70%"></div>
-              <div class="sph-bar dark" style="height:90%"></div>
-              <div class="sph-bar muted" style="height:28%"></div>
-              <div class="sph-bar lime" style="height:100%"></div>
-            </div>
-          </button>
+          <!-- LEFT: yellowcard + pills + status -->
+          <div class="nd-col-left">
 
-          <!-- YellowCard → panel -->
-          <button class="gdc gdc-yc gdc-tile" onclick="goPanel('yellowcard')">
-            <div class="sph-card-top">
-              <div class="sph-card-ico" style="background:rgba(0,0,0,.1)">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
-                </svg>
-              </div>
-              <div style="font-size:10px;font-weight:600;background:rgba(0,0,0,.12);padding:3px 9px;border-radius:20px;color:rgba(0,0,0,.55);font-family:'Urbanist',sans-serif;letter-spacing:.02em">Activ</div>
-            </div>
-            <div class="gdc-tile-name">YellowCard</div>
-            <div class="gdc-tile-sub">Cardul meu digital</div>
-            <div class="gdc-tile-arr" style="margin-top:auto;padding-top:14px;font-size:20px">→</div>
-          </button>
+            <!-- Carousel (mobile swipe / desktop = single card) -->
+            <div class="nd-carousel-wrap">
+              <div class="nd-carousel-track" id="nd-car-track">
 
-          <!-- MulberryAI -->
-          <div class="gdc gdc-blue">
-            <div class="gda-left">
-              <div class="gda-eyebrow">Asistent inteligent</div>
-              <div class="gda-ai-title">Mulberry <span style="color:#b5f333">AI</span></div>
-              <div class="gd-ai-bar">
-                <label class="gd-ai-photo" title="Adaugă poză">
-                  <input type="file" accept="image/*" style="display:none" id="ai-photo-input" onchange="aiHandlePhoto(event)">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                </label>
-                <input type="text" id="ai-query" class="gd-ai-input" placeholder="Întreabă asistentul Mulberry..." onkeydown="if(event.key==='Enter')aiSendQuery()">
-                <button class="gd-ai-send" onclick="aiSendQuery()">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1c1e00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                </button>
-              </div>
-              <div class="gd-ai-chips">
-                <button class="gd-ai-chip" onclick="aiChip(this)">Verifică ITP</button>
-                <button class="gd-ai-chip" onclick="aiChip(this)">Status asigurare</button>
-                <button class="gd-ai-chip" onclick="aiChip(this)">Analiză vehicul</button>
-              </div>
-              <div id="ai-response" class="gd-ai-resp"></div>
-            </div>
-            <div class="gda-right">
-              <div class="gda-donut-wrap">
-                <svg class="gda-donut" viewBox="0 0 120 120">
-                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
-                  <circle cx="60" cy="60" r="46" fill="none" stroke="#b5f333" stroke-width="17" stroke-dasharray="289 0" stroke-linecap="round" transform="rotate(-90 60 60)"/>
-                </svg>
-                <div class="gda-donut-inner">
-                  <div class="gda-donut-val" style="color:#b5f333;font-size:14px">AI</div>
-                  <div class="gda-donut-sub">online</div>
+                <div class="nd-ycard nd-ycard-yellow" onclick="goPanel('yellowcard')">
+                  <div class="nd-ycard-wm">M</div>
+                  <div class="nd-ycard-top">
+                    <span class="nd-ycard-badge">Yellowcard</span>
+                    <div class="nd-ycard-logo-circle">
+                      <img src="/Mulberry.png" class="nd-ycard-brand-logo" alt="Mulberry" onerror="this.src='/favicon.png';this.style.filter='invert(1)'">
+                    </div>
+                  </div>
+                  <div class="nd-ycard-vin" id="nd-ycard-vin">VIN: —</div>
+                  <div class="nd-ycard-plate" id="nd-ycard-plate">— ——</div>
+                  <div class="nd-ycard-chev">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,0.28)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
                 </div>
-              </div>
-              <button class="gda-arr" onclick="goPanel('analytics')">↗</button>
-            </div>
-          </div>
-        </div>
 
-        <!-- Row 2: Cloud + Drive + HUB -->
-        <div class="gd-r2">
+                <div class="nd-ycard nd-ycard-slot" id="nd-trust-card" onclick="goPanel('addvehicle')">
+                  <div class="nd-ycard-slot-inner">
+                    <div class="nd-ycard-slot-ico">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="14" height="9" rx="2"/>
+                        <path d="M16 10h3l2 2.5V16h-5"/>
+                        <circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/>
+                      </svg>
+                    </div>
+                    <div class="nd-ycard-slot-lbl">Vehicul 2</div>
+                    <div class="nd-ycard-slot-sub">Adaugă un vehicul</div>
+                  </div>
+                  <span id="nd-trust-vin" style="display:none"></span>
+                  <span id="nd-trust-plate" style="display:none"></span>
+                </div>
 
-          <!-- MulberryCloud -->
-          <div class="gdc gdc-cloud" onclick="location.href='/mulberry_cloud.html'" style="cursor:pointer">
-            <div class="sph-card-top">
-              <div class="gdc-cloud-ico" style="margin-bottom:0">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
-              </div>
-              <button class="sph-arr" onclick="event.stopPropagation();location.href='/mulberry_cloud.html'">↗</button>
-            </div>
-            <div class="gdc-cloud-name" style="margin-top:10px">MulberryCloud</div>
-            <div class="gdc-cloud-sub">Stocare &amp; documente</div>
-            <div class="gdc-cloud-items" style="margin-top:12px">
-              <div class="gdc-cloud-item">
-                <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-                Documente vehicul
-              </div>
-              <div class="gdc-cloud-item">
-                <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 12 11 14 15 10"/></svg></div>
-                Asigurări &amp; ITP
-              </div>
-            </div>
-            <button class="gdc-cloud-btn" style="margin-top:14px">Deschide Cloud ↗</button>
-          </div>
+                <div class="nd-ycard nd-ycard-slot" id="nd-add-card" onclick="goPanel('addvehicle')">
+                  <div class="nd-ycard-slot-inner">
+                    <div class="nd-ycard-slot-ico">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="2" stroke-linecap="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                      </svg>
+                    </div>
+                    <div class="nd-ycard-slot-lbl">Vehicul 3</div>
+                    <div class="nd-ycard-slot-sub">Adaugă un vehicul</div>
+                  </div>
+                </div>
 
-          <!-- MulberryDrive -->
-          <div class="gdc gdc-drive" style="display:flex;flex-direction:column;gap:12px">
-            <div class="sph-card-top">
-              <div>
-                <div class="gdc-drive-name">MulberryDrive</div>
-                <div class="gdc-drive-sub">Navigație powered by Mapbok</div>
               </div>
-              <button class="sph-arr">↗</button>
             </div>
-            <div class="gdc-map-box" style="flex:1">
-              <div class="gdc-map-ico">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+
+            <!-- Dots (mobile only) -->
+            <div class="nd-dots">
+              <div class="nd-dot active" id="nd-dot-0"></div>
+              <div class="nd-dot" id="nd-dot-1"></div>
+              <div class="nd-dot" id="nd-dot-2"></div>
+            </div>
+
+            <!-- Status pills (desktop only) -->
+            <div class="nd-pills">
+              <div class="nd-pill nd-pill-ok"><div class="nd-pdot"></div>ITP Valid</div>
+              <div class="nd-pill nd-pill-ok"><div class="nd-pdot"></div>RCA Valid</div>
+              <div class="nd-pill nd-pill-warn"><div class="nd-pdot"></div>Revizie 32 zile</div>
+            </div>
+
+            <!-- Status card -->
+            <div class="nd-status-card">
+              <div class="nd-status-title">STARE VEHICUL</div>
+              <div class="nd-status-row"><span class="nd-status-lbl">ITP</span><span id="nd-itp-val" style="color:#1DB87A;font-weight:600">—</span></div>
+              <div class="nd-status-row"><span class="nd-status-lbl">RCA</span><span id="nd-rca-val" style="color:#1DB87A;font-weight:600">—</span></div>
+              <div class="nd-status-row"><span class="nd-status-lbl">Revizie</span><span id="nd-rev-val" style="color:#F59E0B;font-weight:600">—</span></div>
+            </div>
+
+            <!-- MulberryFamily -->
+            <div class="nd-family-banner" id="nd-family-banner" onclick="showFamilyUpsell()">
+              <div class="nd-family-ico">
+                <svg viewBox="0 0 28 28" width="20" height="20" fill="none">
+                  <circle cx="10" cy="9" r="3.5" stroke="rgba(255,255,255,0.9)" stroke-width="1.6"/>
+                  <path d="M4 22Q4 17 10 17Q16 17 16 22" stroke="rgba(255,255,255,0.9)" stroke-width="1.6" stroke-linecap="round"/>
+                  <circle cx="19" cy="10" r="2.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+                  <path d="M16 22Q16 18.5 19 18.5Q22 18.5 22 22" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" stroke-linecap="round"/>
                 </svg>
               </div>
-              <div class="gdc-map-lbl">Navigație GPS</div>
-              <div class="gdc-map-note">Mapbok · timp real<br>Integrare activă</div>
-              <button class="gdc-map-btn">Pornește navigația →</button>
+              <div style="flex:1">
+                <div class="nd-family-title">MulberryFamily</div>
+                <div class="nd-family-sub">Până la 3 vehicule · 3€/lună</div>
+              </div>
+              <div class="nd-family-btn">Activează</div>
             </div>
-          </div>
 
-          <!-- MulberryHUB Last Updates -->
-          <div class="gdc gdc-hub">
-            <div class="sph-card-top" style="margin-bottom:14px">
-              <div style="display:flex;align-items:center;gap:10px">
-                <div class="gdc-hub-ico">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 20V10M12 20V4M6 20v-6"/>
-                  </svg>
-                </div>
+          </div><!-- /col-left -->
+
+          <!-- RIGHT: actions + features -->
+          <div class="nd-col-right">
+
+            <!-- Module grid -->
+            <div class="nd-mod-grid">
+
+              <!-- MulberryGO -->
+              <div class="nd-mod-card" onclick="goPanel('marketplace')">
                 <div>
-                  <div class="gdc-hub-name">MulberryHUB</div>
-                  <div class="gdc-hub-badge">Last Updates</div>
+                  <div class="nd-mod-tag">MulberryGO</div>
+                  <div class="nd-mod-name">Servicii auto</div>
+                  <div class="nd-mod-sub">Marketplace verificat</div>
+                </div>
+                <div class="nd-mod-foot">
+                  <span></span>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
               </div>
-              <span class="sph-badge up">3 nou</span>
-            </div>
-            <div class="gdc-hub-row">
-              <div class="gdc-hub-dot gdc-hub-dot-new"></div>
-              <div><div class="gdc-hub-event">Sphere UI dashboard — redesign complet</div><div class="gdc-hub-time">Azi, 26 Mai 2026</div></div>
-            </div>
-            <div class="gdc-hub-row">
-              <div class="gdc-hub-dot gdc-hub-dot-feat"></div>
-              <div><div class="gdc-hub-event">Favicon PNG + Inter font thin</div><div class="gdc-hub-time">25 Mai 2026</div></div>
-            </div>
-            <div class="gdc-hub-row">
-              <div class="gdc-hub-dot"></div>
-              <div><div class="gdc-hub-event">MulberryFAST — 6 carduri servicii</div><div class="gdc-hub-time">25 Mai 2026</div></div>
-            </div>
-          </div>
 
-        </div>
+              <!-- MulberryEXO -->
+              <div class="nd-mod-card nd-mod-exo" onclick="goPanel('analytics')">
+                <div>
+                  <div class="nd-mod-tag">MulberryEXO · Activ</div>
+                  <div class="nd-mod-name">Notificări</div>
+                  <div class="nd-mod-sub">Motor de alertare AI</div>
+                </div>
+                <div class="nd-mod-chart">
+                  <div class="nd-mod-bar" style="height:40%"></div><div class="nd-mod-bar on" style="height:70%"></div>
+                  <div class="nd-mod-bar" style="height:30%"></div><div class="nd-mod-bar on" style="height:90%"></div>
+                  <div class="nd-mod-bar" style="height:55%"></div><div class="nd-mod-bar on" style="height:100%"></div>
+                  <div class="nd-mod-bar" style="height:65%"></div><div class="nd-mod-bar on" style="height:50%"></div>
+                </div>
+              </div>
+
+              <!-- MulberryID -->
+              <div class="nd-mod-card" onclick="goPanel('yellowcard')">
+                <div>
+                  <div class="nd-mod-tag">MulberryID</div>
+                  <div class="nd-mod-name">YCR Identity</div>
+                  <div class="nd-mod-sub">QR · HMAC signed</div>
+                </div>
+                <div class="nd-mod-foot">
+                  <svg width="22" height="22" viewBox="0 0 28 28" fill="none" opacity=".18">
+                    <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="4" width="6" height="6" fill="#000"/>
+                    <rect x="16" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="18" y="4" width="6" height="6" fill="#000"/>
+                    <rect x="2" y="16" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="18" width="6" height="6" fill="#000"/>
+                    <rect x="16" y="16" width="4" height="4" fill="#000"/><rect x="22" y="16" width="4" height="4" fill="#000"/>
+                    <rect x="16" y="22" width="4" height="4" fill="#000"/><rect x="22" y="22" width="4" height="4" fill="#000"/>
+                  </svg>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- MulberryCloud -->
+              <div class="nd-mod-card" onclick="goPanel('cloud')">
+                <div>
+                  <div class="nd-mod-tag">MulberryCloud</div>
+                  <div class="nd-mod-name">Documente</div>
+                  <div class="nd-mod-sub">Fișiere vehicul</div>
+                </div>
+                <div class="nd-mod-foot">
+                  <span></span>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- MulberryHUB -->
+              <div class="nd-mod-card" onclick="goPanel('hub')">
+                <div>
+                  <div class="nd-mod-tag">MulberryHUB</div>
+                  <div class="nd-mod-screen"></div>
+                </div>
+                <div class="nd-mod-foot">
+                  <span class="nd-mod-sub" id="nd-hub-sub">History · PDF</span>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- MulberryAI -->
+              <div class="nd-mod-card nd-mod-ai" onclick="openGeminiModal()">
+                <div>
+                  <div class="nd-mod-tag">MulberryAI</div>
+                  <div class="nd-mod-name">Asistent auto</div>
+                  <div class="nd-mod-sub" id="nd-ai-hint">Întreabă orice...</div>
+                </div>
+                <div class="nd-mod-foot">
+                  <span></span>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Activity (desktop only) -->
+            <div class="nd-activity-card">
+              <div class="nd-act-title">ACTIVITATE RECENTĂ</div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div style="flex:1"><div class="nd-act-name">Schimb ulei programat</div><div class="nd-act-sub">Ieri · MulberryGO</div></div>
+                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div style="flex:1"><div class="nd-act-name">RCA reînnoit</div><div class="nd-act-sub">Acum 3 zile · YellowCard</div></div>
+                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div style="flex:1"><div class="nd-act-name">ITP verificat</div><div class="nd-act-sub">Săptămâna trecută</div></div>
+                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+
+          </div><!-- /col-right -->
+
+        </div><!-- /two-col -->
+
       </div>
+
     </div>
 
     <!-- YELLOWCARD PANEL -->
@@ -1353,29 +1677,45 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
 
+    <!-- CLOUD PANEL -->
+    <div class="panel panel-iframe" id="panel-cloud">
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryCloud</span>
+      </div>
+      <iframe class="pif-frame" id="pif-cloud" src="" title="MulberryCloud"></iframe>
+    </div>
+
+    <!-- HUB PANEL -->
+    <div class="panel panel-iframe" id="panel-hub">
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryHUB</span>
+      </div>
+      <iframe class="pif-frame" id="pif-hub" src="" title="MulberryHUB"></iframe>
+    </div>
+
+    <!-- DRIVE PANEL -->
+    <div class="panel panel-iframe" id="panel-drive">
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryDrive</span>
+      </div>
+      <iframe class="pif-frame" id="pif-drive" src="" title="MulberryDrive"></iframe>
+    </div>
+
   </main>
 
   <nav class="bnav">
     <div class="bnav-inner">
-      <button class="bn-item" data-p="dashboard" onclick="goPanel('dashboard')">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-        Home
+      <button class="bn-item" onclick="history.back()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <button class="bn-item" data-p="yellowcard" onclick="goPanel('yellowcard')">
-        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg>
-        Card
-      </button>
-      <button class="bn-item" data-p="marketplace" onclick="goPanel('marketplace')">
-        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
-        Market
-      </button>
-      <button class="bn-item active" data-p="analytics" onclick="goPanel('analytics')">
-        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        Chart
+      <button class="bn-item bn-center-logo" data-p="dashboard" onclick="goPanel('dashboard')">
+        <img src="/favicon.png" alt="Mulberry">
       </button>
       <button class="bn-item" data-p="settings" onclick="goPanel('settings')">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        Setări
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </button>
     </div>
   </nav>
@@ -1448,7 +1788,8 @@ function loadSession() {
   try { const r = localStorage.getItem('mlbr_s'); if(r){ currentUser=JSON.parse(r); return currentUser; } } catch(e){}
   return null;
 }
-function clearSession() { localStorage.removeItem('mlbr_s'); currentUser = null; }
+function clearSession() { localStorage.removeItem('mlbr_s'); currentUser = null; sb.auth.signOut(); }
+
 
 let _tt;
 function toast(msg, type) {
@@ -1507,21 +1848,12 @@ const SB_URL  = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
 const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
 const sb = supabase.createClient(SB_URL, SB_ANON);
 
-// Whitelist guard — runs on every page load
+// Whitelist guard — distruge sesiunea doar dacă NU suntem în flux OAuth
 (async () => {
-  const ALLOWED_EMAILS = ['sefanlazar7@gmail.com'];
+  if (sessionStorage.getItem('mlbr_oauth')) return;
+  if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) return;
   const { data: { user } } = await sb.auth.getUser();
-  if (user && !ALLOWED_EMAILS.includes(user.email)) {
-    await sb.auth.signOut();
-    window.location.href = '/mulberry_login.html';
-  } else if (user && ALLOWED_EMAILS.includes(user.email)) {
-    currentUser = {
-      email: user.email,
-      name: user.user_metadata?.full_name || null,
-      avatar: user.user_metadata?.avatar_url || null
-    };
-    enterApp();
-  }
+  if (user) await sb.auth.signOut();
 })();
 
 let afCurrentEmail = '';
@@ -1543,18 +1875,22 @@ function afSwitchTab(btn) {
 }
 
 async function afSignInWithGoogle() {
+  sessionStorage.setItem('mlbr_oauth', '1');
   const { error } = await sb.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: 'https://mulberry.autos/mulberry_app.html' }
+    options: {
+      redirectTo: 'https://mulberry.autos/mulberry_app.html',
+      queryParams: { prompt: 'select_account', access_type: 'online' }
+    }
   });
-  if (error) afShowAlert('af-alert-1', error.message);
+  if (error) { sessionStorage.removeItem('mlbr_oauth'); afShowAlert('af-alert-1', error.message); }
 }
 
 async function afSendOTP() {
   const email = (document.getElementById('af-email').value || '').trim();
   if (!email || !email.includes('@')) return afShowAlert('af-alert-1', 'Introdu un email valid.');
   afCurrentEmail = email;
-  const { error } = await sb.auth.signInWithOtp({ email });
+  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
   if (error) return afShowAlert('af-alert-1', error.message);
   document.getElementById('af-email-display').textContent = email;
   afGoToStep(2);
@@ -1567,11 +1903,15 @@ async function afVerifyOTP() {
   if (token.length !== 6) return afShowAlert('af-alert-2', 'Introdu toate cele 6 cifre.');
   const { data, error } = await sb.auth.verifyOtp({ email: afCurrentEmail, token, type: 'email' });
   if (error) return afShowAlert('af-alert-2', 'Cod incorect sau expirat. Încearcă din nou.');
-  if (data?.session) { currentUser = { email: afCurrentEmail }; enterApp(); } else { afGoToStep(3); }
+  if (data?.session) {
+    const u = data.session.user;
+    saveSession({ email: u.email, name: u.user_metadata?.full_name || null, avatar: u.user_metadata?.avatar_url || null });
+    enterApp();
+  } else { afGoToStep(3); }
 }
 
 async function afResendOTP() {
-  await sb.auth.signInWithOtp({ email: afCurrentEmail });
+  await sb.auth.signInWithOtp({ email: afCurrentEmail, options: { shouldCreateUser: true } });
   afStartResendTimer();
 }
 
@@ -1625,16 +1965,37 @@ async function afHandleUpload(event) {
 }
 
 function afShowExtracted(data) {
-  const fields = [{k:'VIN',v:data.vin},{k:'NUMĂR',v:data.plate},{k:'PROPRIETAR',v:data.owner},{k:'MARCĂ',v:data.brand},{k:'MODEL',v:data.model},{k:'AN',v:data.year}];
-  document.getElementById('af-data-table').innerHTML = fields.filter(f=>f.v).map(f=>`<div class="af-data-row"><span class="af-data-key">${f.k}</span><span class="af-data-val">${f.v}</span></div>`).join('');
+  if (data.brand)  document.getElementById('yc-brand').value  = data.brand;
+  if (data.model)  document.getElementById('yc-model').value  = data.model;
+  if (data.vin)    document.getElementById('yc-vin').value    = data.vin;
+  if (data.plate)  document.getElementById('yc-plate').value  = data.plate.toUpperCase();
+  if (data.year)   document.getElementById('yc-regdate').value = data.year + '-01-01';
   document.getElementById('af-extracted').classList.add('active');
 }
 
-async function afGenerateCard() {
-  if (!document.getElementById('af-confirm-check').checked) return afShowAlert('af-alert-3', 'Confirmă că documentul este original.');
+async function afSaveVehicle() {
+  if (!document.getElementById('af-confirm-check').checked) return afShowAlert('af-alert-3', 'Confirmă că datele sunt corecte.');
+  const vin     = document.getElementById('yc-vin').value.trim();
+  const plate   = document.getElementById('yc-plate').value.trim();
+  const brand   = document.getElementById('yc-brand').value.trim();
+  const model   = document.getElementById('yc-model').value.trim();
+  const regdate = document.getElementById('yc-regdate').value;
+  if (!vin && !plate) return afShowAlert('af-alert-3', 'Completează cel puțin VIN-ul sau numărul de înmatriculare.');
   const btn = document.getElementById('af-gen-btn');
-  btn.textContent = 'Se generează...'; btn.disabled = true;
-  setTimeout(() => { enterApp(); }, 1500);
+  btn.textContent = 'Se salvează...'; btn.disabled = true;
+  try {
+    const token = (typeof window.api !== 'undefined' && window.api.getToken) ? window.api.getToken() : localStorage.getItem('mulberry_session') || '';
+    const res = await fetch('/cars/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ vin, plate, brand, model, first_registration: regdate })
+    });
+    if (!res.ok) throw new Error('Eroare la salvare vehicul.');
+    enterApp();
+  } catch(err) {
+    btn.textContent = 'Salvează vehiculul →'; btn.disabled = false;
+    afShowAlert('af-alert-3', err.message || 'Eroare. Încearcă din nou.');
+  }
 }
 
 function afResetUpload() {
@@ -1668,19 +2029,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Curăță URL-ul după auth
-if (window.location.hash.includes('access_token')) {
-  window.history.replaceState({}, document.title, window.location.pathname);
-}
+setTimeout(() => {
+  if (window.location.hash.includes('access_token')) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+}, 500);
 
-// Supabase OAuth redirect
-sb.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_IN' && session) {
-    currentUser = {
-      email: session.user.email,
-      name: session.user.user_metadata?.full_name || null,
-      avatar: session.user.user_metadata?.avatar_url || null
-    };
-    enterApp();
+// Supabase auth — doar Google OAuth
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'SIGNED_IN' && session && sessionStorage.getItem('mlbr_oauth')) {
+    sessionStorage.removeItem('mlbr_oauth');
+    const user  = session.user;
+    const d = { email: user.email, name: user.user_metadata?.full_name || null, avatar: user.user_metadata?.avatar_url || null };
+    saveSession(d);
+    const isNew = (Date.now() - new Date(user.created_at).getTime()) < 30000;
+    if (isNew) { afGoToStep(3); } else { enterApp(); }
   }
 });
 
@@ -1804,6 +2167,13 @@ function enterApp() {
     }
     gt.textContent = displayName.charAt(0).toUpperCase() + displayName.slice(1) + '!';
   }
+  // Load vehicle data for dashboard Yellowcard
+  apiGet('/me/vehicle').then(v => {
+    const vinEl = document.getElementById('nd-ycard-vin');
+    const plEl  = document.getElementById('nd-ycard-plate');
+    if (vinEl && v.vin)   vinEl.textContent = 'VIN: ' + v.vin;
+    if (plEl  && v.plate) plEl.textContent  = v.plate.toUpperCase();
+  }).catch(() => {});
 }
 
 const PANEL_META = {
@@ -1811,12 +2181,28 @@ const PANEL_META = {
   yellowcard:  ['YellowCard',  () => 'Identitatea digitală a vehiculului tău'],
   marketplace: ['Marketplace', () => 'Servicii auto verificate Mulberry'],
   analytics:   ['Analytics',   () => 'Metrici și rapoarte financiare'],
-  settings:    ['Setări',      () => 'Configurare cont și aplicație']
+  settings:    ['Setări',      () => 'Configurare cont și aplicație'],
+  cloud:       ['MulberryCloud', () => 'Documente și fișiere vehicul'],
+  hub:         ['MulberryHUB',   () => 'Istoric și servicii'],
+  drive:       ['MulberryDrive', () => 'Date și diagnosticare vehicul'],
+};
+const PANEL_IFRAMES = {
+  cloud: ['/mulberry_cloud.html', 'pif-cloud'],
+  hub:   ['/mulberry_menu.html',  'pif-hub'],
+  drive: ['/mulberry_qdata.html', 'pif-drive'],
 };
 
 function goPanel(name) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => {
+    p.classList.remove('active');
+    p.scrollTop = 0; /* reset scroll pe fiecare panel la dezactivare */
+  });
   document.getElementById('panel-'+name)?.classList.add('active');
+  if (PANEL_IFRAMES[name]) {
+    const [src, iframeId] = PANEL_IFRAMES[name];
+    const fr = document.getElementById(iframeId);
+    if (fr && !fr.src.endsWith(src) && !fr.src.includes(src.replace('/', ''))) fr.src = src;
+  }
   if (name === 'analytics') {
     const gl = document.getElementById('gd-greeting-lbl');
     if (gl) gl.textContent = greeting();
@@ -1853,9 +2239,11 @@ document.addEventListener('keydown', e => {
   if (regEl && !regEl.classList.contains('hidden')) doRegister();
 });
 
-(function() {
-  const s = loadSession();
-  if (s && s.token) enterApp();
+(async function() {
+  if (sessionStorage.getItem('mlbr_oauth')) return;
+  if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) return;
+  await sb.auth.signOut();
+  localStorage.removeItem('mlbr_s');
 })();
 
 function aiChip(btn) {
@@ -2005,6 +2393,116 @@ function gmHandlePhoto(event) {
   msgs.appendChild(aiDiv);
   msgs.scrollTop = msgs.scrollHeight;
 }
+
+/* ══ Carousel ══ */
+(function(){
+  var track = document.getElementById('nd-car-track');
+  if(!track) return;
+  var dots = [0,1,2].map(function(i){ return document.getElementById('nd-dot-'+i); });
+  var cur = 0;
+  var visibleCount = 0;
+
+  function getVisibleCards(){
+    var cards = [];
+    for(var i=0;i<track.children.length;i++){
+      if(track.children[i].style.display !== 'none') cards.push(i);
+    }
+    return cards;
+  }
+
+  function updateDots(visibleIdxs){
+    visibleIdxs.forEach(function(cardIdx, pos){
+      var d = dots[pos];
+      if(!d) return;
+      d.style.display = 'block';
+      d.className = 'nd-dot' + (pos === cur ? ' active' : '');
+    });
+    for(var i=visibleIdxs.length;i<3;i++){
+      if(dots[i]) dots[i].style.display = 'none';
+    }
+  }
+
+  window.ndGoTo = function(pos){
+    var visibleIdxs = getVisibleCards();
+    visibleCount = visibleIdxs.length;
+    if(pos<0||pos>=visibleCount) return;
+    cur = pos;
+    var pct = pos * 100;
+    /* Since hidden cards are display:none but still in DOM as flex items,
+       we need to count visible positions by translating differently.
+       Use a simpler approach: show only the current card */
+    track.style.transform = 'translateX(-'+ pct +'%)';
+    updateDots(visibleIdxs);
+    updateContext(visibleIdxs[pos]);
+  };
+
+  function updateContext(cardIdx){
+    var plate = '';
+    if(cardIdx === 0){ plate = (document.getElementById('nd-ycard-plate')||{}).textContent || ''; }
+    else if(cardIdx === 1){ plate = (document.getElementById('nd-trust-plate')||{}).textContent || ''; }
+    if(plate && plate.trim() !== '— ——'){
+      var ai = document.getElementById('nd-ai-hint');
+      var hub = document.getElementById('nd-hub-sub');
+      if(ai) ai.textContent = 'Întreabă despre ' + plate.trim() + '...';
+      if(hub) hub.textContent = plate.trim() + ' · History · PDF';
+    }
+  }
+
+  var sx = 0;
+  track.addEventListener('touchstart', function(e){ sx=e.touches[0].clientX; },{passive:true});
+  track.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - sx;
+    if(dx < -40) ndGoTo(cur+1);
+    else if(dx > 40) ndGoTo(cur-1);
+  },{passive:true});
+  track.addEventListener('mousedown', function(e){ sx=e.clientX; });
+  track.addEventListener('mouseup', function(e){
+    var dx = e.clientX - sx;
+    if(dx < -40) ndGoTo(cur+1);
+    else if(dx > 40) ndGoTo(cur-1);
+  });
+
+  window.ndShowTrustCard = function(){
+    var tc = document.getElementById('nd-trust-card');
+    if(tc) tc.style.display = '';
+    initCarousel();
+  };
+
+  function initCarousel(){
+    cur = 0;
+    var visibleIdxs = getVisibleCards();
+    visibleCount = visibleIdxs.length;
+    track.style.transform = 'translateX(0%)';
+    updateDots(visibleIdxs);
+  }
+
+  setTimeout(initCarousel, 150);
+})();
+
+function showFamilyUpsell(){
+  alert('MulberryFamily · 3€/lună · Până la 3 vehicule în același cont');
+}
+
+// ── Session restore ────────────────────────────────────────────
+// Rulează direct la finalul scriptului (DOM gata, toate funcțiile definite).
+// 1) Verifică localStorage (instant) → intră în app.
+// 2) Fallback: Supabase getSession() → salvează + intră (pt Google OAuth).
+(async function _restoreSession() {
+  const saved = loadSession();
+  if (saved) { enterApp(); return; }
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session?.user) {
+      const u = session.user;
+      saveSession({
+        email:  u.email,
+        name:   u.user_metadata?.full_name  || null,
+        avatar: u.user_metadata?.avatar_url || null
+      });
+      enterApp();
+    }
+  } catch(_) {}
+})();
 </script>
 </body>
 </html>
