@@ -911,6 +911,148 @@ a{color:inherit;text-decoration:none}
   .nd-icon-lbl{font-size:10px}
 }
 
+/* ══ VEHICLE REGISTRATION MODAL ═══════════════════════════════ */
+.vreg-overlay{position:fixed;inset:0;z-index:800;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.vreg-overlay.open{display:flex;animation:vregFI .22s ease}
+@keyframes vregFI{from{opacity:0}to{opacity:1}}
+.vreg-modal{display:grid;grid-template-columns:260px 1fr;width:100%;max-width:800px;min-height:540px;background:rgba(18,18,18,.92);backdrop-filter:blur(40px) saturate(1.6);-webkit-backdrop-filter:blur(40px) saturate(1.6);border:1px solid rgba(255,255,255,.1);border-radius:24px;overflow:hidden;box-shadow:0 48px 120px rgba(0,0,0,.55),0 0 0 .5px rgba(255,255,255,.07);animation:vregSI .3s cubic-bezier(.4,0,.2,1)}
+@keyframes vregSI{from{opacity:0;transform:scale(.95) translateY(16px)}to{opacity:1;transform:none}}
+/* left */
+.vreg-left{background:#000;padding:2rem;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden}
+.vreg-close{position:absolute;top:16px;right:16px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.4);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .15s}
+.vreg-close:hover{background:rgba(255,255,255,.15);color:#fff}
+.vreg-logo{display:flex;align-items:center;gap:8px;position:relative;z-index:1;margin-bottom:auto}
+.vreg-logo-mark{width:26px;height:26px;border-radius:7px;background:#E1FF00;display:flex;align-items:center;justify-content:center}
+.vreg-logo-name{font-size:14px;font-weight:600;color:#fff;letter-spacing:-.2px}
+.vreg-hero{position:relative;z-index:1;padding:1.5rem 0 1rem}
+.vreg-eyebrow{font-size:10px;font-weight:500;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.vreg-title{font-size:22px;font-weight:600;color:#fff;letter-spacing:-.4px;line-height:1.25;margin:0 0 10px}
+.vreg-title em{font-style:normal;color:#E1FF00}
+.vreg-sub{font-size:12px;color:rgba(255,255,255,.35);line-height:1.6}
+.vreg-pills{display:flex;align-items:center;gap:0;position:relative;z-index:1}
+.vreg-pline{flex:1;height:1px;background:rgba(255,255,255,.1);transition:background .3s}
+.vreg-pline.done{background:rgba(255,255,255,.25)}
+.vreg-pill{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 14px;border:none;background:rgba(255,255,255,.06);border-radius:10px;cursor:pointer;transition:all .2s;flex-shrink:0}
+.vreg-pill:hover{background:rgba(255,255,255,.1)}
+.vreg-pnum{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:rgba(255,255,255,.3);transition:all .2s}
+.vreg-plbl{font-size:9px;font-weight:500;color:rgba(255,255,255,.25);letter-spacing:.3px;transition:color .2s}
+.vreg-pill.s-active{background:rgba(225,255,0,.15);border:1px solid rgba(225,255,0,.3)}
+.vreg-pill.s-active .vreg-pnum{background:#E1FF00;color:#000}
+.vreg-pill.s-active .vreg-plbl{color:#E1FF00}
+.vreg-pill.s-done .vreg-pnum{background:rgba(225,255,0,.15);color:#E1FF00}
+.vreg-pill.s-done .vreg-plbl{color:rgba(225,255,0,.45)}
+/* right */
+.vreg-right{background:#fff;padding:2rem;display:flex;flex-direction:column;overflow-y:auto}
+.vreg-prog{height:2px;background:rgba(0,0,0,.08);border-radius:2px;margin-bottom:1.75rem;overflow:hidden}
+.vreg-prog-fill{height:100%;background:#E1FF00;border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.vreg-panel{display:none;flex:1;flex-direction:column}
+.vreg-panel.active{display:flex;animation:vregPI .25s ease}
+@keyframes vregPI{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.vreg-phdr{margin-bottom:1.25rem}
+.vreg-pstep{font-size:10px;font-weight:600;color:#aeaeb2;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.vreg-ptitle{font-size:19px;font-weight:600;color:#1d1d1f;letter-spacing:-.4px;margin:0 0 3px}
+.vreg-psub{font-size:12px;color:#6e6e73;line-height:1.5;margin:0}
+.vreg-fgroup{background:#f5f5f7;border-radius:12px;overflow:hidden;border:.5px solid rgba(0,0,0,.08);margin-bottom:10px}
+.vreg-frow{display:flex;align-items:center;padding:0 14px;border-bottom:.5px solid rgba(0,0,0,.08);min-height:44px}
+.vreg-frow:last-child{border-bottom:none}
+.vreg-frow:focus-within{background:rgba(225,255,0,.04)}
+.vreg-flbl{font-size:12px;font-weight:500;color:#1d1d1f;min-width:110px;flex-shrink:0}
+.vreg-finput{flex:1;border:none;background:transparent;font-size:12px;color:#1d1d1f;outline:none;padding:12px 0;min-width:0;font-family:inherit}
+.vreg-finput::placeholder{color:#aeaeb2}
+.vreg-finput.mono{font-family:'SF Mono','Fira Code',monospace;letter-spacing:.3px;font-size:11px}
+.vreg-ekgroup{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.vreg-ekcard{background:#f5f5f7;border:.5px solid rgba(0,0,0,.08);border-radius:12px;padding:12px;display:flex;align-items:center;gap:9px}
+.vreg-ekcard:focus-within{border-color:rgba(225,255,0,.5)}
+.vreg-ekbadge{width:30px;height:30px;border-radius:7px;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:#666}
+.vreg-ekinner{flex:1;min-width:0}
+.vreg-ekinner-lbl{font-size:9px;font-weight:600;color:#6e6e73;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:2px}
+.vreg-ekinner input{border:none;background:transparent;padding:0;font-size:13px;font-weight:500;font-family:'SF Mono','Fira Code',monospace;color:#1d1d1f;width:100%;outline:none}
+.vreg-ekinner input::placeholder{color:#aeaeb2;font-weight:400;font-size:11px}
+.vreg-note{background:#f5f5f7;border:.5px solid rgba(0,0,0,.08);border-radius:10px;padding:10px 12px;font-size:11px;color:#6e6e73;line-height:1.55;margin-bottom:10px;display:flex;align-items:flex-start;gap:7px}
+.vreg-btn-row{display:flex;gap:8px;margin-top:auto;padding-top:1rem}
+.vreg-btn{padding:11px 16px;border-radius:12px;border:none;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .15s,transform .1s}
+.vreg-btn:active{transform:scale(.98)}
+.vreg-btn.primary{background:#000;color:#E1FF00;flex:1}
+.vreg-btn.primary:hover{opacity:.85}
+.vreg-btn.secondary{background:#f5f5f7;color:#6e6e73;border:.5px solid rgba(0,0,0,.12)}
+.vreg-btn.secondary:hover{background:#ebebee;color:#1d1d1f}
+.vreg-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.vreg-success{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem 0}
+.vreg-sring{width:60px;height:60px;border-radius:50%;background:rgba(225,255,0,.1);border:1.5px solid rgba(225,255,0,.3);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;animation:vregSR .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes vregSR{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.vreg-scheck{stroke-dasharray:30;stroke-dashoffset:30;animation:vregSD .4s .2s ease forwards}
+@keyframes vregSD{to{stroke-dashoffset:0}}
+.vreg-stitle{font-size:19px;font-weight:600;color:#1d1d1f;letter-spacing:-.3px;margin-bottom:6px}
+.vreg-ssub{font-size:12px;color:#6e6e73;line-height:1.6;max-width:250px;margin:0 0 1.5rem}
+@media(max-width:600px){.vreg-modal{grid-template-columns:1fr;min-height:auto}.vreg-left{display:none}}
+
+/* ══ MulberryFAST redesign ══════════════════════════════════════ */
+#panel-dashboard,#panel-dashboard.active{
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 80%,rgba(100,130,70,.5) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 70% 90%,rgba(80,110,50,.4) 0%,transparent 55%),
+    linear-gradient(180deg,#b8cca8 0%,#c4d4a8 40%,#a8bc8c 100%)!important;
+  overflow-y:auto!important;overflow-x:hidden!important
+}
+.mf-wrap{min-height:100%;padding-bottom:calc(var(--bh,72px) + 20px)}
+.mf-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px;gap:8px}
+.mf-tbl{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.mf-toggle{display:flex;align-items:center;background:rgba(255,255,255,.9);border-radius:100px;padding:3px;gap:2px;border:.5px solid rgba(0,0,0,.08)}
+.mf-tog{width:27px;height:20px;border-radius:100px;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;color:#666;transition:background .15s,color .15s}
+.mf-tog.on{background:#111;color:#E1FF00}
+.mf-set-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.08);border-radius:100px;padding:5px 11px;font-size:11px;font-weight:500;color:#333;cursor:pointer}
+.mf-notif{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:.5px solid rgba(0,0,0,.07);border-radius:100px;padding:5px 11px;font-size:11px;font-weight:500;color:#222;flex:1;min-width:0;max-width:260px;overflow:hidden}
+.mf-ntxt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.mf-ndot{width:6px;height:6px;border-radius:50%;background:#ff4444;flex-shrink:0}
+.mf-ntime{color:#999;font-size:10px;flex-shrink:0;white-space:nowrap}
+.mf-nclose{color:#aaa;font-size:13px;cursor:pointer;flex-shrink:0;line-height:1}
+.mf-tbr{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.mf-navpills{display:flex;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.07);border-radius:100px;padding:3px;gap:2px}
+.mf-np{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:500;color:#555;cursor:pointer;white-space:nowrap}
+.mf-np.on{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.mf-srch{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#444;flex-shrink:0}
+.mf-avatar{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);font-size:12px;font-weight:700;color:#333;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;overflow:hidden}
+.mf-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.mf-greet{padding:2px 18px 10px;font-size:12px;color:rgba(0,0,0,.5);font-weight:500;display:flex;align-items:baseline;gap:5px}
+.mf-greet-name{font-size:19px;font-weight:700;color:#111;letter-spacing:-.3px}
+.mf-grid{padding:0 16px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.mf-card{background:rgba(255,255,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);border-radius:20px;padding:14px;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 12px rgba(0,0,0,.06),0 0 0 .5px rgba(0,0,0,.04);-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
+.mf-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.mf-card:active{transform:scale(.97)}
+.mf-card.yc{background:#E1FF00;border-color:#d4f000;box-shadow:0 2px 12px rgba(180,210,0,.25),0 0 0 .5px rgba(0,0,0,.04)}
+.mf-card.cr{background:rgba(255,255,255,.45);border:1.5px dashed rgba(0,0,0,.15);align-items:center;justify-content:center;gap:8px;min-height:80px}
+.mf-ctop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px}
+.mf-tag{display:inline-flex;align-items:center;gap:4px;background:rgba(0,0,0,.06);border-radius:20px;padding:3px 8px;font-size:10px;font-weight:600;color:#555;letter-spacing:.1px}
+.mf-card.yc .mf-tag{background:rgba(0,0,0,.1);color:#333}
+.mf-vin{font-family:monospace;font-size:9.5px;color:rgba(0,0,0,.35);letter-spacing:.3px;margin:5px 0 3px}
+.mf-plate{font-size:21px;font-weight:800;color:#000;letter-spacing:-.5px;line-height:1}
+.mf-cname{font-size:13px;font-weight:700;color:#111;line-height:1.3;letter-spacing:-.2px;margin:4px 0 2px}
+.mf-csub{font-size:11px;color:#888;margin-top:2px}
+.mf-card.yc .mf-csub{color:rgba(0,0,0,.5)}
+.mf-cbot{display:flex;align-items:center;justify-content:space-between;margin-top:9px}
+.mf-ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(255,255,255,.8);box-shadow:0 1px 6px rgba(0,0,0,.12)}
+.mf-badge{display:inline-flex;align-items:center;gap:4px;border-radius:100px;padding:3px 8px;font-size:10px;font-weight:700;border:.5px solid transparent}
+.mf-ok{background:rgba(22,163,74,.09);color:#15803d;border-color:rgba(22,163,74,.15)}
+.mf-info{background:rgba(37,99,235,.09);color:#1d4ed8;border-color:rgba(37,99,235,.15)}
+.mf-bdot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+.mf-cnt{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.mf-cr-plus{width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;color:#888;font-size:20px;line-height:1}
+.mf-cr-lbl{font-size:12px;color:#999;font-weight:500}
+.mf-ai-box{display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.05);border:.5px solid rgba(0,0,0,.08);border-radius:100px;padding:6px 10px;font-size:10.5px;color:#aaa;margin:5px 0 5px}
+.mf-screen{width:100%;height:40px;border-radius:10px;background:linear-gradient(135deg,#0a1400,#1a3000,#4a7000,#E1FF00);margin-bottom:5px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:4px 7px;border:.5px solid rgba(200,230,0,.2)}
+.mf-screen::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.08)}
+.mf-scrlbl{position:relative;z-index:1;background:rgba(0,0,0,.45);border-radius:4px;padding:2px 5px;font-size:9px;font-weight:600;color:#fff}
+.mf-live{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,.2);flex-shrink:0;animation:mfpulse 2s infinite}
+@keyframes mfpulse{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 4px rgba(34,197,94,.08)}}
+@media(min-width:769px){
+  #panel-dashboard.active{overflow-y:auto!important;height:100%!important;display:block!important}
+  .mf-grid{grid-template-columns:repeat(3,1fr);gap:14px;padding:0 22px}
+  .mf-topbar{padding:18px 24px 12px}
+  .mf-greet{padding:2px 24px 12px}
+  .mf-notif{max-width:340px}
+  .mf-wrap{padding-bottom:28px}
+}
+
   </style>
 </head>
 <body>
@@ -1197,25 +1339,191 @@ a{color:inherit;text-decoration:none}
 
     <!-- DASHBOARD -->
     <div class="panel active" id="panel-dashboard">
-      <div class="nd-wrap">
+      <!-- hidden data holders for JS carousel / vehicle API -->
+      <span id="nd-trust-vin" style="display:none"></span>
+      <span id="nd-trust-plate" style="display:none"></span>
+      <div id="nd-trust-card" style="display:none"></div>
+      <div id="nd-family-banner" style="display:none" onclick="showFamilyUpsell()"></div>
 
-        <!-- Greeting: compact row above YellowCard -->
-        <div class="nd-greet-card">
-          <div class="nd-greet-top">
-            <div>
-              <div class="nd-gr-sub" style="display:flex;align-items:center;gap:5px">
-                <img src="/favicon.png" style="height:13px;width:auto;opacity:.55" alt="">
-                <span id="gd-greeting-lbl">Bună ziua,</span>
+      <div class="mf-wrap">
+
+        <!-- topbar -->
+        <div class="mf-topbar">
+          <div class="mf-tbl">
+            <div class="mf-toggle">
+              <div class="mf-tog on">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
               </div>
-              <div class="nd-hello">Hello, <span id="gd-main-title">there</span></div>
+              <div class="mf-tog">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+              </div>
             </div>
-            <div class="nd-greet-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
+            <div class="mf-set-pill" onclick="goPanel('settings')">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"/></svg>
+              Settings
+            </div>
+          </div>
+          <div class="mf-notif">
+            <div class="mf-ndot"></div>
+            <span class="mf-ntxt">EXO — revizie ulei scadentă</span>
+            <span class="mf-ntime">−2.400 km</span>
+            <span class="mf-nclose" onclick="this.parentElement.style.display='none'">×</span>
+          </div>
+          <div class="mf-tbr">
+            <div class="mf-navpills">
+              <div class="mf-np on">MulberryFAST</div>
+            </div>
+            <div class="mf-srch">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </div>
+            <div class="mf-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
           </div>
         </div>
 
-        <div class="nd-two-col">
+        <!-- greeting -->
+        <div class="mf-greet">
+          <span id="gd-greeting-lbl">Bună ziua,</span>
+          <span class="mf-greet-name" id="gd-main-title">Mulberry!</span>
+        </div>
 
-          <!-- LEFT: yellowcard + pills + status -->
+        <!-- mf-grid replaces nd-two-col -->
+        <div class="mf-grid">
+
+          <!-- CREATE -->
+          <div class="mf-card cr" onclick="openVehicleReg()">
+            <div class="mf-cr-plus">+</div>
+            <div class="mf-cr-lbl">Adaugă vehicul</div>
+          </div>
+
+          <!-- YELLOWCARD -->
+          <div class="mf-card yc" onclick="goPanel('yellowcard')">
+            <div class="mf-ctop">
+              <div>
+                <div class="mf-tag">● Yellowcard · Activ</div>
+                <div class="mf-vin" id="nd-ycard-vin">VIN: —</div>
+                <div class="mf-plate" id="nd-ycard-plate">— ——</div>
+              </div>
+              <div style="width:38px;height:38px;border-radius:8px;background:rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                  <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="4" width="6" height="6" fill="#000"/>
+                  <rect x="16" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="18" y="4" width="6" height="6" fill="#000"/>
+                  <rect x="2" y="16" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="18" width="6" height="6" fill="#000"/>
+                  <rect x="16" y="16" width="4" height="4" fill="#000"/><rect x="22" y="16" width="4" height="4" fill="#000"/>
+                  <rect x="16" y="22" width="4" height="4" fill="#000"/><rect x="22" y="22" width="4" height="4" fill="#000"/>
+                </svg>
+              </div>
+            </div>
+            <div class="mf-cbot">
+              <div class="mf-csub">BMW M3 · G80 · 2022</div>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" opacity=".3"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+
+          <!-- MULBERRY AI -->
+          <div class="mf-card" onclick="openGeminiModal()">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#0a0a0a">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E1FF00" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="#E1FF00" fill-opacity=".3"/></svg>
+                </div>
+                <div class="mf-tag">MulberryAI</div>
+              </div>
+              <div style="color:#ccc;font-size:15px;cursor:pointer">···</div>
+            </div>
+            <div class="mf-ai-box">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              <span id="nd-ai-hint">Întreabă orice...</span>
+            </div>
+            <div class="mf-cbot">
+              <div class="mf-cname" style="font-size:12px;margin:0">Asistent auto</div>
+              <div class="mf-badge mf-info"><span class="mf-bdot"></span>Activ</div>
+            </div>
+          </div>
+
+          <!-- MULBERRY HUB -->
+          <div class="mf-card" onclick="goPanel('hub')">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#134e4a">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5eead4" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div class="mf-tag">MulberryHUB</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:4px">
+                <div style="width:5px;height:5px;border-radius:50%;background:#ff4444"></div>
+                <span style="font-size:10px;color:#999;font-weight:600">PDF</span>
+              </div>
+            </div>
+            <div class="mf-screen"><div class="mf-scrlbl">Raport · History</div></div>
+            <div class="mf-cbot">
+              <div class="mf-badge mf-ok"><span class="mf-bdot"></span><span id="nd-hub-sub">Sincronizat</span></div>
+              <div class="mf-cnt" style="background:#134e4a">8</div>
+            </div>
+          </div>
+
+          <!-- MULBERRY GO -->
+          <div class="mf-card" onclick="goPanel('marketplace')">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#14532d">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                </div>
+                <div class="mf-tag">MulberryGO</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:4px">
+                <div class="mf-live"></div>
+                <span style="font-size:10px;color:#555;font-weight:600">live</span>
+              </div>
+            </div>
+            <div class="mf-cname">Navigare & locație</div>
+            <div class="mf-csub">Str. Mihai Eminescu, Buc.</div>
+            <div class="mf-cbot">
+              <div class="mf-badge mf-ok"><span class="mf-bdot"></span>Localizat</div>
+            </div>
+          </div>
+
+          <!-- MULBERRY CLOUD -->
+          <div class="mf-card" onclick="goPanel('cloud')">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#1e1b4b">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+                </div>
+                <div class="mf-tag">MulberryCloud</div>
+              </div>
+              <div style="color:#ccc;font-size:15px;cursor:pointer">···</div>
+            </div>
+            <div class="mf-cname">Stocare & backup</div>
+            <div class="mf-csub">Documente · Date vehicul</div>
+            <div class="mf-cbot">
+              <div class="mf-badge mf-ok"><span class="mf-bdot"></span>Sincronizat</div>
+              <div class="mf-cnt" style="background:#1e1b4b">∞</div>
+            </div>
+          </div>
+
+          <!-- MULBERRY ID -->
+          <div class="mf-card" onclick="goPanel('yellowcard')">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#78350f">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fcd34d" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+                </div>
+                <div class="mf-tag">MulberryID</div>
+              </div>
+              <div style="color:#ccc;font-size:15px;cursor:pointer">···</div>
+            </div>
+            <div class="mf-cname">YCR Identity</div>
+            <div class="mf-csub">HMAC-SHA256 · QR semnat</div>
+            <div class="mf-cbot">
+              <div class="mf-badge mf-info"><span class="mf-bdot"></span>ID verificat</div>
+            </div>
+          </div>
+
+        </div><!-- /mf-grid -->
+
+      </div><!-- /mf-wrap -->
+
+        <div style="display:none"><!-- old nd-two-col removed -->
           <div class="nd-col-left">
 
             <!-- Carousel (mobile swipe / desktop = single card) -->
@@ -1382,7 +1690,7 @@ a{color:inherit;text-decoration:none}
                   <div class="nd-mod-screen"></div>
                 </div>
                 <div class="nd-mod-foot">
-                  <span class="nd-mod-sub" id="nd-hub-sub">History · PDF</span>
+                  <span class="nd-mod-sub">History · PDF</span>
                   <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
               </div>
@@ -1392,7 +1700,7 @@ a{color:inherit;text-decoration:none}
                 <div>
                   <div class="nd-mod-tag">MulberryAI</div>
                   <div class="nd-mod-name">Asistent auto</div>
-                  <div class="nd-mod-sub" id="nd-ai-hint">Întreabă orice...</div>
+                  <div class="nd-mod-sub">Întreabă orice...</div>
                 </div>
                 <div class="nd-mod-foot">
                   <span></span>
@@ -1427,12 +1735,6 @@ a{color:inherit;text-decoration:none}
                 <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
               </div>
             </div>
-
-          </div><!-- /col-right -->
-
-        </div><!-- /two-col -->
-
-      </div>
 
     </div>
 
@@ -2503,6 +2805,283 @@ function showFamilyUpsell(){
     }
   } catch(_) {}
 })();
+</script>
+
+<!-- ══ VEHICLE REGISTRATION MODAL ══════════════════════════ -->
+<div class="vreg-overlay" id="vreg-overlay" onclick="if(event.target===this)closeVehicleReg()">
+  <div class="vreg-modal">
+
+    <!-- LEFT -->
+    <div class="vreg-left">
+      <button class="vreg-close" onclick="closeVehicleReg()" aria-label="Închide">×</button>
+      <div class="vreg-logo">
+        <div class="vreg-logo-mark">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#000" stroke-width="1.5"/><circle cx="7" cy="7" r="2" fill="#000"/></svg>
+        </div>
+        <span class="vreg-logo-name">Mulberry</span>
+      </div>
+      <div class="vreg-hero">
+        <p class="vreg-eyebrow">Înregistrare vehicul</p>
+        <h2 class="vreg-title">Activează-ți<br><em>Yellowcard</em></h2>
+        <p class="vreg-sub">Din talonul de înmatriculare extragem datele vehiculului și le salvăm în Yellowcard și HUB.</p>
+      </div>
+      <div class="vreg-pills">
+        <button class="vreg-pill s-active" id="vpill-1" onclick="vregGoTo(1)">
+          <span class="vreg-pnum" id="vpnum-1">1</span>
+          <span class="vreg-plbl">Talon</span>
+        </button>
+        <div class="vreg-pline" id="vline-12"></div>
+        <button class="vreg-pill" id="vpill-2" onclick="vregGoTo(2)">
+          <span class="vreg-pnum" id="vpnum-2">2</span>
+          <span class="vreg-plbl">Vehicul</span>
+        </button>
+        <div class="vreg-pline" id="vline-23"></div>
+        <button class="vreg-pill" id="vpill-3" onclick="vregGoTo(3)">
+          <span class="vreg-pnum" id="vpnum-3">3</span>
+          <span class="vreg-plbl">Proprietar</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="vreg-right">
+      <div class="vreg-prog"><div class="vreg-prog-fill" id="vreg-prog" style="width:33%"></div></div>
+
+      <!-- STEP 1: Talon -->
+      <div class="vreg-panel active" id="vp1">
+        <div class="vreg-phdr">
+          <div class="vreg-pstep">Pasul 1 din 3</div>
+          <h3 class="vreg-ptitle">Coduri din talon</h3>
+          <p class="vreg-psub">Câmpurile E și K de pe Cartea de Identitate a Vehiculului (CIV).</p>
+        </div>
+        <div class="vreg-note">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;opacity:.5"><rect x="2" y="1" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.2"/><line x1="5" y1="5" x2="11" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="5" y1="8" x2="11" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="5" y1="11" x2="8" y2="11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span>Câmpul <strong>E</strong> = VIN (17 caractere). Câmpul <strong>K</strong> = număr aprobare tip. Ambele pe față CIV-ului.</span>
+        </div>
+        <div class="vreg-ekgroup">
+          <div class="vreg-ekcard">
+            <div class="vreg-ekbadge">E</div>
+            <div class="vreg-ekinner">
+              <span class="vreg-ekinner-lbl">Câmp E — VIN</span>
+              <input type="text" id="vreg-vin" placeholder="WA0ZZ8K9DA1..." maxlength="17" autocomplete="off">
+            </div>
+          </div>
+          <div class="vreg-ekcard">
+            <div class="vreg-ekbadge">K</div>
+            <div class="vreg-ekinner">
+              <span class="vreg-ekinner-lbl">Câmp K — Tip</span>
+              <input type="text" id="vreg-kcode" placeholder="e9*2001/116*..." autocomplete="off">
+            </div>
+          </div>
+        </div>
+        <div class="vreg-btn-row">
+          <button class="vreg-btn primary" onclick="vregGoTo(2)">
+            Continuă
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Vehicul -->
+      <div class="vreg-panel" id="vp2">
+        <div class="vreg-phdr">
+          <div class="vreg-pstep">Pasul 2 din 3</div>
+          <h3 class="vreg-ptitle">Date vehicul</h3>
+          <p class="vreg-psub">Exact cum apar pe certificatul de înmatriculare.</p>
+        </div>
+        <div class="vreg-fgroup">
+          <div class="vreg-frow">
+            <span class="vreg-flbl">Înmatriculare</span>
+            <input class="vreg-finput mono" type="text" id="vreg-plate" placeholder="BZ 06 ALZ" style="text-transform:uppercase">
+          </div>
+          <div class="vreg-frow">
+            <span class="vreg-flbl">Marcă / Model</span>
+            <input class="vreg-finput" type="text" id="vreg-model" placeholder="BMW M3 Competition G80">
+          </div>
+          <div class="vreg-frow">
+            <span class="vreg-flbl">An fabricație</span>
+            <input class="vreg-finput" type="text" id="vreg-year" placeholder="2022" maxlength="4" inputmode="numeric">
+          </div>
+        </div>
+        <div class="vreg-btn-row">
+          <button class="vreg-btn secondary" onclick="vregGoTo(1)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="vreg-btn primary" onclick="vregGoTo(3)">
+            Continuă
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Proprietar -->
+      <div class="vreg-panel" id="vp3">
+        <div class="vreg-phdr">
+          <div class="vreg-pstep">Pasul 3 din 3</div>
+          <h3 class="vreg-ptitle">Proprietar</h3>
+          <p class="vreg-psub">Numele proprietarului va apărea pe Yellowcard și în Setări.</p>
+        </div>
+        <div class="vreg-fgroup">
+          <div class="vreg-frow">
+            <span class="vreg-flbl">Prenume</span>
+            <input class="vreg-finput" type="text" id="vreg-fname" placeholder="Stefan" autocomplete="given-name">
+          </div>
+          <div class="vreg-frow">
+            <span class="vreg-flbl">Nume</span>
+            <input class="vreg-finput" type="text" id="vreg-lname" placeholder="Lazar" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="vreg-btn-row">
+          <button class="vreg-btn secondary" onclick="vregGoTo(2)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="vreg-btn primary" id="vreg-save-btn" onclick="vregSave()">
+            Salvează vehicul
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="vreg-panel" id="vp-ok">
+        <div class="vreg-success">
+          <div class="vreg-sring">
+            <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+              <path class="vreg-scheck" d="M7 14l5 5 9-10" stroke="#E1FF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="vreg-stitle">Yellowcard activat!</div>
+          <p class="vreg-ssub">Vehiculul a fost înregistrat. Datele sunt sincronizate în Yellowcard, HUB și Setări.</p>
+          <button class="vreg-btn primary" style="width:auto;padding:11px 24px" onclick="closeVehicleReg()">
+            Deschide Mulberry
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /vreg-right -->
+  </div><!-- /vreg-modal -->
+</div><!-- /vreg-overlay -->
+
+<script>
+/* ── Vehicle Registration Modal ─────────────────────── */
+var _vregCur = 1;
+
+function openVehicleReg() {
+  _vregCur = 1;
+  document.getElementById('vreg-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  vregGoTo(1, true);
+}
+
+function closeVehicleReg() {
+  document.getElementById('vreg-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function vregGoTo(n, skipAnim) {
+  var old = document.getElementById(_vregCur <= 3 ? 'vp' + _vregCur : 'vp-ok');
+  if (old) old.classList.remove('active');
+  _vregCur = n;
+  var next = document.getElementById(n <= 3 ? 'vp' + n : 'vp-ok');
+  if (next) {
+    if (skipAnim) next.style.animation = 'none';
+    next.classList.add('active');
+    if (skipAnim) { void next.offsetWidth; next.style.animation = ''; }
+  }
+  var pcts = {1:33,2:66,3:100};
+  var prog = document.getElementById('vreg-prog');
+  if (prog) prog.style.width = (pcts[n] || 100) + '%';
+  [1,2,3].forEach(function(s) {
+    var pill = document.getElementById('vpill-' + s);
+    var pnum = document.getElementById('vpnum-' + s);
+    if (!pill) return;
+    pill.classList.remove('s-active','s-done');
+    if (s < n) { pill.classList.add('s-done'); if (pnum) pnum.textContent = '✓'; }
+    else if (s === n) { pill.classList.add('s-active'); if (pnum) pnum.textContent = s; }
+    else { if (pnum) pnum.textContent = s; }
+  });
+  var l12 = document.getElementById('vline-12');
+  var l23 = document.getElementById('vline-23');
+  if (l12) l12.classList.toggle('done', n > 1);
+  if (l23) l23.classList.toggle('done', n > 2);
+}
+
+async function vregSave() {
+  var btn = document.getElementById('vreg-save-btn');
+  var vin   = (document.getElementById('vreg-vin')   ?.value || '').trim().toUpperCase();
+  var plate = (document.getElementById('vreg-plate') ?.value || '').trim().toUpperCase();
+  var model = (document.getElementById('vreg-model') ?.value || '').trim();
+  var year  = (document.getElementById('vreg-year')  ?.value || '').trim();
+  var fname = (document.getElementById('vreg-fname') ?.value || '').trim();
+  var lname = (document.getElementById('vreg-lname') ?.value || '').trim();
+  var kcode = (document.getElementById('vreg-kcode') ?.value || '').trim();
+  var fullName = [fname, lname].filter(Boolean).join(' ');
+
+  if (!plate && !vin) { toast('Introduceți cel puțin numărul de înmatriculare.', 'warn'); return; }
+
+  if (btn) { btn.disabled = true; btn.textContent = 'Se salvează...'; }
+
+  var vehicleData = { vin: vin || null, plate: plate || null, model: model || null, year: year ? parseInt(year) : null, kcode: kcode || null, owner: fullName || null };
+
+  try {
+    /* 1. POST vehicle to API */
+    const token = currentUser?.token;
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = 'Bearer ' + token;
+    const r = await fetch(API + '/me/vehicle', { method: 'POST', headers, body: JSON.stringify(vehicleData) });
+    if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.detail || 'HTTP ' + r.status); }
+  } catch(e) {
+    /* API poate lipsi — salvăm local oricum */
+    console.warn('[VReg] API vehicle save:', e.message);
+  }
+
+  /* 2. Update YellowCard display */
+  const vinEl   = document.getElementById('nd-ycard-vin');
+  const plateEl = document.getElementById('nd-ycard-plate');
+  if (vinEl)   vinEl.textContent  = vin   ? 'VIN: ' + vin : 'VIN: —';
+  if (plateEl) plateEl.textContent = plate || '— ——';
+
+  /* Also update yellowcard panel fields */
+  ['ycp-plate','yc-plate-val'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = plate || '—'; });
+  ['ycp-vin','yc-vin-val'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = vin || '—'; });
+  ['yc-owner','ycp-owner'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = fullName || '—'; });
+  ['yc-name','ycp-name'].forEach(id => { const el = document.getElementById(id); if (el && fullName) el.textContent = fullName + "'s Card"; });
+
+  /* 3. Update Settings / sidebar name fields */
+  if (fullName) {
+    ['sb-uname','set-uname','tb-profile-name'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && !el.textContent.trim()) el.textContent = fullName;
+    });
+    if (currentUser && !currentUser.name) currentUser.name = fullName;
+  }
+
+  /* 4. Persist to localStorage */
+  try {
+    var stored = JSON.parse(localStorage.getItem('mulberry_vehicle') || '{}');
+    Object.assign(stored, vehicleData);
+    localStorage.setItem('mulberry_vehicle', JSON.stringify(stored));
+    if (fullName) {
+      var sess = JSON.parse(localStorage.getItem('mulberry_session') || '{}');
+      if (!sess.name) { sess.name = fullName; localStorage.setItem('mulberry_session', JSON.stringify(sess)); }
+    }
+  } catch(e) {}
+
+  /* 5. Show success */
+  var old = document.getElementById('vp3');
+  if (old) old.classList.remove('active');
+  var ok = document.getElementById('vp-ok');
+  if (ok) { ok.classList.add('active'); ok.style.animation = 'vregPI .3s ease'; }
+  document.getElementById('vreg-prog').style.width = '100%';
+  [1,2,3].forEach(function(s) {
+    var pill = document.getElementById('vpill-' + s);
+    var pnum = document.getElementById('vpnum-' + s);
+    if (pill) { pill.classList.remove('s-active'); pill.classList.add('s-done'); }
+    if (pnum) pnum.textContent = '✓';
+  });
+  toast('Yellowcard activat cu succes!');
+}
 </script>
 </body>
 </html>

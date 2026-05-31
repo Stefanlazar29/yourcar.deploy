@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mulberry — Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,sans-serif;background:#000;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;}
+
+@keyframes panelIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes checkPop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes drawCheck{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glowPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.85;transform:scale(1.06)}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+
+/* ── SHELL ── */
+.outer{
+  display:grid;grid-template-columns:1fr 1fr;
+  width:100%;max-width:860px;min-height:600px;
+  border-radius:28px;overflow:hidden;
+  box-shadow:0 0 0 0.5px rgba(255,255,255,0.08), 0 40px 100px rgba(0,0,0,0.7);
+}
+
+/* ── LEFT — full glassmorphism glow ── */
+.left{
+  padding:2.5rem;
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  border-right:0.5px solid rgba(255,255,255,0.08);
+  /* colored glow blobs as background */
+  background:
+    radial-gradient(ellipse 140% 90% at 10% 40%, rgba(225,255,0,0.20) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 70% at 85% 10%, rgba(80,180,255,0.14) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 90% at 70% 95%, rgba(120,60,255,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 40% 80%, rgba(0,220,120,0.08) 0%, transparent 45%),
+    #030303;
+}
+/* frosted glass layer over blobs */
+.left::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:rgba(8,8,8,0.55);
+  backdrop-filter:blur(40px) saturate(180%);
+  -webkit-backdrop-filter:blur(40px) saturate(180%);
+}
+/* top edge shimmer */
+.left::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:1px;z-index:3;
+  background:linear-gradient(90deg,transparent 5%,rgba(225,255,0,0.5) 30%,rgba(255,255,255,0.3) 60%,transparent 95%);
+}
+.geo{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+.logo{display:flex;align-items:center;gap:9px;position:relative;z-index:2;}
+.logo-mark{width:30px;height:30px;border-radius:8px;background:#E1FF00;display:flex;align-items:center;justify-content:center;}
+.logo-name{font-size:15px;font-weight:500;color:#fff;letter-spacing:-.3px;}
+.left-hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:2rem 0;position:relative;z-index:2;}
+.left-eyebrow{font-size:11px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+
+/* Frosted glass hero card */
+.hero-glass{
+  position:relative;
+  background:rgba(255,255,255,0.07);
+  backdrop-filter:blur(24px) saturate(200%);
+  -webkit-backdrop-filter:blur(24px) saturate(200%);
+  border:0.5px solid rgba(255,255,255,0.18);
+  border-radius:20px;
+  padding:20px 22px;
+  margin-bottom:14px;
+  overflow:hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 8px 32px rgba(0,0,0,0.4),
+    0 0 0 0.5px rgba(255,255,255,0.04);
+}
+.hero-glass::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  background:linear-gradient(135deg,rgba(225,255,0,0.07) 0%,transparent 60%,rgba(255,255,255,0.03) 100%);
+  pointer-events:none;
+}
+/* top shimmer line */
+.hero-glass::after{
+  content:'';
+  position:absolute;
+  top:0;left:10%;right:10%;
+  height:0.5px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);
+  pointer-events:none;
+}
+/* ambient glow behind card */
+.hero-glow{
+  position:absolute;
+  width:240px;height:120px;
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(225,255,0,0.12) 0%,transparent 70%);
+  top:-20px;left:-30px;
+  filter:blur(18px);
+  animation:glowPulse 4s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.left-title{font-size:26px;font-weight:600;color:#fff;letter-spacing:-.5px;line-height:1.25;margin:0 0 10px;position:relative;z-index:1;}
+.left-title em{
+  font-style:normal;
+  background:linear-gradient(90deg,#E1FF00,#b8ff00,#E1FF00);
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 4s linear infinite;
+}
+.left-sub{font-size:12.5px;color:rgba(255,255,255,0.42);line-height:1.65;margin:0;position:relative;z-index:1;}
+
+/* Step pills — no frame */
+.step-pills{display:flex;align-items:center;gap:0;position:relative;z-index:2;}
+.pills-glass{
+  width:100%;
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  border:none;
+  border-radius:0;
+  padding:12px 0;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:visible;
+  z-index:2;
+  box-shadow:none;
+}
+.pills-glass::after{display:none;}
+.pconn{flex:1;height:1px;background:rgba(255,255,255,0.10);transition:background .4s;}
+.pconn.done{background:rgba(52,199,89,0.5);}
+.pill{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:10px;}
+.pnum{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;
+  border:1px solid rgba(255,255,255,0.10);
+  color:rgba(255,255,255,0.22);
+  background:rgba(255,255,255,0.05);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+.plbl{font-size:10px;font-weight:500;color:rgba(255,255,255,0.22);letter-spacing:.3px;transition:color .3s;}
+/* blue active */
+.pill.ba .pnum{
+  background:rgba(10,132,255,0.25);
+  border-color:rgba(10,132,255,0.7);
+  color:#fff;
+  box-shadow:0 0 12px rgba(10,132,255,0.5),0 0 24px rgba(10,132,255,0.2);
+}
+.pill.ba .plbl{color:#60a5fa;}
+.pill.bd .pnum{background:rgba(10,132,255,0.12);border-color:rgba(10,132,255,0.4);color:#60a5fa;}
+.pill.bd .plbl{color:rgba(96,165,250,0.6);}
+/* green active */
+.pill.ga .pnum{
+  background:rgba(48,209,88,0.22);
+  border-color:rgba(48,209,88,0.7);
+  color:#fff;
+  box-shadow:0 0 12px rgba(48,209,88,0.5),0 0 24px rgba(48,209,88,0.2);
+}
+.pill.ga .plbl{color:#4ade80;}
+.pill.gd .pnum{background:rgba(48,209,88,0.12);border-color:rgba(48,209,88,0.4);color:#4ade80;}
+.pill.gd .plbl{color:rgba(74,222,128,0.6);}
+
+/* ── RIGHT — dark form ── */
+.right{
+  background:#0c0c0c;padding:2.5rem;
+  display:flex;flex-direction:column;overflow-y:auto;
+}
+
+.prog-track{height:1.5px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:2rem;overflow:hidden;}
+.prog-fill{height:100%;background:#E1FF00;border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1);}
+
+.panel{display:none;flex:1;flex-direction:column;}
+.panel.active{display:flex;}
+
+.panel-step{font-size:11px;font-weight:500;color:rgba(255,255,255,0.28);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+.panel-title{font-size:20px;font-weight:600;color:#fff;letter-spacing:-.3px;margin:0 0 4px;}
+.panel-sub{font-size:13px;color:rgba(255,255,255,0.5);margin:0 0 1.2rem;line-height:1.5;}
+
+/* Dark grouped fields */
+.field-group{background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;border:.5px solid rgba(255,255,255,0.09);margin-bottom:10px;}
+.field-item{display:flex;align-items:center;padding:0 14px;min-height:44px;border-bottom:.5px solid rgba(255,255,255,0.06);}
+.field-item:last-child{border-bottom:none;}
+.field-item:focus-within{background:rgba(255,255,255,0.04);}
+.field-label{font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);min-width:88px;flex-shrink:0;}
+.field-input{flex:1;border:none;background:transparent;font-size:13px;color:#fff;font-family:inherit;padding:11px 0;outline:none;min-width:0;}
+.field-input::placeholder{color:rgba(255,255,255,0.22);}
+.field-input.mono{font-family:'SF Mono','Fira Code',monospace;letter-spacing:.3px;}
+
+/* Trust notes — dark glass */
+.note{border-radius:12px;padding:11px 13px;display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;backdrop-filter:blur(8px);}
+.note.blue{background:rgba(10,132,255,0.10);border:.5px solid rgba(10,132,255,0.25);}
+.note.purple{background:rgba(88,86,214,0.10);border:.5px solid rgba(88,86,214,0.25);}
+.note.green{background:rgba(48,209,88,0.10);border:.5px solid rgba(48,209,88,0.25);}
+.note-icon{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.note-title{font-size:12px;font-weight:600;margin-bottom:2px;}
+.note-sub{font-size:11px;line-height:1.5;}
+
+/* Buttons */
+.btn-primary{width:100%;padding:12px;border-radius:12px;border:none;background:#E1FF00;color:#000;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .15s,transform .1s;}
+.btn-primary:hover{opacity:.88;}
+.btn-primary:active{transform:scale(.98);}
+
+.btn-secondary{padding:12px 16px;border-radius:12px;border:.5px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);font-size:14px;font-weight:500;color:rgba(255,255,255,0.7);font-family:inherit;cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center;}
+.btn-secondary:hover{background:rgba(255,255,255,0.10);}
+
+.btn-google{width:100%;padding:11px;border-radius:12px;border:.5px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.06);font-size:13px;font-weight:500;font-family:inherit;color:rgba(255,255,255,0.8);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s;margin-bottom:8px;}
+.btn-google:hover{background:rgba(255,255,255,0.10);}
+
+.or-div{display:flex;align-items:center;gap:10px;font-size:11px;color:rgba(255,255,255,0.25);margin-bottom:8px;}
+.or-div::before,.or-div::after{content:'';flex:1;height:.5px;background:rgba(255,255,255,0.08);}
+
+.btn-row{display:flex;gap:8px;margin-top:auto;padding-top:.75rem;}
+.btn-row .btn-primary{flex:1;}
+
+.hint{font-size:11px;font-weight:300;color:rgba(255,255,255,0.2);text-align:center;margin-top:9px;letter-spacing:.1px;}
+
+/* OTP */
+.code-wrap{display:flex;gap:7px;justify-content:center;margin:12px 0 14px;}
+.cbox{width:44px;height:52px;background:rgba(255,255,255,0.05);border:.5px solid rgba(255,255,255,0.10);border-radius:10px;font-size:22px;font-weight:500;font-family:monospace;text-align:center;line-height:52px;color:#fff;cursor:text;transition:border-color .15s,background .15s;}
+.cbox.on{border-color:#E1FF00;border-width:1.5px;background:rgba(225,255,0,0.06);}
+
+/* Success */
+.ok-ring{width:64px;height:64px;border-radius:50%;background:rgba(48,209,88,0.12);border:.5px solid rgba(48,209,88,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;animation:checkPop .4s cubic-bezier(.34,1.56,.64,1) both;}
+.ck{stroke-dasharray:30;stroke-dashoffset:30;animation:drawCheck .4s .2s ease forwards;}
+.dpill{background:rgba(255,255,255,0.05);border-radius:10px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;border:.5px solid rgba(255,255,255,0.07);margin-bottom:6px;animation:fadeUp .3s ease both;}
+.dck{width:18px;height:18px;border-radius:50%;background:#30d158;display:flex;align-items:center;justify-content:center;}
+</style>
+</head>
+<body>
+<div class="outer">
+
+  <!-- LEFT -->
+  <div class="left">
+    <div class="geo">
+      <svg width="100%" height="100%" viewBox="0 0 420 600" fill="none" preserveAspectRatio="xMidYMid slice">
+        <circle cx="370" cy="60" r="140" stroke="rgba(225,255,0,0.04)" stroke-width="1"/>
+        <circle cx="370" cy="60" r="90" stroke="rgba(255,255,255,0.04)" stroke-width=".5"/>
+        <circle cx="370" cy="60" r="5" fill="rgba(225,255,0,0.55)"/>
+        <path d="M24 110 L24 90 L44 90" stroke="rgba(225,255,0,0.18)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M396 490 L396 510 L376 510" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none" stroke-linecap="round"/>
+        <rect x="290" y="478" width="24" height="24" rx="3" stroke="rgba(225,255,0,0.09)" stroke-width="1" transform="rotate(16 302 490)"/>
+        <line x1="340" y1="278" x2="340" y2="304" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-linecap="round"/>
+        <line x1="327" y1="291" x2="353" y2="291" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-linecap="round"/>
+        <g opacity=".05">
+          <circle cx="50" cy="210" r="1.5" fill="white"/><circle cx="75" cy="210" r="1.5" fill="white"/><circle cx="100" cy="210" r="1.5" fill="white"/>
+          <circle cx="50" cy="232" r="1.5" fill="white"/><circle cx="75" cy="232" r="1.5" fill="white"/><circle cx="100" cy="232" r="1.5" fill="white"/>
+          <circle cx="50" cy="254" r="1.5" fill="white"/><circle cx="75" cy="254" r="1.5" fill="white"/><circle cx="100" cy="254" r="1.5" fill="white"/>
+        </g>
+        <polygon points="55,510 82,460 109,510" stroke="rgba(255,255,255,0.04)" stroke-width=".8" fill="none"/>
+        <line x1="0" y1="440" x2="170" y2="600" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        <!-- subtle glow blob -->
+        <ellipse cx="200" cy="300" rx="180" ry="120" fill="rgba(225,255,0,0.015)"/>
+      </svg>
+    </div>
+
+    <div class="logo">
+      <div class="logo-mark">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#000" stroke-width="1.5"/><circle cx="7" cy="7" r="2" fill="#000"/></svg>
+      </div>
+      <span class="logo-name">Mulberry</span>
+    </div>
+
+    <div class="left-hero">
+      <p class="left-eyebrow">Vehicle registration</p>
+      <div class="hero-glass">
+        <div class="hero-glow"></div>
+        <h1 class="left-title">Activate your<br><em>Yellowcard</em></h1>
+        <p class="left-sub">From your registration card we extract vehicle data and sync it across Yellowcard, HUB and Settings.</p>
+      </div>
+    </div>
+
+    <div class="pills-glass">
+      <button class="pill ba" id="pill-1" onclick="goTo(1)">
+        <div class="pnum" id="pn1">1</div>
+        <div class="plbl">Documents</div>
+      </button>
+      <div class="pconn" id="pc12"></div>
+      <button class="pill" id="pill-2" onclick="goTo(2)">
+        <div class="pnum" id="pn2">2</div>
+        <div class="plbl">Vehicle</div>
+      </button>
+      <div class="pconn" id="pc23"></div>
+      <button class="pill" id="pill-3" onclick="goTo(3)">
+        <div class="pnum" id="pn3">3</div>
+        <div class="plbl">Account</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <div class="prog-track">
+      <div class="prog-fill" id="prog" style="width:33%"></div>
+    </div>
+
+    <!-- P1 -->
+    <div class="panel active" id="p1">
+      <div class="panel-step">Step 1 of 3</div>
+      <h2 class="panel-title">Registration Card</h2>
+      <p class="panel-sub">Enter fields E and K from your Vehicle Identity Card (CIV).</p>
+      <div class="note green">
+        <div class="note-icon" style="background:#30d158;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div>
+          <div class="note-title" style="color:#4ade80;">Secured configuration</div>
+          <div class="note-sub" style="color:rgba(74,222,128,0.75);">Codes are used only to validate your vehicle. Never shared with third parties.</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-item"><span class="field-label">Field E</span><input class="field-input mono" type="text" placeholder="VIN — 17 characters" maxlength="17"></div>
+        <div class="field-item"><span class="field-label">Field K</span><input class="field-input mono" type="text" placeholder="Type approval number"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="goTo(2)">Continue <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <p class="hint">Your data is stored securely and confidentially.</p>
+    </div>
+
+    <!-- P2 -->
+    <div class="panel" id="p2">
+      <div class="panel-step">Step 2 of 3</div>
+      <h2 class="panel-title">Vehicle Details</h2>
+      <p class="panel-sub">Exactly as they appear on your registration certificate.</p>
+      <div class="note purple">
+        <div class="note-icon" style="background:#5856D6;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <div>
+          <div class="note-title" style="color:#a5b4fc;">Real-time validation</div>
+          <div class="note-sub" style="color:rgba(165,180,252,0.75);">Plate and VIN are cross-checked with official vehicle registries instantly.</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-item"><span class="field-label">Plate</span><input class="field-input mono" type="text" placeholder="BZ 06 ALZ" id="plate" style="text-transform:uppercase;"></div>
+        <div class="field-item"><span class="field-label">Model</span><input class="field-input" type="text" placeholder="BMW M3 G80" id="model"></div>
+        <div class="field-item"><span class="field-label">Year</span><input class="field-input" type="text" placeholder="2022" maxlength="4"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="goTo(1)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="btn-primary" onclick="goTo(3)">Continue <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <p class="hint">Your data is stored securely and confidentially.</p>
+    </div>
+
+    <!-- P3 -->
+    <div class="panel" id="p3">
+      <div class="panel-step">Step 3 of 3</div>
+      <h2 class="panel-title">Owner & Account</h2>
+      <p class="panel-sub">Link your vehicle to your Mulberry profile.</p>
+      <div class="note green">
+        <div class="note-icon" style="background:#30d158;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="note-title" style="color:#4ade80;">Verified identity</div>
+          <div class="note-sub" style="color:rgba(74,222,128,0.75);">Your Yellowcard is tied to your email — no one else can access your data.</div>
+        </div>
+      </div>
+      <div class="field-group" style="margin-bottom:10px;">
+        <div class="field-item"><span class="field-label">First name</span><input class="field-input" type="text" placeholder="Stefan"></div>
+        <div class="field-item"><span class="field-label">Last name</span><input class="field-input" type="text" placeholder="Lazar"></div>
+      </div>
+      <button class="btn-google">
+        <svg width="15" height="15" viewBox="0 0 24 24"><path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 01-5.279-5.28 5.27 5.27 0 015.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 00-8.934 8.934 8.908 8.908 0 008.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z" fill="currentColor"/></svg>
+        Continue with Google
+      </button>
+      <div class="or-div">or with email</div>
+      <div class="field-group" style="margin-bottom:10px;">
+        <div class="field-item"><span class="field-label">Email</span><input class="field-input" type="email" placeholder="stefan@example.com" id="email-in"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="goTo(2)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="btn-primary" id="send-btn" onclick="sendCode()">Send code <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+      </div>
+      <p class="hint">Your data is stored securely and confidentially.</p>
+    </div>
+
+    <!-- P4 OTP -->
+    <div class="panel" id="p4">
+      <div class="panel-step">Verification</div>
+      <h2 class="panel-title">Check your email</h2>
+      <p class="panel-sub">We sent a 6-digit code to <strong id="eshow" style="color:#fff;"></strong></p>
+      <div class="code-wrap" onclick="document.getElementById('otp').focus()">
+        <div class="cbox" id="c0">&nbsp;</div><div class="cbox" id="c1">&nbsp;</div><div class="cbox" id="c2">&nbsp;</div>
+        <div class="cbox" id="c3">&nbsp;</div><div class="cbox" id="c4">&nbsp;</div><div class="cbox" id="c5">&nbsp;</div>
+      </div>
+      <input id="otp" type="text" maxlength="6" inputmode="numeric" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;" oninput="handleOtp(this.value)">
+      <div style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:10px;">
+        Didn't receive it? <span style="color:#E1FF00;font-weight:500;cursor:pointer;">Resend</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="goTo(3)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="btn-primary" id="vbtn" onclick="verify()">Verify <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <p class="hint">Your data is stored securely and confidentially.</p>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="panel" id="p-ok">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem 0;">
+        <div class="ok-ring">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path class="ck" d="M7 14l5 5 9-10" stroke="#30d158" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div style="font-size:20px;font-weight:600;color:#fff;margin-bottom:5px;">Yellowcard activated</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:1.2rem;line-height:1.55;">Your vehicle is registered and synced across all Mulberry modules.</p>
+        <div style="width:100%;text-align:left;margin-bottom:1.2rem;">
+          <div class="dpill"><div><div style="font-size:11px;color:rgba(255,255,255,0.3);">Plate number</div><div style="font-size:13px;font-weight:600;font-family:monospace;color:#fff;" id="sp">—</div></div><div class="dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+          <div class="dpill" style="animation-delay:.08s;"><div><div style="font-size:11px;color:rgba(255,255,255,0.3);">Stored in</div><div style="font-size:13px;font-weight:500;color:#fff;">Yellowcard · HUB · Settings</div></div><div class="dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+          <div class="dpill" style="animation-delay:.16s;"><div><div style="font-size:11px;color:rgba(255,255,255,0.3);">Privacy</div><div style="font-size:13px;font-weight:600;color:#30d158;">Active</div></div><div class="dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+        </div>
+        <button class="btn-primary" style="width:100%;">Open Mulberry <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var step=1,pct={1:33,2:66,3:100,4:100};
+function goTo(n){
+  var cur=document.querySelector('.panel.active');if(cur)cur.classList.remove('active');
+  step=n;var next=document.getElementById(n===4?'p4':'p'+n);
+  if(next){next.classList.add('active');next.style.animation='none';void next.offsetWidth;next.style.animation='panelIn .28s ease both';}
+  var p=document.getElementById('prog');if(p)p.style.width=(pct[n]||100)+'%';
+  updatePills(n);
+}
+function updatePills(n){
+  [['pill-1','ba','bd','pn1'],['pill-2','ba','bd','pn2'],['pill-3','ga','gd','pn3']].forEach(function(c,i){
+    var s=i+1,el=document.getElementById(c[0]);if(!el)return;
+    el.className='pill';if(s<n)el.classList.add(c[2]);else if(s===n)el.classList.add(c[1]);
+    var pn=document.getElementById(c[3]);if(pn)pn.textContent=s<n?'✓':s;
+  });
+  var c1=document.getElementById('pc12'),c2=document.getElementById('pc23');
+  if(c1)c1.classList.toggle('done',n>1);if(c2)c2.classList.toggle('done',n>2);
+}
+function sendCode(){
+  var e=document.getElementById('email-in'),s=document.getElementById('eshow');
+  if(s)s.textContent=(e&&e.value)?e.value:'stefan@example.com';
+  var b=document.getElementById('send-btn');if(b){b.textContent='Sending...';b.disabled=true;}
+  setTimeout(function(){
+    if(b){b.innerHTML='Send code <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';b.disabled=false;}
+    goTo(4);setTimeout(function(){document.getElementById('otp').focus();},200);
+  },1200);
+}
+function handleOtp(v){
+  v=v.replace(/\D/g,'').slice(0,6);
+  for(var i=0;i<6;i++){var b=document.getElementById('c'+i);if(!b)continue;b.textContent=v[i]||'\u00a0';b.classList.toggle('on',i===v.length&&v.length<6);}
+}
+function verify(){
+  var b=document.getElementById('vbtn');if(b){b.textContent='Verifying...';b.disabled=true;}
+  setTimeout(function(){
+    var cur=document.querySelector('.panel.active');if(cur)cur.classList.remove('active');
+    var ok=document.getElementById('p-ok');if(ok){ok.classList.add('active');ok.style.animation='panelIn .3s ease both';}
+    var p=document.getElementById('prog');if(p)p.style.width='100%';
+    [['pill-1','bd','pn1'],['pill-2','bd','pn2'],['pill-3','gd','pn3']].forEach(function(c){
+      var el=document.getElementById(c[0]);if(!el)return;el.className='pill '+c[1];
+      var pn=document.getElementById(c[2]);if(pn)pn.textContent='✓';
+    });
+    document.getElementById('pc12').classList.add('done');document.getElementById('pc23').classList.add('done');
+    var pl=document.getElementById('plate'),sp=document.getElementById('sp');
+    if(sp&&pl&&pl.value)sp.textContent=pl.value.toUpperCase();
+  },1400);
+}
+</script>
+</body>
+</html>
