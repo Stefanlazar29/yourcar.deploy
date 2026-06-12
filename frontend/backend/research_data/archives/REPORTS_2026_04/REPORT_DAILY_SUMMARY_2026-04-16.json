@@ -1,0 +1,1811 @@
+{
+  "schema": "mulberry_daily_archive_v2",
+  "generated_at": "2026-04-16T21:30:00Z",
+  "date": "2026-04-16",
+  "security_auth_audit": {
+    "counts_by_status": {
+      "SUCCESS": 4,
+      "TAB_CLOSE": 12229
+    },
+    "recent_events": [
+      {
+        "id": 12233,
+        "created_at": "2026-04-16T21:17:00",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12232,
+        "created_at": "2026-04-16T21:16:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12231,
+        "created_at": "2026-04-16T21:16:41",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12230,
+        "created_at": "2026-04-16T21:12:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12229,
+        "created_at": "2026-04-16T21:11:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12228,
+        "created_at": "2026-04-16T21:09:45",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12227,
+        "created_at": "2026-04-16T21:09:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12226,
+        "created_at": "2026-04-16T21:09:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12225,
+        "created_at": "2026-04-13T20:41:08",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12224,
+        "created_at": "2026-04-11T09:20:13",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12223,
+        "created_at": "2026-04-11T08:42:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12222,
+        "created_at": "2026-04-11T08:40:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12221,
+        "created_at": "2026-04-11T08:34:31",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12220,
+        "created_at": "2026-04-11T08:34:02",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12219,
+        "created_at": "2026-04-11T08:31:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12218,
+        "created_at": "2026-04-11T08:30:57",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12217,
+        "created_at": "2026-04-11T08:30:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12216,
+        "created_at": "2026-04-11T08:24:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12215,
+        "created_at": "2026-04-11T08:24:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12214,
+        "created_at": "2026-04-11T08:24:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12213,
+        "created_at": "2026-04-11T08:24:06",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12212,
+        "created_at": "2026-04-11T08:24:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12211,
+        "created_at": "2026-04-11T08:24:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12210,
+        "created_at": "2026-04-11T08:24:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12209,
+        "created_at": "2026-04-11T08:24:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12208,
+        "created_at": "2026-04-11T08:24:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12207,
+        "created_at": "2026-04-11T08:22:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12206,
+        "created_at": "2026-04-11T08:22:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12205,
+        "created_at": "2026-04-11T08:21:21",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12204,
+        "created_at": "2026-04-11T08:20:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12203,
+        "created_at": "2026-04-11T08:19:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12202,
+        "created_at": "2026-04-11T08:18:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12201,
+        "created_at": "2026-04-11T08:17:39",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12200,
+        "created_at": "2026-04-11T08:17:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12199,
+        "created_at": "2026-04-11T08:10:51",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12198,
+        "created_at": "2026-04-11T08:09:02",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12197,
+        "created_at": "2026-04-11T08:05:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12196,
+        "created_at": "2026-04-11T08:04:49",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12195,
+        "created_at": "2026-04-11T08:04:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12194,
+        "created_at": "2026-04-11T08:02:28",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12193,
+        "created_at": "2026-04-10T21:54:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12192,
+        "created_at": "2026-04-10T21:54:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12191,
+        "created_at": "2026-04-10T21:41:42",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12190,
+        "created_at": "2026-04-10T21:29:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12189,
+        "created_at": "2026-04-10T21:29:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12188,
+        "created_at": "2026-04-10T21:29:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12187,
+        "created_at": "2026-04-10T21:29:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12186,
+        "created_at": "2026-04-10T21:23:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12185,
+        "created_at": "2026-04-10T21:20:16",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12184,
+        "created_at": "2026-04-10T21:18:38",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12183,
+        "created_at": "2026-04-10T21:17:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12182,
+        "created_at": "2026-04-10T21:16:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12181,
+        "created_at": "2026-04-10T21:13:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12180,
+        "created_at": "2026-04-10T21:09:12",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12179,
+        "created_at": "2026-04-10T20:57:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12178,
+        "created_at": "2026-04-10T20:56:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12177,
+        "created_at": "2026-04-10T20:53:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12176,
+        "created_at": "2026-04-10T20:52:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12175,
+        "created_at": "2026-04-04T04:11:58",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12174,
+        "created_at": "2026-04-04T04:11:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12173,
+        "created_at": "2026-04-04T03:36:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12172,
+        "created_at": "2026-04-04T03:31:38",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12171,
+        "created_at": "2026-04-04T03:29:45",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12170,
+        "created_at": "2026-04-04T03:29:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12169,
+        "created_at": "2026-04-04T03:29:36",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12168,
+        "created_at": "2026-04-04T03:29:22",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12167,
+        "created_at": "2026-04-04T03:23:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12166,
+        "created_at": "2026-04-04T03:22:25",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12165,
+        "created_at": "2026-04-04T03:21:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12164,
+        "created_at": "2026-04-04T03:21:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12163,
+        "created_at": "2026-04-04T03:17:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12162,
+        "created_at": "2026-04-04T03:17:07",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12161,
+        "created_at": "2026-04-04T03:16:41",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12160,
+        "created_at": "2026-04-04T03:16:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12159,
+        "created_at": "2026-04-04T02:58:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12158,
+        "created_at": "2026-04-04T02:50:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12157,
+        "created_at": "2026-04-04T02:34:54",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12156,
+        "created_at": "2026-04-04T02:31:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12155,
+        "created_at": "2026-04-04T02:30:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12154,
+        "created_at": "2026-04-04T02:28:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12153,
+        "created_at": "2026-04-04T02:27:35",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12152,
+        "created_at": "2026-04-04T02:27:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12151,
+        "created_at": "2026-04-04T02:27:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12150,
+        "created_at": "2026-04-04T02:26:48",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12149,
+        "created_at": "2026-04-04T02:26:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12148,
+        "created_at": "2026-04-04T02:26:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12147,
+        "created_at": "2026-04-04T02:26:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12146,
+        "created_at": "2026-04-04T02:25:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12145,
+        "created_at": "2026-04-04T02:16:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12144,
+        "created_at": "2026-04-03T23:46:36",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12143,
+        "created_at": "2026-04-03T23:46:32",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12142,
+        "created_at": "2026-04-03T23:11:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12141,
+        "created_at": "2026-04-03T23:07:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12140,
+        "created_at": "2026-04-03T22:57:42",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12139,
+        "created_at": "2026-04-03T22:57:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12138,
+        "created_at": "2026-04-03T22:57:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12137,
+        "created_at": "2026-04-03T22:53:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12136,
+        "created_at": "2026-04-03T22:52:35",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12135,
+        "created_at": "2026-04-03T22:25:55",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12134,
+        "created_at": "2026-04-03T22:11:31",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12133,
+        "created_at": "2026-04-03T22:04:16",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12132,
+        "created_at": "2026-04-03T22:02:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12131,
+        "created_at": "2026-04-03T22:00:09",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12130,
+        "created_at": "2026-04-03T21:58:26",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12129,
+        "created_at": "2026-04-03T21:49:54",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12128,
+        "created_at": "2026-04-03T21:49:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12127,
+        "created_at": "2026-04-03T21:42:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12126,
+        "created_at": "2026-04-03T21:42:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12125,
+        "created_at": "2026-04-03T21:36:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12124,
+        "created_at": "2026-04-03T21:36:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12123,
+        "created_at": "2026-04-03T21:36:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12122,
+        "created_at": "2026-04-03T21:32:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12121,
+        "created_at": "2026-04-03T21:32:08",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12120,
+        "created_at": "2026-04-03T21:25:41",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12119,
+        "created_at": "2026-04-03T21:22:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12118,
+        "created_at": "2026-04-03T21:22:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12117,
+        "created_at": "2026-04-03T21:21:49",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12116,
+        "created_at": "2026-04-03T21:21:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12115,
+        "created_at": "2026-04-03T21:21:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12114,
+        "created_at": "2026-04-03T20:46:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      }
+    ]
+  },
+  "security_auth_audit_24h": [
+    {
+      "id": 12226,
+      "created_at": "2026-04-16T21:09:34",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12227,
+      "created_at": "2026-04-16T21:09:37",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12228,
+      "created_at": "2026-04-16T21:09:45",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12229,
+      "created_at": "2026-04-16T21:11:17",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12230,
+      "created_at": "2026-04-16T21:12:10",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12231,
+      "created_at": "2026-04-16T21:16:41",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12232,
+      "created_at": "2026-04-16T21:16:50",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    },
+    {
+      "id": 12233,
+      "created_at": "2026-04-16T21:17:00",
+      "status": "TAB_CLOSE",
+      "user_id": 2,
+      "path": "/auth/client-tab-close"
+    }
+  ],
+  "fleet_inventory": {
+    "total_vehicles": 1,
+    "last_update": "2026-03-26T09:03:40+00:00",
+    "vehicles": [
+      {
+        "vin": "TMBCY46Y654251499",
+        "make": "Skoda",
+        "model": "6Y / Fabia",
+        "year": "2004",
+        "fuel": "benzina",
+        "plate": "BZ-39-ALZ",
+        "series": "AESK120011T35E4"
+      }
+    ]
+  },
+  "fleet_soft_score_snapshot": {
+    "by_vin": {
+      "TMBCY46Y654251499": 24.0
+    },
+    "avg": 24.0
+  },
+  "soft_score_delta_vs_previous": {
+    "note": "Nu există snapshot anterior (prima zi sau arhivă lipsă)."
+  },
+  "device_signature_authorized": "",
+  "technical_exo_intelligence": {
+    "recent_insights": [
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Bugetul service este mediu, verifică prețurile la service-uri locale → Verifică prețurile la service-uri locale și alege cea mai bună opțiune",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:07"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON În România, iarna poate afecta performanța vehiculului, verifică sistemul de frânare → Verifică sistemul de frânare și efectuează reparații necesare",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:07"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ La 0 km, uzura este estimată ca fiind mică, dar verifică periodic → Verifică periodic uzura și efectuează reparații necesare",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:07"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Modelul Skoda Fabia 6Y din 2010 are probleme cu sistemul de combustie → Verifică sistemul de combustie și efectuează reparații necesare",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:07"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică starea documentelor pentru a evita penalizări → Verifică starea documentelor la autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:07"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Consumul estimat al vehiculului este de 7-10 l/100km → Monitorizează consumul pentru a evita cheltuieli suplimentare",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:04"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Prețul de vânzare al modelului este estimat la 5.000-7.000 RON → Verifică prețurile de vânzare pentru a lua decizii informate",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:04"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC La 0 km, uzura este estimată la 0% → Monitorizează kilometrajul pentru a evita uzură prematură",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:04"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări → Verifică statutul ITP pe site-ul autorității",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:04"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorității",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:22:04"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Bugetul de service este mediu, verifică prețurile la service → Verifică prețurile la service în funcție de buget",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:06"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică starea gumei de iarnă și a sistemului de încălzire → Verifică starea gumei de iarnă și a sistemului de încălzire",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:06"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Vehiculul are 0 km, dar uzura este dificil de estimat → Programă un control tehnic pentru a evalua starea vehiculului",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:06"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări → Verifică statutul ITP pe site-ul ANAF",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:06"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul ANAF",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:06"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC Consumul de carburant este estimat la 8-10 l/100km → Verifică consumul de carburant periodic",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:03"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Valoarea vehiculului este estimată la 5.000 RON → Verifică valorile de piață pentru a negocia o vânzare",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:03"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări → Verifică statutul ITP pe site-ul autorităților române",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:03"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ La 0 km, uzura este minimă, dar verifică periodic → Verifică periodic uzura și consumul de carburant",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:03"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorităților române",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:12:03"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Verifică prețurile la service pentru a economisi bani → Caută oferte de service la prețuri competitive",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:04"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică condițiile meteorologice pentru a evita condiții nefavorabile → Verifică prognoza meteo pentru a planifica călătoriile",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:04"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Programă revizii regulate pentru a preveni uzură → Programă revizii regulate la service",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:04"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Obține ITP pentru a evita penalizări → Înregistrează vehiculul la autoritatea locală",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:04"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorității",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:04"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🌡️ SEZON Condițiile climatice din România în acest sezon pot afecta performanța vehiculului → Verifică vehiculul periodic și efectuează service preventiv",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:02"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Consumul ridicat poate indica o problemă cu motorul sau cu sistemul de combustibil → Verifică sistemul de combustibil și efectuează service preventiv",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:02"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Prețurile vehiculelor similare sunt scăzute, ceea ce poate indica o valoare redusă a vehiculului → Verifică prețurile vehiculelor similare",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:02"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE RCA-ul este nedefinit, ceea ce poate duce la probleme la vânzarea sau închirierea vehiculului → Obține un raport de inspecție RCA",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:02"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC Modelul Skoda 6Y / Fabia din 2004 are probleme cunoscute cu motorul, care poate defecta la 100.000 km → Verifică motorul și efectuează service preventiv",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-16T21:02:02"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "Ce inseamna full hybrid? — Full hybrid este un tip de propulsie auto care combina un motor pe benzina sau motorina cu unul sau mai multe motoare electrice si o baterie.",
+        "insight_type": "technical",
+        "engine": "exo_research",
+        "created_at": "2026-04-16T20:55:35"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "Ce inseamna full hybrid? — Full hybrid este un tip de propulsie auto care combina un motor pe benzina sau motorina cu unul sau mai multe motoare electrice si o baterie.",
+        "insight_type": "technical",
+        "engine": "exo_research",
+        "created_at": "2026-04-16T20:55:35"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "Ce inseamna 91T la anvelope? — Articol despre semnificatia 91T la anvelope si influenta asupra sigurantei, performantei si legalitatii masinii.",
+        "insight_type": "technical",
+        "engine": "exo_research",
+        "created_at": "2026-04-16T20:55:28"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "Ce inseamna 91T la anvelope? — Articol despre semnificatia 91T la anvelope si influenta asupra sigurantei, performantei si legalitatii masinii.",
+        "insight_type": "technical",
+        "engine": "exo_research",
+        "created_at": "2026-04-16T20:55:28"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "Ce înseamnă transparența reală într-o achiziție auto? — Lipsa de claritate în cumpărarea unei mașini.",
+        "insight_type": "general",
+        "engine": "exo_research",
+        "created_at": "2026-04-16T20:55:01"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "Ce înseamnă transparența reală într-o achiziție auto? — Lipsa de claritate în cumpărarea unei mașini.",
+        "insight_type": "general",
+        "engine": "exo_research",
+        "created_at": "2026-04-16T20:55:01"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "👤 PERSONALIZAT Bugetul service este mediu, verifică periodic prețurile → Verifică periodic prețurile service-ului",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:42:00"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică condițiile climatice înainte de a pleca → Verifică prognoza meteo înainte de a pleca",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:42:00"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC La 0 km, uzura este minimă, dar verifică periodic → Verifică periodic uzura și consumul de combustibil",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:42:00"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări → Verifică statutul ITP pe site-ul autorității",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:42:00"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorității",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:42:00"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🌡️ SEZON Condițiile climatice din România sunt favorabile, ceea ce poate reduce uzura vehiculului. → Verifică condițiile climatice",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:41:35"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Consumul ridicat poate afecta bugetul de service și valoarea vehiculului. → Verifică consumul și ajustează conduita",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:41:35"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Prețurile pentru vehicule similare sunt scăzute, ceea ce poate afecta valoarea vehiculului. → Verifică prețurile pe piață",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:41:35"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE RCA-ul este nedefinit, ceea ce poate duce la probleme la vânzare sau în caz de accident. → Obține RCA în termen de 30 de zile",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:41:35"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC Motorul Skoda 6Y / Fabia din 2004 poate prezenta probleme de deteriorare la 100.000 km. → Verifică motorul la 50.000 km",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:41:35"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică condițiile de iarnă și ajustează service → Ajustează service pentru condiții de iarnă",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:40:22"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Buget service medium, verifică oferte locale → Verifică oferte de service locale și alege cea mai bună",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:40:22"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Uzura estimată la 0 km, verifică periodic → Verifică periodic uzura și consumul de combustibil",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:40:22"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Obține ITP pentru a evita penalizări → Contactează autoritatea locală pentru ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:40:22"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică starea RCA pentru a evita penalizări → Verifică statutul RCA online",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:40:22"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Modelul din 2004 are recall-uri posibile, verificare la service → Verificare recall-uri la service",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:58"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Modelul din 2004 are valoare scăzută, verificare la service → Verificare valoare la service",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:58"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT La 0 km, consumul este dificil de estimat, verificare la service → Verificare consum la service",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:58"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE ITP nedefinit, verificare obligatorie pentru utilizare pe drumuri publice → Verificare ITP la autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:58"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC RCA nedefinit, verificare obligatorie pentru utilizare pe drumuri publice → Verificare RCA la autoritatea rutieră",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:58"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "👤 PERSONALIZAT Ajustează bugetul de service în funcție de utilizare. → Consultă site-ul de service",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică condițiile de drum înainte de a pleca. → Verifică site-ul meteo",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Verifică frecvența schimbării uleiului și a filtrelor. → Consultă manualul de service",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări. → Contactează autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:46"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări. → Contactează autoritatea rutieră",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:31:46"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🌡️ SEZON În România, condițiile meteorologice pot fi dificile, ceea ce poate afecta vehiculul. → Verifică condițiile meteorologice și ajustează conduita",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:30:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT La 0 km, consumul este ridicat, dar poate scădea odată cu uzura. → Verifică consumul și ajustează conduita",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:30:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Prețurile vehiculelor din 2004 sunt scăzute, dar pot scădea și mai mult. → Vând vehiculul cât mai curând posibil",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:30:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE RCA-ul este nedefinit, ceea ce poate duce la probleme la înmatriculare sau vânzare. → Obține un raport de verificare a stării tehnice (RCA)",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:30:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC Modelul Skoda 6Y / Fabia din 2004 are probleme cunoscute cu motorul, care poate defecta la 150.000 km. → Verifică motorul și efectuează un service preventiv",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:30:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Sezon primăvară, condiții climatice moderate. → Verificare condiții climatice înainte de călătorie",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:18"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Buget service medium, prețuri medii pentru service. → Căutare oferte service la prețuri competitive",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:18"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Kilometraj 0 km, uzura estimată scăzută. → Monitorizare kilometraj și condiții de utilizare",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:18"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE ITP nedefinit, verificare obligatorie pentru utilizare pe drumurile publice. → Verificare ITP la autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:18"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL RCA nedefinit, verificare obligatorie pentru utilizare pe drumurile publice. → Verificare RCA la autoritatea rutieră",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:18"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Consumul de combustibil este estimat la 8-10 l/100 km, în funcție de utilizare. → Verifică consumul de combustibil și ajustează conduita de conducere",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:16"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Modelul Skoda 6Y / Fabia din 2004 nu are recoladă de produs cunoscută. → Verifică lista recoladelor de produs pentru modelul respectiv",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:16"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Valoarea vehiculului este estimată la 5.000-7.000 RON, în funcție de condiții. → Verifică valorile de pe piață și ajustează prețul de vânzare",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:16"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE RCA și ITP nu sunt definite, ceea ce poate duce la penalizări și amenzi. → Verifică și completează documentele în cel mai scurt timp posibil",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:16"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC Modelul Skoda 6Y / Fabia din 2004 are cunoscute probleme cu motorul, care poate rupe la 80.000 km. → Verifică motorul și efectuează un control preventiv",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:21:16"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Prețuri benzina în creștere → Verificare prețuri benzina",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:20:09"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Certificat de înmatriculare valabil → Verificare certificat de înmatriculare",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:20:09"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ Verificare periodică la 10.000 km → Programare verificare periodică",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:20:09"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL ITP nedefinit, verificare obligatorie → Verificare ITP la autoritatea rutieră",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-04-13T21:20:09"
+      }
+    ],
+    "suspected_errors": []
+  },
+  "market_research": {
+    "fuel_prices": {},
+    "last_cycle_summary": {
+      "updated_at": "2026-04-16T20:55:47Z",
+      "cycle": {
+        "articles_fetched": 70,
+        "articles_new": 52,
+        "insights_classified": 23,
+        "fuel_prices_updated": 0,
+        "errors": 0,
+        "chroma_indexed": 23
+      },
+      "bnr_eur": 5.0918,
+      "extra": {
+        "optional_urls_tried": [
+          "https://www.bnr.ro/nbrfxrates.xml",
+          "https://www.peco-online.ro/"
+        ]
+      }
+    },
+    "articles_recent_tail": [
+      {
+        "id": 542,
+        "url": "https://www.motorsport.com/nascar-cup/news/kevin-harvick-says-alex-bowman-needs-to-win-to-keep-hendrick-job/10813234/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Kevin Harvick says Alex Bowman needs to win to keep Hendrick job",
+        "content": "With all due respect to Alex Bowman’s recovery from vertigo, and return to the Hendrick Motorsports No. 48 over the weekend after missing four NASCAR Cup Series races, now it’s time for the 32-year-old to save his job.Everyone downplays it, but Bowman is in a contract year, and having faced several medical issues over the years while also not winning at the scope of his superstar ...Keep reading",
+        "hash": "8eb04732251694145939eeb916f4582a",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 543,
+        "url": "https://www.motorsport.com/wec/news/what-caused-marco-sorensen-heavy-wec-prologue-crash-for-aston-martin/10813186/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "What caused Marco Sorensen’s heavy WEC Prologue crash for Aston Martin?",
+        "content": "Marco Sorensen says tyre warm-up issues led to his dramatic crash during Tuesday’s Prologue test for the 2026 World Endurance Championship at Imola.The factory Aston Martin driver was on an outlap with around 90 minutes remaining in the morning session when he went off-track at Tamburello and smashed heavily into the wall. Although the Dane climbed out of the car unaided and was ...Keep reading",
+        "hash": "1a24cc221e4fd860e2ff2a9872f8b0ca",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 544,
+        "url": "https://www.motorsport.com/f1/news/bearman-blames-colapinto-for-japan-crash/10813212/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Oliver Bearman blames Franco Colapinto for F1 Japanese GP crash",
+        "content": "Oliver Bearman spoke for the first time about the accident he suffered at the Formula 1 Japanese Grand Prix - placing full responsibility on Franco Colapinto.The incident occurred on lap 22 of the 53-lap race, where Bearman started around one second behind the Alpine through Suzuka’s sector two.But he suddenly closed as Colapinto was harvesting energy, with a speed differential of ...Keep reading",
+        "hash": "0df6206aa44f51aaaed4237e3498e030",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 545,
+        "url": "https://www.motorsport.com/f1/news/abu-dhabi-2021-michael-masi-was-a-scapegoat-and-didnt-do-that-much-wrong/10813209/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Niels Wittich: Michael Masi a “scapegoat” who “didn’t do much wrong” at Abu Dhabi 2021",
+        "content": "Former Formula 1 race director Michael Masi has received support from his successor Niels Wittich with regards to his controversial officiating in the title-deciding 2021 Abu Dhabi Grand Prix.Max Verstappen and Lewis Hamilton were tied on points going into the Yas Marina race, meaning whoever finished ahead would claim the title – unless they both ended up out of the top 10, in which case ...Keep reading",
+        "hash": "65f99fdc0fd0c26d068feeadb4b87b79",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 546,
+        "url": "https://www.motorsport.com/f1/news/mick-schumacher-says-f1-will-find-a-solution-to-improve-2026-regulations-/10812996/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Mick Schumacher says F1 \"will find a solution\" to improve 2026 regulations",
+        "content": "The 2026 F1 regulations have been controversial, and there has been plenty of criticism from both inside the paddock and those watching from afar. Formula 1 CEO and president Stefano Domenicali seems open to tweaking the regulations, which also caused safety concerns following Ollie Bearman's 50G crash at Suzuka.The new regulations feature a far larger reliance on electric energy and it has ...Keep reading",
+        "hash": "f7e30c8b69693c7fcb3d1596b064ed98",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 547,
+        "url": "https://www.motorsport.com/nascar-cup/news/team-penske-makes-change-to-ryan-blaneys-pit-crew/10813206/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Team Penske makes a change to Ryan Blaney's pit crew",
+        "content": "In recent weeks, Ryan Blaney has grown increasingly frustrated with mistakes on pit road and slow stops from the No. 12 Team Penske Ford crew. Crew chief Jonathan Hassler has been fairly open about the problems as well, and the need to improve.Despite winning at Phoenix, he had to overcome multiple issues on pit road during that race, and it was a similar story en route to a runner-up finish ...Keep reading",
+        "hash": "7ab499d88b14a76475f15f9210b3b7f2",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 548,
+        "url": "https://www.motorsport.com/f1/news/racing-bulls-planning-double-upgrade-due-to-enforced-april-break-for-f1/10813123/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Racing Bulls planning double upgrade due to enforced April break for F1",
+        "content": "It has long been known that a key battleground of the 2026 Formula 1 campaign will be the development race. Whichever team is able to apply the correct upgrades in good time is expected to succeed, and although this is the case with any regulation switch, it is even more significant this year due to the sheer complexity of the new ruleset.But what is interesting is observing the upgrade ...Keep reading",
+        "hash": "4c521b50abfd682678b9ef993c7cb676",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 549,
+        "url": "https://www.motorsport.com/wec/news/max-verstappen-could-race-hypercars-in-wec-in-a-few-years-says-bmw-driver-robin-frijns/10813119/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Max Verstappen could race WEC hypercars \"in a few years\", says BMW's Robin Frijns",
+        "content": "Factory BMW driver Robin Frijns expects Max Verstappen to make the switch to the World Endurance Championship in the future, with Hypercar likely to be his preferred category.Frijns recently returned to the Nurburgring-Nordschleife for the third round of the Nurburgring Langstrecken-Serie (NLS). Together with Marco Wittmann and Phillip Eng, he competed in the Schubert Motorsport BMW M4 GT3 ...Keep reading",
+        "hash": "5c8294facdd5c16e57818ee8136cadb3",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 550,
+        "url": "https://www.motorsport.com/indycar/news/how-to-watch-indycar-at-long-beach-weekend-schedule-start-time-tv/10813012/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "How to watch IndyCar 2026 at Long Beach: Weekend schedule, start time, TV",
+        "content": "After a two-week break, IndyCar is back with Round No. 5 -- the Grand Prix of Long Beach. Kyle Kirkwood is the defending winner of the eventIndyCar will be joined by IMSA WeatherTech SportsCar Championship with the GTP and GTD classes racing this weekend as well.Kirkwood leads the IndyCar championship at the moment, just two points ahead of Alex Palou, who won the most recent race at ...Keep reading",
+        "hash": "272930a2605bef7cd43855aeb6a1a3ed",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 551,
+        "url": "https://www.motorsport.com/wec/news/toyotas-100th-wec-race-the-highs-lows-and-defining-moments/10813067/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Toyota’s 100th WEC race: The highs, lows and defining moments",
+        "content": "Toyota has been an ever-present fixture in the World Endurance Championship since its (re)birth in 2012. While its rivals have joined, left and returned over the last decade and a half, Toyota remained committed to the championship through wider automotive industry shifts and even a global pandemic. It has not been a smooth ride though, and the Japanese marque had to endure years of ...Keep reading",
+        "hash": "611aa99c1464e50ba1eb2b3d908d7479",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 552,
+        "url": "https://www.motorsport.com/f1/news/liam-lawson-drivers-will-always-complain-about-new-f1-rules/10813091/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Why F1 drivers will always complain about new rules, according to Liam Lawson",
+        "content": "Formula 1 rolled out sweeping regulations for 2026, bringing smaller, lighter cars to the track and increasing the emphasis on electrical energy in the power units. Since the launch of the season, however, these rules have proven to be divisive, which Liam Lawson believes was inevitable.The Racing Bulls driver’s former team-mate Max Verstappen has been the most outspoken about F1’s new ...Keep reading",
+        "hash": "133f33d7028aedd351b566112f610795",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 553,
+        "url": "https://www.motorsport.com/nascar-cup/news/embargo-rockstar-energy-partners-with-nascar-star-tyler-reddick/10812994/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Rockstar Energy partners with NASCAR star Tyler Reddick",
+        "content": "Driving the No. 45 23XI Racing Toyota co-owned by NBA legend Michael Jordan and future NASCAR Hall of Famer Denny Hamlin, NASCAR Cup Series star Tyler Reddick has had a dream start to the 2026 season.He won the season-opening Daytona 500 with a dramatic last-lap pass and went on to win the opening three races of the season -- something no other driver in NASCAR Cup history had previously ...Keep reading",
+        "hash": "e87131dc8bc4e47b13039c932b67c441",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 554,
+        "url": "https://www.motorsport.com/f1/news/lando-norris-makes-prestigious-time-100-most-influential-people-list-after-2025-championship-title/10813139/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Lando Norris makes prestigious TIME 100 Most Influential People list after 2025 championship title",
+        "content": "2025 Formula 1 champion Lando Norris has been featured on TIME Magazine's prestigious 100 Most Influential People list for 2026. The McLaren driver, who claimed his maiden F1 drivers' championship title at the 2025 Abu Dhabi Grand Prix after an intense battle with his team-mate Oscar Piastri and Red Bull's Max Verstappen, is joined by an exclusive group of 'global leaders, artists ...Keep reading",
+        "hash": "212e4b1fdcf5ef85752254ae57671742",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 555,
+        "url": "https://www.motorsport.com/f1/news/george-russell-praises-kimi-antonellis-perfect-start-as-mercedes-title-battle-heats-up/10813129/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "George Russell praises Kimi Antonelli’s “perfect start” as Mercedes title battle heats up",
+        "content": "George Russell has opened up on racing against his Mercedes team-mate Kimi Antonelli, praising the Italian driver's \"perfect start to the year\".Mercedes has enjoyed a dominant start to the 2026 Formula 1 season. After Russell claimed the victory in the season-opening Australian Grand Prix and the first sprint race of the year in China, Antonelli celebrated back-to-back wins at the Chinese and ...Keep reading",
+        "hash": "486f72180abfe1103fab2c99894cc4d3",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 556,
+        "url": "https://www.motorsport.com/motogp/news/fabio-quartararo-staying-a-little-bit-out-of-yamaha-bike-development-as-frustrations-grow/10813050/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Fabio Quartararo staying “a little bit out” of Yamaha development as frustrations grow",
+        "content": "Fabio Quartararo revealed he is trying to stay a “little bit out” of Yamaha’s bike development process amid mounting frustrations with its V4 project in MotoGP.The Japanese manufacturer’s decision to abandon its long-running inline-four engine configuration has left it firmly on the back foot in 2026, even as management remains convinced it will pay off in the long term.Quartararo ...Keep reading",
+        "hash": "e636c7ea5708f3fff2772db2332e476b",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 557,
+        "url": "https://www.motorsport.com/wec/news/wec-will-stop-publishing-bop-data-2026/10813085/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "WEC to stop publishing BoP figures in 2026: 'We're protecting ourselves from speculation'",
+        "content": "The Balance of Performance in the World Endurance Championship will no longer be made public in 2026, in a move aimed at preventing speculation and misinterpretation, the FIA and ACO officials explained during a media briefing at Imola.As teams were still arriving at the circuit on Thursday morning, a small group of media outlets – including Motorsport.com – heard from Bruno Famin and ...Keep reading",
+        "hash": "fab7a6320c2200aaa0d09358813ca032",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 558,
+        "url": "https://www.motorsport.com/f3/news/when-paul-di-resta-beat-sebastian-vettel-to-the-f3-title/10812639/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "When Paul Di Resta beat Sebastian Vettel to the F3 title",
+        "content": "Paul Di Resta may have never achieved a Formula 1 podium, but there was a time when he beat a future four-time world champion – and many other upcoming grand prix drivers.Back in 2006, the likes of Sebastian Vettel, Giedo van der Garde, Kazuki Nakajima, Kamui Kobayashi, Sebastien Buemi and Romain Grosjean featured on the grid of the Formula 3 Euro Series – a championship whose reigning ...Keep reading",
+        "hash": "8edb818168a15dbe1fcf13c9f5ac7de0",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 559,
+        "url": "https://www.motorsport.com/f1/news/martin-brundle-george-russell-lost-his-head-during-japanese-grand-prix/10813065/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Martin Brundle: George Russell “lost his head” in Japan as Kimi Antonelli threatens title charge",
+        "content": "Former Formula 1 driver and Sky Sports F1 analyst Martin Brundle argued that George Russell \"lost his head a little bit\" during the Japanese Grand Prix. The Briton started the 2026 season as the favourite as Mercedes was expected to bring dominant machinery to the new era of regulations.And while Russell started off strong with wins in the Australian Grand Prix and Chinese sprint race ...Keep reading",
+        "hash": "dac2cec69f9d177c43147a2444eaad57",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 560,
+        "url": "https://www.motorsport.com/v8supercars/news/supercars-to-make-chevrolet-camaro-updates-after-parity-investigation/10813053/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Supercars to make Chevrolet Camaro updates after parity investigation",
+        "content": "Supercars will make a parity change to the Chevrolet Camaro teams in time for this weekend’s fourth round at Ruapuna Park in Christchurch, New Zealand.On Thursday, the Supercars Commission notified the teams that small changes will be made to the Camaro front splitter and rear wing to shift the car's aerodynamic balance rearwards.In a note to the teams the Commission said: “Following ...Keep reading",
+        "hash": "e3b78fa51d6bf870b55d8467cd8d3680",
+        "fetched_at": "2026-04-16T20:52:57"
+      },
+      {
+        "id": 561,
+        "url": "https://www.motorsport.com/f1/news/mercedes-mclaren-alpine-on-track-with-their-2026-f1-cars/10813038/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Mercedes, McLaren, Alpine in action with their 2026 F1 cars",
+        "content": "Mercedes, McLaren and Alpine took to the track this week with their 2026 Formula 1 cars.Mercedes and McLaren partook in a Pirelli test at the Nurburgring, with all four race drivers in action.On Tuesday, George Russell covered 127 laps, with Oscar Piastri down on 65 due to a technical issue. Yesterday, championship leader Kimi Antonelli and Lando Norris completed 109 and 108 laps ...Keep reading",
+        "hash": "e2cc7a5024f44b62cc9793d7f399237f",
+        "fetched_at": "2026-04-16T20:52:57"
+      }
+    ]
+  },
+  "frontend_errors_log_tail": [
+    "[2026-03-22T19:21:26] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:30] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:33] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:37] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:40] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:43] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:46] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:49] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:53] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:56] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:21:59] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:03] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:06] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:10] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:14] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:17] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:21] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:25] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:28] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:31] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:35] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:38] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:42] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:46] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:49] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:53] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:22:58] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:04] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:08] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:13] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:19] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:25] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:31] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:36] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:42] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:47] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:23:53] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:00] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:06] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:12] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:18] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:24] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:30] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:37] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:42] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:48] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:24:55] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:01] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:07] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:13] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:18] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:25] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:31] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:38] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:44] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:50] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:25:56] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:03] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:09] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:14] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:21] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:27] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:34] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:39] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:45] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:51] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:26:57] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:04] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:10] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:16] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:23] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:29] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:36] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:42] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:49] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:27:55] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:28:02] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:28:08] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:28:13] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n",
+    "[2026-03-22T19:28:20] status=401 url=http://127.0.0.1:9000/me msg=Token invalid. detail=Token invalid.\n"
+  ],
+  "vehicles_index": [
+    {
+      "user_id": 2,
+      "vin": "TMBCY46Y654251499",
+      "make": "Skoda",
+      "model": "6Y / Fabia",
+      "year": "2004",
+      "fuel": "benzina",
+      "plate": "BZ-39-ALZ",
+      "series": "AESK120011T35E4",
+      "mlbr_code": "MLBR-F8C2-2CB3"
+    },
+    {
+      "user_id": 1,
+      "vin": "WVWZZZAUZNW123456",
+      "make": "Skoda",
+      "model": "Fabia",
+      "year": "2010",
+      "fuel": "benzina",
+      "plate": "B01MLB",
+      "series": "6Y",
+      "mlbr_code": "MLBR-F90A-37B2"
+    }
+  ],
+  "executive_summary_bios": "**Rezumat Executiv**\n\n* **Flota**: [OK] 2 mașini în funcțiune\n* **Autentificări**: \n  * Succes: [OK] 4 autentificări\n  * Închidere tab: [WARN] 12229 autentificări închise\n* **Evenimente 24h**: [OK] 8 evenimente\n* **Soft utilizare**: [OK] 24,0% utilizare medie\n* **Delta**: [CRIT] Nu există snapshot anterior (prima zi sau arhivă lipsă)"
+}

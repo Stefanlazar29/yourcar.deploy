@@ -1,0 +1,251 @@
+<!-- Part 09: lines 2001-2250 of mulberry_app.html -->
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryCloud</span>
+      </div>
+      <iframe class="pif-frame" id="pif-cloud" src="" title="MulberryCloud"></iframe>
+    </div>
+
+    <!-- HUB PANEL -->
+    <div class="panel panel-iframe" id="panel-hub">
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryHUB</span>
+      </div>
+      <iframe class="pif-frame" id="pif-hub" src="" title="MulberryHUB"></iframe>
+    </div>
+
+    <!-- DRIVE PANEL -->
+    <div class="panel panel-iframe" id="panel-drive">
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryDrive</span>
+      </div>
+      <iframe class="pif-frame" id="pif-drive" src="" title="MulberryDrive"></iframe>
+    </div>
+
+  </main>
+
+  <nav class="bnav">
+    <div class="bnav-inner">
+      <button class="bn-item" onclick="history.back()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="bn-item bn-center-logo" data-p="dashboard" onclick="goPanel('dashboard')">
+        <img src="/favicon.png" alt="Mulberry">
+      </button>
+      <button class="bn-item" data-p="settings" onclick="goPanel('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+    </div>
+  </nav>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="toast" id="toast"></div>
+
+<!-- ══ MULBERRY AI — Full Gemini Panel ══════════════════════════ -->
+<div class="gm-overlay hidden" id="gm-overlay">
+  <!-- Top navigation -->
+  <div class="gm-topnav">
+    <button class="gm-back-btn" onclick="closeGeminiModal()">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <div class="gm-nav-brand">
+      <svg class="gm-nav-star" viewBox="0 0 24 24">
+        <defs><linearGradient id="gm-nav-g" x1="0" y1="1" x2="0.7" y2="0"><stop offset="0%" stop-color="#FBBC04"/><stop offset="40%" stop-color="#EA4335"/><stop offset="100%" stop-color="#4285F4"/></linearGradient></defs>
+        <path fill="url(#gm-nav-g)" d="M12 2.5C12 2.5 13.6 8.6 18 12C13.6 15.4 12 21.5 12 21.5C12 21.5 10.4 15.4 6 12C10.4 8.6 12 2.5 12 2.5Z"/>
+        <path fill="url(#gm-nav-g)" opacity=".45" d="M12 6C12 6 15.4 8.2 17 12C15.4 15.8 12 18 12 18C12 18 8.6 15.8 7 12C8.6 8.2 12 6 12 6Z"/>
+      </svg>
+      MulberryAI
+    </div>
+  </div>
+
+  <!-- Body: welcome screen OR chat messages -->
+  <div class="gm-body" id="gm-body">
+    <!-- Welcome (default state) -->
+    <div class="gm-welcome-screen" id="gm-welcome-screen">
+      <div class="gm-big-greeting" id="gm-big-greeting">Bună ziua,</div>
+      <div class="gm-big-sub">Asistentul tău automotive, powered by Gemini</div>
+      <div class="gm-welcome-chips">
+        <button class="gm-welcome-chip" onclick="gmChip(this)">Verifică ITP</button>
+        <button class="gm-welcome-chip" onclick="gmChip(this)">Status asigurare</button>
+        <button class="gm-welcome-chip" onclick="gmChip(this)">Analiză vehicul</button>
+        <button class="gm-welcome-chip" onclick="gmChip(this)">Programare service</button>
+      </div>
+    </div>
+    <!-- Chat messages (shown after first send) -->
+    <div class="gm-messages" id="gm-messages"></div>
+  </div>
+
+  <!-- Fixed input bar -->
+  <div class="gm-input-area">
+    <div class="gm-input-pill">
+      <label class="gm-add-btn" title="Adaugă poză" style="cursor:pointer">
+        <input type="file" accept="image/*" style="display:none" onchange="gmHandlePhoto(event)">
+        +
+      </label>
+      <input type="text" class="gm-pill-input" id="gm-input" placeholder="Întreabă MulberryAI..." onkeydown="if(event.key==='Enter')gmSend()">
+      <div class="gm-input-right">
+        <span class="gm-model-badge">✦ Gemini</span>
+        <button class="gm-pill-send" onclick="gmSend()" title="Trimite">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="gm-input-disclaimer">MulberryAI poate greși. Verifică informațiile importante.</div>
+  </div>
+</div>
+
+<script>
+const API = (window.Config && window.Config.apiBaseUrl) || 'http://46.225.100.151:8080';
+let currentUser = null;
+
+function saveSession(d) { localStorage.setItem('mlbr_s', JSON.stringify(d)); currentUser = d; }
+function loadSession() {
+  try { const r = localStorage.getItem('mlbr_s'); if(r){ currentUser=JSON.parse(r); return currentUser; } } catch(e){}
+  return null;
+}
+function clearSession() { localStorage.removeItem('mlbr_s'); currentUser = null; sb.auth.signOut(); }
+
+
+let _tt;
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'toast show' + (type ? ' '+type : '');
+  clearTimeout(_tt); _tt = setTimeout(() => el.className='toast', 2800);
+}
+
+async function apiPost(path, body) {
+  const r = await fetch(API + path, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.detail || 'Eroare server');
+  return d;
+}
+async function apiGet(path) {
+  const headers = currentUser?.token ? {'Authorization':'Bearer '+currentUser.token} : {};
+  const r = await fetch(API + path, { headers, signal: AbortSignal.timeout(5000) });
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+async function checkHealth() {
+  const dot = document.getElementById('tb-dot');
+  const lbl = document.getElementById('tb-lbl');
+  try {
+    await fetch(API + '/health', { signal: AbortSignal.timeout(5000) });
+    dot.className = 'tb-dot on'; lbl.textContent = 'online';
+    const t = new Date().toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('at-health-time').textContent = t;
+    document.getElementById('at-api').textContent = API;
+    document.getElementById('set-api-url').textContent = API;
+    document.getElementById('set-health-lbl').textContent = '● online';
+    document.getElementById('set-health-lbl').style.color = 'var(--green)';
+  } catch(e) {
+    dot.className = 'tb-dot off'; lbl.textContent = 'offline';
+    document.getElementById('set-health-lbl').textContent = '● offline';
+    document.getElementById('set-health-lbl').style.color = 'var(--red)';
+  }
+}
+
+async function loadStats() {
+  try {
+    const s = await apiGet('/api/stats');
+    document.getElementById('st-drivers').textContent  = s.drivers  ?? '—';
+    document.getElementById('st-partners').textContent = s.partners ?? '—';
+    document.getElementById('st-vehicles').textContent = s.vehicles ?? '—';
+    document.getElementById('st-offers').textContent   = s.offers   ?? '—';
+  } catch(e) {}
+}
+
+// ─── SUPABASE AUTH ────────────────────────────────────────────
+const SB_URL  = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
+const sb = supabase.createClient(SB_URL, SB_ANON);
+
+// Whitelist guard — distruge sesiunea doar dacă NU suntem în flux OAuth
+(async () => {
+  if (sessionStorage.getItem('mlbr_oauth')) return;
+  if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) return;
+  const { data: { user } } = await sb.auth.getUser();
+  if (user) await sb.auth.signOut();
+})();
+
+let afCurrentEmail = '';
+let afResendInterval = null;
+
+function afGoToStep(n) {
+  document.querySelectorAll('.af-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`af-step-${n}`).classList.add('active');
+  document.querySelectorAll('.af-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i + 1 < n) d.classList.add('done');
+    else if (i + 1 === n) d.classList.add('active');
+  });
+}
+
+function afSwitchTab(btn) {
+  document.querySelectorAll('.af-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function afSignInWithGoogle() {
+  sessionStorage.setItem('mlbr_oauth', '1');
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: 'https://mulberry.autos/mulberry_app.html',
+      queryParams: { prompt: 'select_account', access_type: 'online' }
+    }
+  });
+  if (error) { sessionStorage.removeItem('mlbr_oauth'); afShowAlert('af-alert-1', error.message); }
+}
+
+async function afSendOTP() {
+  const email = (document.getElementById('af-email').value || '').trim();
+  if (!email || !email.includes('@')) return afShowAlert('af-alert-1', 'Introdu un email valid.');
+  afCurrentEmail = email;
+  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+  if (error) return afShowAlert('af-alert-1', error.message);
+  document.getElementById('af-email-display').textContent = email;
+  afGoToStep(2);
+  afSetupOTP();
+  afStartResendTimer();
+}
+
+async function afVerifyOTP() {
+  const token = Array.from({length:6}, (_, i) => document.getElementById(`af-otp-${i}`).value).join('');
+  if (token.length !== 6) return afShowAlert('af-alert-2', 'Introdu toate cele 6 cifre.');
+  const { data, error } = await sb.auth.verifyOtp({ email: afCurrentEmail, token, type: 'email' });
+  if (error) return afShowAlert('af-alert-2', 'Cod incorect sau expirat. Încearcă din nou.');
+  if (data?.session) {
+    const u = data.session.user;
+    saveSession({ email: u.email, name: u.user_metadata?.full_name || null, avatar: u.user_metadata?.avatar_url || null });
+    enterApp();
+  } else { afGoToStep(3); }
+}
+
+async function afResendOTP() {
+  await sb.auth.signInWithOtp({ email: afCurrentEmail, options: { shouldCreateUser: true } });
+  afStartResendTimer();
+}
+
+function afStartResendTimer() {
+  let s = 60;
+  const btn = document.getElementById('af-resend-btn');
+  const timer = document.getElementById('af-resend-timer');
+  btn.disabled = true;
+  if (afResendInterval) clearInterval(afResendInterval);
+  afResendInterval = setInterval(() => {
+    s--;
+    timer.textContent = ` (${s}s)`;
+    if (s <= 0) { clearInterval(afResendInterval); btn.disabled = false; timer.textContent = ''; }
+  }, 1000);
+}
+
+function afSetupOTP() {

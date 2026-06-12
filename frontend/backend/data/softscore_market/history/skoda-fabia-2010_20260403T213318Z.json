@@ -1,0 +1,25 @@
+{
+  "schema": "softscore_market_snapshot_v1",
+  "timestamp_utc": "2026-04-03T21:33:18.459886+00:00",
+  "model_key": "skoda-fabia-2010",
+  "vin": "WVWZZZAUZNW123456",
+  "marca": "Skoda",
+  "model": "Fabia",
+  "an": 2010,
+  "km": 0,
+  "autovit": {
+    "count": 1993,
+    "min": 511,
+    "max": 196843,
+    "avg": 18773,
+    "median": 5939,
+    "source": "autovit.ro",
+    "currency_hint": "mixed_or_page_default"
+  },
+  "groq_verification": {
+    "error": "Groq: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kmmybgszerkryg9p32tf04mc` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99998, Requested 1207. Please try again in 17m21.119999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}; Ollama fallback: Ollama: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+    "median_plausible": null,
+    "notes_ro": "Eroare apel Groq."
+  },
+  "cached": false
+}

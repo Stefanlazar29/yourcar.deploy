@@ -1,18 +1,25 @@
-/* offline/backend_bridge.js — trimitere generică către backend (LocalBase) */
+/**
+ * backend_bridge.js — sincronizare date AppDB ↔ server după login.
+ */
+(function () {
+  window.addEventListener('mulberry:screen', function (e) {
+    if (!e.detail || e.detail.screen !== 'dash') return;
+    var token = localStorage.getItem('mulberry_session') || localStorage.getItem('yourcar_token');
+    if (!token || !window.api) return;
 
-(function() {
-  window.trimiteLaServer = async function(provider) {
-    try {
-      await window.AppDB.insert('form_submit', { provider: provider || 'email' });
-      window.AppDB.ui.goTo('yourcar_id.html');
-    } catch (e) {
-      window.showToast((e && e.message) ? e.message : 'Eroare la trimitere.');
-    }
-  };
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var b1 = document.getElementById('btn-auth-email');
-    if (b1) b1.addEventListener('click', function() { window.trimiteLaServer('email'); });
+    /* Sincronizează utilizatorul curent */
+    window.api.me().then(function (user) {
+      if (window.AppDB) {
+        window.AppDB.saveUser({
+          id: user.id,
+          email: user.email,
+          name: (user.email || '').split('@')[0],
+          role: user.role || 'user'
+        });
+        if (window.AppDB.ui && window.AppDB.ui.syncDashboard) {
+          window.AppDB.ui.syncDashboard();
+        }
+      }
+    }).catch(function () {});
   });
 })();
-

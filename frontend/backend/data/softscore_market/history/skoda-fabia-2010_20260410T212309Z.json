@@ -1,0 +1,27 @@
+{
+  "schema": "softscore_market_snapshot_v1",
+  "timestamp_utc": "2026-04-10T21:23:09.719776+00:00",
+  "model_key": "skoda-fabia-2010",
+  "vin": "WVWZZZAUZNW123456",
+  "marca": "Skoda",
+  "model": "Fabia",
+  "an": 2010,
+  "km": 0,
+  "autovit": {
+    "count": 1992,
+    "min": 511,
+    "max": 196843,
+    "avg": 18485,
+    "median": 5871,
+    "source": "autovit.ro",
+    "currency_hint": "mixed_or_page_default"
+  },
+  "groq_verification": {
+    "median_plausible": true,
+    "avg_consistent": true,
+    "confidence_0_1": 0.99,
+    "notes_ro": "Eșantionul are o medie de 18485 km, care este consistentă cu valoarea mediei de 5871 km. Aceasta sugerează că eșantionul este reprezentativ.",
+    "red_flags": []
+  },
+  "cached": false
+}

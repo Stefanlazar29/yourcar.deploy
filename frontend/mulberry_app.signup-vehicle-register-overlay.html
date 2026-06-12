@@ -1,0 +1,251 @@
+<!-- Part 12: lines 2751-3000 of mulberry_app.html -->
+       we need to count visible positions by translating differently.
+       Use a simpler approach: show only the current card */
+    track.style.transform = 'translateX(-'+ pct +'%)';
+    updateDots(visibleIdxs);
+    updateContext(visibleIdxs[pos]);
+  };
+
+  function updateContext(cardIdx){
+    var plate = '';
+    if(cardIdx === 0){ plate = (document.getElementById('nd-ycard-plate')||{}).textContent || ''; }
+    else if(cardIdx === 1){ plate = (document.getElementById('nd-trust-plate')||{}).textContent || ''; }
+    if(plate && plate.trim() !== '— ——'){
+      var ai = document.getElementById('nd-ai-hint');
+      var hub = document.getElementById('nd-hub-sub');
+      if(ai) ai.textContent = 'Întreabă despre ' + plate.trim() + '...';
+      if(hub) hub.textContent = plate.trim() + ' · History · PDF';
+    }
+  }
+
+  var sx = 0;
+  track.addEventListener('touchstart', function(e){ sx=e.touches[0].clientX; },{passive:true});
+  track.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - sx;
+    if(dx < -40) ndGoTo(cur+1);
+    else if(dx > 40) ndGoTo(cur-1);
+  },{passive:true});
+  track.addEventListener('mousedown', function(e){ sx=e.clientX; });
+  track.addEventListener('mouseup', function(e){
+    var dx = e.clientX - sx;
+    if(dx < -40) ndGoTo(cur+1);
+    else if(dx > 40) ndGoTo(cur-1);
+  });
+
+  window.ndShowTrustCard = function(){
+    var tc = document.getElementById('nd-trust-card');
+    if(tc) tc.style.display = '';
+    initCarousel();
+  };
+
+  function initCarousel(){
+    cur = 0;
+    var visibleIdxs = getVisibleCards();
+    visibleCount = visibleIdxs.length;
+    track.style.transform = 'translateX(0%)';
+    updateDots(visibleIdxs);
+  }
+
+  setTimeout(initCarousel, 150);
+})();
+
+function showFamilyUpsell(){
+  alert('MulberryFamily · 3€/lună · Până la 3 vehicule în același cont');
+}
+
+// ── Session restore ────────────────────────────────────────────
+// Rulează direct la finalul scriptului (DOM gata, toate funcțiile definite).
+// 1) Verifică localStorage (instant) → intră în app.
+// 2) Fallback: Supabase getSession() → salvează + intră (pt Google OAuth).
+(async function _restoreSession() {
+  const saved = loadSession();
+  if (saved) { enterApp(); return; }
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session?.user) {
+      const u = session.user;
+      saveSession({
+        email:  u.email,
+        name:   u.user_metadata?.full_name  || null,
+        avatar: u.user_metadata?.avatar_url || null
+      });
+      enterApp();
+    }
+  } catch(_) {}
+})();
+</script>
+
+<!-- ══ SIGNUP OVERLAY ══════════════════════════════════════ -->
+<div id="signup-overlay" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);align-items:center;justify-content:center;">
+  <iframe src="mulberry_signup.html" id="signup-iframe" style="width:880px;max-width:95vw;height:640px;border:none;border-radius:28px;box-shadow:0 40px 100px rgba(0,0,0,0.8);" loading="lazy"></iframe>
+</div>
+
+<!-- DEAD ZONE — old vreg overlay kept as empty shell for back-compat -->
+<div class="vreg-overlay" id="vreg-overlay" style="display:none" role="dialog" aria-modal="true">
+  <div class="vreg-modal" style="display:none">
+
+    <!-- LEFT -->
+    <div class="vreg-left">
+      <div class="vreg-geo">
+        <svg width="100%" height="100%" viewBox="0 0 420 600" fill="none" preserveAspectRatio="xMidYMid slice">
+          <circle cx="370" cy="60" r="140" stroke="rgba(225,255,0,0.04)" stroke-width="1"/>
+          <circle cx="370" cy="60" r="90" stroke="rgba(255,255,255,0.04)" stroke-width=".5"/>
+          <circle cx="370" cy="60" r="5" fill="rgba(225,255,0,0.55)"/>
+          <path d="M24 110 L24 90 L44 90" stroke="rgba(225,255,0,0.18)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M396 490 L396 510 L376 510" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <rect x="290" y="478" width="24" height="24" rx="3" stroke="rgba(225,255,0,0.09)" stroke-width="1" transform="rotate(16 302 490)"/>
+          <line x1="340" y1="278" x2="340" y2="304" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-linecap="round"/>
+          <line x1="327" y1="291" x2="353" y2="291" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-linecap="round"/>
+          <g opacity=".05"><circle cx="50" cy="210" r="1.5" fill="white"/><circle cx="75" cy="210" r="1.5" fill="white"/><circle cx="100" cy="210" r="1.5" fill="white"/><circle cx="50" cy="232" r="1.5" fill="white"/><circle cx="75" cy="232" r="1.5" fill="white"/><circle cx="100" cy="232" r="1.5" fill="white"/><circle cx="50" cy="254" r="1.5" fill="white"/><circle cx="75" cy="254" r="1.5" fill="white"/><circle cx="100" cy="254" r="1.5" fill="white"/></g>
+          <polygon points="55,510 82,460 109,510" stroke="rgba(255,255,255,0.04)" stroke-width=".8" fill="none"/>
+          <line x1="0" y1="440" x2="170" y2="600" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <ellipse cx="200" cy="300" rx="180" ry="120" fill="rgba(225,255,0,0.015)"/>
+        </svg>
+      </div>
+      <button class="vreg-close" onclick="closeVehicleReg()" aria-label="Închide">×</button>
+      <div class="vreg-logo">
+        <div class="vreg-logo-mark">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#000" stroke-width="1.5"/><circle cx="7" cy="7" r="2" fill="#000"/></svg>
+        </div>
+        <span class="vreg-logo-name">Mulberry</span>
+      </div>
+      <div class="vreg-left-hero">
+        <p class="vreg-eyebrow">Vehicle registration</p>
+        <div class="vreg-hero-glass">
+          <div class="vreg-hero-glow"></div>
+          <h2 class="vreg-title">Activate your<br><em>Yellowcard</em></h2>
+          <p class="vreg-sub">From your registration card we extract vehicle data and sync it across Yellowcard, HUB and Settings.</p>
+        </div>
+      </div>
+      <div class="vreg-pills-wrap">
+        <button class="vreg-pill ba" id="vpill-1" onclick="vregGoTo(1)">
+          <div class="vreg-pnum" id="vpnum-1">1</div>
+          <div class="vreg-plbl">Documents</div>
+        </button>
+        <div class="vreg-pconn" id="vline-12"></div>
+        <button class="vreg-pill" id="vpill-2" onclick="vregGoTo(2)">
+          <div class="vreg-pnum" id="vpnum-2">2</div>
+          <div class="vreg-plbl">Vehicle</div>
+        </button>
+        <div class="vreg-pconn" id="vline-23"></div>
+        <button class="vreg-pill" id="vpill-3" onclick="vregGoTo(3)">
+          <div class="vreg-pnum" id="vpnum-3">3</div>
+          <div class="vreg-plbl">Account</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="vreg-right">
+      <div class="vreg-prog"><div class="vreg-prog-fill" id="vreg-prog" style="width:33%"></div></div>
+
+      <!-- P1: Documents -->
+      <div class="vreg-panel active" id="vp1">
+        <div class="vreg-pstep">Step 1 of 3</div>
+        <h3 class="vreg-ptitle">Registration Card</h3>
+        <p class="vreg-psub">Enter fields E and K from your Vehicle Identity Card (CIV).</p>
+        <div class="vreg-note green">
+          <div class="vreg-note-icon" style="background:#30d158">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div>
+            <div class="vreg-note-title" style="color:#4ade80">Secured configuration</div>
+            <div class="vreg-note-sub" style="color:rgba(74,222,128,.75)">Codes are used only to validate your vehicle. Never shared with third parties.</div>
+          </div>
+        </div>
+        <div class="vreg-fgroup">
+          <div class="vreg-frow"><span class="vreg-flbl">Field E</span><input class="vreg-finput mono" id="vreg-vin" type="text" placeholder="VIN — 17 characters" maxlength="17" autocomplete="off"></div>
+          <div class="vreg-frow"><span class="vreg-flbl">Field K</span><input class="vreg-finput mono" id="vreg-kcode" type="text" placeholder="Type approval number" autocomplete="off"></div>
+        </div>
+        <div class="vreg-btn-row">
+          <button class="vreg-btn-primary" onclick="vregGoTo(2)">Continue <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+        <p class="vreg-hint">Your data is stored securely and confidentially.</p>
+      </div>
+
+      <!-- P2: Vehicle -->
+      <div class="vreg-panel" id="vp2">
+        <div class="vreg-pstep">Step 2 of 3</div>
+        <h3 class="vreg-ptitle">Vehicle Details</h3>
+        <p class="vreg-psub">Exactly as they appear on your registration certificate.</p>
+        <div class="vreg-note purple">
+          <div class="vreg-note-icon" style="background:#5856D6">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div>
+            <div class="vreg-note-title" style="color:#a5b4fc">Real-time validation</div>
+            <div class="vreg-note-sub" style="color:rgba(165,180,252,.75)">Plate and VIN are cross-checked with official vehicle registries instantly.</div>
+          </div>
+        </div>
+        <div class="vreg-fgroup">
+          <div class="vreg-frow"><span class="vreg-flbl">Plate</span><input class="vreg-finput mono" id="vreg-plate" type="text" placeholder="BZ 06 ALZ" style="text-transform:uppercase"></div>
+          <div class="vreg-frow"><span class="vreg-flbl">Model</span><input class="vreg-finput" id="vreg-model" type="text" placeholder="BMW M3 G80"></div>
+          <div class="vreg-frow"><span class="vreg-flbl">Year</span><input class="vreg-finput" id="vreg-year" type="text" placeholder="2022" maxlength="4" inputmode="numeric"></div>
+        </div>
+        <div class="vreg-btn-row">
+          <button class="vreg-btn-secondary" onclick="vregGoTo(1)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="vreg-btn-primary" onclick="vregGoTo(3)">Continue <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+        <p class="vreg-hint">Your data is stored securely and confidentially.</p>
+      </div>
+
+      <!-- P3: Account -->
+      <div class="vreg-panel" id="vp3">
+        <div class="vreg-pstep">Step 3 of 3</div>
+        <h3 class="vreg-ptitle">Owner & Account</h3>
+        <p class="vreg-psub">Link your vehicle to your Mulberry profile.</p>
+        <div class="vreg-note green">
+          <div class="vreg-note-icon" style="background:#30d158">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="vreg-note-title" style="color:#4ade80">Verified identity</div>
+            <div class="vreg-note-sub" style="color:rgba(74,222,128,.75)">Your Yellowcard is tied to your email — no one else can access your data.</div>
+          </div>
+        </div>
+        <div class="vreg-fgroup" style="margin-bottom:10px">
+          <div class="vreg-frow"><span class="vreg-flbl">First name</span><input class="vreg-finput" id="vreg-fname" type="text" placeholder="Stefan" autocomplete="given-name"></div>
+          <div class="vreg-frow"><span class="vreg-flbl">Last name</span><input class="vreg-finput" id="vreg-lname" type="text" placeholder="Lazar" autocomplete="family-name"></div>
+        </div>
+        <button class="vreg-btn-google" onclick="closeVehicleReg();afSignInWithGoogle&&afSignInWithGoogle()">
+          <svg width="15" height="15" viewBox="0 0 24 24"><path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 01-5.279-5.28 5.27 5.27 0 015.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 00-8.934 8.934 8.908 8.908 0 008.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z" fill="currentColor"/></svg>
+          Continue with Google
+        </button>
+        <div class="vreg-or-div">or with email</div>
+        <div class="vreg-fgroup" style="margin-bottom:10px">
+          <div class="vreg-frow"><span class="vreg-flbl">Email</span><input class="vreg-finput" id="vreg-email" type="email" placeholder="stefan@example.com" autocomplete="email"></div>
+        </div>
+        <div class="vreg-btn-row">
+          <button class="vreg-btn-secondary" onclick="vregGoTo(2)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="vreg-btn-primary" id="vreg-send-btn" onclick="vregSendCode()">Send code <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+        </div>
+        <p class="vreg-hint">Your data is stored securely and confidentially.</p>
+      </div>
+
+      <!-- P4: OTP -->
+      <div class="vreg-panel" id="vp4">
+        <div class="vreg-pstep">Verification</div>
+        <h3 class="vreg-ptitle">Check your email</h3>
+        <p class="vreg-psub">We sent a 6-digit code to <strong id="vreg-email-show" style="color:#fff"></strong></p>
+        <div class="vreg-code-wrap" onclick="document.getElementById('vreg-otp').focus()">
+          <div class="vreg-cbox" id="vc0">&nbsp;</div><div class="vreg-cbox" id="vc1">&nbsp;</div><div class="vreg-cbox" id="vc2">&nbsp;</div>
+          <div class="vreg-cbox" id="vc3">&nbsp;</div><div class="vreg-cbox" id="vc4">&nbsp;</div><div class="vreg-cbox" id="vc5">&nbsp;</div>
+        </div>
+        <input id="vreg-otp" type="text" maxlength="6" inputmode="numeric" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" oninput="vregHandleOtp(this.value)">
+        <div style="text-align:center;font-size:12px;color:rgba(255,255,255,.3);margin-bottom:10px">Didn't receive it? <span style="color:#E1FF00;font-weight:500;cursor:pointer" onclick="vregSendCode(true)">Resend</span></div>
+        <div class="vreg-btn-row">
+          <button class="vreg-btn-secondary" onclick="vregGoTo(3)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="vreg-btn-primary" id="vreg-verify-btn" onclick="vregVerify()">Verify <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+        <p class="vreg-hint">Your data is stored securely and confidentially.</p>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="vreg-panel" id="vp-ok">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem 0">
+          <div class="vreg-ok-ring">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path class="vreg-ck" d="M7 14l5 5 9-10" stroke="#30d158" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div style="font-size:20px;font-weight:600;color:#fff;margin-bottom:5px">Yellowcard activated</div>

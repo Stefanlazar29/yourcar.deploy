@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid — Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Manrope:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./grid-base.css">
+  <style>
+    /* body reset pentru standalone preview */
+    html, body { height: 100%; margin: 0; background: #0d0d0e; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    body { padding: 0; box-sizing: border-box; }
+    /* gd-r2 wrapper — trei carduri pe un rând */
+    .gd-r2 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    @media(max-width: 900px) { .gd-r2 { grid-template-columns: 1fr; } }
+    @media(max-width: 1200px) and (min-width: 901px) { .gd-r2 { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- CONȚINUT PANEL EXTRAS DIN mulberry_app.html — interior-ul div#panel-analytics -->
+<div class="gd">
+  <div class="gd-hdr">
+    <div>
+      <div class="gd-greeting">Metrici &amp; rapoarte</div>
+      <div class="gd-title">Analytics</div>
+    </div>
+    <div class="gd-hstats">
+      <div><div class="gd-hstat-lbl">Balanță</div><div class="gd-hstat-val">1.655,00 <sup>$</sup></div></div>
+      <div><div class="gd-hstat-lbl">Venit</div><div class="gd-hstat-val">950,00 <sup>$</sup></div></div>
+      <div><div class="gd-hstat-lbl">Cheltuieli</div><div class="gd-hstat-val">382,00 <sup>$</sup></div></div>
+    </div>
+  </div>
+  <!-- Full analytics card -->
+  <div class="gdc gdc-blue" style="min-height:220px">
+    <div class="gda-left">
+      <div class="gda-eyebrow">Performanță financiară</div>
+      <div class="gda-pct">78%</div>
+      <div class="gda-trend">Creștere <span class="gda-chip">71.2% <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span></div>
+      <div class="gda-pills">
+        <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Îmbunătățiri stocaj anual</button>
+        <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Creștere investiții proprietăți</button>
+      </div>
+    </div>
+    <div class="gda-right">
+      <div class="gda-donut-wrap">
+        <svg class="gda-donut" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="17" stroke-dasharray="225 64" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+        </svg>
+        <div class="gda-donut-inner"><div class="gda-donut-val">78%</div><div class="gda-donut-sub">score</div></div>
+      </div>
+      <button class="gda-arr">↗</button>
+    </div>
+  </div>
+  <!-- Bottom: Cash + Period + Payment -->
+  <div class="gd-r2">
+    <div class="gdc gdc-cash">
+      <div class="gdc-cash-top"><div class="gdc-cash-lbl">Cash</div><div class="gdc-cash-amt">816,752 <span class="gdc-cash-badge">USD</span></div></div>
+      <div class="gdc-cash-growth">+36%</div>
+      <div class="gdc-cash-sub">grow since last week</div>
+      <div class="gdc-bars"><div class="gdc-bar" style="height:28%"></div><div class="gdc-bar gdc-bar-mid" style="height:45%"></div><div class="gdc-bar gdc-bar-hi" style="height:66%"></div><div class="gdc-bar gdc-bar-blue" style="height:100%"></div></div>
+    </div>
+    <div class="gdc gdc-period">
+      <div class="gdc-period-hd"><div><div class="gdc-period-title">Period Analytic</div><div class="gdc-period-sub">3 Month</div></div><button class="gdc-arr-green">↗</button></div>
+      <div class="gdc-period-lbl">User Authorized</div>
+      <div class="gdc-period-val">18,785 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    </div>
+    <div class="gdc gdc-pay">
+      <div class="gdc-pay-hd"><div class="gdc-pay-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="17 7 12 2 7 7"/><polyline points="7 17 12 22 17 17"/></svg></div><div class="gdc-pay-title">Payment Transaction</div></div>
+      <div class="gdc-pay-row"><div class="gdc-pay-amt">1,120 <sup>$</sup></div><div class="gdc-pay-name">Repayment cash</div></div>
+      <div class="gdc-pay-row"><div class="gdc-pay-amt">3,810 <sup>$</sup></div><div class="gdc-pay-name">Office leasing</div></div>
+      <div class="gdc-pay-row"><div class="gdc-pay-amt">12,760 <sup>$</sup></div><div class="gdc-pay-name">Employee salary</div></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

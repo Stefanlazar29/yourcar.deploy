@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mulberry Trust</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f7f5;
+  --card:#ffffff;
+  --border:#ebebeb;
+  --text:#111;
+  --muted:#888;
+  --dim:#bbb;
+  --green:#00c76a;
+  --green-dark:#03200d;
+  --accent:#E1FF00;
+  --expert-grad:linear-gradient(135deg,#7c3aed,#00b85a);
+  --trust-grad:linear-gradient(135deg,#7c3aed,#06b6d4);
+  --font:'Inter',sans-serif;
+}
+html,body{height:100%;font-family:var(--font);background:var(--bg);-webkit-font-smoothing:antialiased}
+body{display:flex;flex-direction:column}
+
+/* ═══ TOPBAR ═══ */
+.topnav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:16px;height:52px;position:sticky;top:0;z-index:100}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.nav-logo-txt{font-size:15px;font-weight:700;color:var(--text)}
+.nav-logo-trust{font-size:15px;font-weight:700;background:var(--trust-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-search{flex:1;max-width:320px;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:7px 14px;display:flex;align-items:center;gap:8px}
+.nav-search input{border:none;background:transparent;font-size:13px;color:var(--text);outline:none;width:100%;font-family:var(--font)}
+.nav-search input::placeholder{color:var(--dim)}
+.nav-tabs{display:flex;gap:2px;margin-left:8px}
+.nav-tab{padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;color:var(--muted);font-weight:500;transition:all .15s;border:none;background:none}
+.nav-tab.active{background:var(--text);color:#fff}
+.nav-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn-post{background:var(--green);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:6px}
+.btn-post:hover{background:#00e077}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:20px;border:1px solid var(--border);transition:all .15s}
+.nav-back:hover{color:var(--text);border-color:#9ca3af}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:var(--expert-grad);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;cursor:pointer;flex-shrink:0}
+
+/* ═══ LAYOUT ═══ */
+.layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;flex:1;max-width:1100px;margin:0 auto;width:100%;padding:20px 16px;gap:20px}
+
+/* ═══ LEFT SIDEBAR ═══ */
+.left-col{display:flex;flex-direction:column;gap:12px}
+.sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.sc-header{padding:14px 16px;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.sc-item{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;color:var(--text);font-size:13px;font-weight:500;transition:background .12s;border-radius:0}
+.sc-item:hover{background:var(--bg)}
+.sc-item.active{background:#f0fdf4;color:var(--green)}
+.sc-item i{font-size:16px;color:var(--muted);width:20px;text-align:center}
+.sc-item.active i{color:var(--green)}
+.sc-badge{margin-left:auto;background:var(--green);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px}
+
+.my-profile{padding:16px;text-align:center}
+.mp-avatar{width:56px;height:56px;border-radius:50%;background:var(--expert-grad);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;margin:0 auto 10px}
+.mp-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.mp-role{font-size:11px;color:var(--muted);margin-bottom:10px}
+.mp-stats{display:flex;justify-content:center;gap:16px;border-top:1px solid var(--border);padding-top:10px;margin-top:4px}
+.mp-stat{text-align:center}
+.mp-stat-num{font-size:15px;font-weight:700;color:var(--text)}
+.mp-stat-lbl{font-size:10px;color:var(--muted);margin-top:1px}
+.badge-expert{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#f3e8ff,#d1fae5);border:1px solid #c4b5fd;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;color:#7c3aed;margin-bottom:8px}
+
+/* ═══ FEED ═══ */
+.feed-col{display:flex;flex-direction:column;gap:14px}
+
+/* COMPOSER */
+.composer{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px}
+.composer-top{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.composer-avatar{width:36px;height:36px;border-radius:50%;background:var(--expert-grad);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.composer textarea{flex:1;border:none;background:transparent;font-size:14px;color:var(--text);outline:none;resize:none;font-family:var(--font);line-height:1.5}
+.composer textarea::placeholder{color:var(--dim)}
+.composer-actions{display:flex;align-items:center;gap:8px;border-top:1px solid var(--border);padding-top:10px}
+.composer-tool{width:32px;height:32px;border:none;background:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .12s}
+.composer-tool:hover{background:var(--bg);color:var(--text)}
+.composer-tool i{font-size:17px}
+.composer-audience{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.composer-audience select{border:1px solid var(--border);border-radius:8px;padding:4px 8px;font-size:12px;font-family:var(--font);background:var(--bg);color:var(--text);outline:none}
+.btn-share{background:var(--green);color:#fff;border:none;border-radius:20px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font)}
+.btn-share:hover{background:#00e077}
+
+/* POST CARD */
+.post{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.post-header{display:flex;align-items:flex-start;gap:10px;padding:14px 16px 0}
+.post-avatar{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff}
+.post-meta{flex:1}
+.post-author{font-size:14px;font-weight:700;color:var(--text)}
+.post-sub{font-size:12px;color:var(--muted);margin-top:1px}
+.post-time{font-size:11px;color:var(--dim);margin-left:auto;flex-shrink:0}
+.badge-verified{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.bv-expert{background:linear-gradient(135deg,#f3e8ff,#d1fae5);color:#7c3aed;border:1px solid #c4b5fd}
+.bv-user{background:#f0fdf4;color:var(--green);border:1px solid #bbf7d0}
+.post-body{padding:10px 16px 12px}
+.post-text{font-size:14px;color:var(--text);line-height:1.6}
+.post-img{width:100%;border-radius:10px;margin-top:10px;background:linear-gradient(135deg,#f0fdf4,#ede9fe);height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.post-img img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.post-img i{font-size:48px;color:#d1d5db}
+.post-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:12px;color:var(--muted);cursor:pointer}
+.tag:hover{border-color:var(--green);color:var(--green)}
+.post-actions{display:flex;align-items:center;gap:0;border-top:1px solid var(--border);padding:0 8px}
+.post-action{display:flex;align-items:center;gap:6px;padding:10px 10px;cursor:pointer;color:var(--muted);font-size:13px;border-radius:8px;transition:all .12s;border:none;background:none;font-family:var(--font)}
+.post-action:hover{background:var(--bg);color:var(--text)}
+.post-action.liked{color:#ef4444}
+.post-action i{font-size:16px}
+.post-action span{font-size:13px;font-weight:500}
+
+/* COMMENTS */
+.comments{background:var(--bg);padding:10px 16px;display:none}
+.comments.open{display:block}
+.comment{display:flex;gap:8px;margin-bottom:10px}
+.c-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.c-body{flex:1;background:var(--card);border-radius:10px;padding:8px 12px}
+.c-author{font-size:12px;font-weight:600;color:var(--text)}
+.c-text{font-size:12px;color:#444;margin-top:2px;line-height:1.5}
+.c-time{font-size:10px;color:var(--dim);margin-top:4px}
+.c-input-row{display:flex;gap:8px;align-items:center;margin-top:6px}
+.c-input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:7px 14px;font-size:13px;color:var(--text);outline:none;font-family:var(--font)}
+.c-input:focus{border-color:var(--green)}
+.c-send{width:30px;height:30px;background:var(--green);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.c-send i{font-size:14px;color:#fff}
+
+/* ═══ RIGHT COL ═══ */
+.right-col{display:flex;flex-direction:column;gap:14px}
+.rc-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
+.rc-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.rc-title span{font-size:12px;font-weight:500;color:var(--green);cursor:pointer}
+
+/* EXPERT CARD */
+.expert-item{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.expert-item:last-child{margin-bottom:0}
+.ex-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
+.ex-name{font-size:13px;font-weight:600;color:var(--text)}
+.ex-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.btn-follow{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);color:var(--text);margin-left:auto;flex-shrink:0;transition:all .15s}
+.btn-follow:hover{background:var(--green);color:#fff;border-color:var(--green)}
+.btn-follow.following{background:#f0fdf4;color:var(--green);border-color:#bbf7d0}
+
+/* TRENDING */
+.trend-item{display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer}
+.trend-item:last-child{margin-bottom:0}
+.trend-num{font-size:13px;font-weight:700;color:var(--dim);width:16px;flex-shrink:0}
+.trend-tag{font-size:13px;font-weight:600;color:var(--text)}
+.trend-count{font-size:11px;color:var(--muted);margin-top:1px}
+
+/* TRUST SCORE */
+.trust-meter{background:linear-gradient(135deg,#1a0533,#0a2212);border-radius:12px;padding:14px;margin-bottom:0}
+.tm-label{font-size:11px;font-weight:600;color:#a78bfa;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.tm-score{font-size:36px;font-weight:800;color:#fff;line-height:1}
+.tm-sub{font-size:12px;color:#7c6fa0;margin-top:4px;margin-bottom:10px}
+.tm-bar{height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.tm-fill{height:100%;background:linear-gradient(90deg,#7c3aed,#00c76a);border-radius:3px;width:78%}
+.tm-items{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.tm-item{display:flex;align-items:center;justify-content:space-between;font-size:11px}
+.tm-item-lbl{color:#9ca3af}
+.tm-item-val{font-weight:600}
+.tm-item-val.ok{color:#4ade80}
+.tm-item-val.warn{color:#fbbf24}
+
+/* PANEL TABS */
+.feed-tabs{display:flex;gap:4px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:0}
+.feed-tab{flex:1;text-align:center;padding:8px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;color:var(--muted);transition:all .15s}
+.feed-tab.active{background:var(--text);color:#fff}
+
+/* MODAL overlay */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border-radius:20px;padding:24px;width:480px;max-width:95vw}
+.modal-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.modal-close{cursor:pointer;color:var(--muted);font-size:20px;background:none;border:none}
+.modal textarea{width:100%;border:1px solid var(--border);border-radius:12px;padding:12px;font-size:14px;font-family:var(--font);resize:none;outline:none;color:var(--text);background:var(--bg);margin-bottom:12px}
+.modal textarea:focus{border-color:var(--green)}
+.modal-tools{display:flex;gap:8px;align-items:center}
+.modal-tool{width:36px;height:36px;border:1px solid var(--border);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);background:var(--bg);transition:all .12s}
+.modal-tool:hover{border-color:var(--green);color:var(--green)}
+.modal-tool i{font-size:18px}
+.modal-audience{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-right:8px}
+.modal-audience select{border:1px solid var(--border);border-radius:8px;padding:5px 8px;font-size:12px;font-family:var(--font);outline:none}
+.modal-submit{margin-left:auto;background:var(--green);color:#fff;border:none;border-radius:20px;padding:9px 22px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)}
+.modal-submit:hover{background:#00e077}
+
+/* POST NEW (inline submit feedback) */
+.post-new{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;padding:12px}
+  .left-col,.right-col{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPNAV -->
+<nav class="topnav">
+  <a href="/mulberry_app.html" class="nav-logo">
+    <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><path d="M18 4 A14 14 0 0 1 32 18 L28 18 A10 10 0 0 0 8 18 L4 18 A14 14 0 0 1 18 4Z" fill="#00c76a"/><rect x="10" y="26" width="16" height="4" rx="2" fill="#00c76a"/><rect x="13" y="22" width="10" height="4" rx="2" fill="#00c76a"/></svg>
+    <span class="nav-logo-txt">Mulberry</span>
+    <span class="nav-logo-trust">Trust</span>
+  </a>
+  <div class="nav-search">
+    <i class="ti ti-search" style="font-size:15px;color:#bbb" aria-hidden="true"></i>
+    <input id="search-input" placeholder="Caută service-uri, experți, sfaturi..."/>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchFeed('all',this)">Tot</button>
+    <button class="nav-tab" onclick="switchFeed('experts',this)">Experts</button>
+    <button class="nav-tab" onclick="switchFeed('community',this)">Community</button>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-post" onclick="openModal()"><i class="ti ti-pencil" aria-hidden="true"></i> Postează</button>
+    <div class="nav-avatar" id="nav-av">?</div>
+  </div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- LEFT -->
+  <div class="left-col">
+    <div class="sidebar-card">
+      <div class="my-profile">
+        <div class="mp-avatar" id="mp-av">?</div>
+        <div class="badge-expert" id="mp-badge" style="display:none"><i class="ti ti-shield-check" style="font-size:12px" aria-hidden="true"></i> Expert verificat</div>
+        <div class="mp-name" id="mp-name">—</div>
+        <div class="mp-role" id="mp-role">Utilizator Mulberry</div>
+        <div class="mp-stats">
+          <div class="mp-stat"><div class="mp-stat-num" id="stat-followers">0</div><div class="mp-stat-lbl">Urmăritori</div></div>
+          <div class="mp-stat"><div class="mp-stat-num" id="stat-posts">0</div><div class="mp-stat-lbl">Postări</div></div>
+          <div class="mp-stat"><div class="mp-stat-num" id="stat-likes">0</div><div class="mp-stat-lbl">Like-uri</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-card">
+      <div class="sc-header">Navigare</div>
+      <div class="sc-item active" onclick="navItem(this)"><i class="ti ti-home" aria-hidden="true"></i>Feed principal</div>
+      <div class="sc-item" onclick="navItem(this)"><i class="ti ti-star" aria-hidden="true"></i>Experts<span class="sc-badge">New</span></div>
+      <div class="sc-item" onclick="navItem(this)"><i class="ti ti-users" aria-hidden="true"></i>Community</div>
+      <div class="sc-item" onclick="navItem(this)"><i class="ti ti-bookmark" aria-hidden="true"></i>Salvate</div>
+      <div class="sc-item" onclick="navItem(this)"><i class="ti ti-bell" aria-hidden="true"></i>Notificări<span class="sc-badge" id="notif-badge">3</span></div>
+      <div class="sc-item" onclick="navItem(this)"><i class="ti ti-chart-bar" aria-hidden="true"></i>Statistici</div>
+    </div>
+    <div class="sidebar-card">
+      <div class="sc-header" style="padding:14px 16px">Mulberry Trust Score</div>
+      <div style="padding:0 12px 12px">
+        <div class="trust-meter">
+          <div class="tm-label">Trust Score</div>
+          <div class="tm-score" id="tm-score">—<span style="font-size:18px;color:#a78bfa">/100</span></div>
+          <div class="tm-sub" id="tm-sub">Calculăm scorul...</div>
+          <div class="tm-bar"><div class="tm-fill" id="tm-fill" style="width:0%"></div></div>
+          <div class="tm-items">
+            <div class="tm-item"><span class="tm-item-lbl">CIF verificat</span><span class="tm-item-val" id="tm-cif">—</span></div>
+            <div class="tm-item"><span class="tm-item-lbl">Recenzii clienți</span><span class="tm-item-val ok">—</span></div>
+            <div class="tm-item"><span class="tm-item-lbl">Postări active</span><span class="tm-item-val warn" id="tm-posts-val">0</span></div>
+            <div class="tm-item"><span class="tm-item-lbl">Răspuns mediu</span><span class="tm-item-val ok">&lt;2h</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEED -->
+  <div class="feed-col" id="feed-col">
+    <div class="feed-tabs">
+      <div class="feed-tab active" onclick="ftab(this,'all')">🏠 Pentru tine</div>
+      <div class="feed-tab" onclick="ftab(this,'experts')">⚡ Experts</div>
+      <div class="feed-tab" onclick="ftab(this,'community')">👥 Community</div>
+    </div>
+
+    <!-- COMPOSER -->
+    <div class="composer">
+      <div class="composer-top">
+        <div class="composer-avatar" id="comp-av">?</div>
+        <textarea id="comp-text" rows="2" placeholder="Distribuie o experiență, un sfat sau o ofertă..."></textarea>
+      </div>
+      <div class="composer-actions">
+        <button class="composer-tool" title="Adaugă imagine"><i class="ti ti-photo" aria-hidden="true"></i></button>
+        <button class="composer-tool" title="Adaugă video"><i class="ti ti-video" aria-hidden="true"></i></button>
+        <button class="composer-tool" title="Adaugă locație"><i class="ti ti-map-pin" aria-hidden="true"></i></button>
+        <button class="composer-tool" title="Ofertă specială"><i class="ti ti-tag" aria-hidden="true"></i></button>
+        <div class="composer-audience">
+          <i class="ti ti-world" style="font-size:14px" aria-hidden="true"></i>
+          <select>
+            <option>Public</option>
+            <option>Doar urmăritori</option>
+            <option>Experts</option>
+          </select>
+        </div>
+        <button class="btn-share" onclick="submitPost()">Postează</button>
+      </div>
+    </div>
+
+    <!-- POSTS CONTAINER -->
+    <div id="posts-container">
+
+    <!-- POST 1: Expert -->
+    <div class="post" id="post1">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#7c3aed,#00b85a)">AI</div>
+        <div class="post-meta">
+          <div class="post-author">Auto Ionescu SRL <span class="badge-verified bv-expert"><i class="ti ti-shield-check" style="font-size:10px" aria-hidden="true"></i>Expert</span></div>
+          <div class="post-sub">Service auto verificat · București</div>
+        </div>
+        <div class="post-time">acum 2h</div>
+      </div>
+      <div class="post-body">
+        <div class="post-text">📌 <strong>Sfatul săptămânii:</strong> Dacă mașina ta consumă mai mult ulei decât normal, nu ignora semnalul. Poate fi o garnitură de chiulasă incipientă sau un inel de piston uzat. Am văzut azi o Logan cu 180.000 km care a evitat un motor defect printr-un diagnostic la timp. <strong>Costul unui diagnostic: 120 lei. Costul unui motor nou: 4.000+ lei.</strong></div>
+        <div class="post-img">
+          <i class="ti ti-engine" aria-hidden="true"></i>
+        </div>
+        <div class="post-tags">
+          <span class="tag">#SfaturiAuto</span>
+          <span class="tag">#Motor</span>
+          <span class="tag">#Diagnostic</span>
+          <span class="tag">#Expert</span>
+        </div>
+      </div>
+      <div class="post-actions">
+        <button class="post-action" onclick="toggleLike(this)"><i class="ti ti-heart" aria-hidden="true"></i><span>142</span></button>
+        <button class="post-action" onclick="toggleComments('c1')"><i class="ti ti-message-circle" aria-hidden="true"></i><span>18</span></button>
+        <button class="post-action"><i class="ti ti-share" aria-hidden="true"></i><span>Distribuie</span></button>
+        <button class="post-action" onclick="toggleSave(this)" style="margin-left:auto"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="comments" id="c1">
+        <div class="comment">
+          <div class="c-avatar" style="background:#0891b2">MV</div>
+          <div class="c-body">
+            <div class="c-author">Mihai Vasilescu <span class="badge-verified bv-user" style="font-size:9px;padding:1px 5px">✓ verificat</span></div>
+            <div class="c-text">Super sfat! Am pățit exact asta cu Passat-ul, am ignorat 3 luni și apoi motor complet. Nu mai fac asta.</div>
+            <div class="c-time">acum 1h · 12 like-uri</div>
+          </div>
+        </div>
+        <div class="comment">
+          <div class="c-avatar" style="background:#7c3aed">RA</div>
+          <div class="c-body">
+            <div class="c-author">Rapid Auto Cluj <span class="badge-verified bv-expert" style="font-size:9px;padding:1px 5px">⚡ Expert</span></div>
+            <div class="c-text">Confirmat din experiență. Și la Dacia Duster am văzut același pattern.</div>
+            <div class="c-time">acum 45 min · 8 like-uri</div>
+          </div>
+        </div>
+        <div class="c-input-row">
+          <div class="c-avatar" id="c1-av" style="background:linear-gradient(135deg,#7c3aed,#00b85a);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0">?</div>
+          <input class="c-input" placeholder="Scrie un comentariu..." onkeydown="if(event.key==='Enter')sendComment(this)"/>
+          <button class="c-send" onclick="sendComment(this.previousElementSibling)"><i class="ti ti-send" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 2: Community user -->
+    <div class="post" id="post2">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#0891b2,#0d9488)">IP</div>
+        <div class="post-meta">
+          <div class="post-author">Ion Popescu <span class="badge-verified bv-user"><i class="ti ti-check" style="font-size:10px" aria-hidden="true"></i>Verificat</span></div>
+          <div class="post-sub">Proprietar Dacia Logan · București</div>
+        </div>
+        <div class="post-time">acum 5h</div>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Recomand cu toată inima <strong>Auto Ionescu</strong> din București! Am venit cu un zgomot ciudat la față și au găsit problema în 20 minute. Transparență totală, mi-au arătat piesa uzată înainte de schimb. 5 stele fără discuție ⭐⭐⭐⭐⭐</div>
+        <div class="post-tags">
+          <span class="tag">#Recomandare</span>
+          <span class="tag">#AutoIonescu</span>
+          <span class="tag">#București</span>
+        </div>
+      </div>
+      <div class="post-actions">
+        <button class="post-action" onclick="toggleLike(this)"><i class="ti ti-heart" aria-hidden="true"></i><span>67</span></button>
+        <button class="post-action" onclick="toggleComments('c2')"><i class="ti ti-message-circle" aria-hidden="true"></i><span>9</span></button>
+        <button class="post-action"><i class="ti ti-share" aria-hidden="true"></i><span>Distribuie</span></button>
+        <button class="post-action" onclick="toggleSave(this)" style="margin-left:auto"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="comments" id="c2">
+        <div class="comment">
+          <div class="c-avatar" style="background:linear-gradient(135deg,#7c3aed,#00b85a)">AI</div>
+          <div class="c-body">
+            <div class="c-author">Auto Ionescu SRL <span class="badge-verified bv-expert" style="font-size:9px;padding:1px 5px">⚡ Expert</span></div>
+            <div class="c-text">Mulțumim mult, Ion! Ne bucurăm că ai plecat mulțumit. Te așteptăm la revizia de toamnă! 🙏</div>
+            <div class="c-time">acum 4h · 24 like-uri</div>
+          </div>
+        </div>
+        <div class="c-input-row">
+          <div class="c-avatar" id="c2-av" style="background:linear-gradient(135deg,#7c3aed,#00b85a);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0">?</div>
+          <input class="c-input" placeholder="Scrie un comentariu..." onkeydown="if(event.key==='Enter')sendComment(this)"/>
+          <button class="c-send" onclick="sendComment(this.previousElementSibling)"><i class="ti ti-send" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 3: Expert ofertă -->
+    <div class="post" id="post3">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#dc2626,#7c3aed)">RA</div>
+        <div class="post-meta">
+          <div class="post-author">Rapid Auto Cluj <span class="badge-verified bv-expert"><i class="ti ti-shield-check" style="font-size:10px" aria-hidden="true"></i>Expert</span></div>
+          <div class="post-sub">Service auto verificat · Cluj-Napoca · 4.8 ★</div>
+        </div>
+        <div class="post-time">acum 1zi</div>
+      </div>
+      <div class="post-body">
+        <div class="post-text">🔧 <strong>Ofertă specială weekend:</strong> Schimb ulei + filtru + verificare 27 puncte — <strong>199 lei</strong> în loc de 280 lei. Valabil sâmbătă și duminică. Programare direct din MulberryGO sau mesaj aici!</div>
+        <div style="background:linear-gradient(135deg,#fef3c7,#d1fae5);border-radius:12px;padding:14px;margin-top:10px;display:flex;align-items:center;gap:12px">
+          <div style="font-size:32px">🛢️</div>
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#111">199 lei <span style="font-size:13px;font-weight:400;color:#888;text-decoration:line-through">280 lei</span></div>
+            <div style="font-size:12px;color:#555;margin-top:2px">Schimb ulei complet + 27 puncte verificare</div>
+          </div>
+          <button onclick="alert('Funcție de rezervare — integrare MulberryGO în curând!')" style="margin-left:auto;background:#111;color:#fff;border:none;border-radius:10px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font)">Rezervă</button>
+        </div>
+        <div class="post-tags">
+          <span class="tag">#Ofertă</span>
+          <span class="tag">#SchimbUlei</span>
+          <span class="tag">#Cluj</span>
+          <span class="tag">#Weekend</span>
+        </div>
+      </div>
+      <div class="post-actions">
+        <button class="post-action" onclick="toggleLike(this)"><i class="ti ti-heart" aria-hidden="true"></i><span>89</span></button>
+        <button class="post-action" onclick="toggleComments('c3')"><i class="ti ti-message-circle" aria-hidden="true"></i><span>14</span></button>
+        <button class="post-action"><i class="ti ti-share" aria-hidden="true"></i><span>Distribuie</span></button>
+        <button class="post-action" onclick="toggleSave(this)" style="margin-left:auto"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="comments" id="c3">
+        <div class="c-input-row">
+          <div class="c-avatar" id="c3-av" style="background:linear-gradient(135deg,#7c3aed,#00b85a);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0">?</div>
+          <input class="c-input" placeholder="Scrie un comentariu..." onkeydown="if(event.key==='Enter')sendComment(this)"/>
+          <button class="c-send" onclick="sendComment(this.previousElementSibling)"><i class="ti ti-send" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+
+    </div><!-- /posts-container -->
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right-col">
+    <div class="rc-card">
+      <div class="rc-title">Experți de urmărit <span onclick="alert('Lista completă în curând!')">Vezi toți</span></div>
+      <div class="expert-item">
+        <div class="ex-avatar" style="background:linear-gradient(135deg,#dc2626,#7c3aed)">RA</div>
+        <div><div class="ex-name">Rapid Auto Cluj</div><div class="ex-sub">Cluj · 4.8★ · 512 urmăritori</div></div>
+        <button class="btn-follow" onclick="toggleFollow(this)">Urmărește</button>
+      </div>
+      <div class="expert-item">
+        <div class="ex-avatar" style="background:linear-gradient(135deg,#0891b2,#7c3aed)">MS</div>
+        <div><div class="ex-name">Moto Service TM</div><div class="ex-sub">Timișoara · 4.9★ · 341 urmăritori</div></div>
+        <button class="btn-follow" onclick="toggleFollow(this)">Urmărește</button>
+      </div>
+      <div class="expert-item">
+        <div class="ex-avatar" style="background:linear-gradient(135deg,#059669,#0891b2)">EA</div>
+        <div><div class="ex-name">Euro Auto Iași</div><div class="ex-sub">Iași · 4.7★ · 198 urmăritori</div></div>
+        <button class="btn-follow" onclick="toggleFollow(this)">Urmărește</button>
+      </div>
+    </div>
+
+    <div class="rc-card">
+      <div class="rc-title">Trending acum <span>Explorează</span></div>
+      <div class="trend-item">
+        <div class="trend-num">1</div>
+        <div><div class="trend-tag">#SchimbUlei</div><div class="trend-count">284 postări azi</div></div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-num">2</div>
+        <div><div class="trend-tag">#ITPObligatoriu</div><div class="trend-count">167 postări azi</div></div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-num">3</div>
+        <div><div class="trend-tag">#SfaturiAuto</div><div class="trend-count">143 postări azi</div></div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-num">4</div>
+        <div><div class="trend-tag">#AnvelopeBune</div><div class="trend-count">98 postări azi</div></div>
+      </div>
+    </div>
+
+    <div class="rc-card" style="padding:0;overflow:hidden">
+      <div class="sc-header">Mulberry GO — rezervări rapide</div>
+      <div style="padding:12px 16px">
+        <div style="font-size:13px;color:#555;margin-bottom:10px">Caută un service în zona ta direct din Trust.</div>
+        <div style="display:flex;gap:8px">
+          <input id="go-city" placeholder="Orașul tău..." style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;font-family:var(--font)"/>
+          <button onclick="goSearch()" style="background:var(--green);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:600">Go</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL POST -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-title">
+      Postare nouă
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:12px">
+      <div class="mp-avatar" id="modal-av" style="width:36px;height:36px;font-size:13px;margin:0">?</div>
+      <div>
+        <div style="font-size:13px;font-weight:700" id="modal-name">—</div>
+        <div style="font-size:11px;color:var(--muted)" id="modal-role">Utilizator</div>
+      </div>
+    </div>
+    <textarea id="modal-text" rows="5" placeholder="Ce vrei să distribui? Un sfat, o ofertă, o experiență..."></textarea>
+    <div class="modal-tools">
+      <div class="modal-tool"><i class="ti ti-photo" aria-hidden="true"></i></div>
+      <div class="modal-tool"><i class="ti ti-video" aria-hidden="true"></i></div>
+      <div class="modal-tool"><i class="ti ti-tag" aria-hidden="true"></i></div>
+      <div class="modal-tool"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
+      <div class="modal-audience">
+        <i class="ti ti-world" style="font-size:14px" aria-hidden="true"></i>
+        <select>
+          <option>Public</option>
+          <option>Urmăritori</option>
+          <option>Experts only</option>
+        </select>
+      </div>
+      <button class="modal-submit" onclick="submitModalPost()">Publică</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── SESSION ── */
+let _session = null;
+let _partner = null;
+let _initials = '?';
+let _displayName = '—';
+let _isPartner = false;
+let _postCount = 0;
+
+(function init(){
+  const tok = localStorage.getItem('mulberry_session');
+  const partner = JSON.parse(localStorage.getItem('mlbr_partner') || 'null');
+
+  if(partner && partner.name){
+    _partner = partner;
+    _isPartner = true;
+    _displayName = partner.name;
+    _initials = _getInitials(partner.name);
+    document.getElementById('mp-badge').style.display = 'inline-flex';
+    document.getElementById('mp-role').textContent = (partner.city || '') + ' · Expert Partener';
+    document.getElementById('tm-cif').textContent = partner.cif ? '✓' : '—';
+    document.getElementById('tm-cif').className = 'tm-item-val ok';
+    setScore(78);
+  } else if(tok){
+    _session = tok;
+    try{
+      const payload = JSON.parse(atob(tok.split('.')[1]));
+      _displayName = payload.sub || payload.email || 'Utilizator';
+      _initials = _getInitials(_displayName);
+    } catch(e){ _displayName = 'Utilizator'; _initials = 'U'; }
+    setScore(42);
+  } else {
+    /* not logged in — still show feed as guest */
+    _displayName = 'Vizitator';
+    _initials = 'V';
+    setScore(0);
+  }
+
+  /* apply initials everywhere */
+  ['nav-av','mp-av','comp-av','c1-av','c2-av','c3-av','modal-av'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.textContent = _initials;
+  });
+  document.getElementById('mp-name').textContent = _displayName;
+  document.getElementById('modal-name').textContent = _displayName;
+  document.getElementById('modal-role').textContent = _isPartner ? 'Expert verificat' : 'Utilizator Mulberry';
+  document.getElementById('stat-posts').textContent = _postCount;
+})();
+
+function _getInitials(name){
+  if(!name) return '?';
+  const parts = name.trim().split(/\s+/);
+  return parts.length >= 2
+    ? (parts[0][0] + parts[1][0]).toUpperCase()
+    : name.slice(0,2).toUpperCase();
+}
+
+function setScore(n){
+  document.getElementById('tm-score').innerHTML = n + '<span style="font-size:18px;color:#a78bfa">/100</span>';
+  document.getElementById('tm-fill').style.width = n + '%';
+  const labels = ['Profil incomplet','Profil în construcție','Profil bine definit','Expert de încredere'];
+  document.getElementById('tm-sub').textContent = n < 20 ? labels[0] : n < 50 ? labels[1] : n < 80 ? labels[2] : labels[3];
+}
+
+/* ── INTERACTIONS ── */
+function toggleLike(btn){
+  btn.classList.toggle('liked');
+  const span = btn.querySelector('span');
+  const n = parseInt(span.textContent);
+  span.textContent = btn.classList.contains('liked') ? n+1 : n-1;
+  const icon = btn.querySelector('i');
+  icon.className = btn.classList.contains('liked') ? 'ti ti-heart-filled' : 'ti ti-heart';
+}
+function toggleComments(id){
+  document.getElementById(id).classList.toggle('open');
+}
+function toggleSave(btn){
+  btn.classList.toggle('liked');
+  const icon = btn.querySelector('i');
+  icon.className = btn.classList.contains('liked') ? 'ti ti-bookmark-filled' : 'ti ti-bookmark';
+}
+function toggleFollow(btn){
+  btn.classList.toggle('following');
+  btn.textContent = btn.classList.contains('following') ? 'Urmărești' : 'Urmărește';
+}
+function sendComment(input){
+  const text = input.value.trim();
+  if(!text) return;
+  const row = input.closest('.c-input-row');
+  const commentsBox = row.parentElement;
+  const comment = document.createElement('div');
+  comment.className = 'comment post-new';
+  comment.innerHTML = `<div class="c-avatar" style="background:var(--expert-grad)">${_initials}</div>
+    <div class="c-body">
+      <div class="c-author">${_displayName}</div>
+      <div class="c-text">${esc(text)}</div>
+      <div class="c-time">acum · 0 like-uri</div>
+    </div>`;
+  commentsBox.insertBefore(comment, row);
+  input.value = '';
+}
+
+/* ── POST SUBMIT ── */
+function submitPost(){
+  const text = document.getElementById('comp-text').value.trim();
+  if(!text){ alert('Scrie ceva înainte să postezi.'); return; }
+  _addPostToFeed(text);
+  document.getElementById('comp-text').value = '';
+}
+function submitModalPost(){
+  const text = document.getElementById('modal-text').value.trim();
+  if(!text){ alert('Scrie ceva înainte să postezi.'); return; }
+  _addPostToFeed(text);
+  document.getElementById('modal-text').value = '';
+  closeModal();
+}
+function _addPostToFeed(text){
+  _postCount++;
+  document.getElementById('stat-posts').textContent = _postCount;
+  document.getElementById('tm-posts-val').textContent = _postCount;
+
+  const cid = 'cn' + Date.now();
+  const post = document.createElement('div');
+  post.className = 'post post-new';
+  post.innerHTML = `
+    <div class="post-header">
+      <div class="post-avatar" style="background:var(--expert-grad)">${_initials}</div>
+      <div class="post-meta">
+        <div class="post-author">${esc(_displayName)}${_isPartner?'<span class="badge-verified bv-expert" style="font-size:10px"><i class="ti ti-shield-check" aria-hidden="true"></i>Expert</span>':''}</div>
+        <div class="post-sub">${_isPartner?'Expert Partener Mulberry':'Utilizator Mulberry'}</div>
+      </div>
+      <div class="post-time">acum</div>
+    </div>
+    <div class="post-body">
+      <div class="post-text">${esc(text)}</div>
+    </div>
+    <div class="post-actions">
+      <button class="post-action" onclick="toggleLike(this)"><i class="ti ti-heart" aria-hidden="true"></i><span>0</span></button>
+      <button class="post-action" onclick="toggleComments('${cid}')"><i class="ti ti-message-circle" aria-hidden="true"></i><span>0</span></button>
+      <button class="post-action"><i class="ti ti-share" aria-hidden="true"></i><span>Distribuie</span></button>
+      <button class="post-action" onclick="toggleSave(this)" style="margin-left:auto"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="comments" id="${cid}">
+      <div class="c-input-row">
+        <div class="c-avatar" style="background:var(--expert-grad);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0">${_initials}</div>
+        <input class="c-input" placeholder="Scrie un comentariu..." onkeydown="if(event.key==='Enter')sendComment(this)"/>
+        <button class="c-send" onclick="sendComment(this.previousElementSibling)"><i class="ti ti-send" aria-hidden="true"></i></button>
+      </div>
+    </div>`;
+
+  const container = document.getElementById('posts-container');
+  container.insertBefore(post, container.firstChild);
+}
+
+/* ── TABS & NAV ── */
+function switchFeed(type, el){
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+function ftab(el, type){
+  document.querySelectorAll('.feed-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+function navItem(el){
+  document.querySelectorAll('.sc-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ── MODAL ── */
+function openModal(){ document.getElementById('modal').classList.add('open'); }
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+document.getElementById('modal').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+
+/* ── GO SEARCH ── */
+function goSearch(){
+  const city = document.getElementById('go-city').value.trim();
+  if(!city){ alert('Introdu un oraș.'); return; }
+  window.location.href = '/mulberry_app.html#marketplace?city=' + encodeURIComponent(city);
+}
+
+/* ── XSS ESCAPE ── */
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

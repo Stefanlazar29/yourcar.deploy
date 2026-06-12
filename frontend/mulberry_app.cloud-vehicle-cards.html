@@ -1,0 +1,251 @@
+<!-- Part 07: lines 1501-1750 of mulberry_app.html -->
+
+          <!-- MULBERRY CLOUD -->
+          <div class="mf-card" onclick="goPanel('cloud')">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#1e1b4b">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+                </div>
+                <div class="mf-tag">MulberryCloud</div>
+              </div>
+              <div style="color:#ccc;font-size:15px;cursor:pointer">···</div>
+            </div>
+            <div class="mf-cname">Stocare & backup</div>
+            <div class="mf-csub">Documente · Date vehicul</div>
+            <div class="mf-cbot">
+              <div class="mf-badge mf-ok"><span class="mf-bdot"></span>Sincronizat</div>
+              <div class="mf-cnt" style="background:#1e1b4b">∞</div>
+            </div>
+          </div>
+
+          <!-- MULBERRY ID -->
+          <div class="mf-card" onclick="goPanel('yellowcard')">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#78350f">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fcd34d" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+                </div>
+                <div class="mf-tag">MulberryID</div>
+              </div>
+              <div style="color:#ccc;font-size:15px;cursor:pointer">···</div>
+            </div>
+            <div class="mf-cname">YCR Identity</div>
+            <div class="mf-csub">HMAC-SHA256 · QR semnat</div>
+            <div class="mf-cbot">
+              <div class="mf-badge mf-info"><span class="mf-bdot"></span>ID verificat</div>
+            </div>
+          </div>
+
+        </div><!-- /mf-grid -->
+
+      </div><!-- /mf-wrap -->
+
+        <div style="display:none"><!-- old nd-two-col removed -->
+          <div class="nd-col-left">
+
+            <!-- Carousel (mobile swipe / desktop = single card) -->
+            <div class="nd-carousel-wrap">
+              <div class="nd-carousel-track" id="nd-car-track">
+
+                <div class="nd-ycard nd-ycard-yellow" onclick="goPanel('yellowcard')">
+                  <div class="nd-ycard-wm">M</div>
+                  <div class="nd-ycard-top">
+                    <span class="nd-ycard-badge">Yellowcard</span>
+                    <div class="nd-ycard-logo-circle">
+                      <img src="/Mulberry.png" class="nd-ycard-brand-logo" alt="Mulberry" onerror="this.src='/favicon.png';this.style.filter='invert(1)'">
+                    </div>
+                  </div>
+                  <div class="nd-ycard-vin" id="nd-ycard-vin">VIN: —</div>
+                  <div class="nd-ycard-plate" id="nd-ycard-plate">— ——</div>
+                  <div class="nd-ycard-chev">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,0.28)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                </div>
+
+                <div class="nd-ycard nd-ycard-slot" id="nd-trust-card" onclick="goPanel('addvehicle')">
+                  <div class="nd-ycard-slot-inner">
+                    <div class="nd-ycard-slot-ico">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="14" height="9" rx="2"/>
+                        <path d="M16 10h3l2 2.5V16h-5"/>
+                        <circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/>
+                      </svg>
+                    </div>
+                    <div class="nd-ycard-slot-lbl">Vehicul 2</div>
+                    <div class="nd-ycard-slot-sub">Adaugă un vehicul</div>
+                  </div>
+                  <span id="nd-trust-vin" style="display:none"></span>
+                  <span id="nd-trust-plate" style="display:none"></span>
+                </div>
+
+                <div class="nd-ycard nd-ycard-slot" id="nd-add-card" onclick="goPanel('addvehicle')">
+                  <div class="nd-ycard-slot-inner">
+                    <div class="nd-ycard-slot-ico">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="2" stroke-linecap="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                      </svg>
+                    </div>
+                    <div class="nd-ycard-slot-lbl">Vehicul 3</div>
+                    <div class="nd-ycard-slot-sub">Adaugă un vehicul</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Dots (mobile only) -->
+            <div class="nd-dots">
+              <div class="nd-dot active" id="nd-dot-0"></div>
+              <div class="nd-dot" id="nd-dot-1"></div>
+              <div class="nd-dot" id="nd-dot-2"></div>
+            </div>
+
+            <!-- Status pills (desktop only) -->
+            <div class="nd-pills">
+              <div class="nd-pill nd-pill-ok"><div class="nd-pdot"></div>ITP Valid</div>
+              <div class="nd-pill nd-pill-ok"><div class="nd-pdot"></div>RCA Valid</div>
+              <div class="nd-pill nd-pill-warn"><div class="nd-pdot"></div>Revizie 32 zile</div>
+            </div>
+
+            <!-- Status card -->
+            <div class="nd-status-card">
+              <div class="nd-status-title">STARE VEHICUL</div>
+              <div class="nd-status-row"><span class="nd-status-lbl">ITP</span><span id="nd-itp-val" style="color:#1DB87A;font-weight:600">—</span></div>
+              <div class="nd-status-row"><span class="nd-status-lbl">RCA</span><span id="nd-rca-val" style="color:#1DB87A;font-weight:600">—</span></div>
+              <div class="nd-status-row"><span class="nd-status-lbl">Revizie</span><span id="nd-rev-val" style="color:#F59E0B;font-weight:600">—</span></div>
+            </div>
+
+            <!-- MulberryFamily -->
+            <div class="nd-family-banner" id="nd-family-banner" onclick="showFamilyUpsell()">
+              <div class="nd-family-ico">
+                <svg viewBox="0 0 28 28" width="20" height="20" fill="none">
+                  <circle cx="10" cy="9" r="3.5" stroke="rgba(255,255,255,0.9)" stroke-width="1.6"/>
+                  <path d="M4 22Q4 17 10 17Q16 17 16 22" stroke="rgba(255,255,255,0.9)" stroke-width="1.6" stroke-linecap="round"/>
+                  <circle cx="19" cy="10" r="2.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+                  <path d="M16 22Q16 18.5 19 18.5Q22 18.5 22 22" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div style="flex:1">
+                <div class="nd-family-title">MulberryFamily</div>
+                <div class="nd-family-sub">Până la 3 vehicule · 3€/lună</div>
+              </div>
+              <div class="nd-family-btn">Activează</div>
+            </div>
+
+          </div><!-- /col-left -->
+
+          <!-- RIGHT: actions + features -->
+          <div class="nd-col-right">
+
+            <!-- Module grid -->
+            <div class="nd-mod-grid">
+
+              <!-- MulberryGO -->
+              <div class="nd-mod-card" onclick="goPanel('marketplace')">
+                <div>
+                  <div class="nd-mod-tag">MulberryGO</div>
+                  <div class="nd-mod-name">Servicii auto</div>
+                  <div class="nd-mod-sub">Marketplace verificat</div>
+                </div>
+                <div class="nd-mod-foot">
+                  <span></span>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- MulberryEXO -->
+              <div class="nd-mod-card nd-mod-exo" onclick="goPanel('analytics')">
+                <div>
+                  <div class="nd-mod-tag">MulberryEXO · Activ</div>
+                  <div class="nd-mod-name">Notificări</div>
+                  <div class="nd-mod-sub">Motor de alertare AI</div>
+                </div>
+                <div class="nd-mod-chart">
+                  <div class="nd-mod-bar" style="height:40%"></div><div class="nd-mod-bar on" style="height:70%"></div>
+                  <div class="nd-mod-bar" style="height:30%"></div><div class="nd-mod-bar on" style="height:90%"></div>
+                  <div class="nd-mod-bar" style="height:55%"></div><div class="nd-mod-bar on" style="height:100%"></div>
+                  <div class="nd-mod-bar" style="height:65%"></div><div class="nd-mod-bar on" style="height:50%"></div>
+                </div>
+              </div>
+
+              <!-- MulberryID -->
+              <div class="nd-mod-card" onclick="goPanel('yellowcard')">
+                <div>
+                  <div class="nd-mod-tag">MulberryID</div>
+                  <div class="nd-mod-name">YCR Identity</div>
+                  <div class="nd-mod-sub">QR · HMAC signed</div>
+                </div>
+                <div class="nd-mod-foot">
+                  <svg width="22" height="22" viewBox="0 0 28 28" fill="none" opacity=".18">
+                    <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="4" width="6" height="6" fill="#000"/>
+                    <rect x="16" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="18" y="4" width="6" height="6" fill="#000"/>
+                    <rect x="2" y="16" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="18" width="6" height="6" fill="#000"/>
+                    <rect x="16" y="16" width="4" height="4" fill="#000"/><rect x="22" y="16" width="4" height="4" fill="#000"/>
+                    <rect x="16" y="22" width="4" height="4" fill="#000"/><rect x="22" y="22" width="4" height="4" fill="#000"/>
+                  </svg>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- MulberryCloud -->
+              <div class="nd-mod-card" onclick="goPanel('cloud')">
+                <div>
+                  <div class="nd-mod-tag">MulberryCloud</div>
+                  <div class="nd-mod-name">Documente</div>
+                  <div class="nd-mod-sub">Fișiere vehicul</div>
+                </div>
+                <div class="nd-mod-foot">
+                  <span></span>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- MulberryHUB -->
+              <div class="nd-mod-card" onclick="goPanel('hub')">
+                <div>
+                  <div class="nd-mod-tag">MulberryHUB</div>
+                  <div class="nd-mod-screen"></div>
+                </div>
+                <div class="nd-mod-foot">
+                  <span class="nd-mod-sub">History · PDF</span>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- MulberryAI -->
+              <div class="nd-mod-card nd-mod-ai" onclick="openGeminiModal()">
+                <div>
+                  <div class="nd-mod-tag">MulberryAI</div>
+                  <div class="nd-mod-name">Asistent auto</div>
+                  <div class="nd-mod-sub">Întreabă orice...</div>
+                </div>
+                <div class="nd-mod-foot">
+                  <span></span>
+                  <svg class="nd-mod-arr" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Activity (desktop only) -->
+            <div class="nd-activity-card">
+              <div class="nd-act-title">ACTIVITATE RECENTĂ</div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div style="flex:1"><div class="nd-act-name">Schimb ulei programat</div><div class="nd-act-sub">Ieri · MulberryGO</div></div>
+                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div style="flex:1"><div class="nd-act-name">RCA reînnoit</div><div class="nd-act-sub">Acum 3 zile · YellowCard</div></div>
+                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>

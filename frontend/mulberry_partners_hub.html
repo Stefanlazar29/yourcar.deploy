@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mulberry Partners — Dashboard</title>
+<link rel="icon" type="image/png" href="/favicon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#00c76a;--gd:#03200d;--gm:#0d3318;--gb:#1a5c32;
+  --gmt:#5a9e72;--gdm:#2d6a40;
+  --bg:#061a0e;--bc:#0a2212;--bf:#0e3320;
+  --bd:#133d1e;--bn:#0e3320;
+  --w:#fff;--gr:#4a8a63;
+  --yellow:#E3FF47;
+  --font:'Inter',-apple-system,sans-serif;
+}
+html,body{height:100%;font-family:var(--font);background:var(--bg);color:var(--w);-webkit-font-smoothing:antialiased}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:240px 1fr;grid-template-rows:auto 1fr;min-height:100vh}
+
+/* TOPBAR */
+.topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:62px;background:rgba(6,26,14,.95);border-bottom:1px solid var(--bn);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.tb-logo{display:flex;align-items:center}
+.tb-logo img{height:44px;width:auto;object-fit:contain}
+.tb-right{display:flex;align-items:center;gap:14px}
+.tb-badge{display:flex;align-items:center;gap:6px;background:rgba(0,199,106,.1);border:1px solid rgba(0,199,106,.25);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--g);letter-spacing:.04em}
+.tb-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.tb-avatar{width:34px;height:34px;border-radius:50%;background:var(--gb);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--g);cursor:pointer;border:1.5px solid var(--gb)}
+.tb-logout{background:transparent;border:1px solid var(--bn);border-radius:8px;padding:6px 12px;color:var(--gmt);font-size:12px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all .15s}
+.tb-logout:hover{border-color:var(--gb);color:var(--w)}
+
+/* SIDEBAR */
+.sidebar{background:var(--bc);border-right:1px solid var(--bn);padding:24px 0;display:flex;flex-direction:column}
+.sb-section{padding:0 14px;margin-bottom:8px}
+.sb-label{font-size:10px;font-weight:600;color:var(--gdm);text-transform:uppercase;letter-spacing:.12em;padding:0 8px;margin-bottom:8px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--gmt);font-size:13.5px;font-weight:500;cursor:pointer;transition:all .15s;text-decoration:none;margin-bottom:2px}
+.sb-item i{font-size:17px;flex-shrink:0}
+.sb-item:hover{background:rgba(255,255,255,.05);color:var(--w)}
+.sb-item.active{background:rgba(0,199,106,.1);color:var(--g);border:1px solid rgba(0,199,106,.15)}
+.sb-item .sb-count{margin-left:auto;background:var(--g);color:var(--gd);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
+.sb-spacer{flex:1}
+.sb-profile{padding:14px;border-top:1px solid var(--bn);margin-top:8px}
+.sb-profile-card{background:rgba(0,199,106,.07);border:1px solid rgba(0,199,106,.14);border-radius:12px;padding:12px}
+.sb-profile-name{font-size:13px;font-weight:700;color:var(--w);margin-bottom:2px}
+.sb-profile-sub{font-size:11px;color:var(--gmt)}
+.sb-profile-verified{display:inline-flex;align-items:center;gap:4px;margin-top:8px;background:rgba(0,199,106,.12);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:600;color:var(--g)}
+
+/* MAIN */
+.main{padding:32px 36px;overflow-y:auto}
+
+/* PAGE SECTIONS */
+.hub-page{display:none}
+.hub-page.active{display:block}
+
+/* GREETING */
+.greet{margin-bottom:28px}
+.greet-title{font-size:24px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px}
+.greet-sub{font-size:14px;color:var(--gmt)}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.stat-card{background:var(--bc);border:1px solid var(--bd);border-radius:14px;padding:18px 20px}
+.stat-card-val{font-size:28px;font-weight:800;color:var(--w);letter-spacing:-.5px;margin-bottom:3px}
+.stat-card-val.green{color:var(--g)}
+.stat-card-lbl{font-size:12px;color:var(--gmt)}
+.stat-card-trend{font-size:11px;color:var(--g);margin-top:6px;display:flex;align-items:center;gap:4px}
+
+/* GRID 2 COL */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.grid3{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:18px}
+
+/* CARD */
+.card{background:var(--bc);border:1px solid var(--bd);border-radius:16px;padding:22px 22px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.card-title{font-size:14px;font-weight:700;color:var(--w)}
+.card-action{font-size:12px;color:var(--g);cursor:pointer;text-decoration:none;font-weight:500}
+
+/* REQUESTS LIST */
+.req-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.req-item:last-child{border-bottom:none}
+.req-avatar{width:34px;height:34px;border-radius:50%;background:var(--gm);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--g);flex-shrink:0}
+.req-info{flex:1;min-width:0}
+.req-name{font-size:13px;font-weight:600;color:var(--w);margin-bottom:2px}
+.req-detail{font-size:11.5px;color:var(--gmt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.req-time{font-size:11px;color:var(--gdm);flex-shrink:0}
+.req-status{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;flex-shrink:0}
+.req-status.new{background:rgba(0,199,106,.15);color:var(--g)}
+.req-status.pending{background:rgba(255,200,0,.12);color:#ffd500}
+.req-status.done{background:rgba(255,255,255,.06);color:var(--gmt)}
+
+/* ALERT CARD */
+.alert-item{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;background:rgba(255,255,255,.03);border-radius:10px;margin-bottom:8px}
+.alert-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.alert-ico.orange{background:rgba(255,160,0,.15)}
+.alert-ico.green{background:rgba(0,199,106,.12)}
+.alert-ico.red{background:rgba(255,70,70,.12)}
+.alert-ico i{font-size:16px}
+.alert-ico.orange i{color:#ffa000}
+.alert-ico.green i{color:var(--g)}
+.alert-ico.red i{color:#ff4646}
+.alert-body{flex:1}
+.alert-title{font-size:12.5px;font-weight:600;color:var(--w);margin-bottom:2px}
+.alert-sub{font-size:11.5px;color:var(--gmt)}
+
+/* PROFILE COMPLETION */
+.completion-bar{background:rgba(255,255,255,.07);border-radius:4px;height:6px;margin:10px 0 6px;overflow:hidden}
+.completion-fill{height:100%;background:var(--g);border-radius:4px;transition:width .4s}
+.completion-lbl{font-size:11px;color:var(--gmt);display:flex;justify-content:space-between}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:36px 20px;color:var(--gmt)}
+.empty-state i{font-size:36px;margin-bottom:12px;display:block;opacity:.4}
+.empty-state p{font-size:13px}
+
+/* MOBILE */
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .main{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a href="/mulberry_partners.html" class="tb-logo">
+      <img src="/mulberry-logo-full.png" alt="Mulberry">
+    </a>
+    <div class="tb-right">
+      <div class="tb-badge"><div class="tb-badge-dot"></div>Partener activ</div>
+      <div class="tb-avatar" id="tb-av">AS</div>
+      <button class="tb-logout" onclick="logout()">Ieși</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-label">Principal</div>
+      <a class="sb-item active" onclick="showHub('overview')">
+        <i class="ti ti-layout-dashboard"></i> Dashboard
+      </a>
+      <a class="sb-item" onclick="showHub('requests')">
+        <i class="ti ti-calendar"></i> Programări
+        <span class="sb-count">3</span>
+      </a>
+      <a class="sb-item" onclick="showHub('clients')">
+        <i class="ti ti-users"></i> Clienți
+      </a>
+      <a class="sb-item" onclick="showHub('history')">
+        <i class="ti ti-file-check"></i> Istoric intervenții
+      </a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">Profil</div>
+      <a class="sb-item" onclick="showHub('profile')">
+        <i class="ti ti-building-store"></i> Profilul service-ului
+      </a>
+      <a class="sb-item" onclick="showHub('analytics')">
+        <i class="ti ti-chart-bar"></i> Analytics
+      </a>
+    </div>
+    <div class="sb-spacer"></div>
+    <div class="sb-profile">
+      <div class="sb-profile-card">
+        <div class="sb-profile-name" id="sb-name">Auto Service</div>
+        <div class="sb-profile-sub" id="sb-city">București</div>
+        <div class="sb-profile-verified"><i class="ti ti-shield-check" style="font-size:12px"></i> Mulberry Partner</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <div class="hub-page active" id="hub-overview">
+      <div class="greet">
+        <div class="greet-title">Bună ziua, <span id="greet-name">partener</span> 👋</div>
+        <div class="greet-sub">Iată ce s-a întâmplat azi în service-ul tău.</div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card-val green">3</div>
+          <div class="stat-card-lbl">Programări noi</div>
+          <div class="stat-card-trend"><i class="ti ti-arrow-up" style="font-size:12px"></i> față de ieri</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-val">12</div>
+          <div class="stat-card-lbl">Clienți activi</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-val">47</div>
+          <div class="stat-card-lbl">Vizualizări profil</div>
+          <div class="stat-card-trend"><i class="ti ti-arrow-up" style="font-size:12px"></i> +8 săptămâna asta</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-val green">98%</div>
+          <div class="stat-card-lbl">Satisfacție clienți</div>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Programări recente</div>
+            <a class="card-action" onclick="showHub('requests')">Vezi toate →</a>
+          </div>
+          <div class="req-item">
+            <div class="req-avatar">AP</div>
+            <div class="req-info">
+              <div class="req-name">Andrei Popescu</div>
+              <div class="req-detail">Dacia Logan · Revizie + schimb ulei</div>
+            </div>
+            <div class="req-status new">NOU</div>
+            <div class="req-time">azi 09:30</div>
+          </div>
+          <div class="req-item">
+            <div class="req-avatar">MI</div>
+            <div class="req-info">
+              <div class="req-name">Maria Ionescu</div>
+              <div class="req-detail">VW Golf · ITP + verificare frâne</div>
+            </div>
+            <div class="req-status new">NOU</div>
+            <div class="req-time">azi 11:00</div>
+          </div>
+          <div class="req-item">
+            <div class="req-avatar">GS</div>
+            <div class="req-info">
+              <div class="req-name">George Stan</div>
+              <div class="req-detail">BMW Seria 3 · Diagnosticare</div>
+            </div>
+            <div class="req-status pending">ÎN AȘTEPTARE</div>
+            <div class="req-time">mâine</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Alerte Mulberry</div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-ico orange"><i class="ti ti-alert-triangle"></i></div>
+            <div class="alert-body">
+              <div class="alert-title">RCA expiră în 5 zile</div>
+              <div class="alert-sub">Andrei Popescu · B-12-APX</div>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-ico orange"><i class="ti ti-calendar-event"></i></div>
+            <div class="alert-body">
+              <div class="alert-title">ITP expirat</div>
+              <div class="alert-sub">Maria Ionescu · B-55-MRX</div>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-ico green"><i class="ti ti-shield-check"></i></div>
+            <div class="alert-body">
+              <div class="alert-title">Profil verificat Mulberry</div>
+              <div class="alert-sub">Service-ul tău e activ în rețea</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Completează profilul service-ului</div>
+            <span style="font-size:12px;color:var(--g);font-weight:700">65%</span>
+          </div>
+          <div class="completion-bar"><div class="completion-fill" style="width:65%"></div></div>
+          <div class="completion-lbl"><span>Profil incomplet</span><span>Completare → Mulberry Verified</span></div>
+          <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--g)"><i class="ti ti-check" style="font-size:14px"></i> Profil de bază creat</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--g)"><i class="ti ti-check" style="font-size:14px"></i> CIF verificat ANAF</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gmt)"><i class="ti ti-circle" style="font-size:14px"></i> Adaugă specialități</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gmt)"><i class="ti ti-circle" style="font-size:14px"></i> Încarcă poze service</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Vizibilitate în rețea</div>
+          </div>
+          <div style="text-align:center;padding:12px 0">
+            <div style="font-size:42px;font-weight:800;color:var(--g);letter-spacing:-1px">47</div>
+            <div style="font-size:12px;color:var(--gmt);margin-bottom:14px">vizualizări de profil în ultimele 7 zile</div>
+            <div style="background:rgba(0,199,106,.08);border:1px solid rgba(0,199,106,.15);border-radius:10px;padding:10px;font-size:12px;color:var(--gmt);line-height:1.6">
+              Completează profilul pentru a apărea mai sus în căutările din zona ta.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REQUESTS -->
+    <div class="hub-page" id="hub-requests">
+      <div class="greet">
+        <div class="greet-title">Programări</div>
+        <div class="greet-sub">Gestionează programările clienților tăi.</div>
+      </div>
+      <div class="card">
+        <div class="req-item">
+          <div class="req-avatar">AP</div>
+          <div class="req-info"><div class="req-name">Andrei Popescu</div><div class="req-detail">Dacia Logan · Revizie + schimb ulei · B-12-APX</div></div>
+          <div class="req-status new">NOU</div>
+          <div class="req-time">azi 09:30</div>
+        </div>
+        <div class="req-item">
+          <div class="req-avatar">MI</div>
+          <div class="req-info"><div class="req-name">Maria Ionescu</div><div class="req-detail">VW Golf · ITP + verificare frâne · B-55-MRX</div></div>
+          <div class="req-status new">NOU</div>
+          <div class="req-time">azi 11:00</div>
+        </div>
+        <div class="req-item">
+          <div class="req-avatar">GS</div>
+          <div class="req-info"><div class="req-name">George Stan</div><div class="req-detail">BMW Seria 3 · Diagnosticare</div></div>
+          <div class="req-status pending">ÎN AȘTEPTARE</div>
+          <div class="req-time">mâine 10:00</div>
+        </div>
+        <div class="req-item">
+          <div class="req-avatar">RL</div>
+          <div class="req-info"><div class="req-name">Radu Luca</div><div class="req-detail">Skoda Octavia · Schimb anvelope</div></div>
+          <div class="req-status done">FINALIZAT</div>
+          <div class="req-time">ieri</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="hub-page" id="hub-clients">
+      <div class="greet">
+        <div class="greet-title">Clienți</div>
+        <div class="greet-sub">Clienții care au interacționat cu service-ul tău prin Mulberry.</div>
+      </div>
+      <div class="empty-state">
+        <i class="ti ti-users"></i>
+        <p>Clienții vor apărea here după primele programări confirmate.</p>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="hub-page" id="hub-history">
+      <div class="greet">
+        <div class="greet-title">Istoric intervenții</div>
+        <div class="greet-sub">Intervențiile înregistrate în dosarele digitale ale vehiculelor.</div>
+      </div>
+      <div class="empty-state">
+        <i class="ti ti-file-check"></i>
+        <p>Nicio intervenție înregistrată încă. Înregistrează prima intervenție după finalizarea unei programări.</p>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="hub-page" id="hub-profile">
+      <div class="greet">
+        <div class="greet-title">Profilul service-ului</div>
+        <div class="greet-sub">Cum apari în aplicația Mulberry pentru șoferi.</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Informații de bază</div></div>
+        <div style="display:grid;gap:14px">
+          <div><div style="font-size:11px;font-weight:600;color:var(--gmt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Nume afișat</div><div id="prof-name" style="font-size:14px;color:var(--w)">—</div></div>
+          <div><div style="font-size:11px;font-weight:600;color:var(--gmt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Oraș</div><div id="prof-city" style="font-size:14px;color:var(--w)">—</div></div>
+          <div><div style="font-size:11px;font-weight:600;color:var(--gmt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Email</div><div id="prof-email" style="font-size:14px;color:var(--w)">—</div></div>
+          <div><div style="font-size:11px;font-weight:600;color:var(--gmt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">CIF</div><div id="prof-cif" style="font-size:14px;color:var(--w)">—</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="hub-page" id="hub-analytics">
+      <div class="greet">
+        <div class="greet-title">Analytics</div>
+        <div class="greet-sub">Performanța service-ului tău în rețeaua Mulberry.</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-card-val green">47</div><div class="stat-card-lbl">Vizualizări profil</div></div>
+        <div class="stat-card"><div class="stat-card-val">3</div><div class="stat-card-lbl">Programări luna asta</div></div>
+        <div class="stat-card"><div class="stat-card-val">0</div><div class="stat-card-lbl">Recenzii primite</div></div>
+        <div class="stat-card"><div class="stat-card-val green">—</div><div class="stat-card-lbl">Rating mediu</div></div>
+      </div>
+      <div class="card">
+        <div class="empty-state" style="padding:24px 0">
+          <i class="ti ti-chart-bar"></i>
+          <p>Graficele detaliate vor fi disponibile după primele 30 de zile de activitate.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ── SESSION CHECK ── */
+(function(){
+  const p = JSON.parse(sessionStorage.getItem('mlbr_partner') || localStorage.getItem('mlbr_partner') || 'null');
+  if(!p){ window.location.href = '/mulberry_partners.html'; return; }
+  const name = p.name || 'Partener';
+  const city = p.city || '';
+  const email = p.email || '';
+  const cif = p.cif || '';
+  const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase() || 'AS';
+
+  document.getElementById('greet-name').textContent = name;
+  document.getElementById('sb-name').textContent = name;
+  document.getElementById('sb-city').textContent = city;
+  document.getElementById('tb-av').textContent = initials;
+  document.getElementById('prof-name').textContent = name || '—';
+  document.getElementById('prof-city').textContent = city || '—';
+  document.getElementById('prof-email').textContent = email || '—';
+  document.getElementById('prof-cif').textContent = cif || '—';
+})();
+
+function showHub(id){
+  document.querySelectorAll('.hub-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('hub-'+id).classList.add('active');
+  event && event.currentTarget && event.currentTarget.classList.add('active');
+}
+
+function logout(){
+  localStorage.removeItem('mlbr_partner');
+  sessionStorage.removeItem('mlbr_partner');
+  window.location.href = '/mulberry_partners.html';
+}
+</script>
+</body>
+</html>

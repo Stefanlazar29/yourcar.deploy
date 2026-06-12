@@ -1,476 +1,565 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mulberry — Register</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mulberry — Panou Service</title>
+<link rel="icon" type="image/png" href="/favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',-apple-system,sans-serif;background:#000;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;}
-
-@keyframes panelIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-@keyframes checkPop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
-@keyframes drawCheck{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes glowPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.85;transform:scale(1.06)}}
-@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
-
-/* ── SHELL ── */
-.outer{
-  display:grid;grid-template-columns:1fr 1fr;
-  width:100%;max-width:860px;min-height:600px;
-  border-radius:28px;overflow:hidden;
-  box-shadow:0 0 0 0.5px rgba(255,255,255,0.08), 0 40px 100px rgba(0,0,0,0.7);
+:root{
+  --sb:#111;
+  --sb-border:#1f1f1f;
+  --bg:#f4f5f7;
+  --white:#fff;
+  --border:#e8eaed;
+  --text:#111;
+  --sub:#6b7280;
+  --green:#00c76a;
+  --green-light:rgba(0,199,106,.1);
+  --green-border:rgba(0,199,106,.2);
+  --font:'Inter',-apple-system,sans-serif;
 }
+html,body{height:100%;font-family:var(--font);-webkit-font-smoothing:antialiased;background:var(--bg)}
+body{display:flex;flex-direction:column;overflow:hidden}
 
-/* ── LEFT — full glassmorphism glow ── */
-.left{
-  padding:2.5rem;
-  display:flex;flex-direction:column;
-  position:relative;overflow:hidden;
-  border-right:0.5px solid rgba(255,255,255,0.08);
-  /* colored glow blobs as background */
-  background:
-    radial-gradient(ellipse 140% 90% at 10% 40%, rgba(225,255,0,0.20) 0%, transparent 50%),
-    radial-gradient(ellipse 100% 70% at 85% 10%, rgba(80,180,255,0.14) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 90% at 70% 95%, rgba(120,60,255,0.12) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 40% 80%, rgba(0,220,120,0.08) 0%, transparent 45%),
-    #030303;
+/* ═══════════ TOPBAR ═══════════ */
+.topbar-global{flex-shrink:0;height:54px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:16px}
+.tg-logo img{height:36px;width:auto;object-fit:contain}
+.tg-sep{width:1px;height:20px;background:var(--border)}
+.tg-service{font-size:13px;font-weight:600;color:var(--text);flex:1}
+.tg-badge{display:flex;align-items:center;gap:5px;background:var(--green-light);border:1px solid var(--green-border);border-radius:20px;padding:4px 11px;font-size:10px;font-weight:600;color:var(--green);letter-spacing:.04em}
+.tg-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.tg-avatar{width:32px;height:32px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+
+/* ═══════════ LAYOUT ═══════════ */
+.layout-inner{flex:1;display:flex;overflow:hidden}
+
+/* ═══════════ SIDEBAR ═══════════ */
+.sidebar{width:196px;flex-shrink:0;background:var(--sb);border-right:1px solid var(--sb-border);display:flex;flex-direction:column;padding:16px 0;height:100%}
+.sb-section{font-size:9.5px;color:#444;text-transform:uppercase;letter-spacing:.08em;padding:12px 16px 5px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;color:#777;font-size:12.5px;position:relative;transition:all .12s;border-radius:8px;margin:1px 8px}
+.sb-item:hover{background:#1a1a1a;color:#fff}
+.sb-item.active{background:#1a1a1a;color:#fff;font-weight:500}
+.sb-item.active::before{content:'';position:absolute;left:-8px;top:6px;bottom:6px;width:2px;background:var(--green);border-radius:0 2px 2px 0}
+.sb-item i{font-size:15px;flex-shrink:0}
+.sb-badge{margin-left:auto;background:var(--green);color:#000;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;min-width:18px;text-align:center}
+.sb-footer{margin-top:auto;padding:12px 8px;border-top:1px solid var(--sb-border)}
+.sb-user{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;margin-bottom:6px}
+.sb-avatar{width:30px;height:30px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.sb-uname{font-size:12px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-ucity{font-size:10px;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn-logout{width:100%;background:transparent;border:1px solid #2a2a2a;border-radius:7px;padding:7px;font-size:11px;color:#555;cursor:pointer;font-family:var(--font);transition:all .12s;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-logout:hover{border-color:#444;color:#ccc}
+
+/* ═══════════ MAIN ═══════════ */
+.main-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.panel-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--white)}
+.pt-title{font-size:15px;font-weight:700;color:var(--text)}
+.pt-sub{font-size:11px;color:var(--sub);margin-top:2px}
+.pt-actions{display:flex;gap:8px;align-items:center}
+.content{padding:20px 22px;overflow-y:auto;flex:1}
+.panel{display:none}
+.panel.active{display:block}
+
+/* ═══════════ BUTTONS ═══════════ */
+.btn{padding:7px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:var(--font);border:none;display:inline-flex;align-items:center;gap:6px;transition:all .12s;font-weight:600}
+.btn-outline{background:transparent;color:var(--sub);border:1px solid var(--border)}
+.btn-outline:hover{border-color:#9ca3af;color:var(--text)}
+.btn-green{background:var(--green);color:#fff;font-weight:700}
+.btn-green:hover{background:#00b35f}
+.btn-block{width:100%;justify-content:center}
+.btn-dark{background:var(--text);color:#fff}
+.btn-dark:hover{background:#333}
+
+/* ═══════════ TABS ═══════════ */
+.tab-row{display:flex;gap:2px;margin-bottom:18px;background:var(--border);padding:3px;border-radius:8px;width:fit-content}
+.tab{padding:5px 13px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--sub);transition:all .12s;font-weight:500}
+.tab.active{background:var(--white);color:var(--text);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+/* ═══════════ CARDS ═══════════ */
+.card-w{background:var(--white);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;border:1px solid var(--border);transition:box-shadow .12s}
+.card-w:hover{box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.card-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card-info{flex:1;min-width:0}
+.card-title{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{font-size:11px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.status-pill{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;flex-shrink:0;white-space:nowrap}
+.pill-wait{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
+.pill-prog{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.pill-done{background:#f9fafb;color:#6b7280;border:1px solid var(--border)}
+.pill-sched{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.card-price{font-size:13px;font-weight:700;color:var(--text);margin-left:4px;flex-shrink:0;white-space:nowrap}
+.btn-fin{background:var(--green);color:#fff;border:none;border-radius:7px;padding:5px 11px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;margin-left:4px;font-family:var(--font);transition:all .12s}
+.btn-fin:hover{background:#00b35f}
+.btn-fin.archived{background:#f3f4f6;color:#9ca3af;cursor:default;border:1px solid var(--border)}
+
+/* ═══════════ SERVICES ═══════════ */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.svc-card{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:box-shadow .15s}
+.svc-card:hover{box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.svc-img{height:68px;background:#f9fafb;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.svc-img i{font-size:26px;color:#9ca3af}
+.svc-body{padding:10px 12px}
+.svc-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.svc-desc{font-size:11px;color:var(--sub);line-height:1.5;margin-bottom:8px}
+.svc-footer{display:flex;align-items:center;justify-content:space-between}
+.svc-price{font-size:11px;color:var(--sub);font-weight:500}
+.toggle{width:32px;height:18px;background:#e5e7eb;border-radius:9px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.toggle.on{background:var(--green)}
+.toggle::after{content:'';position:absolute;width:14px;height:14px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left .2s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.toggle.on::after{left:16px}
+
+/* ═══════════ WORKSPACE ═══════════ */
+.ws-head{background:var(--white);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:flex;gap:14px;align-items:center;border:1px solid var(--border)}
+.ws-plate{background:var(--text);color:#fff;font-size:14px;font-weight:700;padding:7px 15px;border-radius:7px;letter-spacing:.06em;flex-shrink:0}
+.ws-car{font-size:13px;font-weight:600;color:var(--text)}
+.ws-km{font-size:11px;color:var(--sub);margin-top:2px}
+.ws-link{font-size:11px;color:var(--green);cursor:pointer;font-weight:600;text-decoration:none}
+.ws-link:hover{text-decoration:underline}
+.history{display:flex;flex-direction:column;gap:0;margin-bottom:16px}
+.h-item{display:flex;gap:10px;align-items:flex-start}
+.h-connector{display:flex;flex-direction:column;align-items:center;width:8px}
+.h-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:3px}
+.h-dot.old{background:#d1d5db}
+.h-line{width:1px;background:#e5e7eb;flex:1;min-height:20px}
+.h-body{flex:1;padding-bottom:14px}
+.h-title{font-size:12.5px;font-weight:600;color:var(--text)}
+.h-meta{font-size:11px;color:var(--sub);margin-top:2px}
+.ws-form{background:var(--white);border-radius:12px;padding:16px;border:1px solid var(--border)}
+.ws-form-label{font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.form-row{display:flex;gap:8px;margin-bottom:8px}
+.form-row input,.form-row textarea{flex:1;font-size:12px;padding:8px 11px;border-radius:8px;border:1px solid var(--border);background:var(--white);color:var(--text);font-family:var(--font);resize:none;outline:none;transition:border-color .12s}
+.form-row input:focus,.form-row textarea:focus{border-color:var(--green)}
+.form-row input[readonly]{color:#aaa;background:#f9fafb}
+
+/* ═══════════ SETTINGS ═══════════ */
+.set-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.set-card{background:var(--white);border-radius:12px;padding:16px;border:1px solid var(--border)}
+.set-title{font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.set-title i{font-size:15px}
+.set-f{margin-bottom:9px}
+.set-f label{font-size:11px;color:var(--sub);display:block;margin-bottom:3px;font-weight:500}
+.set-f input{width:100%;font-size:12.5px;padding:8px 11px;border-radius:8px;border:1px solid var(--border);background:var(--white);color:var(--text);font-family:var(--font);outline:none;transition:border-color .12s}
+.set-f input:focus{border-color:var(--green)}
+
+/* ═══════════ BILANȚ ═══════════ */
+.bilant-top{background:var(--white);border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid var(--border)}
+.bnums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.bnum{background:#f9fafb;border-radius:9px;padding:12px;text-align:center;border:1px solid var(--border)}
+.bnum-val{font-size:22px;font-weight:700;color:var(--text)}
+.bnum-lbl{font-size:10px;color:var(--sub);margin-top:3px;text-transform:uppercase;letter-spacing:.05em}
+.chart-label{font-size:10px;color:var(--sub);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.bar-chart{display:flex;align-items:flex-end;gap:5px;height:68px}
+.bar{flex:1;background:var(--green);border-radius:3px 3px 0 0;opacity:.75;cursor:pointer;transition:opacity .15s}
+.bar:hover{opacity:1}
+.bar.dim{opacity:.18;background:#9ca3af}
+.bar-lbls{display:flex;gap:5px;margin-top:5px}
+.bar-lbl{flex:1;text-align:center;font-size:9px;color:var(--sub)}
+.bilant-bottom{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:768px){
+  .sidebar{width:54px}
+  .sb-section,.sb-item span:not(.sb-badge),.sb-uname,.sb-ucity,.sb-footer .btn-logout span{display:none}
+  .sb-item{justify-content:center;padding:10px;margin:1px 4px}
+  .sb-item i{font-size:17px}
+  .sb-badge{position:absolute;top:5px;right:5px;min-width:14px;padding:1px 4px}
+  .set-grid{grid-template-columns:1fr}
+  .bilant-bottom{grid-template-columns:1fr}
+  .tg-service{display:none}
+  .tg-sep{display:none}
 }
-/* frosted glass layer over blobs */
-.left::before{
-  content:'';position:absolute;inset:0;z-index:0;
-  background:rgba(8,8,8,0.55);
-  backdrop-filter:blur(40px) saturate(180%);
-  -webkit-backdrop-filter:blur(40px) saturate(180%);
-}
-/* top edge shimmer */
-.left::after{
-  content:'';position:absolute;
-  top:0;left:0;right:0;height:1px;z-index:3;
-  background:linear-gradient(90deg,transparent 5%,rgba(225,255,0,0.5) 30%,rgba(255,255,255,0.3) 60%,transparent 95%);
-}
-.geo{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
-.logo{display:flex;align-items:center;gap:9px;position:relative;z-index:2;}
-.logo-mark{width:30px;height:30px;border-radius:8px;background:#E1FF00;display:flex;align-items:center;justify-content:center;}
-.logo-name{font-size:15px;font-weight:500;color:#fff;letter-spacing:-.3px;}
-.left-hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:2rem 0;position:relative;z-index:2;}
-.left-eyebrow{font-size:11px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
-
-/* Frosted glass hero card */
-.hero-glass{
-  position:relative;
-  background:rgba(255,255,255,0.07);
-  backdrop-filter:blur(24px) saturate(200%);
-  -webkit-backdrop-filter:blur(24px) saturate(200%);
-  border:0.5px solid rgba(255,255,255,0.18);
-  border-radius:20px;
-  padding:20px 22px;
-  margin-bottom:14px;
-  overflow:hidden;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.12),
-    0 8px 32px rgba(0,0,0,0.4),
-    0 0 0 0.5px rgba(255,255,255,0.04);
-}
-.hero-glass::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  border-radius:20px;
-  background:linear-gradient(135deg,rgba(225,255,0,0.07) 0%,transparent 60%,rgba(255,255,255,0.03) 100%);
-  pointer-events:none;
-}
-/* top shimmer line */
-.hero-glass::after{
-  content:'';
-  position:absolute;
-  top:0;left:10%;right:10%;
-  height:0.5px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);
-  pointer-events:none;
-}
-/* ambient glow behind card */
-.hero-glow{
-  position:absolute;
-  width:240px;height:120px;
-  border-radius:50%;
-  background:radial-gradient(ellipse,rgba(225,255,0,0.12) 0%,transparent 70%);
-  top:-20px;left:-30px;
-  filter:blur(18px);
-  animation:glowPulse 4s ease-in-out infinite;
-  pointer-events:none;
-}
-
-.left-title{font-size:26px;font-weight:600;color:#fff;letter-spacing:-.5px;line-height:1.25;margin:0 0 10px;position:relative;z-index:1;}
-.left-title em{
-  font-style:normal;
-  background:linear-gradient(90deg,#E1FF00,#b8ff00,#E1FF00);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  animation:shimmer 4s linear infinite;
-}
-.left-sub{font-size:12.5px;color:rgba(255,255,255,0.42);line-height:1.65;margin:0;position:relative;z-index:1;}
-
-/* Step pills — no frame */
-.step-pills{display:flex;align-items:center;gap:0;position:relative;z-index:2;}
-.pills-glass{
-  width:100%;
-  background:transparent;
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-  border:none;
-  border-radius:0;
-  padding:12px 0;
-  display:flex;
-  align-items:center;
-  position:relative;
-  overflow:visible;
-  z-index:2;
-  box-shadow:none;
-}
-.pills-glass::after{display:none;}
-.pconn{flex:1;height:1px;background:rgba(255,255,255,0.10);transition:background .4s;}
-.pconn.done{background:rgba(52,199,89,0.5);}
-.pill{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:10px;}
-.pnum{
-  width:28px;height:28px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:600;
-  border:1px solid rgba(255,255,255,0.10);
-  color:rgba(255,255,255,0.22);
-  background:rgba(255,255,255,0.05);
-  transition:all .3s cubic-bezier(.4,0,.2,1);
-}
-.plbl{font-size:10px;font-weight:500;color:rgba(255,255,255,0.22);letter-spacing:.3px;transition:color .3s;}
-/* blue active */
-.pill.ba .pnum{
-  background:rgba(10,132,255,0.25);
-  border-color:rgba(10,132,255,0.7);
-  color:#fff;
-  box-shadow:0 0 12px rgba(10,132,255,0.5),0 0 24px rgba(10,132,255,0.2);
-}
-.pill.ba .plbl{color:#60a5fa;}
-.pill.bd .pnum{background:rgba(10,132,255,0.12);border-color:rgba(10,132,255,0.4);color:#60a5fa;}
-.pill.bd .plbl{color:rgba(96,165,250,0.6);}
-/* green active */
-.pill.ga .pnum{
-  background:rgba(48,209,88,0.22);
-  border-color:rgba(48,209,88,0.7);
-  color:#fff;
-  box-shadow:0 0 12px rgba(48,209,88,0.5),0 0 24px rgba(48,209,88,0.2);
-}
-.pill.ga .plbl{color:#4ade80;}
-.pill.gd .pnum{background:rgba(48,209,88,0.12);border-color:rgba(48,209,88,0.4);color:#4ade80;}
-.pill.gd .plbl{color:rgba(74,222,128,0.6);}
-
-/* ── RIGHT — dark form ── */
-.right{
-  background:#0c0c0c;padding:2.5rem;
-  display:flex;flex-direction:column;overflow-y:auto;
-}
-
-.prog-track{height:1.5px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:2rem;overflow:hidden;}
-.prog-fill{height:100%;background:#E1FF00;border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1);}
-
-.panel{display:none;flex:1;flex-direction:column;}
-.panel.active{display:flex;}
-
-.panel-step{font-size:11px;font-weight:500;color:rgba(255,255,255,0.28);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
-.panel-title{font-size:20px;font-weight:600;color:#fff;letter-spacing:-.3px;margin:0 0 4px;}
-.panel-sub{font-size:13px;color:rgba(255,255,255,0.5);margin:0 0 1.2rem;line-height:1.5;}
-
-/* Dark grouped fields */
-.field-group{background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;border:.5px solid rgba(255,255,255,0.09);margin-bottom:10px;}
-.field-item{display:flex;align-items:center;padding:0 14px;min-height:44px;border-bottom:.5px solid rgba(255,255,255,0.06);}
-.field-item:last-child{border-bottom:none;}
-.field-item:focus-within{background:rgba(255,255,255,0.04);}
-.field-label{font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);min-width:88px;flex-shrink:0;}
-.field-input{flex:1;border:none;background:transparent;font-size:13px;color:#fff;font-family:inherit;padding:11px 0;outline:none;min-width:0;}
-.field-input::placeholder{color:rgba(255,255,255,0.22);}
-.field-input.mono{font-family:'SF Mono','Fira Code',monospace;letter-spacing:.3px;}
-
-/* Trust notes — dark glass */
-.note{border-radius:12px;padding:11px 13px;display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;backdrop-filter:blur(8px);}
-.note.blue{background:rgba(10,132,255,0.10);border:.5px solid rgba(10,132,255,0.25);}
-.note.purple{background:rgba(88,86,214,0.10);border:.5px solid rgba(88,86,214,0.25);}
-.note.green{background:rgba(48,209,88,0.10);border:.5px solid rgba(48,209,88,0.25);}
-.note-icon{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.note-title{font-size:12px;font-weight:600;margin-bottom:2px;}
-.note-sub{font-size:11px;line-height:1.5;}
-
-/* Buttons */
-.btn-primary{width:100%;padding:12px;border-radius:12px;border:none;background:#E1FF00;color:#000;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .15s,transform .1s;}
-.btn-primary:hover{opacity:.88;}
-.btn-primary:active{transform:scale(.98);}
-
-.btn-secondary{padding:12px 16px;border-radius:12px;border:.5px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);font-size:14px;font-weight:500;color:rgba(255,255,255,0.7);font-family:inherit;cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center;}
-.btn-secondary:hover{background:rgba(255,255,255,0.10);}
-
-.btn-google{width:100%;padding:11px;border-radius:12px;border:.5px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.06);font-size:13px;font-weight:500;font-family:inherit;color:rgba(255,255,255,0.8);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s;margin-bottom:8px;}
-.btn-google:hover{background:rgba(255,255,255,0.10);}
-
-.or-div{display:flex;align-items:center;gap:10px;font-size:11px;color:rgba(255,255,255,0.25);margin-bottom:8px;}
-.or-div::before,.or-div::after{content:'';flex:1;height:.5px;background:rgba(255,255,255,0.08);}
-
-.btn-row{display:flex;gap:8px;margin-top:auto;padding-top:.75rem;}
-.btn-row .btn-primary{flex:1;}
-
-.hint{font-size:11px;font-weight:300;color:rgba(255,255,255,0.2);text-align:center;margin-top:9px;letter-spacing:.1px;}
-
-/* OTP */
-.code-wrap{display:flex;gap:7px;justify-content:center;margin:12px 0 14px;}
-.cbox{width:44px;height:52px;background:rgba(255,255,255,0.05);border:.5px solid rgba(255,255,255,0.10);border-radius:10px;font-size:22px;font-weight:500;font-family:monospace;text-align:center;line-height:52px;color:#fff;cursor:text;transition:border-color .15s,background .15s;}
-.cbox.on{border-color:#E1FF00;border-width:1.5px;background:rgba(225,255,0,0.06);}
-
-/* Success */
-.ok-ring{width:64px;height:64px;border-radius:50%;background:rgba(48,209,88,0.12);border:.5px solid rgba(48,209,88,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;animation:checkPop .4s cubic-bezier(.34,1.56,.64,1) both;}
-.ck{stroke-dasharray:30;stroke-dashoffset:30;animation:drawCheck .4s .2s ease forwards;}
-.dpill{background:rgba(255,255,255,0.05);border-radius:10px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;border:.5px solid rgba(255,255,255,0.07);margin-bottom:6px;animation:fadeUp .3s ease both;}
-.dck{width:18px;height:18px;border-radius:50%;background:#30d158;display:flex;align-items:center;justify-content:center;}
 </style>
 </head>
 <body>
-<div class="outer">
 
-  <!-- LEFT -->
-  <div class="left">
-    <div class="geo">
-      <svg width="100%" height="100%" viewBox="0 0 420 600" fill="none" preserveAspectRatio="xMidYMid slice">
-        <circle cx="370" cy="60" r="140" stroke="rgba(225,255,0,0.04)" stroke-width="1"/>
-        <circle cx="370" cy="60" r="90" stroke="rgba(255,255,255,0.04)" stroke-width=".5"/>
-        <circle cx="370" cy="60" r="5" fill="rgba(225,255,0,0.55)"/>
-        <path d="M24 110 L24 90 L44 90" stroke="rgba(225,255,0,0.18)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <path d="M396 490 L396 510 L376 510" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none" stroke-linecap="round"/>
-        <rect x="290" y="478" width="24" height="24" rx="3" stroke="rgba(225,255,0,0.09)" stroke-width="1" transform="rotate(16 302 490)"/>
-        <line x1="340" y1="278" x2="340" y2="304" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-linecap="round"/>
-        <line x1="327" y1="291" x2="353" y2="291" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-linecap="round"/>
-        <g opacity=".05">
-          <circle cx="50" cy="210" r="1.5" fill="white"/><circle cx="75" cy="210" r="1.5" fill="white"/><circle cx="100" cy="210" r="1.5" fill="white"/>
-          <circle cx="50" cy="232" r="1.5" fill="white"/><circle cx="75" cy="232" r="1.5" fill="white"/><circle cx="100" cy="232" r="1.5" fill="white"/>
-          <circle cx="50" cy="254" r="1.5" fill="white"/><circle cx="75" cy="254" r="1.5" fill="white"/><circle cx="100" cy="254" r="1.5" fill="white"/>
-        </g>
-        <polygon points="55,510 82,460 109,510" stroke="rgba(255,255,255,0.04)" stroke-width=".8" fill="none"/>
-        <line x1="0" y1="440" x2="170" y2="600" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-        <!-- subtle glow blob -->
-        <ellipse cx="200" cy="300" rx="180" ry="120" fill="rgba(225,255,0,0.015)"/>
-      </svg>
-    </div>
+<!-- ═══════════ TOPBAR GLOBAL ═══════════ -->
+<div class="topbar-global">
+  <a href="/mulberry_partners.html" class="tg-logo"><img src="/mulberry-logo-full.png" alt="Mulberry"/></a>
+  <div class="tg-sep"></div>
+  <div class="tg-service" id="tg-service-name">Panou Service</div>
+  <div class="tg-badge"><div class="tg-dot"></div>Partener activ</div>
+  <div class="tg-avatar" id="tg-av">ML</div>
+</div>
 
-    <div class="logo">
-      <div class="logo-mark">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#000" stroke-width="1.5"/><circle cx="7" cy="7" r="2" fill="#000"/></svg>
-      </div>
-      <span class="logo-name">Mulberry</span>
-    </div>
+<!-- ═══════════ LAYOUT ═══════════ -->
+<div class="layout-inner">
 
-    <div class="left-hero">
-      <p class="left-eyebrow">Vehicle registration</p>
-      <div class="hero-glass">
-        <div class="hero-glow"></div>
-        <h1 class="left-title">Activate your<br><em>Yellowcard</em></h1>
-        <p class="left-sub">From your registration card we extract vehicle data and sync it across Yellowcard, HUB and Settings.</p>
-      </div>
-    </div>
-
-    <div class="pills-glass">
-      <button class="pill ba" id="pill-1" onclick="goTo(1)">
-        <div class="pnum" id="pn1">1</div>
-        <div class="plbl">Documents</div>
-      </button>
-      <div class="pconn" id="pc12"></div>
-      <button class="pill" id="pill-2" onclick="goTo(2)">
-        <div class="pnum" id="pn2">2</div>
-        <div class="plbl">Vehicle</div>
-      </button>
-      <div class="pconn" id="pc23"></div>
-      <button class="pill" id="pill-3" onclick="goTo(3)">
-        <div class="pnum" id="pn3">3</div>
-        <div class="plbl">Account</div>
-      </button>
-    </div>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sb-section">Principal</div>
+  <div class="sb-item active" onclick="nav('comenzi',this)">
+    <i class="ti ti-clipboard-list"></i><span>Comenzi</span><span class="sb-badge" id="badge-comenzi">3</span>
+  </div>
+  <div class="sb-item" onclick="nav('servicii',this)">
+    <i class="ti ti-tool"></i><span>Servicii</span>
+  </div>
+  <div class="sb-item" onclick="nav('workspace',this)">
+    <i class="ti ti-car"></i><span>Workspace</span><span class="sb-badge" style="background:#f3f4f6;color:#6b7280">1</span>
   </div>
 
-  <!-- RIGHT -->
-  <div class="right">
-    <div class="prog-track">
-      <div class="prog-fill" id="prog" style="width:33%"></div>
-    </div>
+  <div class="sb-section">Comunitate</div>
+  <div class="sb-item" onclick="window.location.href='/mulberry_trust.html'">
+    <i class="ti ti-shield-star"></i><span>Mulberry Trust</span><span class="sb-badge" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff">Feed</span>
+  </div>
 
-    <!-- P1 -->
-    <div class="panel active" id="p1">
-      <div class="panel-step">Step 1 of 3</div>
-      <h2 class="panel-title">Registration Card</h2>
-      <p class="panel-sub">Enter fields E and K from your Vehicle Identity Card (CIV).</p>
-      <div class="note green">
-        <div class="note-icon" style="background:#30d158;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        </div>
-        <div>
-          <div class="note-title" style="color:#4ade80;">Secured configuration</div>
-          <div class="note-sub" style="color:rgba(74,222,128,0.75);">Codes are used only to validate your vehicle. Never shared with third parties.</div>
-        </div>
-      </div>
-      <div class="field-group">
-        <div class="field-item"><span class="field-label">Field E</span><input class="field-input mono" type="text" placeholder="VIN — 17 characters" maxlength="17"></div>
-        <div class="field-item"><span class="field-label">Field K</span><input class="field-input mono" type="text" placeholder="Type approval number"></div>
-      </div>
-      <div class="btn-row">
-        <button class="btn-primary" onclick="goTo(2)">Continue <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
-      </div>
-      <p class="hint">Your data is stored securely and confidentially.</p>
-    </div>
+  <div class="sb-section">Cont</div>
+  <div class="sb-item" onclick="nav('settings',this)">
+    <i class="ti ti-settings"></i><span>Setări</span>
+  </div>
+  <div class="sb-item" onclick="nav('bilant',this)">
+    <i class="ti ti-chart-bar"></i><span>Bilanț</span>
+  </div>
 
-    <!-- P2 -->
-    <div class="panel" id="p2">
-      <div class="panel-step">Step 2 of 3</div>
-      <h2 class="panel-title">Vehicle Details</h2>
-      <p class="panel-sub">Exactly as they appear on your registration certificate.</p>
-      <div class="note purple">
-        <div class="note-icon" style="background:#5856D6;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        </div>
-        <div>
-          <div class="note-title" style="color:#a5b4fc;">Real-time validation</div>
-          <div class="note-sub" style="color:rgba(165,180,252,0.75);">Plate and VIN are cross-checked with official vehicle registries instantly.</div>
-        </div>
-      </div>
-      <div class="field-group">
-        <div class="field-item"><span class="field-label">Plate</span><input class="field-input mono" type="text" placeholder="BZ 06 ALZ" id="plate" style="text-transform:uppercase;"></div>
-        <div class="field-item"><span class="field-label">Model</span><input class="field-input" type="text" placeholder="BMW M3 G80" id="model"></div>
-        <div class="field-item"><span class="field-label">Year</span><input class="field-input" type="text" placeholder="2022" maxlength="4"></div>
-      </div>
-      <div class="btn-row">
-        <button class="btn-secondary" onclick="goTo(1)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <button class="btn-primary" onclick="goTo(3)">Continue <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
-      </div>
-      <p class="hint">Your data is stored securely and confidentially.</p>
-    </div>
-
-    <!-- P3 -->
-    <div class="panel" id="p3">
-      <div class="panel-step">Step 3 of 3</div>
-      <h2 class="panel-title">Owner & Account</h2>
-      <p class="panel-sub">Link your vehicle to your Mulberry profile.</p>
-      <div class="note green">
-        <div class="note-icon" style="background:#30d158;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div>
-          <div class="note-title" style="color:#4ade80;">Verified identity</div>
-          <div class="note-sub" style="color:rgba(74,222,128,0.75);">Your Yellowcard is tied to your email — no one else can access your data.</div>
-        </div>
-      </div>
-      <div class="field-group" style="margin-bottom:10px;">
-        <div class="field-item"><span class="field-label">First name</span><input class="field-input" type="text" placeholder="Stefan"></div>
-        <div class="field-item"><span class="field-label">Last name</span><input class="field-input" type="text" placeholder="Lazar"></div>
-      </div>
-      <button class="btn-google">
-        <svg width="15" height="15" viewBox="0 0 24 24"><path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 01-5.279-5.28 5.27 5.27 0 015.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 00-8.934 8.934 8.908 8.908 0 008.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z" fill="currentColor"/></svg>
-        Continue with Google
-      </button>
-      <div class="or-div">or with email</div>
-      <div class="field-group" style="margin-bottom:10px;">
-        <div class="field-item"><span class="field-label">Email</span><input class="field-input" type="email" placeholder="stefan@example.com" id="email-in"></div>
-      </div>
-      <div class="btn-row">
-        <button class="btn-secondary" onclick="goTo(2)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <button class="btn-primary" id="send-btn" onclick="sendCode()">Send code <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
-      </div>
-      <p class="hint">Your data is stored securely and confidentially.</p>
-    </div>
-
-    <!-- P4 OTP -->
-    <div class="panel" id="p4">
-      <div class="panel-step">Verification</div>
-      <h2 class="panel-title">Check your email</h2>
-      <p class="panel-sub">We sent a 6-digit code to <strong id="eshow" style="color:#fff;"></strong></p>
-      <div class="code-wrap" onclick="document.getElementById('otp').focus()">
-        <div class="cbox" id="c0">&nbsp;</div><div class="cbox" id="c1">&nbsp;</div><div class="cbox" id="c2">&nbsp;</div>
-        <div class="cbox" id="c3">&nbsp;</div><div class="cbox" id="c4">&nbsp;</div><div class="cbox" id="c5">&nbsp;</div>
-      </div>
-      <input id="otp" type="text" maxlength="6" inputmode="numeric" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;" oninput="handleOtp(this.value)">
-      <div style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:10px;">
-        Didn't receive it? <span style="color:#E1FF00;font-weight:500;cursor:pointer;">Resend</span>
-      </div>
-      <div class="btn-row">
-        <button class="btn-secondary" onclick="goTo(3)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <button class="btn-primary" id="vbtn" onclick="verify()">Verify <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
-      </div>
-      <p class="hint">Your data is stored securely and confidentially.</p>
-    </div>
-
-    <!-- SUCCESS -->
-    <div class="panel" id="p-ok">
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem 0;">
-        <div class="ok-ring">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path class="ck" d="M7 14l5 5 9-10" stroke="#30d158" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div style="font-size:20px;font-weight:600;color:#fff;margin-bottom:5px;">Yellowcard activated</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:1.2rem;line-height:1.55;">Your vehicle is registered and synced across all Mulberry modules.</p>
-        <div style="width:100%;text-align:left;margin-bottom:1.2rem;">
-          <div class="dpill"><div><div style="font-size:11px;color:rgba(255,255,255,0.3);">Plate number</div><div style="font-size:13px;font-weight:600;font-family:monospace;color:#fff;" id="sp">—</div></div><div class="dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="dpill" style="animation-delay:.08s;"><div><div style="font-size:11px;color:rgba(255,255,255,0.3);">Stored in</div><div style="font-size:13px;font-weight:500;color:#fff;">Yellowcard · HUB · Settings</div></div><div class="dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="dpill" style="animation-delay:.16s;"><div><div style="font-size:11px;color:rgba(255,255,255,0.3);">Privacy</div><div style="font-size:13px;font-weight:600;color:#30d158;">Active</div></div><div class="dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-        </div>
-        <button class="btn-primary" style="width:100%;">Open Mulberry <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <div class="sb-footer">
+    <div class="sb-user">
+      <div class="sb-avatar" id="sb-av">ML</div>
+      <div style="min-width:0">
+        <div class="sb-uname" id="sb-uname">—</div>
+        <div class="sb-ucity" id="sb-ucity">—</div>
       </div>
     </div>
-
+    <button class="btn-logout" onclick="partnerLogout()">
+      <i class="ti ti-logout" style="font-size:13px"></i><span>Deconectare</span>
+    </button>
   </div>
 </div>
 
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- COMENZI -->
+  <div id="panel-comenzi" class="panel active" style="display:flex;flex-direction:column;height:100%">
+    <div class="panel-topbar">
+      <div><div class="pt-title">Comenzi</div><div class="pt-sub">Gestionează toate rezervările</div></div>
+      <div class="pt-actions"><button class="btn btn-outline"><i class="ti ti-download" style="font-size:13px"></i>Export</button></div>
+    </div>
+    <div class="content">
+      <div class="tab-row">
+        <div class="tab active" onclick="ctab(this,'ca')">Așteptare <span style="color:var(--green);font-weight:700">(2)</span></div>
+        <div class="tab" onclick="ctab(this,'cp')">Programate</div>
+        <div class="tab" onclick="ctab(this,'cac')">Active</div>
+        <div class="tab" onclick="ctab(this,'cd')">Finalizate</div>
+      </div>
+      <div id="ca">
+        <div class="card-w">
+          <div class="card-icon" style="background:#fef9c3"><i class="ti ti-oil" style="font-size:17px;color:#ca8a04"></i></div>
+          <div class="card-info"><div class="card-title">Schimb ulei + filtru</div><div class="card-meta">B 123 ABC · Dacia Logan 2019 · Ion Popescu</div></div>
+          <span class="status-pill pill-wait">Așteptare</span>
+          <span class="card-price">180 lei</span>
+          <button class="btn-fin">Finalizează</button>
+        </div>
+        <div class="card-w">
+          <div class="card-icon" style="background:#fce7f3"><i class="ti ti-brake" style="font-size:17px;color:#db2777"></i></div>
+          <div class="card-info"><div class="card-title">Verificare frâne + geometrie</div><div class="card-meta">CJ 45 XYZ · VW Golf 2021 · Maria Ionescu</div></div>
+          <span class="status-pill pill-wait">Așteptare</span>
+          <span class="card-price">320 lei</span>
+          <button class="btn-fin">Finalizează</button>
+        </div>
+      </div>
+      <div id="cp" style="display:none">
+        <div class="card-w">
+          <div class="card-icon" style="background:#dbeafe"><i class="ti ti-calendar" style="font-size:17px;color:#2563eb"></i></div>
+          <div class="card-info"><div class="card-title">ITP + revizie completă</div><div class="card-meta">TM 88 DEF · Skoda Octavia · Andrei Marin · 14 iun 10:00</div></div>
+          <span class="status-pill pill-sched">Programat</span>
+          <span class="card-price">450 lei</span>
+          <button class="btn-fin">Finalizează</button>
+        </div>
+      </div>
+      <div id="cac" style="display:none">
+        <div class="card-w">
+          <div class="card-icon" style="background:#f0fdf4"><i class="ti ti-tool" style="font-size:17px;color:#16a34a"></i></div>
+          <div class="card-info"><div class="card-title">Vulcanizare + echilibrare</div><div class="card-meta">B 77 GHI · Renault Clio · în lucru 35 min</div></div>
+          <span class="status-pill pill-prog">În lucru</span>
+          <span class="card-price">200 lei</span>
+          <button class="btn-fin">Finalizează</button>
+        </div>
+      </div>
+      <div id="cd" style="display:none">
+        <div class="card-w">
+          <div class="card-icon" style="background:#f9fafb"><i class="ti ti-check" style="font-size:17px;color:#9ca3af"></i></div>
+          <div class="card-info"><div class="card-title">Schimb distribuție</div><div class="card-meta">IS 12 JKL · Ford Focus · finalizat 11 iun</div></div>
+          <span class="status-pill pill-done">Finalizat</span>
+          <span class="card-price">890 lei</span>
+          <button class="btn-fin archived">Arhivat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICII -->
+  <div id="panel-servicii" class="panel" style="display:none;flex-direction:column;height:100%">
+    <div class="panel-topbar">
+      <div><div class="pt-title">Listare servicii</div><div class="pt-sub">Serviciile vizibile clienților în MulberryGO</div></div>
+      <div class="pt-actions"><button class="btn btn-green"><i class="ti ti-plus" style="font-size:13px"></i>Adaugă serviciu</button></div>
+    </div>
+    <div class="content">
+      <p style="font-size:12px;color:var(--sub);margin-bottom:16px">Activează serviciile pe care vrei să le afișezi clienților în MulberryGO.</p>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="svc-img"><i class="ti ti-oil"></i></div>
+          <div class="svc-body">
+            <div class="svc-name">Schimb ulei & filtru</div>
+            <div class="svc-desc">Schimb ulei motor + filtru ulei. Toate mărcile și tipurile de ulei.</div>
+            <div class="svc-footer"><span class="svc-price">150–250 lei · ~45 min</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-img"><i class="ti ti-certificate"></i></div>
+          <div class="svc-body">
+            <div class="svc-name">ITP complet</div>
+            <div class="svc-desc">Inspecție tehnică periodică autorizată RAR. Toate categoriile.</div>
+            <div class="svc-footer"><span class="svc-price">280–420 lei · ~90 min</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-img"><i class="ti ti-circle"></i></div>
+          <div class="svc-body">
+            <div class="svc-name">Vulcanizare</div>
+            <div class="svc-desc">Reparare, montare și echilibrare anvelope. Sezonier și permanent.</div>
+            <div class="svc-footer"><span class="svc-price">80–160 lei · ~30 min</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-img"><i class="ti ti-engine"></i></div>
+          <div class="svc-body">
+            <div class="svc-name">Diagnoză auto</div>
+            <div class="svc-desc">Scanare OBD, identificare erori motor și sistem electric.</div>
+            <div class="svc-footer"><span class="svc-price">100–150 lei · ~30 min</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div id="panel-workspace" class="panel" style="display:none;flex-direction:column;height:100%">
+    <div class="panel-topbar">
+      <div><div class="pt-title">Workspace</div><div class="pt-sub">Intervenție activă — B 77 GHI</div></div>
+      <div class="pt-actions"><button class="btn btn-green"><i class="ti ti-check" style="font-size:13px"></i>Finalizează intervenția</button></div>
+    </div>
+    <div class="content">
+      <div class="ws-head">
+        <div class="ws-plate">B 77 GHI</div>
+        <div>
+          <div class="ws-car">Renault Clio 1.2 TCe · 2018</div>
+          <div class="ws-km">Ultimii km înregistrați: 87.340 km · acum 3 luni</div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div style="font-size:12px;color:var(--sub)">Vasile Marin</div>
+          <a class="ws-link" href="#">Vezi YellowCard →</a>
+        </div>
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px">Istoric intervenții</div>
+      <div class="history">
+        <div class="h-item">
+          <div class="h-connector"><div class="h-dot"></div><div class="h-line"></div></div>
+          <div class="h-body"><div class="h-title">Vulcanizare + echilibrare — în curs</div><div class="h-meta">Azi, 14:22 · 91.200 km estimat</div></div>
+        </div>
+        <div class="h-item">
+          <div class="h-connector"><div class="h-dot old"></div><div class="h-line"></div></div>
+          <div class="h-body"><div class="h-title">Schimb ulei + filtru aer</div><div class="h-meta">15 mar 2025 · 87.340 km · Auto Ionescu</div></div>
+        </div>
+        <div class="h-item">
+          <div class="h-connector"><div class="h-dot old"></div></div>
+          <div class="h-body"><div class="h-title">ITP + geometrie roți</div><div class="h-meta">02 oct 2024 · 79.100 km · Service Rapid SRL</div></div>
+        </div>
+      </div>
+      <div class="ws-form">
+        <div class="ws-form-label">Adaugă intervenție curentă</div>
+        <div class="form-row">
+          <input type="number" placeholder="Km actuali (ex: 91.200)"/>
+          <input type="text" id="ws-timestamp" readonly style="max-width:180px"/>
+        </div>
+        <div class="form-row">
+          <textarea rows="3" placeholder="Comentariu — ce s-a făcut, piese înlocuite, observații..."></textarea>
+        </div>
+        <button class="btn btn-green btn-block" style="margin-top:6px">
+          <i class="ti ti-check" style="font-size:13px"></i>Finalizează și salvează în dosar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETĂRI -->
+  <div id="panel-settings" class="panel" style="display:none;flex-direction:column;height:100%">
+    <div class="panel-topbar">
+      <div><div class="pt-title">Setări</div><div class="pt-sub">Date cont, service și informații bancare</div></div>
+      <div class="pt-actions"><button class="btn btn-green">Salvează modificările</button></div>
+    </div>
+    <div class="content">
+      <div class="set-grid">
+        <div class="set-card">
+          <div class="set-title"><i class="ti ti-building"></i>Date firmă</div>
+          <div class="set-f"><label>Denumire service</label><input data-set="name" placeholder="Numele service-ului"/></div>
+          <div class="set-f"><label>CIF</label><input data-set="cif" placeholder="RO..."/></div>
+          <div class="set-f"><label>Adresă</label><input data-set="address" placeholder="Str. ..."/></div>
+          <div class="set-f"><label>Oraș</label><input data-set="city" placeholder="București"/></div>
+          <div class="set-f"><label>Telefon</label><input data-set="phone" placeholder="07xx xxx xxx"/></div>
+        </div>
+        <div class="set-card">
+          <div class="set-title"><i class="ti ti-lock"></i>Securitate</div>
+          <div class="set-f"><label>Email</label><input data-set="email" readonly style="color:#9ca3af;background:#f9fafb"/></div>
+          <div class="set-f"><label>Parolă curentă</label><input type="password" placeholder="••••••••"/></div>
+          <div class="set-f"><label>Parolă nouă</label><input type="password" placeholder="Minim 8 caractere"/></div>
+          <div class="set-f"><label>Confirmă parola</label><input type="password" placeholder="Repetă parola nouă"/></div>
+          <button class="btn btn-dark" style="margin-top:8px;width:100%;justify-content:center">Schimbă parola</button>
+        </div>
+        <div class="set-card" style="grid-column:1/-1">
+          <div class="set-title"><i class="ti ti-building-bank"></i>Date bancare</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="set-f"><label>IBAN</label><input placeholder="RO49 AAAA 1B31 0075 9384 0000"/></div>
+            <div class="set-f"><label>Bancă</label><input placeholder="ex: BRD, BCR, Raiffeisen..."/></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BILANȚ -->
+  <div id="panel-bilant" class="panel" style="display:none;flex-direction:column;height:100%">
+    <div class="panel-topbar">
+      <div><div class="pt-title">Bilanț încasări</div><div class="pt-sub">Toate sumele intrate prin comenzi</div></div>
+      <div class="pt-actions">
+        <div class="tab-row" style="margin:0">
+          <div class="tab active" onclick="btab(this,'an')">An</div>
+          <div class="tab" onclick="btab(this,'luna')">Luni</div>
+          <div class="tab" onclick="btab(this,'zi')">Zile</div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="bilant-top">
+        <div class="bnums">
+          <div class="bnum"><div class="bnum-val">12.840 lei</div><div class="bnum-lbl">Total 2025</div></div>
+          <div class="bnum"><div class="bnum-val">2.140 lei</div><div class="bnum-lbl">Luna aceasta</div></div>
+          <div class="bnum"><div class="bnum-val">38</div><div class="bnum-lbl">Comenzi total</div></div>
+        </div>
+        <div class="chart-label" id="chart-label">Încasări lunare 2025</div>
+        <div class="bar-chart" id="bar-chart">
+          <div class="bar" style="height:30%"></div><div class="bar" style="height:45%"></div>
+          <div class="bar" style="height:60%"></div><div class="bar" style="height:38%"></div>
+          <div class="bar" style="height:72%"></div><div class="bar" style="height:55%"></div>
+          <div class="bar dim" style="height:20%"></div><div class="bar dim" style="height:20%"></div>
+          <div class="bar dim" style="height:20%"></div><div class="bar dim" style="height:20%"></div>
+          <div class="bar dim" style="height:20%"></div><div class="bar dim" style="height:20%"></div>
+        </div>
+        <div class="bar-lbls" id="bar-lbls">
+          <div class="bar-lbl">Ian</div><div class="bar-lbl">Feb</div><div class="bar-lbl">Mar</div>
+          <div class="bar-lbl">Apr</div><div class="bar-lbl">Mai</div><div class="bar-lbl">Iun</div>
+          <div class="bar-lbl">Iul</div><div class="bar-lbl">Aug</div><div class="bar-lbl">Sep</div>
+          <div class="bar-lbl">Oct</div><div class="bar-lbl">Nov</div><div class="bar-lbl">Dec</div>
+        </div>
+      </div>
+      <div class="bilant-bottom">
+        <div class="set-card">
+          <div class="set-title"><i class="ti ti-trending-up" style="color:var(--green)"></i>Top servicii</div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:var(--sub)">Schimb ulei</span><span style="font-size:13px;font-weight:700;color:var(--text)">3.200 lei</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:var(--sub)">ITP</span><span style="font-size:13px;font-weight:700;color:var(--text)">2.800 lei</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:var(--sub)">Diagnoză auto</span><span style="font-size:13px;font-weight:700;color:var(--text)">1.540 lei</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:var(--sub)">Vulcanizare</span><span style="font-size:13px;font-weight:700;color:var(--text)">980 lei</span></div>
+          </div>
+        </div>
+        <div class="set-card">
+          <div class="set-title"><i class="ti ti-calendar"></i>Statistici</div>
+          <div style="margin-bottom:12px">
+            <div style="font-size:11px;color:var(--sub);margin-bottom:4px">Medie lunară</div>
+            <div style="font-size:24px;font-weight:700;color:var(--text)">2.140 lei</div>
+            <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:3px">↑ +18% față de luna trecută</div>
+          </div>
+          <div style="margin-bottom:9px">
+            <div style="font-size:11px;color:var(--sub);margin-bottom:2px">Medie per comandă</div>
+            <div style="font-size:16px;font-weight:600;color:var(--text)">338 lei</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--sub);margin-bottom:2px">Cea mai bună lună</div>
+            <div style="font-size:16px;font-weight:600;color:var(--text)">Mai — 1.840 lei</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+</div><!-- /layout-inner -->
+
 <script>
-var step=1,pct={1:33,2:66,3:100,4:100};
-function goTo(n){
-  var cur=document.querySelector('.panel.active');if(cur)cur.classList.remove('active');
-  step=n;var next=document.getElementById(n===4?'p4':'p'+n);
-  if(next){next.classList.add('active');next.style.animation='none';void next.offsetWidth;next.style.animation='panelIn .28s ease both';}
-  var p=document.getElementById('prog');if(p)p.style.width=(pct[n]||100)+'%';
-  updatePills(n);
+/* ── SESSION ── */
+(function(){
+  const p = JSON.parse(localStorage.getItem('mlbr_partner') || sessionStorage.getItem('mlbr_partner') || 'null');
+  if(!p){ window.location.href = '/mulberry_partners.html'; return; }
+  const name     = p.name  || 'Partener';
+  const city     = p.city  || '';
+  const email    = p.email || '';
+  const cif      = p.cif   || '';
+  const initials = name.split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase() || 'ML';
+  document.getElementById('tg-av').textContent       = initials;
+  document.getElementById('tg-service-name').textContent = name;
+  document.getElementById('sb-av').textContent       = initials;
+  document.getElementById('sb-uname').textContent    = name;
+  document.getElementById('sb-ucity').textContent    = city || email;
+  const f = (sel, val) => { const el = document.querySelector(sel); if(el) el.value = val; };
+  f('[data-set="name"]',  name);
+  f('[data-set="cif"]',   cif);
+  f('[data-set="city"]',  city);
+  f('[data-set="email"]', email);
+})();
+
+function partnerLogout(){
+  localStorage.removeItem('mlbr_partner');
+  sessionStorage.removeItem('mlbr_partner');
+  window.location.href = '/mulberry_partners.html';
 }
-function updatePills(n){
-  [['pill-1','ba','bd','pn1'],['pill-2','ba','bd','pn2'],['pill-3','ga','gd','pn3']].forEach(function(c,i){
-    var s=i+1,el=document.getElementById(c[0]);if(!el)return;
-    el.className='pill';if(s<n)el.classList.add(c[2]);else if(s===n)el.classList.add(c[1]);
-    var pn=document.getElementById(c[3]);if(pn)pn.textContent=s<n?'✓':s;
+
+/* ── NAVIGATION ── */
+function nav(id, el){
+  document.querySelectorAll('[id^="panel-"]').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+  const panel = document.getElementById('panel-'+id);
+  panel.classList.add('active'); panel.style.display='flex';
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function ctab(el, id){
+  el.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  ['ca','cp','cac','cd'].forEach(i=>{ const e=document.getElementById(i); if(e) e.style.display=i===id?'block':'none'; });
+}
+
+/* ── BILANȚ ── */
+const bilantData={
+  an:   {labels:['2021','2022','2023','2024','2025'], heights:[20,35,50,65,72], title:'Încasări anuale'},
+  luna: {labels:['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Nov','Dec'], heights:[30,45,60,38,72,55,20,20,20,20,20,20], title:'Încasări lunare 2025'},
+  zi:   {labels:['Lun','Mar','Mie','Joi','Vin','Sâm','Dum'], heights:[40,65,30,80,55,70,20], title:'Încasări zilnice — săptămâna curentă'}
+};
+function btab(el, period){
+  el.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const d = bilantData[period];
+  document.getElementById('chart-label').textContent = d.title;
+  document.getElementById('bar-chart').innerHTML = d.heights.map((h,i)=>
+    `<div class="bar${h<=20&&i>=5?' dim':''}" style="height:${h}%"></div>`).join('');
+  document.getElementById('bar-lbls').innerHTML = d.labels.map(l=>`<div class="bar-lbl">${l}</div>`).join('');
+}
+
+/* ── WORKSPACE TIMESTAMP ── */
+const ts = document.getElementById('ws-timestamp');
+if(ts){ const now=new Date(); ts.value=now.toLocaleDateString('ro-RO',{day:'2-digit',month:'short',year:'numeric'})+', '+now.toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'}); }
+
+/* ── FINALIZEAZĂ DEMO ── */
+document.querySelectorAll('.btn-fin:not(.archived)').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const card=this.closest('.card-w');
+    const pill=card.querySelector('.status-pill');
+    if(pill){pill.className='status-pill pill-done';pill.textContent='Finalizat';}
+    this.className='btn-fin archived'; this.textContent='Arhivat';
   });
-  var c1=document.getElementById('pc12'),c2=document.getElementById('pc23');
-  if(c1)c1.classList.toggle('done',n>1);if(c2)c2.classList.toggle('done',n>2);
-}
-function sendCode(){
-  var e=document.getElementById('email-in'),s=document.getElementById('eshow');
-  if(s)s.textContent=(e&&e.value)?e.value:'stefan@example.com';
-  var b=document.getElementById('send-btn');if(b){b.textContent='Sending...';b.disabled=true;}
-  setTimeout(function(){
-    if(b){b.innerHTML='Send code <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';b.disabled=false;}
-    goTo(4);setTimeout(function(){document.getElementById('otp').focus();},200);
-  },1200);
-}
-function handleOtp(v){
-  v=v.replace(/\D/g,'').slice(0,6);
-  for(var i=0;i<6;i++){var b=document.getElementById('c'+i);if(!b)continue;b.textContent=v[i]||'\u00a0';b.classList.toggle('on',i===v.length&&v.length<6);}
-}
-function verify(){
-  var b=document.getElementById('vbtn');if(b){b.textContent='Verifying...';b.disabled=true;}
-  setTimeout(function(){
-    var cur=document.querySelector('.panel.active');if(cur)cur.classList.remove('active');
-    var ok=document.getElementById('p-ok');if(ok){ok.classList.add('active');ok.style.animation='panelIn .3s ease both';}
-    var p=document.getElementById('prog');if(p)p.style.width='100%';
-    [['pill-1','bd','pn1'],['pill-2','bd','pn2'],['pill-3','gd','pn3']].forEach(function(c){
-      var el=document.getElementById(c[0]);if(!el)return;el.className='pill '+c[1];
-      var pn=document.getElementById(c[2]);if(pn)pn.textContent='✓';
-    });
-    document.getElementById('pc12').classList.add('done');document.getElementById('pc23').classList.add('done');
-    var pl=document.getElementById('plate'),sp=document.getElementById('sp');
-    if(sp&&pl&&pl.value)sp.textContent=pl.value.toUpperCase();
-  },1400);
-}
+});
 </script>
 </body>
 </html>

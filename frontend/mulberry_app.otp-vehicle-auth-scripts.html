@@ -1,0 +1,251 @@
+<!-- Part 10: lines 2251-2500 of mulberry_app.html -->
+  for (let i = 0; i < 6; i++) {
+    const inp = document.getElementById(`af-otp-${i}`);
+    inp.value = '';
+    inp.oninput = e => {
+      if (e.target.value.length > 1) e.target.value = e.target.value.slice(-1);
+      if (e.target.value && i < 5) document.getElementById(`af-otp-${i+1}`).focus();
+    };
+    inp.onkeydown = e => { if (e.key === 'Backspace' && !e.target.value && i > 0) document.getElementById(`af-otp-${i-1}`).focus(); };
+  }
+  document.getElementById('af-otp-0').focus();
+}
+
+async function afHandleUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) return afShowAlert('af-alert-3', 'Fișier prea mare. Max 10MB.');
+  document.getElementById('af-upload-zone').style.display = 'none';
+  document.getElementById('af-processing').classList.add('active');
+  document.getElementById('af-processing-text').textContent = 'Analizăm documentul...';
+  try {
+    const base64 = await afFileToBase64(file);
+    setTimeout(() => { document.getElementById('af-processing-text').textContent = 'Verificăm calitatea imaginii...'; }, 1000);
+    setTimeout(() => { document.getElementById('af-processing-text').textContent = 'Extragem datele cu AI...'; }, 2500);
+    const res  = await fetch('/api/scan-talon', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ image: base64, mime_type: file.type }) });
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || 'Nu am putut extrage datele. Încearcă o poză mai clară.');
+    document.getElementById('af-processing').classList.remove('active');
+    afShowExtracted(data);
+  } catch(err) {
+    document.getElementById('af-processing').classList.remove('active');
+    document.getElementById('af-upload-zone').style.display = 'block';
+    afShowAlert('af-alert-3', err.message || 'Eroare. Încearcă o poză mai clară.');
+  }
+}
+
+function afShowExtracted(data) {
+  if (data.brand)  document.getElementById('yc-brand').value  = data.brand;
+  if (data.model)  document.getElementById('yc-model').value  = data.model;
+  if (data.vin)    document.getElementById('yc-vin').value    = data.vin;
+  if (data.plate)  document.getElementById('yc-plate').value  = data.plate.toUpperCase();
+  if (data.year)   document.getElementById('yc-regdate').value = data.year + '-01-01';
+  document.getElementById('af-extracted').classList.add('active');
+}
+
+async function afSaveVehicle() {
+  if (!document.getElementById('af-confirm-check').checked) return afShowAlert('af-alert-3', 'Confirmă că datele sunt corecte.');
+  const vin     = document.getElementById('yc-vin').value.trim();
+  const plate   = document.getElementById('yc-plate').value.trim();
+  const brand   = document.getElementById('yc-brand').value.trim();
+  const model   = document.getElementById('yc-model').value.trim();
+  const regdate = document.getElementById('yc-regdate').value;
+  if (!vin && !plate) return afShowAlert('af-alert-3', 'Completează cel puțin VIN-ul sau numărul de înmatriculare.');
+  const btn = document.getElementById('af-gen-btn');
+  btn.textContent = 'Se salvează...'; btn.disabled = true;
+  try {
+    const token = (typeof window.api !== 'undefined' && window.api.getToken) ? window.api.getToken() : localStorage.getItem('mulberry_session') || '';
+    const res = await fetch('/cars/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ vin, plate, brand, model, first_registration: regdate })
+    });
+    if (!res.ok) throw new Error('Eroare la salvare vehicul.');
+    enterApp();
+  } catch(err) {
+    btn.textContent = 'Salvează vehiculul →'; btn.disabled = false;
+    afShowAlert('af-alert-3', err.message || 'Eroare. Încearcă din nou.');
+  }
+}
+
+function afResetUpload() {
+  document.getElementById('af-upload-zone').style.display = 'block';
+  document.getElementById('af-extracted').classList.remove('active');
+  document.getElementById('af-talon-input').value = '';
+}
+
+function afFileToBase64(file) {
+  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(file); });
+}
+
+function afShowAlert(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.classList.add('active');
+  setTimeout(() => el.classList.remove('active'), 5000);
+}
+
+// Drag & drop on upload zone
+document.addEventListener('DOMContentLoaded', () => {
+  const zone = document.getElementById('af-upload-zone');
+  if (zone) {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault(); zone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) afHandleUpload({ target: { files: [file] } });
+    });
+  }
+});
+
+// Curăță URL-ul după auth
+setTimeout(() => {
+  if (window.location.hash.includes('access_token')) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+}, 500);
+
+// Supabase auth — doar Google OAuth
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'SIGNED_IN' && session && sessionStorage.getItem('mlbr_oauth')) {
+    sessionStorage.removeItem('mlbr_oauth');
+    const user  = session.user;
+    const d = { email: user.email, name: user.user_metadata?.full_name || null, avatar: user.user_metadata?.avatar_url || null };
+    saveSession(d);
+    const isNew = (Date.now() - new Date(user.created_at).getTime()) < 30000;
+    if (isNew) { afGoToStep(3); } else { enterApp(); }
+  }
+});
+
+function switchTab(t) {} // legacy stub
+
+function setBtnLoad(id, loading, label) {
+  const b = document.getElementById(id); if(!b) return;
+  b.disabled = loading;
+  b.innerHTML = loading ? '<span class="spin"></span>' : label;
+}
+
+let _logoutConfirmTimer = null;
+function handleUserClick() {
+  const el = document.querySelector('.sb-user');
+  if (el.classList.contains('confirm-logout')) {
+    clearTimeout(_logoutConfirmTimer);
+    el.classList.remove('confirm-logout');
+    doLogout();
+  } else {
+    el.classList.add('confirm-logout');
+    _logoutConfirmTimer = setTimeout(() => el.classList.remove('confirm-logout'), 3000);
+  }
+}
+
+function doLogout() {
+  clearSession();
+  document.getElementById('app-shell').classList.add('hidden');
+  document.getElementById('auth-screen').classList.remove('hidden');
+  toast('Deconectat', '');
+}
+
+function hashStr(s) {
+  let h = 0;
+  for(let i=0;i<s.length;i++) h = Math.imul(31,h)+s.charCodeAt(i)|0;
+  return h;
+}
+function greeting() {
+  const h = new Date().getHours();
+  return (h < 5 || h >= 22) ? 'Hello' : h < 12 ? 'Bună dimineața' : h < 18 ? 'Bună ziua' : 'Bună seara';
+}
+
+function setAvatar(el, avatarUrl, init) {
+  if (!el) return;
+  if (avatarUrl) {
+    el.innerHTML = `<img src="${avatarUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block" onerror="this.parentElement.textContent='${init}'">`;
+  } else {
+    el.innerHTML = '';
+    el.textContent = init;
+  }
+}
+
+function syncUser() {
+  if (!currentUser) return;
+  const raw      = currentUser.email || currentUser.identifier || 'User';
+  const fullName = currentUser.name || null;
+  const name     = fullName || (raw.includes('@') ? raw.split('@')[0] : raw);
+  const init     = name[0].toUpperCase();
+  const cardId   = 'MLB-' + name.slice(0,4).toUpperCase() + '-' + Math.abs(hashStr(raw) % 9000 + 1000);
+  const avatar   = currentUser.avatar || null;
+
+  // Avatar elements (profile picture or initial)
+  setAvatar(document.getElementById('sb-avatar'), avatar, init);
+  setAvatar(document.getElementById('tb-avatar'), avatar, init);
+  setAvatar(document.getElementById('tb-profile-av'), avatar, init);
+  setAvatar(document.getElementById('gd-hdr-av'), avatar, init);
+
+  // Topbar profile info
+  const tbName = document.getElementById('tb-profile-name');
+  if (tbName) tbName.textContent = fullName || name;
+  const tbEmail = document.getElementById('tb-profile-email');
+  if (tbEmail) tbEmail.textContent = raw;
+
+  // Personalize Gemini modal input placeholder with first name
+  const firstName = (fullName || name).split(' ')[0];
+  const firstCap  = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  const gmInput = document.getElementById('gm-input');
+  if (gmInput) gmInput.placeholder = 'Ce vrei să știi astăzi, ' + firstCap + '?';
+
+  // Sidebar & settings
+  [['sb-uname', fullName || name], ['sb-uemail', raw],
+   ['set-uname', fullName || name], ['set-uemail', raw],
+   ['set-init',  init]].forEach(([id, v]) => {
+    const el = document.getElementById(id); if(el) el.textContent = v;
+  });
+  ['yc-owner','ycp-owner'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.textContent = fullName || name;
+  });
+  ['yc-name','ycp-name'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.textContent = (fullName || name) + "'s Card";
+  });
+  const cardEl = document.getElementById('set-cardid');
+  if(cardEl) cardEl.textContent = cardId;
+}
+
+function enterApp() {
+  document.getElementById('auth-screen').classList.add('hidden');
+  document.getElementById('app-shell').classList.remove('hidden');
+  syncUser();
+  checkHealth();
+  loadStats();
+  const now = new Date();
+  const t = now.toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'});
+  const el = document.getElementById('at-login'); if(el) el.textContent = t;
+  const ex = document.getElementById('at-expire');
+  if(ex) {
+    const exp = new Date(now.getTime()+86400000);
+    ex.textContent = exp.toLocaleDateString('ro-RO',{day:'2-digit',month:'2-digit'});
+  }
+  goPanel('dashboard');
+  const gl = document.getElementById('gd-greeting-lbl');
+  if (gl) gl.textContent = greeting() + ',';
+  const gt = document.getElementById('gd-main-title');
+  if (gt) {
+    const fullName = currentUser?.name;
+    let displayName;
+    if (fullName) {
+      displayName = fullName.split(' ')[0];
+    } else {
+      const raw = currentUser?.email || '';
+      displayName = raw.includes('@') ? raw.split('@')[0] : (raw || 'Mulberry');
+    }
+    gt.textContent = displayName.charAt(0).toUpperCase() + displayName.slice(1) + '!';
+  }
+  // Load vehicle data for dashboard Yellowcard
+  apiGet('/me/vehicle').then(v => {
+    const vinEl = document.getElementById('nd-ycard-vin');
+    const plEl  = document.getElementById('nd-ycard-plate');
+    if (vinEl && v.vin)   vinEl.textContent = 'VIN: ' + v.vin;
+    if (plEl  && v.plate) plEl.textContent  = v.plate.toUpperCase();
+  }).catch(() => {});
+}
+
+const PANEL_META = {
+  dashboard:   ['MulberryFAST', () => greeting()],
+  yellowcard:  ['YellowCard',  () => 'Identitatea digitală a vehiculului tău'],

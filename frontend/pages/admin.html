@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Mulberry Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;
+  --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+  --text:#f0f0f0;
+  --muted:#888;
+  --green:#00B86A;
+  --yellow:#ECFF54;
+  --red:#FF4D4D;
+  --blue:#3B82F6;
+  --purple:#A855F7;
+  --teal:#14B8A6;
+}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── top bar ── */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:60px;
+  background:rgba(8,8,8,0.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px);
+}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-left img{height:24px;opacity:.9}
+.admin-badge{
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  background:rgba(236,255,84,0.12);color:var(--yellow);
+  border:1px solid rgba(236,255,84,0.3);
+  padding:3px 8px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase;
+}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.admin-email{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace}
+.btn-logout{
+  background:transparent;border:1px solid var(--border);
+  color:var(--muted);font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;
+  padding:6px 14px;border-radius:8px;cursor:pointer;transition:all .2s;
+}
+.btn-logout:hover{border-color:rgba(255,77,77,.5);color:var(--red)}
+
+/* ── layout ── */
+.shell{max-width:1280px;margin:0 auto;padding:32px 24px}
+
+/* ── stats row ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:20px 24px;display:flex;flex-direction:column;gap:6px;
+  transition:border-color .2s;
+}
+.stat-card:hover{border-color:rgba(255,255,255,0.14)}
+.stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.stat-value{font-family:'Manrope',sans-serif;font-size:36px;font-weight:800;letter-spacing:-.02em}
+.stat-value.green{color:var(--green)}
+.stat-value.yellow{color:var(--yellow)}
+.stat-value.blue{color:var(--blue)}
+.stat-value.red{color:var(--red)}
+
+/* ── tabs ── */
+.tab-bar{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:0}
+.tab{
+  background:transparent;border:none;color:var(--muted);
+  font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;
+  padding:10px 20px;border-radius:8px 8px 0 0;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .15s;
+}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--text);border-bottom-color:var(--yellow)}
+
+/* ── panel ── */
+.panel{display:none}
+.panel.active{display:block}
+
+/* ── table ── */
+.table-wrap{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+}
+.table-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;border-bottom:1px solid var(--border);
+}
+.table-title{font-family:'Manrope',sans-serif;font-size:14px;font-weight:700}
+.table-count{
+  font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);
+  background:rgba(255,255,255,0.06);padding:3px 8px;border-radius:6px;
+}
+table{width:100%;border-collapse:collapse}
+thead th{
+  padding:10px 16px;text-align:left;
+  font-size:11px;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.06em;
+  border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);
+}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.04);transition:background .15s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:rgba(255,255,255,0.03)}
+tbody td{padding:12px 16px;font-size:13px;vertical-align:middle}
+.mono{font-family:'DM Mono',monospace;font-size:12px}
+
+/* ── status pills ── */
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;
+  font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.04em;
+}
+.pill::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.verified{background:rgba(0,184,106,.12);color:var(--green)}
+.pill.pending{background:rgba(236,255,84,.1);color:var(--yellow)}
+.pill.rejected{background:rgba(255,77,77,.1);color:var(--red)}
+.pill.active{background:rgba(59,130,246,.12);color:var(--blue)}
+.pill.rca{background:rgba(20,184,166,.12);color:var(--teal)}
+.pill.casco{background:rgba(168,85,247,.12);color:var(--purple)}
+
+/* ── action buttons ── */
+.action-btn{
+  background:transparent;border:1px solid var(--border);color:var(--muted);
+  font-size:11px;font-family:'DM Mono',monospace;padding:4px 10px;
+  border-radius:6px;cursor:pointer;transition:all .15s;margin-right:4px;
+}
+.action-btn:hover.approve{border-color:rgba(0,184,106,.5);color:var(--green)}
+.action-btn:hover.reject{border-color:rgba(255,77,77,.5);color:var(--red)}
+
+/* ── empty state ── */
+.empty{padding:48px;text-align:center;color:var(--muted);font-size:14px}
+
+/* ── loading skeleton ── */
+.skeleton{
+  background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 75%);
+  background-size:200% 100%;animation:shimmer 1.4s infinite;
+  height:14px;border-radius:4px;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skeleton-row{display:flex;gap:16px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.skeleton-row .skeleton:nth-child(1){width:80px}
+.skeleton-row .skeleton:nth-child(2){width:160px}
+.skeleton-row .skeleton:nth-child(3){width:120px;flex:1}
+.skeleton-row .skeleton:nth-child(4){width:60px}
+
+/* ── toast ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  background:rgba(20,20,20,0.95);border:1px solid var(--border);
+  border-radius:12px;padding:14px 20px;font-size:13px;
+  backdrop-filter:blur(20px);transform:translateY(100px);opacity:0;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:rgba(0,184,106,.4);color:var(--green)}
+.toast.error{border-color:rgba(255,77,77,.4);color:var(--red)}
+
+/* ── auth screen ── */
+#auth-gate{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);display:flex;align-items:center;justify-content:center;
+}
+.auth-card{
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:20px;padding:40px 48px;text-align:center;max-width:360px;
+}
+.auth-card img{height:28px;margin-bottom:24px;opacity:.8}
+.auth-card p{font-size:14px;color:var(--muted);line-height:1.6}
+.spinner{
+  width:32px;height:32px;border:2px solid rgba(255,255,255,.1);
+  border-top-color:var(--yellow);border-radius:50%;
+  animation:spin .7s linear infinite;margin:24px auto 0;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:768px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .topbar{padding:0 16px}
+  .shell{padding:20px 12px}
+  thead{display:none}
+  tbody td{display:flex;justify-content:space-between;padding:8px 16px}
+  tbody td::before{content:attr(data-label);color:var(--muted);font-size:11px;text-transform:uppercase}
+}
+</style>
+</head>
+<body>
+
+<!-- Auth gate shown until session verified -->
+<div id="auth-gate">
+  <div class="auth-card">
+    <img src="/mulberry-wordmark.svg" alt="Mulberry"/>
+    <p>Se verifică sesiunea de admin…</p>
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <img src="/mulberry-wordmark.svg" alt="Mulberry"/>
+    <span class="admin-badge">Admin</span>
+  </div>
+  <div class="topbar-right">
+    <span class="admin-email" id="admin-email-display"></span>
+    <button class="btn-logout" onclick="doLogout()">Deconectare</button>
+  </div>
+</div>
+
+<!-- Main shell -->
+<div class="shell">
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <span class="stat-label">Utilizatori</span>
+      <span class="stat-value blue" id="stat-users">—</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Vehicule</span>
+      <span class="stat-value green" id="stat-vehicles">—</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Oferte</span>
+      <span class="stat-value yellow" id="stat-offers">—</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">În așteptare</span>
+      <span class="stat-value red" id="stat-pending">—</span>
+    </div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('users',this)">Utilizatori</button>
+    <button class="tab" onclick="switchTab('vehicles',this)">Vehicule</button>
+    <button class="tab" onclick="switchTab('offers',this)">Oferte</button>
+    <button class="tab" onclick="switchTab('logs',this)">Loguri</button>
+  </div>
+
+  <!-- Users panel -->
+  <div class="panel active" id="panel-users">
+    <div class="table-wrap">
+      <div class="table-header">
+        <span class="table-title">Utilizatori înregistrați</span>
+        <span class="table-count" id="count-users">…</span>
+      </div>
+      <div id="users-body"><div class="empty">Se încarcă…</div></div>
+    </div>
+  </div>
+
+  <!-- Vehicles panel -->
+  <div class="panel" id="panel-vehicles">
+    <div class="table-wrap">
+      <div class="table-header">
+        <span class="table-title">Vehicule înregistrate</span>
+        <span class="table-count" id="count-vehicles">…</span>
+      </div>
+      <div id="vehicles-body"><div class="empty">Se încarcă…</div></div>
+    </div>
+  </div>
+
+  <!-- Offers panel -->
+  <div class="panel" id="panel-offers">
+    <div class="table-wrap">
+      <div class="table-header">
+        <span class="table-title">Oferte parteneri</span>
+        <span class="table-count" id="count-offers">…</span>
+      </div>
+      <div id="offers-body"><div class="empty">Se încarcă…</div></div>
+    </div>
+  </div>
+
+  <!-- Logs panel -->
+  <div class="panel" id="panel-logs">
+    <div class="table-wrap">
+      <div class="table-header">
+        <span class="table-title">Loguri sistem</span>
+        <span class="table-count">Live</span>
+      </div>
+      <div id="logs-body">
+        <div class="empty">Logurile vor apărea în timp real odată ce backend-ul trimite events.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /shell -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
+const ADMIN_EMAIL  = 'sefanlazar7@gmail.com';
+const API_BASE     = '';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+let accessToken = null;
+
+// ── bootstrap ──────────────────────────────────────
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session || session.user.email !== ADMIN_EMAIL) {
+    window.location.href = '/mulberry_login.html';
+    return;
+  }
+  accessToken = session.access_token;
+  document.getElementById('admin-email-display').textContent = session.user.email;
+  document.getElementById('auth-gate').style.display = 'none';
+  await loadStats();
+  await loadUsers();
+})();
+
+// ── api helper ─────────────────────────────────────
+async function api(path, opts = {}) {
+  const res = await fetch(API_BASE + path, {
+    ...opts,
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      ...(opts.headers || {}),
+    },
+  });
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+// ── stats ──────────────────────────────────────────
+async function loadStats() {
+  try {
+    const s = await api('/admin/stats');
+    document.getElementById('stat-users').textContent    = s.users;
+    document.getElementById('stat-vehicles').textContent = s.vehicles;
+    document.getElementById('stat-offers').textContent   = s.offers;
+    document.getElementById('stat-pending').textContent  = s.pending;
+  } catch (e) {
+    console.error('stats error', e);
+  }
+}
+
+// ── users ──────────────────────────────────────────
+async function loadUsers() {
+  const el = document.getElementById('users-body');
+  el.innerHTML = skeletons(5);
+  try {
+    const users = await api('/admin/users');
+    document.getElementById('count-users').textContent = `${users.length} total`;
+    if (!users.length) { el.innerHTML = '<div class="empty">Niciun utilizator.</div>'; return; }
+    el.innerHTML = `<table>
+      <thead><tr>
+        <th>#</th><th>Email</th><th>Status sesiune</th>
+      </tr></thead>
+      <tbody>${users.map(u => `
+        <tr>
+          <td data-label="ID" class="mono">${u.id}</td>
+          <td data-label="Email">${u.email}</td>
+          <td data-label="Sesiune"><span class="pill ${u.has_token ? 'active' : 'rejected'}">${u.has_token ? 'Activ' : 'Inactiv'}</span></td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  } catch (e) {
+    el.innerHTML = `<div class="empty">Eroare la încărcare: ${e.message}</div>`;
+  }
+}
+
+// ── vehicles ───────────────────────────────────────
+async function loadVehicles() {
+  const el = document.getElementById('vehicles-body');
+  el.innerHTML = skeletons(4);
+  try {
+    const vehicles = await api('/admin/vehicles');
+    document.getElementById('count-vehicles').textContent = `${vehicles.length} total`;
+    if (!vehicles.length) { el.innerHTML = '<div class="empty">Niciun vehicul.</div>'; return; }
+    el.innerHTML = `<table>
+      <thead><tr>
+        <th>Număr</th><th>Proprietar</th><th>Marcă / Model</th><th>An</th><th>VIN</th><th>Cod K</th><th>Status</th><th>Acțiuni</th>
+      </tr></thead>
+      <tbody>${vehicles.map(v => `
+        <tr id="vrow-${v.vin}">
+          <td data-label="Număr" class="mono">${v.plate}</td>
+          <td data-label="Proprietar">${v.owner || '—'}</td>
+          <td data-label="Marcă">${v.brand} ${v.model}</td>
+          <td data-label="An" class="mono">${v.year}</td>
+          <td data-label="VIN" class="mono" style="font-size:11px">${v.vin}</td>
+          <td data-label="Cod K" class="mono" style="font-size:11px">${v.cod_k || '—'}</td>
+          <td data-label="Status"><span class="pill ${v.status}">${v.status}</span></td>
+          <td data-label="Acțiuni">
+            ${v.status !== 'verified'  ? `<button class="action-btn approve" onclick="setVehicleStatus('${v.vin}','verified')">Aprobă</button>` : ''}
+            ${v.status !== 'rejected'  ? `<button class="action-btn reject"  onclick="setVehicleStatus('${v.vin}','rejected')">Respinge</button>` : ''}
+          </td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  } catch (e) {
+    el.innerHTML = `<div class="empty">Eroare: ${e.message}</div>`;
+  }
+}
+
+async function setVehicleStatus(vin, status) {
+  try {
+    await api(`/admin/vehicles/${vin}/status`, { method: 'PATCH', body: JSON.stringify({ status }) });
+    showToast(`VIN ${vin} → ${status}`, 'success');
+    await loadVehicles();
+    await loadStats();
+  } catch (e) {
+    showToast(`Eroare: ${e.message}`, 'error');
+  }
+}
+
+// ── offers ─────────────────────────────────────────
+async function loadOffers() {
+  const el = document.getElementById('offers-body');
+  el.innerHTML = skeletons(3);
+  try {
+    const offers = await api('/admin/offers');
+    document.getElementById('count-offers').textContent = `${offers.length} total`;
+    if (!offers.length) { el.innerHTML = '<div class="empty">Nicio ofertă.</div>'; return; }
+    el.innerHTML = `<table>
+      <thead><tr>
+        <th>Partener</th><th>Tip</th><th>Preț</th><th>Valabilitate</th>
+      </tr></thead>
+      <tbody>${offers.map(o => `
+        <tr>
+          <td data-label="Partener">${o.partner}</td>
+          <td data-label="Tip"><span class="pill ${o.type.toLowerCase()}">${o.type}</span></td>
+          <td data-label="Preț" class="mono">${o.price} ${o.currency}</td>
+          <td data-label="Valabilitate" class="mono">${o.valid_days} zile</td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  } catch (e) {
+    el.innerHTML = `<div class="empty">Eroare: ${e.message}</div>`;
+  }
+}
+
+// ── tab switch ─────────────────────────────────────
+const loaders = { users: loadUsers, vehicles: loadVehicles, offers: loadOffers };
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(`panel-${name}`).classList.add('active');
+  if (loaders[name]) loaders[name]();
+}
+
+// ── logout ─────────────────────────────────────────
+async function doLogout() {
+  await sb.auth.signOut();
+  window.location.href = '/mulberry_login.html';
+}
+
+// ── helpers ────────────────────────────────────────
+function skeletons(n) {
+  return Array.from({length: n}, () =>
+    `<div class="skeleton-row"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>`
+  ).join('');
+}
+
+let toastTimer;
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+}
+</script>
+</body>
+</html>

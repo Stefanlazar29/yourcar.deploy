@@ -1,0 +1,210 @@
+<!-- Part 13: lines 3001-3209 of mulberry_app.html -->
+          <p style="font-size:13px;color:rgba(255,255,255,.45);margin-bottom:1.2rem;line-height:1.55">Your vehicle is registered and synced across all Mulberry modules.</p>
+          <div style="width:100%;text-align:left;margin-bottom:1.2rem">
+            <div class="vreg-dpill"><div><div style="font-size:11px;color:rgba(255,255,255,.3)">Plate number</div><div style="font-size:13px;font-weight:600;font-family:monospace;color:#fff" id="vreg-ok-plate">—</div></div><div class="vreg-dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+            <div class="vreg-dpill" style="animation-delay:.08s"><div><div style="font-size:11px;color:rgba(255,255,255,.3)">Stored in</div><div style="font-size:13px;font-weight:500;color:#fff">Yellowcard · HUB · Settings</div></div><div class="vreg-dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+            <div class="vreg-dpill" style="animation-delay:.16s"><div><div style="font-size:11px;color:rgba(255,255,255,.3)">Privacy</div><div style="font-size:13px;font-weight:600;color:#30d158">Active</div></div><div class="vreg-dck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+          </div>
+          <button class="vreg-btn-primary" style="width:100%" onclick="closeVehicleReg()">Open Mulberry <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+
+    </div><!-- /vreg-right -->
+  </div><!-- /vreg-modal -->
+</div><!-- /vreg-overlay -->
+
+<script>
+/* ── Signup Overlay ─────────────────────────────────── */
+function openSignup() {
+  var overlay = document.getElementById('signup-overlay');
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeSignup() {
+  document.getElementById('signup-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('signup-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeSignup();
+});
+window.addEventListener('message', function(e) {
+  if (!e.data || e.data.type !== 'vreg-complete') return;
+  var d = e.data.data || {};
+  closeSignup();
+  var vinEl = document.getElementById('nd-ycard-vin');
+  var plEl  = document.getElementById('nd-ycard-plate');
+  if (vinEl && d.vin)   vinEl.textContent = 'VIN: ' + d.vin;
+  if (plEl  && d.plate) plEl.textContent  = d.plate;
+  ['ycp-plate'].forEach(function(id){ var el=document.getElementById(id); if(el&&d.plate) el.textContent=d.plate; });
+  ['ycp-vin'].forEach(function(id){ var el=document.getElementById(id); if(el&&d.vin) el.textContent=d.vin; });
+  ['yc-owner','ycp-owner'].forEach(function(id){ var el=document.getElementById(id); if(el&&d.name) el.textContent=d.name; });
+  if (d.name) ['sb-uname','set-uname'].forEach(function(id){ var el=document.getElementById(id); if(el&&!el.textContent.trim()) el.textContent=d.name; });
+  if (d.email) ['sb-uemail','set-uemail'].forEach(function(id){ var el=document.getElementById(id); if(el&&!el.textContent.trim()) el.textContent=d.email; });
+  try { var s=JSON.parse(localStorage.getItem('mulberry_vehicle')||'{}'); Object.assign(s,d); localStorage.setItem('mulberry_vehicle',JSON.stringify(s)); } catch(e2){}
+  toast('Yellowcard activated!');
+});
+function openVehicleReg() { openSignup(); }
+function closeVehicleReg() { closeSignup(); }
+
+/* ── OLD vreg logic (unused, kept for reference) ──── */
+var _vregCur = 1;
+
+function openVehicleReg() {
+  _vregCur = 1;
+  document.getElementById('vreg-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  vregGoTo(1);
+  /* reset OTP input */
+  var oi = document.getElementById('vreg-otp'); if (oi) oi.value = '';
+  for (var i = 0; i < 6; i++) { var cb = document.getElementById('vc'+i); if (cb) { cb.textContent = ' '; cb.classList.remove('on'); } }
+}
+
+function closeVehicleReg() {
+  document.getElementById('vreg-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function vregGoTo(n) {
+  var panels = { 1:'vp1', 2:'vp2', 3:'vp3', 4:'vp4', 'ok':'vp-ok' };
+  var old = document.getElementById(panels[_vregCur] || 'vp1');
+  if (old) old.classList.remove('active');
+  _vregCur = n;
+  var next = document.getElementById(panels[n] || 'vp1');
+  if (next) next.classList.add('active');
+
+  var pcts = { 1:33, 2:66, 3:100, 4:100 };
+  var prog = document.getElementById('vreg-prog');
+  if (prog) prog.style.width = (pcts[n] || 100) + '%';
+
+  [1,2,3].forEach(function(s) {
+    var pill = document.getElementById('vpill-' + s);
+    var pnum = document.getElementById('vpnum-' + s);
+    if (!pill) return;
+    var isGreen = s === 3;
+    pill.className = 'vreg-pill';
+    if (s < n) { pill.classList.add(isGreen ? 'gd' : 'bd'); if (pnum) pnum.textContent = '✓'; }
+    else if (s === n) { pill.classList.add(isGreen ? 'ga' : 'ba'); if (pnum) pnum.textContent = s; }
+    else { if (pnum) pnum.textContent = s; }
+  });
+  var l12 = document.getElementById('vline-12');
+  var l23 = document.getElementById('vline-23');
+  if (l12) l12.classList.toggle('done', n > 1);
+  if (l23) l23.classList.toggle('done', n > 2);
+}
+
+function vregSendCode(resend) {
+  var emailEl = document.getElementById('vreg-email');
+  var email = emailEl ? emailEl.value.trim() : '';
+  var showEl = document.getElementById('vreg-email-show');
+  if (showEl) showEl.textContent = email || 'your email';
+  var btn = document.getElementById('vreg-send-btn');
+  if (btn && !resend) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
+  /* send OTP via API */
+  fetch(API + '/auth/otp/send', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
+  }).catch(function() {});
+
+  setTimeout(function() {
+    if (btn) { btn.innerHTML = 'Send code <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>'; btn.disabled = false; }
+    if (!resend) { vregGoTo(4); setTimeout(function(){ var oi=document.getElementById('vreg-otp'); if(oi) oi.focus(); }, 200); }
+  }, 1200);
+}
+
+function vregHandleOtp(val) {
+  val = val.replace(/\D/g,'').slice(0,6);
+  for (var i = 0; i < 6; i++) {
+    var cb = document.getElementById('vc'+i);
+    if (!cb) continue;
+    cb.textContent = val[i] || ' ';
+    cb.classList.toggle('on', i === val.length && val.length < 6);
+  }
+}
+
+async function vregVerify() {
+  var btn = document.getElementById('vreg-verify-btn');
+  if (btn) { btn.textContent = 'Verifying...'; btn.disabled = true; }
+
+  var vin   = (document.getElementById('vreg-vin')   ?.value || '').trim().toUpperCase();
+  var plate = (document.getElementById('vreg-plate') ?.value || '').trim().toUpperCase();
+  var model = (document.getElementById('vreg-model') ?.value || '').trim();
+  var year  = (document.getElementById('vreg-year')  ?.value || '').trim();
+  var fname = (document.getElementById('vreg-fname') ?.value || '').trim();
+  var lname = (document.getElementById('vreg-lname') ?.value || '').trim();
+  var kcode = (document.getElementById('vreg-kcode') ?.value || '').trim();
+  var email = (document.getElementById('vreg-email') ?.value || '').trim().toLowerCase();
+  var otp   = (document.getElementById('vreg-otp')   ?.value || '').replace(/\D/g,'');
+  var fullName = [fname, lname].filter(Boolean).join(' ');
+  var vehicleData = { vin: vin||null, plate: plate||null, model: model||null, year: year?parseInt(year):null, kcode: kcode||null, owner: fullName||null };
+
+  /* 1. Verify OTP + register/login */
+  try {
+    var r = await fetch(API + '/auth/otp/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, otp, name: fullName||null })
+    });
+    var d = await r.json().catch(function(){ return {}; });
+    if (r.ok && d.access_token) {
+      saveSession({ email, name: fullName||null, token: d.access_token });
+      if (!currentUser) currentUser = {};
+      currentUser.email = email; currentUser.name = fullName||null; currentUser.token = d.access_token;
+    }
+  } catch(e) { console.warn('[VReg] OTP verify:', e.message); }
+
+  /* 2. POST vehicle */
+  try {
+    var headers = { 'Content-Type': 'application/json' };
+    if (currentUser?.token) headers['Authorization'] = 'Bearer ' + currentUser.token;
+    await fetch(API + '/me/vehicle', { method:'POST', headers, body: JSON.stringify(vehicleData) });
+  } catch(e) { console.warn('[VReg] vehicle save:', e.message); }
+
+  /* 3. Update UI elements */
+  var vinEl = document.getElementById('nd-ycard-vin');
+  var plEl  = document.getElementById('nd-ycard-plate');
+  if (vinEl)  vinEl.textContent  = vin   ? 'VIN: '+vin : 'VIN: —';
+  if (plEl)   plEl.textContent   = plate || '— ——';
+  ['ycp-plate'].forEach(function(id){ var el=document.getElementById(id); if(el) el.textContent=plate||'—'; });
+  ['ycp-vin'].forEach(function(id){ var el=document.getElementById(id); if(el) el.textContent=vin||'—'; });
+  ['yc-owner','ycp-owner'].forEach(function(id){ var el=document.getElementById(id); if(el) el.textContent=fullName||'—'; });
+  ['yc-name','ycp-name'].forEach(function(id){ var el=document.getElementById(id); if(el&&fullName) el.textContent=fullName+"'s Card"; });
+  if (fullName) {
+    ['sb-uname','set-uname'].forEach(function(id){ var el=document.getElementById(id); if(el&&!el.textContent.trim()) el.textContent=fullName; });
+    if (currentUser && !currentUser.name) currentUser.name = fullName;
+  }
+  ['set-uemail','sb-uemail'].forEach(function(id){ var el=document.getElementById(id); if(el&&email&&!el.textContent.trim()) el.textContent=email; });
+
+  /* 4. Persist localStorage */
+  try {
+    var stored = JSON.parse(localStorage.getItem('mulberry_vehicle')||'{}');
+    Object.assign(stored, vehicleData);
+    localStorage.setItem('mulberry_vehicle', JSON.stringify(stored));
+    var sess = JSON.parse(localStorage.getItem('mulberry_session')||'{}');
+    if (fullName && !sess.name) sess.name = fullName;
+    if (email && !sess.email)   sess.email = email;
+    localStorage.setItem('mulberry_session', JSON.stringify(sess));
+  } catch(e) {}
+
+  /* 5. Show success */
+  var okPlate = document.getElementById('vreg-ok-plate');
+  if (okPlate) okPlate.textContent = plate || '—';
+  var curEl = document.getElementById('vp4');
+  if (curEl) curEl.classList.remove('active');
+  var ok = document.getElementById('vp-ok');
+  if (ok) { ok.classList.add('active'); ok.style.animation = 'vregPanelIn .3s ease both'; }
+  _vregCur = 'ok';
+  document.getElementById('vreg-prog').style.width = '100%';
+  [['vpill-1','bd'],['vpill-2','bd'],['vpill-3','gd']].forEach(function(c){
+    var el=document.getElementById(c[0]); if(el){el.className='vreg-pill '+c[1];}
+    var pn=document.getElementById(c[0].replace('vpill','vpnum')); if(pn) pn.textContent='✓';
+  });
+  var l12=document.getElementById('vline-12'); var l23=document.getElementById('vline-23');
+  if(l12) l12.classList.add('done'); if(l23) l23.classList.add('done');
+  toast('Yellowcard activated!');
+  if (btn) { btn.disabled = false; }
+}
+</script>
+</body>
+</html>

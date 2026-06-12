@@ -1,0 +1,1082 @@
+{
+  "schema": "mulberry_vehicle_archive_v2",
+  "generated_at": "2026-03-26T22:30:00Z",
+  "date": "2026-03-26",
+  "mlbr_code": "MLBR-F8C2-2CB3",
+  "vehicle": {
+    "user_id": 2,
+    "vin": "TMBCY46Y654251499",
+    "make": "Skoda",
+    "model": "6Y / Fabia",
+    "year": "2004",
+    "fuel": "benzina",
+    "plate": "BZ-39-ALZ",
+    "series": "AESK120011T35E4",
+    "mlbr_code": "MLBR-F8C2-2CB3"
+  },
+  "technical_exo_intelligence": {
+    "recent_insights": [],
+    "suspected_errors": []
+  },
+  "market_research": {
+    "fuel_prices": {},
+    "last_cycle_summary": {
+      "updated_at": "2026-03-26T17:03:55Z",
+      "cycle": {
+        "articles_fetched": 70,
+        "articles_new": 4,
+        "insights_classified": 0,
+        "fuel_prices_updated": 0,
+        "errors": 0,
+        "chroma_indexed": 0
+      },
+      "bnr_eur": 5.0953,
+      "extra": {
+        "optional_urls_tried": [
+          "https://www.bnr.ro/nbrfxrates.xml",
+          "https://www.peco-online.ro/"
+        ]
+      }
+    },
+    "articles_recent_tail": [
+      {
+        "id": 118,
+        "url": "https://www.motorsport.com/f1/news/sky-sports-f1-presenter-natalie-pinkham-returns-for-japanese-gp-after-neck-surgery/10808175/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Sky Sports F1 presenter Natalie Pinkham returns for Japanese GP after neck surgery",
+        "content": "Fan-favourite Sky Sports Formula 1 presenter Natalie Pinkham will return to screens for this weekend's Japanese Grand Prix after being absent from the coverage for five months.Pinkham was forced to skip the 2025 Brazilian Grand Prix due to a slipped disc in her neck that was pressing against nerves affecting her left arm and her spinal cord. After undergoing surgery, the Briton took time to ...Keep reading",
+        "hash": "a7fc2a7edc1bde3f0d616f8ba9280af0",
+        "fetched_at": "2026-03-26T11:34:26"
+      },
+      {
+        "id": 119,
+        "url": "https://www.motorsport.com/f1/news/-oh-sht-how-nico-hulkenbergs-mum-told-him-about-jonathan-wheatleys-audi-exit/10808167/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "“Oh, sh*t” – How Nico Hulkenberg found out about Jonathan Wheatley’s Audi exit",
+        "content": "Nico Hulkenberg has revealed he only found out about Audi team principal Jonathan Wheatley’s departure when his mother shared a news story with him.It was announced last Friday that Wheatley was leaving the Switzerland-based outfit “due to personal reasons”, just a year after joining it. Motorsport understands the Briton is set for an Aston Martin move to replace Adrian Newey as team ...Keep reading",
+        "hash": "ad03b629c4593bada2edf3188cb64c2d",
+        "fetched_at": "2026-03-26T11:34:26"
+      },
+      {
+        "id": 120,
+        "url": "https://www.motorsport.com/f1/news/lewis-hamilton-shares-f1-movie-sequel-documentary-and-tv-series-plans/10808165/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Lewis Hamilton shares \"F1\" movie sequel, documentary and TV series plans",
+        "content": "Lewis Hamilton has shared an insight into the five-year plan of his production company, Dawn Apollo Films, including an update on the sequel to F1: The Movie and other projects he is working on.F1 has made several appearances in the recent awards season, with the latest recognition at the Oscars, where it won the award for Best Sound. After exceeding $630million at the global box office, it is ...Keep reading",
+        "hash": "9f48905c052bae8ce63bacc3505f3d58",
+        "fetched_at": "2026-03-26T11:34:26"
+      },
+      {
+        "id": 121,
+        "url": "https://www.motorsport.com/f1/news/still-top-tier-or-neutered-drivers-weigh-in-on-suzukas-f1-challenge/10808150/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Still top-tier or neutered? Drivers weigh in on Suzuka's F1 challenge",
+        "content": "The FIA is pulling one of its levers to help restore Formula 1 qualifying to its former glory, but regardless of its fixes, drivers feel Suzuka is still one of the best challenges on the calendar.Ahead of the Japanese Grand Prix weekend, the FIA reduced the maximum allowed energy usage from 9 to 8MJ per lap in qualifying, which is estimated to significantly reduce the amount of super clipping ...Keep reading",
+        "hash": "1517a35c83de19b3e9a52a2dbd83ee7f",
+        "fetched_at": "2026-03-26T11:57:09"
+      },
+      {
+        "id": 122,
+        "url": "https://www.automarket.ro/tv/curse-auto/liniut-cu-cele-mai-rapide-modele-porsche-cayenne-alturi-de-orlando-bloom-10089.html",
+        "source": "automarket.ro",
+        "title": "VIDEO: Liniută cu cele mai rapide modele Porsche Cayenne alături de Orlando Bloom",
+        "content": "",
+        "hash": "d931894b7f84db53095d87246b12c92a",
+        "fetched_at": "2026-03-26T13:03:37"
+      },
+      {
+        "id": 123,
+        "url": "https://www.automarket.ro/stiri/skoda-se-retrage-de-pe-piata-din-china-din-cauza-vanzarilor-slabe-126481.html",
+        "source": "automarket.ro",
+        "title": "Skoda se retrage de pe piața din China, din cauza vânzărilor slabe",
+        "content": "Începând de la jumătatea acestui an, Skoda nu va mai fi prezentă pe piața din China. Decizia a fost luată de Grupul Volkswagen, din care face parte și marca cehă, ca urmare a vânzărilor foarte mici pe această piață. Concret, în 2025, Skoda a vândut doar 15.000 de mașini în China. Ca o comparație, marca din Mlada Boleslav a vândut 341.000 de mașini în China în 2018. Asta înseamnă o scădere de 96% a vânzărilor...",
+        "hash": "32b466d6259818a0368f9fcb64abe2e5",
+        "fetched_at": "2026-03-26T13:03:37"
+      },
+      {
+        "id": 124,
+        "url": "https://www.motorsport.com/motogp/news/official-motogp-visit-to-inspect-construction-work-at-the-buenos-aires-autodrome/10807968/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "MotoGP chiefs visit Buenos Aires construction site ahead of 2027 Argentina GP",
+        "content": "Top officials from the MotoGP world championship visited the Oscar y Juan Galvez Autodrome on Monday to oversee the work being carried out in preparation for the series’ return to Buenos Aires in 2027.Following the Brazilian Grand Prix held last weekend at the Autodromo Ayrton Senna in Goiania, Carmelo Ezpeleta, CEO of MotoGP Sports Entertainment Group, and Carlos Ezpeleta, sporting ...Keep reading",
+        "hash": "cc21487d8b66197e748f04d62576352b",
+        "fetched_at": "2026-03-26T13:03:47"
+      },
+      {
+        "id": 125,
+        "url": "https://www.motorsport.com/f1/news/lewis-hamilton-shares-full-circle-moment-after-unreal-samurai-experience/10808213/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Lewis Hamilton shares “full circle” moment after \"unreal\" samurai experience",
+        "content": "Lewis Hamilton has shared a \"full circle\" moment after having a samurai lesson from the artist who choreographed the sword-fighting scenes from Quentin Tarantino's Kill Bill.After doing karate as a young boy, Hamilton shared how he began the martial art as a way of dealing with bullying at school, but learned so much more from it than he originally expected. Now, using the time between the ...Keep reading",
+        "hash": "e6898e2285278db606a1eb22d64f6aa4",
+        "fetched_at": "2026-03-26T13:03:47"
+      },
+      {
+        "id": 126,
+        "url": "https://www.motorsport.com/f1/news/kimi-antonelli-revives-kimi-raikkonens-famous-bwoah-as-mercedes-pokes-fun-at-chinese-gp-blunder/10808206/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Kimi Antonelli revives Kimi Raikkonen’s famous \"bwoah\" as Mercedes pokes fun at Chinese GP blunder",
+        "content": "The Mercedes Formula 1 team has poked fun at the awkward slip-up at the Chinese Grand Prix, when Kimi Antonelli was announced as 2007 champion Kimi Raikkonen.The Italian driver was noticeably taken aback and confused as he stepped on the podium following his maiden grand prix victory at the Chinese Grand Prix. For those who were not there in person, footage was later released of the podium ...Keep reading",
+        "hash": "418a0dbcc2ca7109cf0f822c75f52a73",
+        "fetched_at": "2026-03-26T13:03:47"
+      },
+      {
+        "id": 127,
+        "url": "https://www.topgear.ro/blackjack-online-reguli-strategie-si-sfaturi/",
+        "source": "topgear.ro",
+        "title": "Blackjack online: reguli, strategie și sfaturi",
+        "content": "Dintre jocurile practicate în cazinourile terestre, blackjack se evidențiază prin modul în care participanții se implică în acțiune prin decizii strategice pe parcursul rundelor. Cu abordarea potrivită, Avantajul Casei poate scădea chiar și sub 1%, ceea ce înseamnă că organizatorul își păstrează o marjă foarte mică de câștig.  Versiunile online de blackjack au devenit populare […]\nArticolul Blackjack online: reguli, strategie și sfaturi apare prima dată în Top Gear.",
+        "hash": "7eba8b758be4b8c5e944179a684f79a8",
+        "fetched_at": "2026-03-26T14:47:24"
+      },
+      {
+        "id": 128,
+        "url": "https://www.motorsport.com/f1/news/ocon-responds-to-online-death-threats-from-keyboard-warriors-after-colapinto-clash/10808099/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Esteban Ocon responds to death threats from \"keyboard warriors\" after Franco Colapinto clash",
+        "content": "\"Best close your DMs now\" was one journalist’s advice to Esteban Ocon in the post-race media ‘pen’ after a collision with Franco Colapinto in the Chinese Grand Prix. The Haas Formula 1 driver was duly on the receiving end of a torrent of online abuse in the days that followed.While Ocon brushed off the abuse, which included death threats, as the work of \"keyboard warriors\", it forms part ...Keep reading",
+        "hash": "8d1be59a2396bdbd3063f0fa4b0bd94f",
+        "fetched_at": "2026-03-26T14:47:26"
+      },
+      {
+        "id": 129,
+        "url": "https://www.automarket.ro/stiri/leapmotor-va-lansa-3-modele-noi-in-europa-in-2026-126487.html",
+        "source": "automarket.ro",
+        "title": "Leapmotor va lansa 3 modele noi în Europa, în 2026",
+        "content": "Marca chineză Leapmotor continuă să crească în popularitate în Europa. Conform unor noi date furnizate de cei de la DataForce, Leapmotor este a 4-a cea mai populară marcă chineză pe continentul nostru.\r\nDatorită acestui lucru, Leapmotor își va extinde gama sa de modele pe piața europeană. Până la finalul lui 2026, marca chineză va lansa nu mai puțin de 3 modele noi pe Bătrânul Continent, potrivit spuselor lui Danilo Annese, directorul operațiunilor...",
+        "hash": "7dcc029c082d3c160c252df511e2ed0a",
+        "fetched_at": "2026-03-26T16:03:25"
+      },
+      {
+        "id": 130,
+        "url": "https://www.automarket.ro/stiri/cupra-tavascan-versiune-de-baza-noua-cu-190-de-cai-putere-126485.html",
+        "source": "automarket.ro",
+        "title": "Cupra Tavascan, versiune de bază nouă cu 190 de cai putere",
+        "content": "Constructorul spaniol de mașini de performanță a dezvăluit oficial o versiune nouă pentru SUV-ul electric Tavascan. Cu noua versiune de bază, Cupra Tavascan este acum mai puternică și primește și câteva noutăți minore.\r\n\r\nCea mai mare noutate este motorul electric de 190 de cai putere. Acesta este alimentat de o baterie cu o capacitate de 58 kWh și garantează o autonomie de 435 de kilometri. Încărcarea bateriei de la 10% la 80% durează aproximativ 26 de minute....",
+        "hash": "0221a7cae06493983e59b4d94604836d",
+        "fetched_at": "2026-03-26T16:03:25"
+      },
+      {
+        "id": 131,
+        "url": "https://www.automarket.ro/tv/curse-auto/liniut-cu-cele-mai-rapide-modele-porsche-cayenne-alturi-de-orlando-bloom-10089.html",
+        "source": "automarket.ro",
+        "title": "VIDEO: Liniută cu cele mai rapide modele Porsche Cayenne alături de Orlando Bloom",
+        "content": "Constructorul spaniol de mașini de performanță a dezvăluit oficial o versiune nouă pentru SUV-ul electric Tavascan. Cu noua versiune de bază, Cupra Tavascan este acum mai puternică și primește și câteva noutăți minore.\r\n\r\nCea mai mare noutate este motorul electric de 190 de cai putere. Acesta este alimentat de o baterie cu o capacitate de 58 kWh și garantează o autonomie de 435 de kilometri. Încărcarea bateriei de la 10% la 80% durează aproximativ 26 de...",
+        "hash": "bf0685db9f2fe039b435c4eb2de6f92d",
+        "fetched_at": "2026-03-26T16:03:25"
+      },
+      {
+        "id": 132,
+        "url": "https://www.motorsport.com/wrc/news/how-toyotas-new-flying-finn-is-starting-to-make-wrc-headlines/10808068/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "How Toyota’s new flying Finn is starting to make WRC headlines",
+        "content": "Oliver Solberg, Elfyn Evans and now Takamoto Katsuta have grabbed World Rally Championship headlines with victories this year, but Toyota’s other young driver Sami Pajari is fast becoming its next star.Right now, Toyota has an embarrassment of riches within its WRC driver roster. All five of its drivers, Evans, Solberg, Katsuta, Pajari and part-timer and reigning world champion Sebastien ...Keep reading",
+        "hash": "7c878fb419c5377d38b6cff535a4a06e",
+        "fetched_at": "2026-03-26T16:03:29"
+      },
+      {
+        "id": 133,
+        "url": "https://www.motorsport.com/f1/news/george-russell-recreates-iconic-tokyo-drift-scene-in-mercedes-japanese-gp-shoot/10808231/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "George Russell recreates iconic \"Tokyo Drift\" scene in Mercedes Japanese GP shoot",
+        "content": "George Russell channelled his inner Han Lue in a The Fast and the Furious: Tokyo Drift-inspired shoot ahead of the Japanese Grand Prix. The Briton did the iconic pose as he leaned against a Mercedes AMG GT 63, sporting the wolf-inspired livery that will be on the Brackley outfit's Formula 1 cars at this weekend's Japanese Grand Prix. \"Georgie understood the assignment,\" one fan ...Keep reading",
+        "hash": "92cafc8e18fba919c013f827786f7133",
+        "fetched_at": "2026-03-26T16:03:29"
+      },
+      {
+        "id": 134,
+        "url": "https://www.motorsport.com/f1/news/audi-leadership-thrown-into-doubt-after-shock-jonathan-wheatley-exit-theyre-lacking/10808291/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Audi leadership thrown into doubt after \"shock\" Jonathan Wheatley exit: \"They're lacking\"",
+        "content": "Jonathan Wheatley's exit from his role as Audi Formula 1 team principal has been branded a \"shock decision\" by F1 TV presenter Lawrence Barretto.Audi confirmed last week that Wheatley was to leave the team with immediate effect due to personal reasons. The Briton had only joined the team in 2025 and was part of the transition from Sauber to Audi. \"As it continues its journey towards the ...Keep reading",
+        "hash": "1ddae1d85f6a0668cd96df4a28b10177",
+        "fetched_at": "2026-03-26T17:03:42"
+      },
+      {
+        "id": 135,
+        "url": "https://www.motorsport.com/f1/news/piastri-says-mercedes-f1-advantage-over-mclaren-is-nothing-magical/10808187/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Oscar Piastri: Mercedes F1 advantage over McLaren is \"nothing magical\"",
+        "content": "Mercedes drivers have won every grand prix and sprint race this season. A modest sample size, given this weekend’s Japanese Grand Prix is round three, but that hasn’t stopped George Russell continuing to be the championship favourite.Oscar Piastri, a title contender last season, has yet to actually start a grand prix this year, and his McLaren team is having to come to terms with the fact ...Keep reading",
+        "hash": "b6bae02cbd0647cf655c7eaf2916f376",
+        "fetched_at": "2026-03-26T17:03:42"
+      },
+      {
+        "id": 136,
+        "url": "https://www.motorsport.com/indycar/news/andretti-boss-explains-will-powers-steep-transition-in-learning-different-car/10808281/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Andretti boss explains Will Power’s steep transition in learning different car",
+        "content": "Will Power’s opening three races with Andretti Global has been a rollercoaster. The 45-year-old Aussie has shown flashes of brilliant pace at times and gone over the limit on others, with four incidents combined through practice sessions or in the race, including crashing out while leading at Phoenix Raceway earlier this month. However, his latest result, a third-place finish in the Grand ...Keep reading",
+        "hash": "6578f4f15887a389c957ebc54ba1eb4e",
+        "fetched_at": "2026-03-26T17:03:42"
+      },
+      {
+        "id": 137,
+        "url": "https://www.motorsport.com/f1/news/ayao-komatsu-very-proud-of-esteban-ocon-as-he-owns-up-to-franco-colapinto-clash/10808220/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Ayao Komatsu “very proud” of Esteban Ocon as he owns up to Franco Colapinto clash",
+        "content": "Haas team principal Ayao Komatsu is “very proud” of the way Esteban Ocon handled his collision with Franco Colapinto in Formula 1’s Chinese Grand Prix.The incident occurred after Colapinto pitted from eighth on lap 32 of the race; the Alpine emerged out of the pits right in front of Ocon, who attempted a late lunge down the inside in the Turns 1-2 curve but ended up with nowhere to go ...Keep reading",
+        "hash": "ef23be4599ac8b8993323390bce8d600",
+        "fetched_at": "2026-03-26T17:03:42"
+      }
+    ]
+  },
+  "security_auth_audit": {
+    "counts_by_status": {
+      "SUCCESS": 1,
+      "TAB_CLOSE": 574
+    },
+    "recent_events": [
+      {
+        "id": 575,
+        "created_at": "2026-03-26T22:29:59",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 574,
+        "created_at": "2026-03-26T22:29:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 573,
+        "created_at": "2026-03-26T22:29:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 572,
+        "created_at": "2026-03-26T22:29:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 571,
+        "created_at": "2026-03-26T22:29:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 570,
+        "created_at": "2026-03-26T22:29:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 569,
+        "created_at": "2026-03-26T22:29:41",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 568,
+        "created_at": "2026-03-26T22:29:38",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 567,
+        "created_at": "2026-03-26T22:29:35",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 566,
+        "created_at": "2026-03-26T22:29:32",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 565,
+        "created_at": "2026-03-26T22:29:29",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 564,
+        "created_at": "2026-03-26T22:29:26",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 563,
+        "created_at": "2026-03-26T22:29:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 562,
+        "created_at": "2026-03-26T22:29:21",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 561,
+        "created_at": "2026-03-26T22:29:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 560,
+        "created_at": "2026-03-26T22:29:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 559,
+        "created_at": "2026-03-26T22:29:14",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 558,
+        "created_at": "2026-03-26T22:29:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 557,
+        "created_at": "2026-03-26T22:29:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 556,
+        "created_at": "2026-03-26T22:29:07",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 555,
+        "created_at": "2026-03-26T22:29:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 554,
+        "created_at": "2026-03-26T22:29:02",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 553,
+        "created_at": "2026-03-26T22:28:59",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 552,
+        "created_at": "2026-03-26T22:28:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 551,
+        "created_at": "2026-03-26T22:28:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 550,
+        "created_at": "2026-03-26T22:28:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 549,
+        "created_at": "2026-03-26T22:28:48",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 548,
+        "created_at": "2026-03-26T22:28:46",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 547,
+        "created_at": "2026-03-26T22:28:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 546,
+        "created_at": "2026-03-26T22:28:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 545,
+        "created_at": "2026-03-26T22:28:38",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 544,
+        "created_at": "2026-03-26T22:28:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 543,
+        "created_at": "2026-03-26T22:28:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 542,
+        "created_at": "2026-03-26T22:28:31",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 541,
+        "created_at": "2026-03-26T22:28:28",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 540,
+        "created_at": "2026-03-26T22:28:25",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 539,
+        "created_at": "2026-03-26T22:28:22",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 538,
+        "created_at": "2026-03-26T22:28:21",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 537,
+        "created_at": "2026-03-26T22:28:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 536,
+        "created_at": "2026-03-26T22:28:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 535,
+        "created_at": "2026-03-26T22:28:12",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 534,
+        "created_at": "2026-03-26T22:28:09",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 533,
+        "created_at": "2026-03-26T22:28:06",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 532,
+        "created_at": "2026-03-26T22:28:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 531,
+        "created_at": "2026-03-26T22:28:00",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 530,
+        "created_at": "2026-03-26T22:27:57",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 529,
+        "created_at": "2026-03-26T22:27:54",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 528,
+        "created_at": "2026-03-26T22:27:51",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 527,
+        "created_at": "2026-03-26T22:27:48",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 526,
+        "created_at": "2026-03-26T22:27:46",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 525,
+        "created_at": "2026-03-26T22:27:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 524,
+        "created_at": "2026-03-26T22:27:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 523,
+        "created_at": "2026-03-26T22:27:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 522,
+        "created_at": "2026-03-26T22:27:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 521,
+        "created_at": "2026-03-26T22:27:31",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 520,
+        "created_at": "2026-03-26T22:27:28",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 519,
+        "created_at": "2026-03-26T22:27:27",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 518,
+        "created_at": "2026-03-26T22:27:26",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 517,
+        "created_at": "2026-03-26T22:27:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 516,
+        "created_at": "2026-03-26T22:27:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 515,
+        "created_at": "2026-03-26T22:27:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 514,
+        "created_at": "2026-03-26T22:27:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 513,
+        "created_at": "2026-03-26T22:27:12",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 512,
+        "created_at": "2026-03-26T22:27:09",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 511,
+        "created_at": "2026-03-26T22:27:07",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 510,
+        "created_at": "2026-03-26T22:27:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 509,
+        "created_at": "2026-03-26T22:27:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 508,
+        "created_at": "2026-03-26T22:27:00",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 507,
+        "created_at": "2026-03-26T22:26:57",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 506,
+        "created_at": "2026-03-26T22:26:54",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 505,
+        "created_at": "2026-03-26T22:26:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 504,
+        "created_at": "2026-03-26T22:26:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 503,
+        "created_at": "2026-03-26T22:26:48",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 502,
+        "created_at": "2026-03-26T22:26:45",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 501,
+        "created_at": "2026-03-26T22:26:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 500,
+        "created_at": "2026-03-26T22:26:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 499,
+        "created_at": "2026-03-26T22:26:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 498,
+        "created_at": "2026-03-26T22:26:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 497,
+        "created_at": "2026-03-26T22:26:31",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 496,
+        "created_at": "2026-03-26T22:26:28",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 495,
+        "created_at": "2026-03-26T22:26:25",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 494,
+        "created_at": "2026-03-26T22:26:22",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 493,
+        "created_at": "2026-03-26T22:26:19",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 492,
+        "created_at": "2026-03-26T22:26:16",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 491,
+        "created_at": "2026-03-26T22:26:13",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 490,
+        "created_at": "2026-03-26T22:26:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 489,
+        "created_at": "2026-03-26T22:26:07",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 488,
+        "created_at": "2026-03-26T22:26:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 487,
+        "created_at": "2026-03-26T22:26:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 486,
+        "created_at": "2026-03-26T22:26:00",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 485,
+        "created_at": "2026-03-26T22:25:58",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 484,
+        "created_at": "2026-03-26T22:25:55",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 483,
+        "created_at": "2026-03-26T22:25:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 482,
+        "created_at": "2026-03-26T22:25:51",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 481,
+        "created_at": "2026-03-26T22:25:48",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 480,
+        "created_at": "2026-03-26T22:25:45",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 479,
+        "created_at": "2026-03-26T22:25:42",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 478,
+        "created_at": "2026-03-26T22:25:39",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 477,
+        "created_at": "2026-03-26T22:25:36",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 476,
+        "created_at": "2026-03-26T22:25:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 475,
+        "created_at": "2026-03-26T22:25:31",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 474,
+        "created_at": "2026-03-26T22:25:28",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 473,
+        "created_at": "2026-03-26T22:25:26",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 472,
+        "created_at": "2026-03-26T22:25:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 471,
+        "created_at": "2026-03-26T22:25:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 470,
+        "created_at": "2026-03-26T22:25:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 469,
+        "created_at": "2026-03-26T22:25:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 468,
+        "created_at": "2026-03-26T22:25:12",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 467,
+        "created_at": "2026-03-26T22:25:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 466,
+        "created_at": "2026-03-26T22:25:08",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 465,
+        "created_at": "2026-03-26T22:25:07",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 464,
+        "created_at": "2026-03-26T22:25:06",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 463,
+        "created_at": "2026-03-26T22:25:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 462,
+        "created_at": "2026-03-26T22:25:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 461,
+        "created_at": "2026-03-26T22:24:58",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 460,
+        "created_at": "2026-03-26T22:24:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 459,
+        "created_at": "2026-03-26T22:24:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 458,
+        "created_at": "2026-03-26T22:24:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 457,
+        "created_at": "2026-03-26T22:24:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 456,
+        "created_at": "2026-03-26T22:24:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      }
+    ]
+  },
+  "fleet_soft_score_snapshot": {
+    "by_vin": {
+      "TMBCY46Y654251499": 50.0
+    },
+    "avg": 50.0
+  },
+  "soft_score_delta_vs_previous": {
+    "note": "Nu există snapshot anterior (prima zi sau arhivă lipsă)."
+  },
+  "device_signature_authorized": ""
+}

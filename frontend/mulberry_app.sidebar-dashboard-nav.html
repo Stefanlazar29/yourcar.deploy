@@ -1,0 +1,251 @@
+<!-- Part 06: lines 1251-1500 of mulberry_app.html -->
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP SHELL ═════════════════════════════════════ -->
+<div id="app-shell" class="hidden">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <img src="/mulberry-wordmark.svg" alt="Mulberry" class="sb-wordmark">
+        <div class="sb-logo-ver">B2B2C · Assurance</div>
+      </div>
+    </div>
+
+    <div class="sb-user" onclick="handleUserClick()">
+      <div class="sb-avatar" id="sb-avatar">M</div>
+      <div class="sb-uinfo">
+        <div class="sb-uname" id="sb-uname">—</div>
+        <div class="sb-uemail" id="sb-uemail">—</div>
+      </div>
+      <div class="sb-logout">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+
+    <div class="sb-sep"></div>
+    <div class="sb-label">Navigare</div>
+
+    <button class="nav-item active" data-p="dashboard" onclick="goPanel('dashboard')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></span>
+      MulberryFAST
+    </button>
+    <button class="nav-item" data-p="yellowcard" onclick="goPanel('yellowcard')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><rect x="5" y="9" width="5" height="3.5" rx="1"/><path d="M5 16h3.5M11 16h2.5"/></svg></span>
+      YellowCard
+      <span class="ni-badge">MLBR</span>
+    </button>
+    <button class="nav-item" data-p="marketplace" onclick="goPanel('marketplace')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><rect x="5" y="10.5" width="14" height="10.5" rx="2"/><rect x="9.5" y="15" width="5" height="6" rx="1.5"/></svg></span>
+      MulberryGO
+    </button>
+
+    <div class="sb-sep" style="margin-top:10px"></div>
+    <div class="sb-label">Servicii</div>
+
+    <button class="nav-item" data-p="cloud" onclick="goPanel('cloud')">
+      <span class="ni-icon" style="background:rgba(139,92,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 16H8a4.5 4.5 0 010-9 5 5 0 019.5 1H18a3.5 3.5 0 010 7h-1.5z"/><path d="M12 12v4M9.5 14.5L12 12l2.5 2.5"/></svg></span>
+      MulberryCloud
+    </button>
+    <button class="nav-item" data-p="hub" onclick="goPanel('hub')">
+      <span class="ni-icon" style="background:rgba(59,130,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M19.07 4.93l-1.77 1.77M6.7 17.3l-1.77 1.77"/></svg></span>
+      MulberryHUB
+    </button>
+    <button class="nav-item" data-p="drive" onclick="goPanel('drive')">
+      <span class="ni-icon" style="background:rgba(236,255,84,.12)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l2-4h12l2 4"/><rect x="2" y="10.5" width="20" height="8" rx="2.5"/><circle cx="6.5" cy="19.5" r="2"/><circle cx="17.5" cy="19.5" r="2"/></svg></span>
+      MulberryDrive
+    </button>
+    <button class="nav-item" data-p="analytics" style="opacity:0.32;filter:blur(0.6px);pointer-events:none;cursor:default" tabindex="-1">
+      <span class="ni-icon" style="background:rgba(181,243,51,.15)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#b5f333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 12 7 12 10 4 14 20 17 12 22 12"/></svg></span>
+      Analytics
+    </button>
+
+    <div class="sb-sep" style="margin-top:10px"></div>
+    <div class="sb-label">Cont</div>
+
+    <button class="nav-item" data-p="settings" onclick="goPanel('settings')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.8"/><path d="M12 2v2.5M12 19.5V22M4.22 4.22l1.77 1.77M18.01 18.01l1.77 1.77M2 12h2.5M19.5 12H22M4.22 19.78l1.77-1.77M18.01 5.99l1.77-1.77"/></svg></span>
+      Setări
+    </button>
+
+  </aside>
+
+  <header class="topbar">
+    <!-- Mobile hamburger -->
+    <button class="tb-hamburger" onclick="toggleSidebar()" aria-label="Meniu">
+      <img src="/favicon.png" alt="Mulberry">
+      <span class="tb-mobile-brand">Mulberry</span>
+    </button>
+    <!-- Desktop logo → opens sidebar -->
+    <button class="tb-logo-btn" onclick="toggleSidebar()" aria-label="Meniu Mulberry">
+      <img src="/mulberry-wordmark.svg" alt="Mulberry" class="tb-wordmark-top">
+    </button>
+    <!-- Profile corner -->
+    <div class="tb-profile">
+      <div class="tb-profile-user" onclick="goPanel('settings')">
+        <div class="tb-profile-av" id="tb-profile-av">M</div>
+        <div class="tb-profile-info">
+          <div class="tb-profile-name" id="tb-profile-name">—</div>
+          <div class="tb-profile-email" id="tb-profile-email">—</div>
+        </div>
+      </div>
+    </div>
+    <!-- Hidden: used by checkHealth() -->
+    <span id="tb-dot" style="display:none"></span>
+    <span id="tb-lbl" style="display:none"></span>
+    <!-- Mobile avatar button -->
+    <button class="tb-avatar tb-avatar-btn" id="tb-avatar" onclick="goPanel('settings')" style="display:none;margin-left:auto">M</button>
+    <!-- goPanel() compatibility -->
+    <span id="tb-title" style="display:none"></span>
+    <span id="tb-sub" style="display:none"></span>
+  </header>
+
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <!-- hidden data holders for JS carousel / vehicle API -->
+      <span id="nd-trust-vin" style="display:none"></span>
+      <span id="nd-trust-plate" style="display:none"></span>
+      <div id="nd-trust-card" style="display:none"></div>
+      <div id="nd-family-banner" style="display:none" onclick="showFamilyUpsell()"></div>
+
+      <div class="mf-wrap">
+
+        <!-- topbar -->
+        <div class="mf-topbar">
+          <div class="mf-tbl">
+            <div class="mf-toggle">
+              <div class="mf-tog on">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+              </div>
+              <div class="mf-tog">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+              </div>
+            </div>
+            <div class="mf-set-pill" onclick="goPanel('settings')">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"/></svg>
+              Settings
+            </div>
+          </div>
+          <div class="mf-notif">
+            <div class="mf-ndot"></div>
+            <span class="mf-ntxt">EXO — revizie ulei scadentă</span>
+            <span class="mf-ntime">−2.400 km</span>
+            <span class="mf-nclose" onclick="this.parentElement.style.display='none'">×</span>
+          </div>
+          <div class="mf-tbr">
+            <div class="mf-navpills">
+              <div class="mf-np on">MulberryFAST</div>
+            </div>
+            <div class="mf-srch">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </div>
+            <div class="mf-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
+          </div>
+        </div>
+
+        <!-- greeting -->
+        <div class="mf-greet">
+          <span id="gd-greeting-lbl">Bună ziua,</span>
+          <span class="mf-greet-name" id="gd-main-title">Mulberry!</span>
+        </div>
+
+        <!-- mf-grid replaces nd-two-col -->
+        <div class="mf-grid">
+
+          <!-- CREATE -->
+          <div class="mf-card cr" onclick="openVehicleReg()">
+            <div class="mf-cr-plus">+</div>
+            <div class="mf-cr-lbl">Adaugă vehicul</div>
+          </div>
+
+          <!-- YELLOWCARD -->
+          <div class="mf-card yc" onclick="goPanel('yellowcard')">
+            <div class="mf-ctop">
+              <div>
+                <div class="mf-tag">● Yellowcard · Activ</div>
+                <div class="mf-vin" id="nd-ycard-vin">VIN: —</div>
+                <div class="mf-plate" id="nd-ycard-plate">— ——</div>
+              </div>
+              <div style="width:38px;height:38px;border-radius:8px;background:rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                  <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="4" width="6" height="6" fill="#000"/>
+                  <rect x="16" y="2" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="18" y="4" width="6" height="6" fill="#000"/>
+                  <rect x="2" y="16" width="10" height="10" rx="1.5" stroke="#000" stroke-width="1.5"/><rect x="4" y="18" width="6" height="6" fill="#000"/>
+                  <rect x="16" y="16" width="4" height="4" fill="#000"/><rect x="22" y="16" width="4" height="4" fill="#000"/>
+                  <rect x="16" y="22" width="4" height="4" fill="#000"/><rect x="22" y="22" width="4" height="4" fill="#000"/>
+                </svg>
+              </div>
+            </div>
+            <div class="mf-cbot">
+              <div class="mf-csub">BMW M3 · G80 · 2022</div>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" opacity=".3"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+
+          <!-- MULBERRY AI -->
+          <div class="mf-card" onclick="openGeminiModal()">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#0a0a0a">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E1FF00" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="#E1FF00" fill-opacity=".3"/></svg>
+                </div>
+                <div class="mf-tag">MulberryAI</div>
+              </div>
+              <div style="color:#ccc;font-size:15px;cursor:pointer">···</div>
+            </div>
+            <div class="mf-ai-box">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              <span id="nd-ai-hint">Întreabă orice...</span>
+            </div>
+            <div class="mf-cbot">
+              <div class="mf-cname" style="font-size:12px;margin:0">Asistent auto</div>
+              <div class="mf-badge mf-info"><span class="mf-bdot"></span>Activ</div>
+            </div>
+          </div>
+
+          <!-- MULBERRY HUB -->
+          <div class="mf-card" onclick="goPanel('hub')">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#134e4a">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5eead4" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div class="mf-tag">MulberryHUB</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:4px">
+                <div style="width:5px;height:5px;border-radius:50%;background:#ff4444"></div>
+                <span style="font-size:10px;color:#999;font-weight:600">PDF</span>
+              </div>
+            </div>
+            <div class="mf-screen"><div class="mf-scrlbl">Raport · History</div></div>
+            <div class="mf-cbot">
+              <div class="mf-badge mf-ok"><span class="mf-bdot"></span><span id="nd-hub-sub">Sincronizat</span></div>
+              <div class="mf-cnt" style="background:#134e4a">8</div>
+            </div>
+          </div>
+
+          <!-- MULBERRY GO -->
+          <div class="mf-card" onclick="goPanel('marketplace')">
+            <div class="mf-ctop">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="mf-ico" style="background:#14532d">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                </div>
+                <div class="mf-tag">MulberryGO</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:4px">
+                <div class="mf-live"></div>
+                <span style="font-size:10px;color:#555;font-weight:600">live</span>
+              </div>
+            </div>
+            <div class="mf-cname">Navigare & locație</div>
+            <div class="mf-csub">Str. Mihai Eminescu, Buc.</div>
+            <div class="mf-cbot">
+              <div class="mf-badge mf-ok"><span class="mf-bdot"></span>Localizat</div>
+            </div>
+          </div>

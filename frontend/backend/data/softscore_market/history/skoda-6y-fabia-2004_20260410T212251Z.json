@@ -1,0 +1,30 @@
+{
+  "schema": "softscore_market_snapshot_v1",
+  "timestamp_utc": "2026-04-10T21:22:51.902966+00:00",
+  "model_key": "skoda-6y-fabia-2004",
+  "vin": "TMBCY46Y654251499",
+  "marca": "Skoda",
+  "model": "6Y / Fabia",
+  "an": 2004,
+  "km": 0,
+  "autovit": {
+    "count": 1995,
+    "min": 511,
+    "max": 196843,
+    "avg": 18460,
+    "median": 5839,
+    "source": "autovit.ro",
+    "currency_hint": "mixed_or_page_default"
+  },
+  "groq_verification": {
+    "median_plausible": true,
+    "avg_consistent": false,
+    "confidence_0_1": 0.5,
+    "notes_ro": "Eșantionul are o medie de 5839 km, ceea ce este plauzibil pentru un model din 2004. Cu toate acestea, valoarea medie a kilometrajului este de 18460, ceea ce sugerează că există liste cu kilometraj foarte mare, posibil incorect.",
+    "red_flags": [
+      "esantion_mic",
+      "moneda_mixed"
+    ]
+  },
+  "cached": false
+}

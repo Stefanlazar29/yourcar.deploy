@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mulberry Partners</title>
+<meta name="description" content="Parteneri service auto — Mulberry creat să te propulseze. Free pentru parteneri."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#00c76a;--gd:#03200d;--gm:#0d3318;--gb:#1a5c32;
+  --gmt:#5a9e72;--gdm:#2d6a40;--gf:#0e3320;
+  --bg:#061a0e;--bc:#0a2212;--bf:#0e3320;
+  --bd:#133d1e;--bn:#0e3320;
+  --w:#fff;--gr:#4a8a63;
+  --accent:#E1FF00;
+  --font:'Inter',-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--w);-webkit-font-smoothing:antialiased}
+.page{display:none;flex-direction:column;min-height:100vh}
+.page.active{display:flex}
+nav{display:flex;align-items:center;justify-content:space-between;padding:12px 48px;border-bottom:1px solid var(--bn);position:sticky;top:0;background:var(--bg);z-index:100}
+.logo{display:flex;align-items:center;text-decoration:none}
+.logo-img{height:64px;width:auto;display:block;object-fit:contain}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--gmt);font-size:14px;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--g)}
+.nav-cta{display:flex;gap:10px}
+.btn{cursor:pointer;font-family:var(--font);border-radius:10px;font-size:14px;transition:all .15s;border:none}
+.btn-main{background:#E3FF47;color:#000;font-weight:700;padding:12px 26px}
+.btn-main:hover{background:#f0ff6e}
+.btn-ghost{background:transparent;color:var(--gmt);border:1px solid var(--gb);padding:12px 20px}
+.btn-ghost:hover{border-color:var(--g);color:var(--w)}
+.btn-lg{padding:15px 36px;font-size:15px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--gm);border:.5px solid var(--gb);border-radius:20px;padding:5px 14px}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--g);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.badge-txt{color:var(--g);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+/* PAGE 1 */
+.hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 48px 64px;background:url('/partners-bg.jpg') center/cover no-repeat;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:rgba(3,14,6,.72);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero-eye{color:var(--gdm);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin:20px 0 14px}
+.hero h1{color:var(--w);font-size:46px;font-weight:800;line-height:1.1;max-width:680px;margin-bottom:14px}
+.hero h1 em{color:var(--g);font-style:normal}
+.hero-sub{color:var(--gmt);font-size:18px;font-weight:500;margin-bottom:48px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.stats-bar{display:flex;justify-content:center;border-top:1px solid var(--bn)}
+.stat{padding:22px 48px;text-align:center;border-right:1px solid var(--bn)}
+.stat:last-child{border-right:none}
+.snum{color:var(--g);font-size:26px;font-weight:800;line-height:1}
+.slbl{color:var(--gdm);font-size:11px;margin-top:4px;text-transform:uppercase;letter-spacing:.07em}
+/* PAGE 2 */
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--gdm);font-size:13px;cursor:pointer;background:none;border:none;font-family:var(--font);padding:28px 48px 0;transition:color .15s}
+.back-btn:hover{color:var(--g)}
+.b-hero{padding:40px 48px 32px;max-width:700px}
+.b-hero h1{color:var(--w);font-size:38px;font-weight:800;line-height:1.12;margin:14px 0 12px}
+.b-hero h1 em{color:var(--g);font-style:normal}
+.b-hero p{color:var(--gmt);font-size:16px;line-height:1.7}
+.b-hero p strong{color:var(--w)}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 48px 36px}
+.feat{background:var(--bc);border:.5px solid var(--bd);border-radius:16px;padding:26px 22px}
+.feat.hot{background:var(--bf);border:1.5px solid var(--g)}
+.feat i{font-size:22px;color:var(--g);margin-bottom:14px;display:block}
+.feat h3{color:var(--w);font-size:15px;font-weight:700;margin-bottom:8px}
+.feat p{color:var(--gr);font-size:13px;line-height:1.65}
+.promise{margin:0 48px 36px;background:var(--bf);border:1.5px solid var(--g);border-radius:18px;padding:36px 32px;display:flex;align-items:center;gap:32px}
+.pr-left{flex:1}
+.pr-tag{color:var(--g);font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+.pr-left h2{color:var(--w);font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px}
+.pr-left p{color:var(--gmt);font-size:14px;line-height:1.7}
+.pr-right{text-align:center;flex-shrink:0}
+.pnum{color:var(--g);font-size:56px;font-weight:800;line-height:1}
+.plbl{color:var(--gmt);font-size:12px;margin-top:6px}
+.perks{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 48px 36px}
+.perk{display:flex;align-items:flex-start;gap:12px;background:var(--bc);border:.5px solid var(--bd);border-radius:12px;padding:16px 18px}
+.perk i{color:var(--g);font-size:20px;margin-top:1px;flex-shrink:0}
+.perk strong{color:var(--w);font-size:13px;display:block;margin-bottom:3px}
+.perk p{color:var(--gmt);font-size:12px;line-height:1.55}
+.cta-strip{margin:0 48px 28px;background:var(--bc);border:.5px solid var(--bd);border-radius:16px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.cta-strip h3{color:var(--w);font-size:20px;font-weight:700;margin-bottom:4px}
+.cta-strip p{color:var(--gr);font-size:13px}
+.cta-btns{display:flex;gap:10px;flex-shrink:0}
+footer{padding:20px 48px;border-top:1px solid var(--bn);display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.ft{color:var(--gdm);font-size:12px}
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .hero{padding:48px 20px 40px}
+  .hero h1{font-size:28px}
+  .hero-btns{flex-direction:column;align-items:stretch;max-width:300px}
+  .stats-bar{flex-wrap:wrap}
+  .stat{padding:16px 24px;flex:1;min-width:90px}
+  .back-btn{padding:20px 20px 0}
+  .b-hero{padding:28px 20px 20px}
+  .b-hero h1{font-size:24px}
+  .feat-grid{grid-template-columns:1fr;padding:0 20px 28px;gap:12px}
+  .promise{flex-direction:column;text-align:center;margin:0 20px 28px;padding:28px 22px;gap:20px}
+  .perks{grid-template-columns:1fr;padding:0 20px 28px}
+  .cta-strip{flex-direction:column;text-align:center;margin:0 20px 24px;padding:24px 20px}
+  .cta-btns{flex-direction:column;width:100%}
+  .cta-btns .btn{width:100%;text-align:center}
+  footer{flex-direction:column;gap:6px;text-align:center;padding:16px 20px}
+}
+
+/* ══════════════════════════════════════
+   MODAL OVERLAY
+══════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(6px);
+  opacity:0;pointer-events:none;
+  transition:opacity .22s ease;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-overlay.open .auth-card{transform:translateY(0);opacity:1}
+
+/* ══════════════════════════════════════
+   AUTH CARD
+══════════════════════════════════════ */
+.auth-card{
+  width:100%;max-width:420px;
+  background:#f5f5f0;
+  border-radius:24px;
+  padding:36px 32px 28px;
+  box-shadow:0 24px 64px rgba(0,0,0,.45);
+  position:relative;
+  transform:translateY(16px);opacity:0;
+  transition:transform .28s ease,opacity .28s ease;
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(0,0,0,.08);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:#555;transition:background .15s;
+  font-family:var(--font);
+}
+.modal-close:hover{background:rgba(0,0,0,.15)}
+
+/* LOGO inside card */
+.card-logo{display:flex;align-items:center;justify-content:center;margin-bottom:24px;background:#fff;border-radius:12px;padding:10px 16px}
+
+/* TITLE */
+.card-title{text-align:center;font-size:21px;font-weight:800;color:#111;margin-bottom:6px}
+.card-sub{text-align:center;font-size:13px;color:#888;margin-bottom:28px;line-height:1.5}
+.card-sub span{color:#555}
+
+/* PANELS inside card */
+.panel{display:none}
+.panel.active{display:block}
+
+/* CARD BUTTONS */
+.cbtn{
+  width:100%;padding:15px 20px;border-radius:14px;
+  font-size:15px;font-weight:700;cursor:pointer;
+  font-family:var(--font);border:none;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:all .15s;margin-bottom:10px;
+}
+.cbtn-accent{background:var(--accent);color:#111}
+.cbtn-accent:hover{background:#d4ee00;transform:translateY(-1px)}
+.cbtn-outline{background:#fff;color:#111;border:1.5px solid #ddd}
+.cbtn-outline:hover{border-color:#bbb;background:#fafafa}
+.cbtn-green{background:#E3FF47;color:#000}
+.cbtn-green:hover{background:#f0ff6e}
+.cbtn-ghost{background:transparent;color:#888;border:1.5px solid #ddd;padding:12px 20px;font-size:14px;font-weight:600}
+.cbtn-ghost:hover{border-color:#aaa;color:#444}
+.cbtn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* OR */
+.or{display:flex;align-items:center;gap:12px;margin:4px 0 10px}
+.or-line{flex:1;height:1px;background:#ddd}
+.or span{color:#bbb;font-size:13px}
+
+/* LEGAL */
+.legal{text-align:center;font-size:11.5px;color:#aaa;line-height:1.6;margin-top:16px}
+.legal a{color:#555;font-weight:600;text-decoration:none}
+.legal a:hover{color:#111}
+
+/* BACK */
+.back-link{display:block;text-align:center;font-size:13px;color:#aaa;cursor:pointer;margin-top:16px;text-decoration:none}
+.back-link:hover{color:#555}
+
+/* INPUTS */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.field input{
+  width:100%;background:#fff;border:1.5px solid #e0e0e0;
+  border-radius:12px;padding:13px 14px;font-size:14px;
+  color:#111;font-family:var(--font);outline:none;transition:border-color .15s;
+}
+.field input:focus{border-color:var(--g)}
+.field input.err{border-color:#ff4d4d}
+.field-err{font-size:11px;color:#ff4d4d;margin-top:4px;display:none}
+.field-err.show{display:block}
+.field-hint{font-size:11px;color:#aaa;margin-top:4px}
+
+/* FORGOT */
+.forgot{text-align:right;margin:-8px 0 14px}
+.forgot a{font-size:12px;color:#aaa;cursor:pointer;text-decoration:none;transition:color .15s}
+.forgot a:hover{color:#111}
+
+/* OTP */
+.otp-row{display:flex;gap:8px;justify-content:center;margin:4px 0 18px}
+.otp-input{
+  width:46px;height:54px;background:#fff;border:1.5px solid #e0e0e0;
+  border-radius:12px;text-align:center;font-size:22px;font-weight:700;
+  color:#111;font-family:var(--font);outline:none;transition:border-color .15s;
+}
+.otp-input:focus{border-color:var(--g)}
+
+/* STEPS */
+.steps{display:flex;align-items:center;justify-content:center;margin-bottom:24px;gap:0}
+.sdot{width:26px;height:26px;border-radius:50%;border:2px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#bbb;transition:all .3s;background:#fff}
+.sdot.done{background:var(--g);border-color:var(--g);color:var(--gd)}
+.sdot.active{border-color:var(--g);color:var(--g)}
+.sline{flex:1;height:2px;background:#ddd;max-width:44px;transition:background .3s}
+.sline.done{background:var(--g)}
+
+/* PROGRESS */
+.progress{height:3px;background:#e8e8e8;border-radius:2px;margin-bottom:22px;overflow:hidden}
+.pfill{height:100%;background:var(--g);border-radius:2px;transition:width .4s ease}
+
+/* ANAF */
+.anaf-box{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.anaf-tag{font-size:10px;color:#16a34a;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.anaf-name{font-size:14px;font-weight:700;color:#111}
+.anaf-addr{font-size:12px;color:#888;margin-top:2px}
+
+/* SUCCESS */
+.success-box{text-align:center;padding:8px 0}
+.s-icon{font-size:52px;margin-bottom:16px;line-height:1}
+.s-title{font-size:20px;font-weight:800;color:#111;margin-bottom:8px}
+.s-sub{font-size:13px;color:#888;line-height:1.7}
+.s-sub strong{color:#111}
+
+/* SPINNER */
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(0,0,0,.15);border-top-color:#111;border-radius:50%;animation:spin .6s linear infinite}
+
+@media(max-width:480px){
+  .auth-card{padding:28px 20px 24px;border-radius:20px}
+  .modal-overlay{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ PAGE 1 — LANDING ══ -->
+<div class="page active" id="p1">
+  <nav>
+    <a href="/mulberry_app.html" class="logo">
+      <img src="/mulberry-logo-full.png" alt="Mulberry" class="logo-img">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showP2();return false">Beneficii</a></li>
+      <li><a href="mailto:contact@mulberry.autos">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn btn-ghost" onclick="openModal('login')">Login</button>
+      <button class="btn btn-main" onclick="showP2()">Înscrie-te</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="badge"><div class="bdot"></div><span class="badge-txt">Parteneri service auto</span></div>
+    <p class="hero-eye">Mulberry × Service-uri</p>
+    <h1>I-ați RCA-ul afacerii tale —<br><em>Mulberry</em>, creat să te propulseze!</h1>
+    <p class="hero-sub">Free pentru parteneri.</p>
+    <div class="hero-btns">
+      <button class="btn btn-main btn-lg" onclick="openModal('signup')">Înscrie-te acum</button>
+      <button class="btn btn-ghost btn-lg" onclick="openModal('login')">Am deja cont — Login</button>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="snum">0 €</div><div class="slbl">Cost intrare</div></div>
+    <div class="stat"><div class="snum">100%</div><div class="slbl">Digital</div></div>
+    <div class="stat"><div class="snum">RO</div><div class="slbl">Piață locală</div></div>
+  </div>
+</div>
+
+<!-- ══ PAGE 2 — BENEFITS ══ -->
+<div class="page" id="p2">
+  <nav>
+    <a href="/mulberry_app.html" class="logo">
+      <img src="/mulberry-logo-full.png" alt="Mulberry" class="logo-img">
+    </a>
+    <ul class="nav-links">
+      <li><a href="mailto:contact@mulberry.autos">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn btn-ghost" onclick="openModal('login')">Login</button>
+      <button class="btn btn-main" onclick="openModal('signup')">Înscrie-te</button>
+    </div>
+  </nav>
+
+  <button class="back-btn" onclick="showP1()"><i class="ti ti-arrow-left"></i> Înapoi</button>
+
+  <div class="b-hero">
+    <div class="badge" style="margin-bottom:20px"><div class="bdot"></div><span class="badge-txt">De ce Mulberry?</span></div>
+    <h1>Tu repari mașina.<br><em>Mulberry îți aduce clientul.</em></h1>
+    <p>Nicio reclamă plătită. Nicio bătaie de cap cu marketingul.<br><strong>Clientul te găsește direct în aplicație</strong> — exact când are nevoie de tine.</p>
+  </div>
+
+  <div class="feat-grid">
+    <div class="feat hot"><i class="ti ti-tool"></i><h3>Vizibilitate locală</h3><p>Apari pe harta Mulberry când un client din zona ta caută un service de încredere. Zero efort din partea ta.</p></div>
+    <div class="feat"><i class="ti ti-bell"></i><h3>Clienți pregătiți</h3><p>Mulberry alertează șoferii când expiră ITP, RCA sau revizia. Tu primești lead-ul când clientul e deja convins.</p></div>
+    <div class="feat"><i class="ti ti-star"></i><h3>Reputație digitală</h3><p>Fiecare intervenție apare în istoricul vehiculului. Munca bună rămâne înregistrată și verificabilă.</p></div>
+  </div>
+
+  <div class="promise">
+    <div class="pr-left">
+      <div class="pr-tag">Free pentru fondatori</div>
+      <h2>Intri primul.<br>Crești cu noi.</h2>
+      <p>Primii parteneri de service intră gratuit și rămân cu avantaje permanente. Nu cerem bani până nu îți aducem valoare reală.</p>
+    </div>
+    <div class="pr-right">
+      <div class="pnum">0 €</div>
+      <div class="plbl">pentru primii parteneri</div>
+    </div>
+  </div>
+
+  <div class="perks">
+    <div class="perk"><i class="ti ti-map-pin"></i><div><strong>Profil service complet</strong><p>Adresă, program, specialități — totul vizibil în aplicație pentru clienții din zona ta.</p></div></div>
+    <div class="perk"><i class="ti ti-file-check"></i><div><strong>Istoric intervenții</strong><p>Înregistrezi reparațiile direct în dosarul digital al mașinii clientului.</p></div></div>
+    <div class="perk"><i class="ti ti-users"></i><div><strong>Clienți ai tăi</strong><p>Nicio platformă intermediară care ia comision. Clienții rămân ai tăi.</p></div></div>
+    <div class="perk"><i class="ti ti-trending-up"></i><div><strong>Crești cu platforma</strong><p>Pe măsură ce Mulberry crește în România, expunerea ta crește fără costuri suplimentare.</p></div></div>
+  </div>
+
+  <div class="cta-strip">
+    <div><h3>Gata să intri?</h3><p>Fără contracte pe termen lung. Ieși oricând, fără penalizări.</p></div>
+    <div class="cta-btns">
+      <button class="btn btn-main" onclick="openModal('signup')">Înscrie service-ul tău</button>
+      <button class="btn btn-ghost" onclick="window.location.href='mailto:contact@mulberry.autos?subject=Parteneriat service'">Cum funcționează?</button>
+    </div>
+  </div>
+
+  <footer>
+    <span class="ft">© 2025 Mulberry. Toate drepturile rezervate.</span>
+    <span class="ft">mulberry.autos</span>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL AUTH
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="overlayClick(event)">
+  <div class="auth-card" id="auth-card">
+
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- LOGO -->
+    <div class="card-logo">
+      <img src="/mulberry-logo-bw.jpg" alt="Mulberry" style="height:36px;width:auto;object-fit:contain;display:block">
+    </div>
+
+    <!-- SCREEN 0: HOME -->
+    <div class="panel active" id="sc-home">
+      <div class="card-title">Intră în rețeaua Mulberry</div>
+      <div class="card-sub">Free pentru parteneri &nbsp;·&nbsp; Fără card de credit</div>
+      <button class="cbtn cbtn-accent" onclick="authGoSignup()">→ Sign up</button>
+      <div class="or"><div class="or-line"></div><span>sau</span><div class="or-line"></div></div>
+      <button class="cbtn cbtn-outline" onclick="authGoLogin()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        Continuă cu email
+      </button>
+      <div class="legal">Continuând, ești de acord cu <a href="#">Termenii de utilizare</a> și <a href="#">Politica de confidențialitate</a>. Date stocate în România.</div>
+    </div>
+
+    <!-- SCREEN: LOGIN -->
+    <div class="panel" id="sc-login">
+
+      <div class="panel active" id="l1">
+        <div class="card-title">Bun venit înapoi</div>
+        <div class="card-sub">Intră în contul tău de partener.</div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="l-email" placeholder="service@firma.ro" autocomplete="email"/>
+          <div class="field-err" id="l-email-err">Email invalid.</div>
+        </div>
+        <div class="field">
+          <label>Parolă</label>
+          <input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password"/>
+          <div class="field-err" id="l-pass-err">Parola este obligatorie.</div>
+        </div>
+        <div class="forgot"><a onclick="showLogin('l-forgot')">Ai uitat parola?</a></div>
+        <button class="cbtn cbtn-green" onclick="loginStep1()">Continuă</button>
+        <a class="back-link" onclick="authGoHome()">← Înapoi</a>
+      </div>
+
+      <div class="panel" id="l2">
+        <div class="card-title">Verificare cod</div>
+        <div class="card-sub">Am trimis un cod la <strong id="l-email-show" style="color:#111"></strong></div>
+        <div class="otp-row">
+          <input class="otp-input" maxlength="1" id="otp0" oninput="otpNext(0,1)" onkeydown="otpBack(event,0,null)"/>
+          <input class="otp-input" maxlength="1" id="otp1" oninput="otpNext(1,2)" onkeydown="otpBack(event,1,0)"/>
+          <input class="otp-input" maxlength="1" id="otp2" oninput="otpNext(2,3)" onkeydown="otpBack(event,2,1)"/>
+          <input class="otp-input" maxlength="1" id="otp3" oninput="otpNext(3,4)" onkeydown="otpBack(event,3,2)"/>
+          <input class="otp-input" maxlength="1" id="otp4" oninput="otpNext(4,5)" onkeydown="otpBack(event,4,3)"/>
+          <input class="otp-input" maxlength="1" id="otp5" oninput="otpNext(5,null)" onkeydown="otpBack(event,5,4)"/>
+        </div>
+        <div class="field-err" id="otp-err" style="text-align:center;margin-bottom:10px"></div>
+        <button class="cbtn cbtn-green" onclick="verifyOtp()">Verifică</button>
+        <button class="cbtn cbtn-ghost" style="margin-top:6px" onclick="resendOtp()">Retrimite codul</button>
+        <a class="back-link" onclick="showLogin('l1')">← Înapoi</a>
+      </div>
+
+      <div class="panel" id="l-forgot">
+        <div class="card-title">Resetare parolă</div>
+        <div class="card-sub">Îți trimitem un link de resetare pe email.</div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="l-frg-email" placeholder="service@firma.ro"/>
+        </div>
+        <button class="cbtn cbtn-green" onclick="sendReset()">Trimite link</button>
+        <a class="back-link" onclick="showLogin('l1')">← Înapoi la login</a>
+      </div>
+
+    </div>
+
+    <!-- SCREEN: SIGNUP -->
+    <div class="panel" id="sc-signup">
+
+      <div class="progress"><div class="pfill" id="s-prog" style="width:33%"></div></div>
+      <div class="steps">
+        <div class="sdot active" id="sd1">1</div>
+        <div class="sline" id="sl1"></div>
+        <div class="sdot" id="sd2">2</div>
+        <div class="sline" id="sl2"></div>
+        <div class="sdot" id="sd3">3</div>
+      </div>
+
+      <!-- Step 1: CIF -->
+      <div class="panel active" id="s1">
+        <div class="card-title">Date fiscale</div>
+        <div class="card-sub">CIF-ul firmei pentru verificare ANAF.</div>
+        <div class="field">
+          <label>CIF / CUI</label>
+          <input type="text" id="s-cif" placeholder="RO12345678" maxlength="12" oninput="this.value=this.value.toUpperCase().replace(/[^0-9RO]/g,'')"/>
+          <div class="field-err" id="s-cif-err">CIF invalid. Verifică formatul.</div>
+          <div class="field-hint">Ex: RO12345678 sau 12345678</div>
+        </div>
+        <div id="s-anaf-box" style="display:none" class="anaf-box">
+          <div class="anaf-tag">✓ Verificat ANAF</div>
+          <div class="anaf-name" id="s-anaf-name"></div>
+          <div class="anaf-addr" id="s-anaf-addr"></div>
+        </div>
+        <button class="cbtn cbtn-green" id="btn-s1" onclick="sStep1()">Verifică &amp; Continuă</button>
+        <a class="back-link" onclick="authGoHome()">← Înapoi</a>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="panel" id="s2">
+        <div class="card-title">Profilul service-ului</div>
+        <div class="card-sub">Cum apari în aplicația Mulberry.</div>
+        <div class="field">
+          <label>Nume afișat</label>
+          <input type="text" id="s-name" placeholder="Auto Service Ionescu"/>
+          <div class="field-err" id="s-name-err">Numele este obligatoriu.</div>
+        </div>
+        <div class="field">
+          <label>Oraș</label>
+          <input type="text" id="s-city" placeholder="București, Cluj..."/>
+          <div class="field-err" id="s-city-err">Orașul este obligatoriu.</div>
+        </div>
+        <div class="field">
+          <label>Telefon <span style="font-size:10px;color:#bbb;text-transform:none">(opțional)</span></label>
+          <input type="tel" id="s-phone" placeholder="07XX XXX XXX"/>
+        </div>
+        <button class="cbtn cbtn-green" onclick="sStep2()">Continuă</button>
+        <a class="back-link" onclick="sBack(1)">← Înapoi</a>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="panel" id="s3">
+        <div class="card-title">Cont &amp; confirmare</div>
+        <div class="card-sub">Vei primi un email cu datele înregistrării.</div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="s-email" placeholder="service@firma.ro"/>
+          <div class="field-err" id="s-email-err">Email invalid.</div>
+        </div>
+        <div class="field">
+          <label>Parolă</label>
+          <input type="password" id="s-pass" placeholder="Minim 8 caractere"/>
+          <div class="field-err" id="s-pass-err">Minim 8 caractere.</div>
+        </div>
+        <div class="field">
+          <label>Confirmă parola</label>
+          <input type="password" id="s-pass2" placeholder="Repetă parola"/>
+          <div class="field-err" id="s-pass2-err">Parolele nu coincid.</div>
+        </div>
+        <button class="cbtn cbtn-green" id="btn-s3" onclick="sSubmit()">Creează cont</button>
+        <a class="back-link" onclick="sBack(2)">← Înapoi</a>
+      </div>
+
+      <!-- Success -->
+      <div class="panel" id="s-ok">
+        <div class="success-box">
+          <div class="s-icon">✅</div>
+          <div class="s-title">Cont creat!</div>
+          <div class="s-sub">Am trimis un email de confirmare la<br><strong id="s-ok-email"></strong><br><br>Verifică inbox-ul pentru a activa contul.</div>
+          <button class="cbtn cbtn-green" style="margin-top:24px" onclick="window.location.href='/mulberry_partners_hub.html'">Intră în dashboard →</button>
+        </div>
+      </div>
+
+    </div><!-- /sc-signup -->
+
+  </div><!-- /auth-card -->
+</div><!-- /modal-overlay -->
+
+<script>
+/* ── PAGE NAVIGATION ── */
+function showP2(){document.getElementById('p1').classList.remove('active');document.getElementById('p2').classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function showP1(){document.getElementById('p2').classList.remove('active');document.getElementById('p1').classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+
+/* ── MODAL ── */
+function openModal(mode){
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  if(mode==='login') authGoLogin();
+  else if(mode==='signup') authGoSignup();
+  else authGoHome();
+}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function overlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal()}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+
+/* ── AUTH SCREENS ── */
+function showScreen(id){
+  ['sc-home','sc-login','sc-signup'].forEach(s=>document.getElementById(s).classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function authGoHome(){showScreen('sc-home')}
+function authGoLogin(){showScreen('sc-login');showLogin('l1')}
+function authGoSignup(){showScreen('sc-signup');sSetStep(1)}
+
+function showLogin(id){
+  document.getElementById('sc-login').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* ── LOGIN ── */
+const SD={cif:'',name:'',city:'',phone:'',email:''};
+
+function loginStep1(){
+  const e=document.getElementById('l-email').value.trim();
+  const p=document.getElementById('l-pass').value;
+  let ok=true;
+  if(!/\S+@\S+\.\S+/.test(e)){se('l-email-err','l-email');ok=false}else he('l-email-err','l-email');
+  if(!p){se('l-pass-err','l-pass');ok=false}else he('l-pass-err','l-pass');
+  if(!ok)return;
+  document.getElementById('l-email-show').textContent=e;
+  showLogin('l2');
+  document.getElementById('otp0').focus();
+}
+function otpNext(i,next){if(next!==null&&document.getElementById('otp'+i).value)document.getElementById('otp'+next).focus()}
+function otpBack(e,i,prev){if(e.key==='Backspace'&&!document.getElementById('otp'+i).value&&prev!==null)document.getElementById('otp'+prev).focus()}
+function verifyOtp(){
+  const code=[0,1,2,3,4,5].map(i=>document.getElementById('otp'+i).value).join('');
+  if(code.length<6){const el=document.getElementById('otp-err');el.textContent='Introdu toate cele 6 cifre.';el.style.display='block';return;}
+  const email=document.getElementById('l-email').value.trim();
+  localStorage.setItem('mlbr_partner', JSON.stringify({email, name:'Partener', city:''}));
+  window.location.href='/mulberry_partners_hub.html';
+}
+function resendOtp(){const el=document.getElementById('otp-err');el.style.color='green';el.textContent='Cod retrimis!';el.style.display='block';setTimeout(()=>{el.style.display='none';el.style.color='#ff4d4d'},3000)}
+function sendReset(){
+  const e=document.getElementById('l-frg-email').value.trim();
+  if(!/\S+@\S+\.\S+/.test(e)){alert('Email invalid.');return;}
+  alert('Link trimis la '+e);showLogin('l1');
+}
+
+/* ── SIGNUP ── */
+function sSetStep(step){
+  [1,2,3].forEach(i=>{
+    document.getElementById('sd'+i).className='sdot'+(i<step?' done':i===step?' active':'');
+    if(i<3)document.getElementById('sl'+i).className='sline'+(i<step?' done':'');
+  });
+  document.getElementById('s-prog').style.width=(step/3*100)+'%';
+}
+function sStep1(){
+  const cif=document.getElementById('s-cif').value.trim();
+  if(cif.length<6){se('s-cif-err','s-cif');return;}
+  he('s-cif-err','s-cif');SD.cif=cif;
+  const btn=document.getElementById('btn-s1');
+  btn.innerHTML='<span class="spin"></span> Verificare ANAF...';btn.disabled=true;
+  setTimeout(()=>{
+    btn.innerHTML='Verifică &amp; Continuă';btn.disabled=false;
+    const mock='AUTO SERVICE '+cif.replace('RO','');
+    document.getElementById('s-anaf-name').textContent=mock;
+    document.getElementById('s-anaf-addr').textContent='Str. Exemplu 1, București';
+    document.getElementById('s-anaf-box').style.display='block';
+    SD.anafName=mock;
+    setTimeout(()=>{
+      document.getElementById('sc-signup').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      document.getElementById('s2').classList.add('active');
+      sSetStep(2);
+    },800);
+  },1200);
+}
+function sStep2(){
+  const n=document.getElementById('s-name').value.trim();
+  const c=document.getElementById('s-city').value.trim();
+  let ok=true;
+  if(!n){se('s-name-err','s-name');ok=false}else he('s-name-err','s-name');
+  if(!c){se('s-city-err','s-city');ok=false}else he('s-city-err','s-city');
+  if(!ok)return;
+  SD.name=n;SD.city=c;SD.phone=document.getElementById('s-phone').value.trim();
+  document.getElementById('sc-signup').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('s3').classList.add('active');
+  sSetStep(3);
+}
+function sBack(from){
+  document.getElementById('sc-signup').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('s'+(from===1?'1':'2')).classList.add('active');
+  sSetStep(from);
+}
+function sSubmit(){
+  const e=document.getElementById('s-email').value.trim();
+  const p=document.getElementById('s-pass').value;
+  const p2=document.getElementById('s-pass2').value;
+  let ok=true;
+  if(!/\S+@\S+\.\S+/.test(e)){se('s-email-err','s-email');ok=false}else he('s-email-err','s-email');
+  if(p.length<8){se('s-pass-err','s-pass');ok=false}else he('s-pass-err','s-pass');
+  if(p!==p2){se('s-pass2-err','s-pass2');ok=false}else he('s-pass2-err','s-pass2');
+  if(!ok)return;
+  SD.email=e;
+  const btn=document.getElementById('btn-s3');
+  btn.innerHTML='<span class="spin"></span> Se creează contul...';btn.disabled=true;
+  setTimeout(()=>{
+    localStorage.setItem('mlbr_partner', JSON.stringify({
+      email: e, name: SD.name || SD.anafName || 'Partener',
+      city: SD.city || '', cif: SD.cif || ''
+    }));
+    document.getElementById('s-ok-email').textContent=e;
+    document.getElementById('sc-signup').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('s-ok').classList.add('active');
+    document.getElementById('s-prog').style.width='100%';
+    [1,2,3].forEach(i=>document.getElementById('sd'+i).className='sdot done');
+    document.getElementById('sl1').className='sline done';
+    document.getElementById('sl2').className='sline done';
+  },1500);
+}
+
+function se(errId,inId){document.getElementById(errId).classList.add('show');document.getElementById(inId).classList.add('err')}
+function he(errId,inId){document.getElementById(errId).classList.remove('show');document.getElementById(inId).classList.remove('err')}
+
+if(new URLSearchParams(window.location.search).get('signup')==='service') openModal('signup');
+</script>
+</body>
+</html>

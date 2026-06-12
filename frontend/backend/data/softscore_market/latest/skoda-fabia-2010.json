@@ -1,0 +1,25 @@
+{
+  "schema": "softscore_market_snapshot_v1",
+  "timestamp_utc": "2026-04-22T15:17:24.590558+00:00",
+  "model_key": "skoda-fabia-2010",
+  "vin": "WVWZZZAUZNW123456",
+  "marca": "Skoda",
+  "model": "Fabia",
+  "an": 2010,
+  "km": 0,
+  "autovit": {
+    "count": 882,
+    "min": 512,
+    "max": 194100,
+    "avg": 18137,
+    "median": 4757,
+    "source": "autovit.ro",
+    "currency_hint": "mixed_or_page_default"
+  },
+  "groq_verification": {
+    "error": "Groq: Pachetul 'groq' nu e instalat. Rulează: pip install groq; Gemini: Gemini HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_con; Ollama: Ollama: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+    "median_plausible": null,
+    "notes_ro": "Eroare apel Groq."
+  },
+  "cached": false
+}

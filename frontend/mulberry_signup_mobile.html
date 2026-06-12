@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Mulberry — Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;min-height:100vh;background:#000;font-family:'Inter',-apple-system,sans-serif;color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+/* BG glows like the screenshot */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.bg::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 40% at 10% 70%, rgba(180,100,0,0.55) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 110%, rgba(0,180,80,0.35) 0%,transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 80%, rgba(0,80,200,0.45) 0%,transparent 55%),
+    #000;
+}
+.bg::after{content:'';position:absolute;inset:0;backdrop-filter:blur(60px);-webkit-backdrop-filter:blur(60px);background:rgba(0,0,0,0.55);}
+
+/* SHELL */
+.shell{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+
+/* THE CARD — bordered container like screenshot */
+.card{
+  width:100%;max-width:380px;
+  border-radius:28px;
+  padding:28px 24px 28px;
+  background:rgba(15,15,15,0.85);
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  position:relative;
+  /* Gaming border — SVG border animates */
+}
+
+/* SVG border overlay for animated progress */
+.card-border{
+  position:absolute;inset:0;border-radius:28px;pointer-events:none;overflow:visible;
+  width:100%;height:100%;
+}
+
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes checkPop{0%{transform:scale(0)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes drawCheck{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(225,255,0,0.3)}50%{box-shadow:0 0 40px rgba(225,255,0,0.6)}}
+@keyframes progressGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(225,255,0,0.6))}50%{filter:drop-shadow(0 0 10px rgba(225,255,0,1))}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+.logo{display:flex;align-items:center;gap:8px;}
+.logo-mark{width:28px;height:28px;border-radius:7px;background:#E1FF00;display:flex;align-items:center;justify-content:center;}
+.logo-name{font-size:15px;font-weight:600;color:#fff;}
+.back-btn{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,0.08);
+  border:0.5px solid rgba(255,255,255,0.15);
+  border-radius:100px;padding:7px 14px;
+  font-size:13px;color:rgba(255,255,255,0.7);
+  cursor:pointer;font-family:inherit;
+}
+
+/* STEP DOTS — like screenshot */
+.step-dots{display:flex;align-items:center;gap:6px;margin-bottom:24px;}
+.sdot{height:4px;border-radius:2px;transition:all .4s cubic-bezier(.4,0,.2,1);}
+.sdot.inactive{width:14px;background:rgba(255,255,255,0.18);}
+.sdot.active{width:28px;background:#E1FF00;box-shadow:0 0 8px rgba(225,255,0,0.7);}
+.sdot.done{width:14px;background:rgba(225,255,0,0.5);}
+
+/* HERO */
+.hero-title{font-size:30px;font-weight:800;color:#fff;letter-spacing:-.6px;line-height:1.1;margin-bottom:6px;}
+.hero-title em{
+  font-style:normal;
+  background:linear-gradient(90deg,#E1FF00,#d4f542,#E1FF00);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;animation:shimmer 3s linear infinite;
+}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.55;margin-bottom:24px;}
+
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;animation:slideIn .25s ease both;}
+
+/* TRUST NOTE */
+.note{
+  border-radius:12px;padding:11px 13px;
+  display:flex;align-items:flex-start;gap:10px;
+  margin-bottom:14px;
+}
+.note.green{background:rgba(48,209,88,0.10);border:.5px solid rgba(48,209,88,0.25);}
+.note.blue{background:rgba(10,132,255,0.10);border:.5px solid rgba(10,132,255,0.25);}
+.note.purple{background:rgba(120,80,255,0.10);border:.5px solid rgba(120,80,255,0.25);}
+.note-icon{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:13px;}
+.note-title{font-size:12px;font-weight:600;margin-bottom:2px;}
+.note-sub{font-size:11px;line-height:1.45;}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:10px;font-size:11px;color:rgba(255,255,255,0.2);margin:10px 0;}
+.divider::before,.divider::after{content:'';flex:1;height:.5px;background:rgba(255,255,255,0.08);}
+
+/* FIELD GROUP like screenshot email box */
+.fgroup{
+  border-radius:14px;overflow:hidden;
+  border:.5px solid rgba(255,255,255,0.10);
+  background:rgba(255,255,255,0.05);
+  margin-bottom:10px;
+}
+.frow{display:flex;align-items:center;padding:0 14px;min-height:52px;border-bottom:.5px solid rgba(255,255,255,0.07);}
+.frow:last-child{border-bottom:none;}
+.frow:focus-within{background:rgba(255,255,255,0.04);}
+.flbl{font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:.8px;min-width:72px;flex-shrink:0;}
+.finput{flex:1;border:none;background:transparent;font-size:14px;color:#fff;font-family:inherit;padding:14px 0;outline:none;min-width:0;}
+.finput::placeholder{color:rgba(255,255,255,0.18);}
+.finput.mono{font-family:'SF Mono','Courier New',monospace;font-size:13px;letter-spacing:.3px;}
+.vin-count{font-size:11px;font-family:monospace;color:rgba(255,255,255,0.2);flex-shrink:0;margin-left:6px;transition:color .2s;}
+.vin-count.ok{color:#30d158;}
+.vin-count.partial{color:#ff9f0a;}
+
+/* ERROR */
+.ferr{display:none;font-size:12px;color:#ff453a;padding:8px 12px;margin-bottom:10px;background:rgba(255,69,58,0.10);border:.5px solid rgba(255,69,58,0.25);border-radius:10px;line-height:1.45;}
+
+/* GAMING BUTTON — primary */
+.btn-primary{
+  width:100%;padding:16px;
+  border-radius:14px;border:none;
+  background:#E1FF00;color:#000;
+  font-size:15px;font-weight:800;font-family:inherit;
+  cursor:pointer;letter-spacing:-.2px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:opacity .15s,transform .1s;
+  -webkit-tap-highlight-color:transparent;
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  background-size:200% 100%;transform:translateX(-100%);
+  transition:transform .4s;
+}
+.btn-primary:active{transform:scale(.97);}
+.btn-primary:hover::after{transform:translateX(100%);}
+
+.btn-google{
+  width:100%;padding:14px;border-radius:14px;
+  border:.5px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.07);
+  font-size:14px;font-weight:500;font-family:inherit;
+  color:rgba(255,255,255,0.8);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-bottom:10px;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn-google:active{opacity:.7;}
+
+.btn-secondary{
+  padding:14px 18px;border-radius:14px;
+  border:.5px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.07);
+  font-size:15px;font-weight:500;color:rgba(255,255,255,0.7);
+  font-family:inherit;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.btn-row{display:flex;gap:8px;margin-top:4px;}
+.btn-row .btn-primary{flex:1;}
+
+.hint{font-size:11px;font-weight:300;color:rgba(255,255,255,0.2);text-align:center;margin-top:10px;}
+
+/* OTP BOXES */
+.code-wrap{display:flex;gap:8px;justify-content:center;margin:12px 0 14px;}
+.cbox{
+  flex:1;max-width:50px;height:58px;
+  background:rgba(255,255,255,0.05);
+  border:.5px solid rgba(255,255,255,0.12);
+  border-radius:12px;font-size:24px;font-weight:700;
+  font-family:monospace;text-align:center;line-height:58px;
+  color:#fff;cursor:text;transition:border-color .15s,box-shadow .15s;
+}
+.cbox.on{border-color:#E1FF00;border-width:1.5px;box-shadow:0 0 12px rgba(225,255,0,0.3);}
+
+/* SUCCESS */
+.ok-wrap{text-align:center;padding:8px 0 4px;}
+.ok-ring{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(225,255,0,0.10);
+  border:2px solid #E1FF00;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+  animation:checkPop .4s cubic-bezier(.34,1.56,.64,1) both, glow 2s ease-in-out infinite;
+}
+.ck{stroke-dasharray:40;stroke-dashoffset:40;animation:drawCheck .45s .3s ease forwards;}
+.ok-title{font-size:24px;font-weight:800;color:#fff;letter-spacing:-.4px;margin-bottom:5px;}
+.ok-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:20px;line-height:1.55;}
+.dpill{
+  background:rgba(255,255,255,0.05);border-radius:12px;
+  padding:12px 14px;display:flex;align-items:center;justify-content:space-between;
+  border:.5px solid rgba(255,255,255,0.08);margin-bottom:8px;
+  animation:fadeUp .3s ease both;
+}
+.dpill:nth-child(1){animation-delay:.1s;}
+.dpill:nth-child(2){animation-delay:.2s;}
+.dpill:nth-child(3){animation-delay:.3s;}
+.dp-l{font-size:11px;color:rgba(255,255,255,0.3);}
+.dp-v{font-size:13px;font-weight:600;color:#fff;}
+.dp-ck{width:20px;height:20px;border-radius:50%;background:#E1FF00;display:flex;align-items:center;justify-content:center;}
+
+/* GAMING PROGRESS BORDER SVG */
+.border-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:28px;overflow:visible;}
+#border-path{
+  fill:none;
+  stroke:rgba(255,255,255,0.08);
+  stroke-width:1.5;
+}
+#progress-path{
+  fill:none;
+  stroke:#E1FF00;
+  stroke-width:2;
+  stroke-linecap:round;
+  transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1);
+  animation:progressGlow 2s ease-in-out infinite;
+}
+
+/* STEP LABEL */
+.step-eyebrow{font-size:10px;font-weight:600;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.step-heading{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.4px;margin-bottom:3px;}
+.step-body{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:16px;line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<div class="shell">
+<div class="card" id="main-card">
+
+  <!-- SVG GAMING BORDER -->
+  <svg class="border-svg" id="border-svg" viewBox="0 0 380 600" preserveAspectRatio="none">
+    <rect id="border-path" x="1" y="1" width="378" height="598" rx="27"/>
+    <rect id="progress-path" x="1" y="1" width="378" height="598" rx="27"
+      stroke-dasharray="1954"
+      stroke-dashoffset="1954"/>
+  </svg>
+
+  <!-- TOPBAR -->
+  <div class="topbar" style="justify-content:flex-end;">
+    <button class="back-btn" onclick="goBack()">Înapoi ›</button>
+  </div>
+
+  <!-- LOGO CENTERED -->
+  <div style="display:flex;justify-content:center;margin-bottom:24px;">
+    <img src="/mulberry-brand.png" alt="Mulberry" style="height:76px;width:auto;display:block">
+  </div>
+
+  <!-- DOTS -->
+  <div class="step-dots">
+    <div class="sdot active" id="d1"></div>
+    <div class="sdot inactive" id="d2"></div>
+    <div class="sdot inactive" id="d3"></div>
+  </div>
+
+  <!-- PANELS -->
+
+  <!-- P0 — INTRO -->
+  <div class="panel active" id="p0" style="padding-top:16px;">
+    <div class="hero-title" style="margin-bottom:12px;">Activează<br><em>Yellowcard</em></div>
+    <div class="hero-sub" style="margin-bottom:32px;">Din talonul de înmatriculare extragem datele și le sincronizăm în Yellowcard, HUB și Settings.</div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px;">
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.07);border-radius:12px;">
+        <div style="width:32px;height:32px;border-radius:9px;background:rgba(225,255,0,0.12);border:.5px solid rgba(225,255,0,0.25);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">1</div>
+        <div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Coduri din talon</div><div style="font-size:11px;color:rgba(255,255,255,0.35);">Câmpurile E și K din CIV</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.07);border-radius:12px;">
+        <div style="width:32px;height:32px;border-radius:9px;background:rgba(10,132,255,0.12);border:.5px solid rgba(10,132,255,0.25);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">2</div>
+        <div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Date vehicul</div><div style="font-size:11px;color:rgba(255,255,255,0.35);">Număr înmatriculare și model</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(255,255,255,0.04);border:.5px solid rgba(255,255,255,0.07);border-radius:12px;">
+        <div style="width:32px;height:32px;border-radius:9px;background:rgba(120,80,255,0.12);border:.5px solid rgba(120,80,255,0.25);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">3</div>
+        <div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Proprietar & cont</div><div style="font-size:11px;color:rgba(255,255,255,0.35);">Nume și verificare email</div></div>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top:16px;">
+      <button class="btn-primary" onclick="goTo(1)">Continuă →</button>
+    </div>
+    <div class="hint">Durează 2 minute. Datele rămân confidențiale.</div>
+  </div>
+
+  <!-- P1 -->
+  <div class="panel" id="p1">
+    <div class="step-eyebrow">Pasul 1 din 3</div>
+    <div class="step-heading">Confirmă talonul</div>
+    <div class="step-body">Introdu câmpurile E și K din Cartea de Identitate a Vehiculului (CIV).</div>
+
+    <div class="note green">
+      <div class="note-icon" style="background:#30d158;">🔒</div>
+      <div>
+        <div class="note-title" style="color:#4ade80;">Secured configuration</div>
+        <div class="note-sub" style="color:rgba(74,222,128,0.7);">Codurile sunt folosite doar pentru validarea vehiculului. Nu sunt partajate cu terți.</div>
+      </div>
+    </div>
+
+    <div class="fgroup">
+      <div class="frow">
+        <span class="flbl">Field E</span>
+        <input class="finput mono" id="vreg-vin" type="text" placeholder="VIN — 17 caractere" maxlength="17" autocapitalize="characters" autocomplete="off">
+        <span class="vin-count" id="vc">0/17</span>
+      </div>
+      <div class="frow">
+        <span class="flbl">Field K</span>
+        <input class="finput mono" id="vreg-k" type="text" placeholder="Nr. aprobare tip" autocomplete="off">
+      </div>
+    </div>
+    <div class="ferr" id="err1"></div>
+
+    <div class="btn-row" style="margin-top:4px;">
+      <button class="btn-secondary" onclick="goTo(0)">←</button>
+      <button class="btn-primary" onclick="next1()">Confirmă →</button>
+    </div>
+    <div class="hint">Datele sunt stocate în siguranță și confidențial.</div>
+  </div>
+
+  <!-- P2 -->
+  <div class="panel" id="p2">
+    <div class="step-eyebrow">Pasul 2 din 3</div>
+    <div class="step-heading">Date vehicul</div>
+    <div class="step-body">Exact cum apar pe certificatul de înmatriculare.</div>
+
+    <div class="note blue">
+      <div class="note-icon" style="background:#0a84ff;">✦</div>
+      <div>
+        <div class="note-title" style="color:#60a5fa;">Validare în timp real</div>
+        <div class="note-sub" style="color:rgba(96,165,250,0.7);">Numărul și VIN-ul sunt verificate cu bazele de date oficiale instant.</div>
+      </div>
+    </div>
+
+    <div class="fgroup">
+      <div class="frow">
+        <span class="flbl">Placă</span>
+        <input class="finput mono" id="vreg-plate" type="text" placeholder="BZ 06 ALZ" autocapitalize="characters">
+      </div>
+      <div class="frow">
+        <span class="flbl">Model</span>
+        <input class="finput" id="vreg-model" type="text" placeholder="BMW M3 G80">
+      </div>
+      <div class="frow">
+        <span class="flbl">An</span>
+        <input class="finput" id="vreg-year" type="number" placeholder="2022" inputmode="numeric">
+      </div>
+    </div>
+    <div class="ferr" id="err2"></div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(1)">←</button>
+      <button class="btn-primary" onclick="next2()">Continuă →</button>
+    </div>
+    <div class="hint">Datele sunt stocate în siguranță și confidențial.</div>
+  </div>
+
+  <!-- P3 -->
+  <div class="panel" id="p3">
+    <div class="step-eyebrow">Pasul 3 din 3</div>
+    <div class="step-heading">Proprietar & Cont</div>
+    <div class="step-body">Leagă vehiculul de profilul tău Mulberry.</div>
+
+    <div class="note purple">
+      <div class="note-icon" style="background:#7c3aed;">⬡</div>
+      <div>
+        <div class="note-title" style="color:#a78bfa;">Identitate verificată</div>
+        <div class="note-sub" style="color:rgba(167,139,250,0.7);">Yellowcard-ul tău e legat de email — nimeni altcineva nu poate accesa datele.</div>
+      </div>
+    </div>
+
+    <div class="fgroup" style="margin-bottom:10px;">
+      <div class="frow">
+        <span class="flbl">Prenume</span>
+        <input class="finput" id="vreg-fname" type="text" placeholder="Stefan" autocomplete="given-name">
+      </div>
+      <div class="frow">
+        <span class="flbl">Nume</span>
+        <input class="finput" id="vreg-lname" type="text" placeholder="Lazar" autocomplete="family-name">
+      </div>
+    </div>
+
+    <button class="btn-google" type="button">
+      <svg width="16" height="16" viewBox="0 0 24 24"><path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 01-5.279-5.28 5.27 5.27 0 015.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 00-8.934 8.934 8.908 8.908 0 008.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z" fill="currentColor"/></svg>
+      Continuă cu Google
+    </button>
+    <div class="divider">sau cu email</div>
+    <div class="fgroup">
+      <div class="frow">
+        <span class="flbl">Email</span>
+        <input class="finput" id="vreg-email" type="email" placeholder="stefan@exemplu.com" autocomplete="email" inputmode="email">
+      </div>
+    </div>
+    <div class="ferr" id="err3"></div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(2)">←</button>
+      <button class="btn-primary" id="send-btn-m" onclick="next3()">Trimite cod →</button>
+    </div>
+    <div class="hint">Datele sunt stocate în siguranță și confidențial.</div>
+  </div>
+
+  <!-- P4 OTP -->
+  <div class="panel" id="p4">
+    <div class="step-eyebrow">Verificare</div>
+    <div class="step-heading">Verifică emailul</div>
+    <div class="step-body">Am trimis un cod de 6 cifre la <strong id="eshow" style="color:#fff;"></strong></div>
+
+    <div class="code-wrap" onclick="document.getElementById('otp').focus()">
+      <div class="cbox" id="c0"> </div>
+      <div class="cbox" id="c1"> </div>
+      <div class="cbox" id="c2"> </div>
+      <div class="cbox" id="c3"> </div>
+      <div class="cbox" id="c4"> </div>
+      <div class="cbox" id="c5"> </div>
+    </div>
+    <input id="otp" type="text" maxlength="6" inputmode="numeric"
+      style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;"
+      oninput="handleOtp(this.value)">
+
+    <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.3);margin-bottom:14px;">
+      Nu ai primit? <span style="color:#E1FF00;cursor:pointer;font-weight:600;">Retrimite</span>
+    </div>
+    <div class="ferr" id="err4"></div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(3)">←</button>
+      <button class="btn-primary" id="vbtn" onclick="verify()">Verifică →</button>
+    </div>
+    <div class="hint">Datele sunt stocate în siguranță și confidențial.</div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="panel" id="p-ok">
+    <div class="ok-wrap">
+      <div class="ok-ring">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path class="ck" d="M7 16l7 7 11-13" stroke="#E1FF00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="ok-title">Yellowcard activat!</div>
+      <p class="ok-sub">Vehiculul tău a fost înregistrat și sincronizat în toate modulele Mulberry.</p>
+
+      <div class="dpill">
+        <div><div class="dp-l">Număr înmatriculare</div><div class="dp-v" id="sp" style="font-family:monospace;">—</div></div>
+        <div class="dp-ck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="dpill">
+        <div><div class="dp-l">Stocat în</div><div class="dp-v">Yellowcard · HUB · Settings</div></div>
+        <div class="dp-ck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="dpill">
+        <div><div class="dp-l">Confidențialitate</div><div class="dp-v" style="color:#E1FF00;">Activă</div></div>
+        <div class="dp-ck"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#000" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+      </div>
+
+      <button class="btn-primary" style="margin-top:16px;">Deschide Mulberry →</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+var step = 1;
+var CY = new Date().getFullYear();
+var PERIMETER = 1954; // approx rect perimeter for 380x600 r=27
+
+/* ── GAMING BORDER ── */
+function setProgress(pct) {
+  var pp = document.getElementById('progress-path');
+  if (!pp) return;
+  var offset = PERIMETER * (1 - pct);
+  pp.style.strokeDashoffset = offset;
+  if (pct >= 1) {
+    pp.style.stroke = '#E1FF00';
+    pp.style.strokeWidth = '3';
+    document.getElementById('border-path').style.stroke = '#E1FF00';
+    document.getElementById('border-path').style.opacity = '0.6';
+  } else {
+    pp.style.stroke = '#E1FF00';
+    pp.style.strokeWidth = '2';
+  }
+}
+
+/* ── NAVIGATION ── */
+var progressMap = {0: 0.05, 1: 0.30, 2: 0.58, 3: 0.82, 4: 0.93, 'ok': 1.0};
+
+function goTo(n) {
+  var cur = document.querySelector('.panel.active');
+  if (cur) cur.classList.remove('active');
+  step = n;
+  var pid = (n === 'ok') ? 'p-ok' : (n === 4 ? 'p4' : 'p' + n);
+  var next = document.getElementById(pid);
+  if (next) { next.classList.add('active'); next.style.animation='none'; void next.offsetWidth; next.style.animation='slideIn .25s ease both'; }
+  updateDots(n);
+  setProgress(progressMap[n] !== undefined ? progressMap[n] : 0.05);
+}
+
+function goBack() { if (step > 0 && step <= 4) goTo(step - 1); else history.back(); }
+
+function updateDots(n) {
+  [1,2,3].forEach(function(i) {
+    var d = document.getElementById('d'+i);
+    if (!d) return;
+    d.className = 'sdot';
+    if (n === 'ok' || i < n) d.classList.add('done');
+    else if (i === n) d.classList.add('active');
+    else d.classList.add('inactive');
+  });
+}
+
+/* ── VALIDATION ── */
+var VIN_RE  = /^[A-HJ-NPR-Z0-9]{17}$/;
+var PLATE_RE = /^[A-Z]{1,2}\d{2,3}[A-Z]{2,3}$/;
+var K_RE    = /^[A-Z0-9e*\/\-\.]{8,}$/i;
+var NAME_RE = /^[a-zA-ZăâîșțĂÂÎȘȚ\s\-]{2,}$/;
+var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function showErr(n, msg) {
+  var el = document.getElementById('err'+n);
+  if (!el) return;
+  el.textContent = msg; el.style.display = 'block';
+}
+function clearErr(n) { var el = document.getElementById('err'+n); if(el){el.textContent='';el.style.display='none';} }
+
+function next1() {
+  clearErr(1);
+  var vin = (document.getElementById('vreg-vin').value||'').trim().toUpperCase();
+  var k   = (document.getElementById('vreg-k').value||'').trim();
+  if (vin.length !== 17) { showErr(1,'Câmpul E trebuie să aibă exact 17 caractere. Ai introdus: '+vin.length+'.'); return; }
+  if (!VIN_RE.test(vin)) { showErr(1,'Câmpul E conține caractere invalide (I, O, Q nu sunt permise).'); return; }
+  if (k.length < 8) { showErr(1,'Câmpul K trebuie să aibă cel puțin 8 caractere. Ai introdus: '+k.length+'.'); return; }
+  document.getElementById('vreg-vin').value = vin;
+  goTo(2);
+}
+
+function next2() {
+  clearErr(2);
+  var plate = (document.getElementById('vreg-plate').value||'').trim().toUpperCase().replace(/\s/g,'');
+  var model = (document.getElementById('vreg-model').value||'').trim();
+  var year  = parseInt(document.getElementById('vreg-year').value||'0',10);
+  if (!PLATE_RE.test(plate)) { showErr(2,'Format invalid. Exemplu: BZ 06 ALZ'); return; }
+  if (model.length < 2) { showErr(2,'Introdu modelul vehiculului (minim 2 caractere).'); return; }
+  if (year < 1900 || year > CY) { showErr(2,'Anul trebuie să fie între 1900 și '+CY+'.'); return; }
+  goTo(3);
+}
+
+function next3() {
+  clearErr(3);
+  var fname = (document.getElementById('vreg-fname').value||'').trim();
+  var lname = (document.getElementById('vreg-lname').value||'').trim();
+  var email = (document.getElementById('vreg-email').value||'').trim().toLowerCase();
+  if (!NAME_RE.test(fname)) { showErr(3,'Introdu un prenume valid (minim 2 litere).'); return; }
+  if (!NAME_RE.test(lname)) { showErr(3,'Introdu un nume valid (minim 2 litere).'); return; }
+  if (!EMAIL_RE.test(email)) { showErr(3,'Adresa de email nu este validă.'); return; }
+  document.getElementById('vreg-email').value = email;
+  var btn = document.getElementById('send-btn-m');
+  if (btn) { btn.textContent = 'Se verifică…'; btn.disabled = true; }
+  window.parent.postMessage({type: 'vreg-send-otp', email: email}, '*');
+}
+
+function handleOtp(v) {
+  v = v.replace(/\D/g,'').slice(0,6);
+  for (var i=0;i<6;i++) {
+    var b = document.getElementById('c'+i);
+    if (!b) continue;
+    b.textContent = v[i]||' ';
+    b.classList.toggle('on', i===v.length && v.length<6);
+  }
+}
+
+function verify() {
+  var otp = (document.getElementById('otp').value||'').replace(/\D/g,'');
+  if (otp.length !== 6) { showErr(4, 'Introdu codul de 6 cifre.'); return; }
+  clearErr(4);
+  var btn = document.getElementById('vbtn');
+  if (btn) { btn.textContent = 'Se verifică…'; btn.disabled = true; }
+  var email = (document.getElementById('vreg-email').value||'').trim().toLowerCase();
+  window.parent.postMessage({type: 'vreg-verify-otp', email: email, token: otp}, '*');
+}
+
+window.addEventListener('message', function(e) {
+  if (!e.data || !e.data.type) return;
+  var btn;
+  switch (e.data.type) {
+    case 'vreg-otp-result':
+      btn = document.getElementById('send-btn-m');
+      if (btn) { btn.textContent = 'Trimite cod →'; btn.disabled = false; }
+      if (!e.data.success) { showErr(3, e.data.error || 'Email neînregistrat.'); return; }
+      var show = document.getElementById('eshow');
+      if (show) show.textContent = e.data.email;
+      goTo(4);
+      setTimeout(function(){ document.getElementById('otp').focus(); }, 300);
+      break;
+    case 'vreg-verify-result':
+      btn = document.getElementById('vbtn');
+      if (!e.data.success) {
+        if (btn) { btn.textContent = 'Verifică →'; btn.disabled = false; }
+        showErr(4, e.data.error || 'Cod invalid.');
+        return;
+      }
+      var plate = (document.getElementById('vreg-plate').value||'').toUpperCase();
+      var sp = document.getElementById('sp');
+      if (sp) sp.textContent = plate || '—';
+      window.parent.postMessage({
+        type: 'vreg-success',
+        plate: plate,
+        model: (document.getElementById('vreg-model').value||''),
+        year:  (document.getElementById('vreg-year').value||''),
+        vin:   (document.getElementById('vreg-vin').value||'').toUpperCase(),
+        email: (document.getElementById('vreg-email').value||'')
+      }, '*');
+      goTo('ok');
+      break;
+  }
+});
+
+/* ── LIVE VIN COUNTER ── */
+document.addEventListener('DOMContentLoaded', function() {
+  var vin = document.getElementById('vreg-vin');
+  if (vin) vin.addEventListener('input', function(){
+    var v = this.value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g,'');
+    this.value = v;
+    var cnt = document.getElementById('vc');
+    if (cnt) {
+      cnt.textContent = v.length+'/17';
+      cnt.className = 'vin-count'+(v.length===17?' ok':v.length>0?' partial':'');
+    }
+  });
+  var plate = document.getElementById('vreg-plate');
+  if (plate) plate.addEventListener('input', function(){ this.value=this.value.toUpperCase(); });
+
+  function resizeBorder() {
+    var card = document.getElementById('main-card');
+    var svg = document.getElementById('border-svg');
+    if (!card || !svg) return;
+    var h = card.offsetHeight;
+    var w = card.offsetWidth;
+    svg.setAttribute('viewBox', '0 0 '+w+' '+h);
+    svg.setAttribute('height', h);
+    var bp = document.getElementById('border-path');
+    var pp = document.getElementById('progress-path');
+    if (bp) { bp.setAttribute('width', w-2); bp.setAttribute('height', h-2); }
+    if (pp) {
+      pp.setAttribute('width', w-2);
+      pp.setAttribute('height', h-2);
+      PERIMETER = 2*(w-2+h-2);
+      pp.setAttribute('stroke-dasharray', PERIMETER);
+      setProgress(progressMap[step]||0.25);
+    }
+  }
+  setProgress(0.05);
+  resizeBorder();
+  window.addEventListener('resize', resizeBorder);
+  setTimeout(resizeBorder, 100);
+});
+</script>
+</body>
+</html>

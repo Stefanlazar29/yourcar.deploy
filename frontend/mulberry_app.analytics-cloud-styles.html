@@ -1,0 +1,251 @@
+<!-- Part 03: lines 501-750 of mulberry_app.html -->
+.sph-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.sph-card-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sph-arr{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(0,0,0,.45);transition:background .15s}
+.sph-arr:hover{background:rgba(0,0,0,.12);color:#111}
+
+/* ══ SERVICE CARDS ════════════════════════════════════════════ */
+.gd-services{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.gd-services{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.gd-services{grid-template-columns:1fr 1fr}}
+
+.gd-svc{
+  background:#111113;border:1px solid rgba(255,255,255,.07);border-radius:18px;
+  padding:20px 18px;cursor:pointer;transition:all .22s;
+  display:flex;flex-direction:column;gap:11px;text-decoration:none;
+}
+.gd-svc:hover{background:#1c1c1f;border-color:rgba(255,255,255,.16);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.gd-svc-ico{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gd-svc-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:400;color:#fff;letter-spacing:-.1px;line-height:1.2}
+.gd-svc-desc{font-size:11px;color:rgba(255,255,255,.32);font-weight:400;line-height:1.4;font-family:'Inter',sans-serif}
+.gd-svc-arr{margin-top:auto;font-size:18px;color:rgba(255,255,255,.2);transition:color .15s}
+.gd-svc:hover .gd-svc-arr{color:rgba(255,255,255,.6)}
+
+/* ══ DARK ANALYTICS DASHBOARD (Gogo-style) ══════════════════ */
+#panel-analytics{margin:0;padding:0;background:#0d0d0e;color:#fff}
+.gd{display:flex;flex-direction:column;gap:14px;padding:28px 32px}
+@media(max-width:768px){.gd{padding:18px 16px;gap:12px}}
+
+/* Header */
+.gd-hdr{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.gd-greeting{font-size:13px;color:rgba(255,255,255,.45);font-weight:400;margin-bottom:4px;font-family:'Urbanist','Inter',sans-serif;letter-spacing:.01em}
+.gd-title{font-size:clamp(28px,3.2vw,46px);font-weight:600;letter-spacing:-.5px;line-height:1.05;font-family:'Urbanist','Inter',sans-serif;color:#fff}
+.gd-hstats{display:flex;gap:36px;align-items:center}
+.gd-hstat-lbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;margin-bottom:4px;letter-spacing:.04em}
+.gd-hstat-val{font-size:clamp(18px,2vw,26px);font-weight:800;color:#fff;letter-spacing:-.5px}
+.gd-hstat-val sup{font-size:12px;font-weight:500;color:rgba(255,255,255,.55)}
+
+/* 4-card equal grid */
+.gd-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.gd-cards-grid{grid-template-columns:1fr}}
+.gd-svc-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:20px;padding:22px;cursor:pointer;text-align:left;font-family:var(--font);transition:all .22s;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(0,0,0,.05);width:100%;min-height:160px}
+.gd-svc-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.gd-svc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:auto}
+.gd-svc-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gd-svc-arr{font-size:16px;color:rgba(0,0,0,.18);transition:color .15s}
+.gd-svc-card:hover .gd-svc-arr{color:rgba(0,0,0,.5)}
+.gd-svc-name{font-family:'Urbanist',sans-serif;font-size:19px;font-weight:700;color:#111;letter-spacing:-.2px;margin:18px 0 4px}
+.gd-svc-sub{font-size:12px;color:rgba(0,0,0,.42);font-family:'Inter',sans-serif}
+
+/* Base card */
+.gdc{border-radius:20px;padding:22px 20px;position:relative;overflow:hidden}
+
+/* Gray striped card */
+.gdc-gray{
+  background:repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1.5px,rgba(255,255,255,.01) 1.5px,rgba(255,255,255,.01) 10px),#2c2c2e;
+  flex:1;min-height:120px}
+
+/* Lime card */
+.gdc-lime{background:#b5f333;color:#1c1e00;flex:1;min-height:120px}
+
+.gdc-pct{font-size:clamp(38px,4vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1}
+.gdc-lbl{font-size:13px;font-weight:600;opacity:.65;margin-top:6px}
+.gdc-badge{position:absolute;top:16px;right:16px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.14);color:rgba(255,255,255,.8)}
+.gdc-lime .gdc-badge{background:rgba(0,0,0,.13);color:rgba(0,0,0,.65)}
+
+/* Blue analytics card */
+.gdc-blue{background:#1e4fd8;display:flex;align-items:stretch;padding:26px 24px}
+.gda-left{flex:1;display:flex;flex-direction:column}
+.gda-eyebrow{font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;font-family:'Inter',sans-serif}
+.gda-pct{font-size:clamp(50px,6vw,76px);font-weight:900;letter-spacing:-3px;line-height:.9;color:#fff}
+.gda-trend{display:flex;align-items:center;gap:10px;margin:12px 0 20px;font-size:17px;font-weight:700;color:#fff}
+.gda-chip{font-size:11px;font-weight:700;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:4px}
+.gda-pills{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.gda-pill{display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.13);border-radius:30px;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s;color:#fff;border:none;text-align:left;font-family:var(--font)}
+.gda-pill:hover{background:rgba(255,255,255,.2)}
+.gda-pill-ico{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+
+.gda-right{width:165px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.gda-donut-wrap{position:relative;width:134px;height:134px;display:flex;align-items:center;justify-content:center}
+.gda-donut{width:134px;height:134px}
+.gda-donut-inner{position:absolute;text-align:center;pointer-events:none}
+.gda-donut-val{font-size:18px;font-weight:800;color:#fff}
+.gda-donut-sub{font-size:9px;color:rgba(255,255,255,.45);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
+.gda-arr{position:absolute;bottom:0;right:0;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.35);border:none;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:background .15s}
+.gda-arr:hover{background:rgba(0,0,0,.55)}
+
+/* Cash card */
+.gdc-cash{background:#1c1c1e}
+.gdc-cash-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.gdc-cash-lbl{font-size:13px;color:rgba(255,255,255,.45);font-weight:600}
+.gdc-cash-amt{font-size:clamp(14px,1.5vw,18px);font-weight:800;color:#fff;display:flex;align-items:center;gap:6px}
+.gdc-cash-badge{font-size:9px;font-weight:800;background:rgba(255,255,255,.12);padding:2px 7px;border-radius:6px;color:rgba(255,255,255,.7)}
+.gdc-cash-growth{font-size:clamp(26px,3vw,36px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:2px}
+.gdc-cash-sub{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:18px}
+.gdc-bars{display:flex;align-items:flex-end;gap:8px;height:64px}
+.gdc-bar{flex:1;border-radius:6px 6px 0 0;background:rgba(255,255,255,.1)}
+.gdc-bar-mid{background:rgba(255,255,255,.22)}
+.gdc-bar-hi{background:rgba(255,255,255,.6)}
+.gdc-bar-blue{background:#1e4fd8}
+
+/* Period card */
+.gdc-period{background:#f4f4f2;color:#111}
+.gdc-period-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
+.gdc-period-title{font-size:15px;font-weight:800;color:#111;font-family:var(--font-head)}
+.gdc-period-sub{font-size:12px;color:rgba(0,0,0,.4);margin-top:2px}
+.gdc-period-lbl{font-size:11px;color:rgba(0,0,0,.4);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.gdc-period-val{font-size:clamp(32px,3.5vw,46px);font-weight:900;letter-spacing:-2px;color:#111;display:flex;align-items:center;gap:10px;font-family:var(--font-head)}
+.gdc-arr-green{width:40px;height:40px;border-radius:50%;background:#b5f333;border:none;color:#1c1e00;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:background .15s;flex-shrink:0}
+.gdc-arr-green:hover{background:#a3e020}
+
+/* Payment card */
+.gdc-pay{background:#232325}
+.gdc-pay-hd{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.gdc-pay-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-pay-title{font-size:13px;font-weight:700;color:#fff}
+.gdc-pay-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.gdc-pay-row:last-child{border-bottom:none;padding-bottom:0}
+.gdc-pay-amt{font-size:16px;font-weight:800;color:#fff}
+.gdc-pay-amt sup{font-size:9px;color:rgba(255,255,255,.55);vertical-align:super}
+.gdc-pay-name{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
+
+/* ── Service tiles (MulberryGO + YellowCard) ── */
+.gdc-tile{cursor:pointer;display:flex;flex-direction:column;border:none;text-align:left;font-family:var(--font);transition:all .22s;min-height:220px;width:100%}
+.gdc-tile:hover{transform:translateY(-3px)}
+.gdc-tile-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:auto}
+.gdc-tile-name{font-family:'Urbanist',sans-serif;font-size:20px;font-weight:600;letter-spacing:-.2px;color:#fff;margin:14px 0 4px;line-height:1.1}
+.gdc-tile-sub{font-size:12px;font-weight:400;color:rgba(255,255,255,.42);font-family:'Inter',sans-serif;letter-spacing:.01em}
+.gdc-tile-arr{margin-top:10px;font-size:20px;color:rgba(255,255,255,.25);transition:color .15s}
+.gdc-tile:hover .gdc-tile-arr{color:rgba(255,255,255,.6)}
+.gdc-go{background:repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1.5px,rgba(255,255,255,.01) 1.5px,rgba(255,255,255,.01) 10px),#1e2025}
+.gdc-yc{background:#b5f333;color:#1c1e00}
+.gdc-yc .gdc-tile-name{color:#1c1e00}
+.gdc-yc .gdc-tile-sub{color:rgba(0,0,0,.5)}
+.gdc-yc .gdc-tile-arr{color:rgba(0,0,0,.22)}
+.gdc-yc:hover .gdc-tile-arr{color:rgba(0,0,0,.5)}
+
+/* ── MulberryAI ── */
+.gda-ai-title{font-family:'Inter',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:300;letter-spacing:-.5px;color:#fff;line-height:1;margin:6px 0 16px}
+.gd-ai-bar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border-radius:30px;padding:7px 8px 7px 16px;margin-bottom:10px}
+.gd-ai-input{flex:1;background:transparent;border:none;color:#fff;font-family:var(--font);font-size:13px;outline:none;min-width:0}
+.gd-ai-input::placeholder{color:rgba(255,255,255,.4)}
+.gd-ai-photo{width:32px;height:32px;background:rgba(255,255,255,.14);border:none;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .15s}
+.gd-ai-photo:hover{background:rgba(255,255,255,.24)}
+.gd-ai-send{width:34px;height:34px;background:#b5f333;border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:opacity .15s}
+.gd-ai-send:hover{opacity:.85}
+.gd-ai-chips{display:flex;gap:7px;flex-wrap:wrap}
+.gd-ai-chip{font-family:var(--font);font-size:11px;font-weight:600;padding:6px 13px;background:rgba(255,255,255,.1);border:none;border-radius:20px;color:rgba(255,255,255,.7);cursor:pointer;transition:background .15s}
+.gd-ai-chip:hover{background:rgba(255,255,255,.18)}
+.gd-ai-resp{display:none;margin-top:12px;padding:11px 14px;background:rgba(255,255,255,.08);border-radius:14px;font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.55}
+
+/* ── MulberryCloud card ── */
+.gdc-cloud{background:#0e1017;cursor:pointer;transition:all .2s}
+.gdc-cloud:hover{background:#161920;transform:translateY(-2px)}
+.gdc-cloud-ico{width:42px;height:42px;border-radius:12px;background:rgba(139,92,246,.18);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.gdc-cloud-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:400;color:#fff;letter-spacing:-.1px}
+.gdc-cloud-sub{font-size:11px;color:rgba(255,255,255,.32);margin-top:3px;margin-bottom:14px;font-family:'Inter',sans-serif;font-weight:400}
+.gdc-cloud-items{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.gdc-cloud-item{display:flex;align-items:center;gap:8px;font-size:11.5px;color:rgba(255,255,255,.5)}
+.gdc-cloud-item-ico{width:24px;height:24px;border-radius:6px;background:rgba(139,92,246,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-cloud-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:7px 14px;background:rgba(139,92,246,.18);border:1px solid rgba(139,92,246,.28);border-radius:20px;color:#a78bfa;cursor:pointer;transition:background .15s;font-family:var(--font)}
+.gdc-cloud-btn:hover{background:rgba(139,92,246,.32)}
+
+/* ── MulberryDrive card ── */
+.gdc-drive{background:#0a0e14}
+.gdc-drive-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.gdc-drive-name{font-family:'Inter',sans-serif;font-size:15px;font-weight:400;color:#fff}
+.gdc-drive-sub{font-size:11px;color:rgba(255,255,255,.32);margin-top:2px;font-family:'Inter',sans-serif;font-weight:400}
+.gdc-map-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;flex:1}
+.gdc-map-ico{width:46px;height:46px;background:rgba(236,255,84,.1);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.gdc-map-lbl{font-size:13px;font-weight:700;color:#fff}
+.gdc-map-note{font-size:11px;color:rgba(255,255,255,.35);line-height:1.4}
+.gdc-map-btn{font-size:11px;font-weight:700;padding:7px 18px;background:rgba(236,255,84,.1);border:1px solid rgba(236,255,84,.18);border-radius:20px;color:#ECFF54;cursor:pointer;transition:background .15s;font-family:var(--font)}
+.gdc-map-btn:hover{background:rgba(236,255,84,.2)}
+
+/* ── MulberryHUB Last Updates ── */
+.gdc-hub{background:#151618}
+.gdc-hub-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.gdc-hub-ico{width:34px;height:34px;background:rgba(59,130,246,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-hub-name{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:#fff}
+.gdc-hub-badge{font-size:9px;font-weight:400;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.07em;margin-top:1px;font-family:'Inter',sans-serif}
+.gdc-hub-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.gdc-hub-row:last-child{border-bottom:none;padding-bottom:0}
+.gdc-hub-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);margin-top:4px;flex-shrink:0}
+.gdc-hub-dot-new{background:#60a5fa;box-shadow:0 0 7px rgba(96,165,250,.55)}
+.gdc-hub-dot-feat{background:#b5f333;box-shadow:0 0 7px rgba(181,243,51,.4)}
+.gdc-hub-event{font-size:12px;font-weight:400;color:rgba(255,255,255,.82);line-height:1.35;font-family:'Inter',sans-serif}
+.gdc-hub-time{font-size:10.5px;color:rgba(255,255,255,.28);margin-top:2px;font-family:'Inter',sans-serif}
+
+/* ══ NEW DASHBOARD — Responsive (mobile carousel + desktop two-col) ══ */
+:root{
+  --nd-bg:#F0F0F2;--nd-card:#FFFFFF;--nd-yellow:#E1FF00;--nd-ink:#111111;
+  --nd-dim:rgba(60,60,67,0.6);--nd-sep:rgba(60,60,67,0.1);--nd-icon:#1A1A1A;
+  --nd-green:#1DB87A;--nd-orange:#F59E0B;--nd-trust:#7C3AED;
+  --nd-shadow:0 2px 16px rgba(0,0,0,0.07);--nd-shadow-lg:0 6px 28px rgba(0,0,0,0.1);
+  --nd-r:20px;
+}
+#panel-dashboard{background:var(--nd-bg);min-height:100%;padding:0;margin:0}
+.nd-wrap{padding:0 0 calc(var(--bh,72px)+16px)}
+
+/* greeting */
+.nd-greet-card{padding:18px 20px 10px}
+.nd-greet-top{display:flex;justify-content:space-between;align-items:center}
+.nd-gr-sub{font-size:12px;color:var(--nd-dim);margin-bottom:2px;font-weight:500;letter-spacing:.01em}
+.nd-hello{font-size:22px;font-weight:600;color:var(--nd-ink);letter-spacing:-.4px}
+.nd-greet-avatar{width:36px;height:36px;border-radius:50%;background:#4A5568;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0}
+.nd-greet-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.nd-gr-actions{display:none;flex-direction:column;gap:6px;margin-top:14px}
+.nd-gr-action{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:12px;background:#F5F5F7;cursor:pointer;transition:background .15s}
+.nd-gr-action:hover{background:#EBEBEE}
+.nd-gr-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nd-gr-txt{font-size:12.5px;font-weight:500;color:var(--nd-ink);flex:1}
+.nd-gr-arr{color:rgba(0,0,0,0.25)}
+
+/* two-col layout (mobile: single column) */
+.nd-two-col{display:flex;flex-direction:column}
+.nd-col-left{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+.nd-col-right{display:flex;flex-direction:column;padding:0 16px}
+
+/* carousel */
+.nd-carousel-wrap{overflow:hidden;margin:0;border-radius:20px}
+.nd-carousel-track{display:flex;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.nd-ycard{min-width:100%;border-radius:20px;padding:18px 20px;flex-shrink:0;cursor:pointer}
+.nd-ycard-yellow{
+  background:linear-gradient(145deg,#E1FF00 0%,#C8EC00 100%);
+  position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),0 6px 28px rgba(200,235,0,.28);
+}
+.nd-ycard-yellow::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:52%;
+  background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 100%);
+  border-radius:20px 20px 0 0;pointer-events:none;z-index:2;
+}
+.nd-ycard-wm{position:absolute;right:-12px;bottom:-28px;font-size:130px;font-weight:900;color:rgba(0,0,0,.06);font-family:var(--font-head);line-height:1;pointer-events:none;user-select:none;letter-spacing:-4px;z-index:0}
+.nd-ycard-yellow > *:not(.nd-ycard-wm){position:relative;z-index:3}
+.nd-ycard-brand-logo{height:22px;width:auto;opacity:.88}
+.nd-ycard-trust{background:#7C3AED}
+.nd-ycard-add{background:#F5F5F5;border:1.5px dashed rgba(0,0,0,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px}
+.nd-ycard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+.nd-ycard-badge{font-size:11px;font-weight:600;color:#111;background:rgba(255,255,255,.55);padding:3px 10px;border-radius:20px}
+.nd-ycard-badge-trust{font-size:11px;font-weight:600;color:#fff;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px}
+.nd-ycard-logo{height:26px;width:auto;filter:invert(1);opacity:.8}
+.nd-ycard-logo-trust{height:26px;width:auto;opacity:.7}
+.nd-ycard-vin{font-size:10px;color:rgba(0,0,0,.4);margin-bottom:3px;font-family:'DM Mono',monospace;letter-spacing:.3px}
+.nd-ycard-vin-trust{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px;font-family:'DM Mono',monospace}
+.nd-ycard-plate{font-size:22px;font-weight:700;color:#111;letter-spacing:2px}
+.nd-ycard-plate-trust{font-size:22px;font-weight:700;color:#fff;letter-spacing:2px}
+.nd-ycard-chev{display:flex;justify-content:center;margin-top:14px}
+.nd-ycard-add-icon{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;margin-bottom:7px}
+.nd-ycard-add-lbl{font-size:12px;font-weight:500;color:#888}
+

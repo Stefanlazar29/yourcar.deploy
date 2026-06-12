@@ -1,0 +1,251 @@
+<!-- Part 11: lines 2501-2750 of mulberry_app.html -->
+  marketplace: ['Marketplace', () => 'Servicii auto verificate Mulberry'],
+  analytics:   ['Analytics',   () => 'Metrici și rapoarte financiare'],
+  settings:    ['Setări',      () => 'Configurare cont și aplicație'],
+  cloud:       ['MulberryCloud', () => 'Documente și fișiere vehicul'],
+  hub:         ['MulberryHUB',   () => 'Istoric și servicii'],
+  drive:       ['MulberryDrive', () => 'Date și diagnosticare vehicul'],
+};
+const PANEL_IFRAMES = {
+  cloud: ['/mulberry_cloud.html', 'pif-cloud'],
+  hub:   ['/mulberry_menu.html',  'pif-hub'],
+  drive: ['/mulberry_qdata.html', 'pif-drive'],
+};
+
+function goPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => {
+    p.classList.remove('active');
+    p.scrollTop = 0; /* reset scroll pe fiecare panel la dezactivare */
+  });
+  document.getElementById('panel-'+name)?.classList.add('active');
+  if (PANEL_IFRAMES[name]) {
+    const [src, iframeId] = PANEL_IFRAMES[name];
+    const fr = document.getElementById(iframeId);
+    if (fr && !fr.src.endsWith(src) && !fr.src.includes(src.replace('/', ''))) fr.src = src;
+  }
+  if (name === 'analytics') {
+    const gl = document.getElementById('gd-greeting-lbl');
+    if (gl) gl.textContent = greeting();
+  }
+  document.querySelectorAll('[data-p]').forEach(n =>
+    n.classList.toggle('active', n.dataset.p === name)
+  );
+  const [title, sub] = PANEL_META[name] || [name, () => ''];
+  const titleEl = document.getElementById('tb-title');
+  const subEl   = document.getElementById('tb-sub');
+  if (titleEl) titleEl.textContent = title;
+  if (subEl)   subEl.textContent   = sub();
+  closeSidebar();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    openGeminiModal();
+    return;
+  }
+  if (e.key === 'Escape') { closeGeminiModal(); return; }
+  if (e.key !== 'Enter') return;
+  const regEl = document.getElementById('form-register');
+  if (regEl && !regEl.classList.contains('hidden')) doRegister();
+});
+
+(async function() {
+  if (sessionStorage.getItem('mlbr_oauth')) return;
+  if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) return;
+  await sb.auth.signOut();
+  localStorage.removeItem('mlbr_s');
+})();
+
+function aiChip(btn) {
+  document.getElementById('ai-query').value = btn.textContent;
+  aiSendQuery();
+}
+
+async function aiSendQuery() {
+  const q = (document.getElementById('ai-query')?.value || '').trim();
+  if (!q) return;
+  const resp = document.getElementById('ai-response');
+  resp.style.display = 'block';
+  resp.textContent = '⏳ Se procesează...';
+  try {
+    const r = await fetch(API + '/api/ai-chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ query: q, user: currentUser?.email })
+    });
+    const d = await r.json();
+    resp.textContent = d.response || d.message || 'Răspuns primit.';
+  } catch(e) {
+    resp.textContent = 'Mulberry AI analizează: "' + q + '". Funcționalitate completă în curând.';
+  }
+}
+
+function aiHandlePhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const resp = document.getElementById('ai-response');
+  resp.style.display = 'block';
+  resp.textContent = '📷 Poză primită: ' + file.name + '. Analiza AI în curând...';
+}
+
+// ─── GEMINI MODAL ─────────────────────────────────────────────
+function gmFirstName() {
+  const fullName = currentUser?.name || currentUser?.email || '';
+  const raw = fullName.includes('@') ? fullName.split('@')[0] : fullName.split(' ')[0];
+  return raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : 'tu';
+}
+function openGeminiModal() {
+  const overlay = document.getElementById('gm-overlay');
+  const input   = document.getElementById('gm-input');
+  const sb      = document.getElementById('gd-ai-sb-border');
+  const greetEl = document.getElementById('gm-big-greeting');
+  if (greetEl && currentUser) greetEl.textContent = 'Bună ziua, ' + gmFirstName();
+  sb?.classList.add('gd-ai-sb-glow');
+  // Load & render saved history
+  gmLoadHistory();
+  if (gmHistory.length > 0) { gmSwitchToChat(); gmRenderHistory(); }
+  overlay?.classList.remove('hidden');
+  setTimeout(() => input?.focus(), 80);
+}
+function closeGeminiModal() {
+  document.getElementById('gm-overlay').classList.add('hidden');
+  document.getElementById('gd-ai-sb-border')?.classList.remove('gd-ai-sb-glow');
+}
+function gmChip(btn) {
+  document.getElementById('gm-input').value = btn.textContent.trim();
+  gmSend();
+}
+function gmSwitchToChat() {
+  const body = document.getElementById('gm-body');
+  if (body && body.dataset.state !== 'chat') body.dataset.state = 'chat';
+}
+/* ── Gemini conversation history ── */
+const GM_HIST_KEY = 'mulberry_gm_history';
+let gmHistory = [];
+
+function gmLoadHistory() {
+  try { const s = localStorage.getItem(GM_HIST_KEY); if (s) gmHistory = JSON.parse(s); } catch(e) { gmHistory = []; }
+}
+function gmSaveHistory() {
+  try { localStorage.setItem(GM_HIST_KEY, JSON.stringify(gmHistory)); } catch(e) {}
+}
+function gmClearHistory() {
+  gmHistory = [];
+  try { localStorage.removeItem(GM_HIST_KEY); } catch(e) {}
+}
+function gmRenderHistory() {
+  const msgs = document.getElementById('gm-messages');
+  if (!msgs) return;
+  msgs.innerHTML = '';
+  gmHistory.forEach(turn => {
+    if (turn.role === 'user') {
+      const wrap = document.createElement('div'); wrap.className = 'gm-msg-user-wrap';
+      const div = document.createElement('div'); div.className = 'gm-msg-user';
+      div.textContent = turn.parts[0].text; wrap.appendChild(div); msgs.appendChild(wrap);
+    } else {
+      const div = document.createElement('div'); div.className = 'gm-msg-ai';
+      div.textContent = turn.parts[0].text; msgs.appendChild(div);
+    }
+  });
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+async function gmSend() {
+  const input = document.getElementById('gm-input');
+  const q = (input?.value || '').trim();
+  if (!q) return;
+  input.value = '';
+  gmSwitchToChat();
+  const msgs = document.getElementById('gm-messages');
+  // User bubble
+  const userWrap = document.createElement('div'); userWrap.className = 'gm-msg-user-wrap';
+  const userDiv = document.createElement('div'); userDiv.className = 'gm-msg-user';
+  userDiv.textContent = q; userWrap.appendChild(userDiv); msgs.appendChild(userWrap);
+  // Add to history
+  gmHistory.push({ role: 'user', parts: [{ text: q }] });
+  // Thinking bubble
+  const thinkDiv = document.createElement('div'); thinkDiv.className = 'gm-msg-ai';
+  thinkDiv.innerHTML = '<div class="gm-thinking"><img src="/gemini-spark.png" class="gm-thinking-spark" alt=""><span></span><span></span><span></span></div>';
+  msgs.appendChild(thinkDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+  try {
+    const r = await fetch(API + '/api/gemini-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: gmHistory })
+    });
+    const d = await r.json();
+    const text = d.response || 'Răspuns primit.';
+    thinkDiv.textContent = text;
+    gmHistory.push({ role: 'model', parts: [{ text }] });
+    gmSaveHistory();
+  } catch(e) {
+    thinkDiv.textContent = 'Eroare la conectarea cu Gemini. Verifică conexiunea.';
+    gmHistory.pop();
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function gmHandlePhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  gmSwitchToChat();
+  const msgs = document.getElementById('gm-messages');
+  const userWrap = document.createElement('div');
+  userWrap.className = 'gm-msg-user-wrap';
+  const userDiv = document.createElement('div');
+  userDiv.className = 'gm-msg-user';
+  userDiv.textContent = '📷 ' + file.name;
+  userWrap.appendChild(userDiv);
+  msgs.appendChild(userWrap);
+  const aiDiv = document.createElement('div');
+  aiDiv.className = 'gm-msg-ai';
+  aiDiv.textContent = 'Imaginea a fost primită. Analiza vehiculului în curând...';
+  msgs.appendChild(aiDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+/* ══ Carousel ══ */
+(function(){
+  var track = document.getElementById('nd-car-track');
+  if(!track) return;
+  var dots = [0,1,2].map(function(i){ return document.getElementById('nd-dot-'+i); });
+  var cur = 0;
+  var visibleCount = 0;
+
+  function getVisibleCards(){
+    var cards = [];
+    for(var i=0;i<track.children.length;i++){
+      if(track.children[i].style.display !== 'none') cards.push(i);
+    }
+    return cards;
+  }
+
+  function updateDots(visibleIdxs){
+    visibleIdxs.forEach(function(cardIdx, pos){
+      var d = dots[pos];
+      if(!d) return;
+      d.style.display = 'block';
+      d.className = 'nd-dot' + (pos === cur ? ' active' : '');
+    });
+    for(var i=visibleIdxs.length;i<3;i++){
+      if(dots[i]) dots[i].style.display = 'none';
+    }
+  }
+
+  window.ndGoTo = function(pos){
+    var visibleIdxs = getVisibleCards();
+    visibleCount = visibleIdxs.length;
+    if(pos<0||pos>=visibleCount) return;
+    cur = pos;
+    var pct = pos * 100;
+    /* Since hidden cards are display:none but still in DOM as flex items,

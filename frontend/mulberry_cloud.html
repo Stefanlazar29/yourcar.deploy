@@ -271,7 +271,7 @@
 
   <!-- Topbar -->
   <header class="mc-topbar">
-    <button class="mc-back" onclick="window.location.href='mulberry_app.html'" aria-label="Înapoi">
+    <button class="mc-back" onclick="window.parent.postMessage({type:'go-dashboard'},'*')" aria-label="Înapoi">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
     <div>

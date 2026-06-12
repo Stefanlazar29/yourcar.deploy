@@ -1,0 +1,251 @@
+<!-- Part 05: lines 1001-1250 of mulberry_app.html -->
+.vreg-ck{stroke-dasharray:30;stroke-dashoffset:30;animation:vregDrawCheck .4s .2s ease forwards}
+.vreg-dpill{background:rgba(255,255,255,.05);border-radius:10px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;border:.5px solid rgba(255,255,255,.07);margin-bottom:6px;animation:vregFadeUp .3s ease both}
+.vreg-dck{width:18px;height:18px;border-radius:50%;background:#30d158;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+@media(max-width:600px){.vreg-modal{grid-template-columns:1fr;min-height:auto}.vreg-left{display:none}}
+
+/* ══ MulberryFAST redesign ══════════════════════════════════════ */
+#panel-dashboard,#panel-dashboard.active{
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 80%,rgba(100,130,70,.5) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 70% 90%,rgba(80,110,50,.4) 0%,transparent 55%),
+    linear-gradient(180deg,#b8cca8 0%,#c4d4a8 40%,#a8bc8c 100%)!important;
+  overflow-y:auto!important;overflow-x:hidden!important
+}
+.mf-wrap{min-height:100%;padding-bottom:calc(var(--bh,72px) + 20px)}
+.mf-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px;gap:8px}
+.mf-tbl{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.mf-toggle{display:flex;align-items:center;background:rgba(255,255,255,.9);border-radius:100px;padding:3px;gap:2px;border:.5px solid rgba(0,0,0,.08)}
+.mf-tog{width:27px;height:20px;border-radius:100px;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;color:#666;transition:background .15s,color .15s}
+.mf-tog.on{background:#111;color:#E1FF00}
+.mf-set-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.08);border-radius:100px;padding:5px 11px;font-size:11px;font-weight:500;color:#333;cursor:pointer}
+.mf-notif{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:.5px solid rgba(0,0,0,.07);border-radius:100px;padding:5px 11px;font-size:11px;font-weight:500;color:#222;flex:1;min-width:0;max-width:260px;overflow:hidden}
+.mf-ntxt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.mf-ndot{width:6px;height:6px;border-radius:50%;background:#ff4444;flex-shrink:0}
+.mf-ntime{color:#999;font-size:10px;flex-shrink:0;white-space:nowrap}
+.mf-nclose{color:#aaa;font-size:13px;cursor:pointer;flex-shrink:0;line-height:1}
+.mf-tbr{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.mf-navpills{display:flex;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.07);border-radius:100px;padding:3px;gap:2px}
+.mf-np{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:500;color:#555;cursor:pointer;white-space:nowrap}
+.mf-np.on{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.mf-srch{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#444;flex-shrink:0}
+.mf-avatar{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);font-size:12px;font-weight:700;color:#333;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;overflow:hidden}
+.mf-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.mf-greet{padding:2px 18px 10px;font-size:12px;color:rgba(0,0,0,.5);font-weight:500;display:flex;align-items:baseline;gap:5px}
+.mf-greet-name{font-size:19px;font-weight:700;color:#111;letter-spacing:-.3px}
+.mf-grid{padding:0 16px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.mf-card{background:rgba(255,255,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);border-radius:20px;padding:14px;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 12px rgba(0,0,0,.06),0 0 0 .5px rgba(0,0,0,.04);-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
+.mf-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.mf-card:active{transform:scale(.97)}
+.mf-card.yc{background:#E1FF00;border-color:#d4f000;box-shadow:0 2px 12px rgba(180,210,0,.25),0 0 0 .5px rgba(0,0,0,.04)}
+.mf-card.cr{background:rgba(255,255,255,.45);border:1.5px dashed rgba(0,0,0,.15);align-items:center;justify-content:center;gap:8px;min-height:80px}
+.mf-ctop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px}
+.mf-tag{display:inline-flex;align-items:center;gap:4px;background:rgba(0,0,0,.06);border-radius:20px;padding:3px 8px;font-size:10px;font-weight:600;color:#555;letter-spacing:.1px}
+.mf-card.yc .mf-tag{background:rgba(0,0,0,.1);color:#333}
+.mf-vin{font-family:monospace;font-size:9.5px;color:rgba(0,0,0,.35);letter-spacing:.3px;margin:5px 0 3px}
+.mf-plate{font-size:21px;font-weight:800;color:#000;letter-spacing:-.5px;line-height:1}
+.mf-cname{font-size:13px;font-weight:700;color:#111;line-height:1.3;letter-spacing:-.2px;margin:4px 0 2px}
+.mf-csub{font-size:11px;color:#888;margin-top:2px}
+.mf-card.yc .mf-csub{color:rgba(0,0,0,.5)}
+.mf-cbot{display:flex;align-items:center;justify-content:space-between;margin-top:9px}
+.mf-ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(255,255,255,.8);box-shadow:0 1px 6px rgba(0,0,0,.12)}
+.mf-badge{display:inline-flex;align-items:center;gap:4px;border-radius:100px;padding:3px 8px;font-size:10px;font-weight:700;border:.5px solid transparent}
+.mf-ok{background:rgba(22,163,74,.09);color:#15803d;border-color:rgba(22,163,74,.15)}
+.mf-info{background:rgba(37,99,235,.09);color:#1d4ed8;border-color:rgba(37,99,235,.15)}
+.mf-bdot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+.mf-cnt{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.mf-cr-plus{width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;color:#888;font-size:20px;line-height:1}
+.mf-cr-lbl{font-size:12px;color:#999;font-weight:500}
+.mf-ai-box{display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.05);border:.5px solid rgba(0,0,0,.08);border-radius:100px;padding:6px 10px;font-size:10.5px;color:#aaa;margin:5px 0 5px}
+.mf-screen{width:100%;height:40px;border-radius:10px;background:linear-gradient(135deg,#0a1400,#1a3000,#4a7000,#E1FF00);margin-bottom:5px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:4px 7px;border:.5px solid rgba(200,230,0,.2)}
+.mf-screen::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.08)}
+.mf-scrlbl{position:relative;z-index:1;background:rgba(0,0,0,.45);border-radius:4px;padding:2px 5px;font-size:9px;font-weight:600;color:#fff}
+.mf-live{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,.2);flex-shrink:0;animation:mfpulse 2s infinite}
+@keyframes mfpulse{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 4px rgba(34,197,94,.08)}}
+@media(min-width:769px){
+  #panel-dashboard.active{overflow-y:auto!important;height:100%!important;display:block!important}
+  .mf-grid{grid-template-columns:repeat(3,1fr);gap:14px;padding:0 22px}
+  .mf-topbar{padding:18px 24px 12px}
+  .mf-greet{padding:2px 24px 12px}
+  .mf-notif{max-width:340px}
+  .mf-wrap{padding-bottom:28px}
+}
+
+  </style>
+</head>
+<body>
+
+<!-- ══ AUTH ══════════════════════════════════════════ -->
+<div id="auth-screen">
+
+  <div class="auth-left">
+    <!-- Logo wordmark (yellow icon + Mulberry text) -->
+    <div class="al-logo">
+      <img src="/mulberry-logo.png" alt="Mulberry" class="al-wordmark">
+    </div>
+
+    <!-- Hero -->
+    <div class="al-hero">
+      <h1 class="al-h1">Radical clarity.<br><em>Absolute certainty.</em></h1>
+      <p class="al-sub">We eliminate the friction of automotive maintenance by providing drivers and partners with a clean, intuitive, and guaranteed digital experience.</p>
+    </div>
+
+    <!-- Features -->
+    <div class="al-features">
+      <div class="al-feat">
+        <div class="al-feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+        Identitate digitală verificată
+      </div>
+      <div class="al-feat">
+        <div class="al-feat-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        YellowCard — asigurare + ITP + istoric
+      </div>
+      <div class="al-feat">
+        <div class="al-feat-ico"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg></div>
+        MulberryAI — analiză predictivă
+      </div>
+    </div>
+
+    <div class="al-foot">© 2025 Mulberry Technologies SRL · Toate drepturile rezervate</div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-form-panel">
+
+      <!-- Back button — dreapta -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:24px">
+        <button class="al-back-btn" onclick="history.back()">
+          Înapoi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- Brand logo — versiunea hero (galben pe negru) -->
+      <div class="af-brand-logo">
+        <img src="/mulberry-logo.png" alt="Mulberry" style="height:46px;width:auto;display:block">
+      </div>
+
+      <!-- Step indicator -->
+      <div class="af-step-indicator">
+        <div class="af-dot active" id="af-dot-1"></div>
+        <div class="af-dot" id="af-dot-2"></div>
+        <div class="af-dot" id="af-dot-3"></div>
+      </div>
+
+      <!-- STEP 1: Login -->
+      <div class="af-step active" id="af-step-1">
+        <div class="af-title">Bun venit înapoi</div>
+        <div class="af-sub">Intră în contul tău Mulberry</div>
+
+        <div class="af-tabs">
+          <button class="af-tab active" onclick="afSwitchTab(this)">Intră în cont</button>
+          <button class="af-tab" onclick="openSignup()">Cont nou</button>
+        </div>
+
+        <div id="af-alert-1" class="af-alert error"></div>
+
+        <button class="btn-google" onclick="afSignInWithGoogle()" style="display:none">
+          <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continuă cu Google
+        </button>
+
+        <div class="af-divider">
+          <div class="af-divider-line"></div>
+          <span class="af-divider-text">sau cu email</span>
+          <div class="af-divider-line"></div>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="af-email" placeholder="email@exemplu.com" autocomplete="email">
+        </div>
+
+        <button class="btn-primary" onclick="afSendOTP()">Trimite cod de verificare →</button>
+
+        <div class="af-foot">
+          Continuând, ești de acord cu <a href="#">Termenii</a> și <a href="#">Politica de Confidențialitate</a>.
+        </div>
+      </div>
+
+      <!-- STEP 2: OTP -->
+      <div class="af-step" id="af-step-2">
+        <div class="af-title">Verifică emailul</div>
+        <div class="af-sub">Am trimis un cod de 6 cifre la <strong id="af-email-display"></strong></div>
+
+        <div id="af-alert-2" class="af-alert error"></div>
+
+        <div class="otp-inputs">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-0" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-1" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-2" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-3" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-4" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-5" inputmode="numeric">
+        </div>
+
+        <button class="btn-primary" onclick="afVerifyOTP()">Verifică codul →</button>
+
+        <div class="af-resend">
+          Nu ai primit codul?
+          <button class="af-resend-btn" id="af-resend-btn" onclick="afResendOTP()">Retrimite</button>
+          <span id="af-resend-timer"></span>
+        </div>
+
+        <div style="margin-top:1rem">
+          <button class="btn-ghost" onclick="afGoToStep(1)">← Înapoi</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Talon upload -->
+      <div class="af-step" id="af-step-3">
+        <div class="af-title">Scanează talonul</div>
+        <div class="af-sub">Încarcă o fotografie clară a certificatului de înmatriculare.</div>
+
+        <div id="af-alert-3" class="af-alert error"></div>
+
+        <div class="upload-zone" id="af-upload-zone">
+          <input type="file" accept="image/*" capture="environment" id="af-talon-input" onchange="afHandleUpload(event)">
+          <div class="upload-icon">📷</div>
+          <div class="upload-title">Fotografiază sau încarcă talonul</div>
+          <div class="upload-sub">VIN + număr înmatriculare lizibile • JPG, PNG • Max 10MB</div>
+        </div>
+
+        <div class="af-processing" id="af-processing">
+          <div class="af-spinner"></div>
+          <div class="af-processing-text" id="af-processing-text">Analizăm documentul...</div>
+        </div>
+
+        <div class="af-extracted" id="af-extracted">
+          <div class="yellowcard">
+            <div class="yellowcard-header">Certificat de înmatriculare</div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">A</span>
+              <input class="yellowcard-input" id="yc-brand" placeholder="Marcă" autocomplete="off">
+            </div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">D.1</span>
+              <input class="yellowcard-input" id="yc-model" placeholder="Model" autocomplete="off">
+            </div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">E</span>
+              <input class="yellowcard-input" id="yc-vin" placeholder="Serie șasiu (VIN)" autocomplete="off" style="font-family:'DM Mono','JetBrains Mono',monospace;font-size:0.78rem">
+            </div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">K</span>
+              <input class="yellowcard-input" id="yc-plate" placeholder="Număr înmatriculare" autocomplete="off" style="text-transform:uppercase">
+            </div>
+            <div class="yellowcard-field">
+              <span class="yellowcard-code">C.2</span>
+              <input class="yellowcard-input" id="yc-regdate" placeholder="Data primei înmatriculări" type="date">
+            </div>
+          </div>
+          <div class="af-check-row">
+            <input type="checkbox" id="af-confirm-check">
+            <label class="af-check-label" for="af-confirm-check">Certific că datele sunt corecte și vehiculul este înregistrat pe numele meu.</label>
+          </div>
+          <button class="btn-primary" id="af-gen-btn" onclick="afSaveVehicle()">Salvează vehiculul →</button>
+          <button class="btn-ghost" onclick="afResetUpload()">Încearcă altă poză</button>
+        </div>
+
+        <div class="af-foot" style="margin-top:1.5rem">🔒 Nu stocăm poza. Extragem doar datele necesare.</div>
+      </div>

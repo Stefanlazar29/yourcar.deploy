@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Mulberry — Profil public vehicul</title>
+<link rel="icon" href="/favicon.png">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+:root {
+  --yellow: #E1FF00;
+  --ink: #0D1B2A;
+  --green: #16a34a;
+  --blue: #2563eb;
+  --wine: #7c3aed;
+  --orange: #d97706;
+}
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0a0a0a;
+  color: #111;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.wrap { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; position: relative; overflow: hidden; }
+
+/* HERO */
+.hero { background: linear-gradient(165deg, #1a1a1a 0%, #2d2d2d 100%); padding: 30px 26px 26px; position: relative; }
+.hero::after { content: ''; position: absolute; top: 0; right: 0; width: 180px; height: 180px; background: radial-gradient(circle, rgba(225,255,0,.08) 0%, transparent 70%); }
+.logo-row { display: flex; align-items: center; gap: 9px; margin-bottom: 24px; position: relative; z-index: 1; }
+.logo-dot { width: 26px; height: 26px; border-radius: 7px; background: var(--yellow); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-dot svg { width: 16px; height: 16px; }
+.logo-name { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -.3px; }
+.logo-tag { font-size: 9px; color: rgba(255,255,255,.4); margin-left: 1px; letter-spacing: .3px; }
+
+.plate-big { font-size: 38px; font-weight: 900; color: var(--yellow); font-family: 'SF Mono', ui-monospace, monospace; letter-spacing: 4px; margin-bottom: 6px; position: relative; z-index: 1; }
+.model-line { font-size: 15px; color: rgba(255,255,255,.65); margin-bottom: 18px; position: relative; z-index: 1; }
+.verified-row { display: flex; align-items: center; gap: 10px; position: relative; z-index: 1; flex-wrap: wrap; }
+.verified { display: flex; align-items: center; gap: 6px; background: rgba(34,197,94,.14); border: .5px solid rgba(34,197,94,.35); border-radius: 30px; padding: 7px 13px; }
+.verified svg { width: 14px; height: 14px; stroke: var(--green); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.verified-txt { font-size: 11px; font-weight: 700; color: var(--green); }
+.scan-date { font-size: 10px; color: rgba(255,255,255,.32); margin-left: auto; }
+
+/* SECTIONS */
+.section { padding: 22px 26px; border-bottom: 1px solid #f0f0f0; }
+.section-title { font-size: 10px; font-weight: 800; color: #b0b0b0; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+
+/* identity grid */
+.id-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+.id-item .id-lbl { font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px; }
+.id-item .id-val { font-size: 14px; font-weight: 700; color: #111; font-family: 'SF Mono', ui-monospace, monospace; word-break: break-all; }
+
+/* status cards */
+.status-row { display: flex; gap: 10px; }
+.status-card { flex: 1; background: #f7f7f8; border-radius: 14px; padding: 14px 10px; text-align: center; }
+.status-ico { width: 30px; height: 30px; margin: 0 auto 8px; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+.status-ico svg { width: 16px; height: 16px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.status-ico.itp { background: rgba(0,0,0,.06); } .status-ico.itp svg { stroke: #111; }
+.status-ico.rca { background: rgba(22,163,74,.12); } .status-ico.rca svg { stroke: var(--green); }
+.status-ico.svc { background: rgba(0,0,0,.06); } .status-ico.svc svg { stroke: #111; }
+.status-lbl { font-size: 10px; color: #999; font-weight: 600; margin-bottom: 3px; }
+.status-val { font-size: 12px; font-weight: 800; }
+.status-val.ok { color: var(--green); } .status-val.warn { color: #111; }
+
+/* history */
+.hist-item { display: flex; align-items: flex-start; gap: 13px; padding: 13px 0; border-bottom: 1px solid #f4f4f4; }
+.hist-item:last-child { border-bottom: none; padding-bottom: 0; }
+.hist-ico { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hist-ico svg { width: 17px; height: 17px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hist-ico.itp { background: rgba(0,0,0,.06); } .hist-ico.itp svg { stroke: #111; }
+.hist-ico.rca { background: rgba(22,163,74,.12); } .hist-ico.rca svg { stroke: var(--green); }
+.hist-ico.svc { background: rgba(0,0,0,.06); } .hist-ico.svc svg { stroke: #111; }
+.hist-info { flex: 1; }
+.hist-title { font-size: 13.5px; font-weight: 700; color: #111; }
+.hist-sub { font-size: 11.5px; color: #999; margin-top: 2px; }
+.hist-date { font-size: 10px; color: #c0c0c0; font-family: monospace; white-space: nowrap; padding-top: 2px; }
+
+/* footer */
+.footer { padding: 26px; text-align: center; background: #fafafa; }
+.footer-txt { font-size: 11.5px; color: #aaa; line-height: 1.6; margin-bottom: 14px; }
+.footer-brand { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 800; color: var(--yellow); background: #111; padding: 9px 18px; border-radius: 30px; text-decoration: none; }
+.footer-brand .fb-dot { width: 14px; height: 14px; border-radius: 4px; background: var(--yellow); }
+.secure-note { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; font-size: 10px; color: #bbb; }
+.secure-note svg { width: 11px; height: 11px; stroke: #22c55e; fill: none; stroke-width: 2; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="logo-row" style="align-items:center;gap:10px">
+      <img src="/mulberry-logo.png" style="height:26px;width:auto;display:block" alt="Mulberry">
+      <div class="logo-tag" style="font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.3px">· Profil public vehicul</div>
+    </div>
+    <div class="plate-big" id="plate">— —— ———</div>
+    <div class="model-line" id="model">Vehicul înregistrat</div>
+    <div class="verified-row">
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <div class="verified-txt" id="verified-txt">Mulberry Verified</div>
+      </div>
+      <div class="scan-date" id="scan-date"></div>
+    </div>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-title">Identitate vehicul</div>
+    <div class="id-grid">
+      <div class="id-item"><div class="id-lbl">Cod Mulberry</div><div class="id-val" id="mlbr-code" style="color:var(--green)">—</div></div>
+      <div class="id-item"><div class="id-lbl">An fabricație</div><div class="id-val" id="year">—</div></div>
+      <div class="id-item"><div class="id-lbl">VIN</div><div class="id-val" id="vin">—</div></div>
+      <div class="id-item"><div class="id-lbl">Titular</div><div class="id-val" id="owner">—</div></div>
+    </div>
+  </div>
+
+  <!-- STATUS -->
+  <div class="section">
+    <div class="section-title">Stare curentă</div>
+    <div class="status-row">
+      <div class="status-card">
+        <div class="status-ico itp"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="status-lbl">ITP</div>
+        <div class="status-val ok">Valabil</div>
+      </div>
+      <div class="status-card">
+        <div class="status-ico rca"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="status-lbl">RCA</div>
+        <div class="status-val ok">Activ</div>
+      </div>
+      <div class="status-card">
+        <div class="status-ico svc"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="status-lbl">Service</div>
+        <div class="status-val warn">6 luni</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="section">
+    <div class="section-title">Istoric verificat</div>
+    <div id="history">
+      <div class="hist-item">
+        <div class="hist-ico itp"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="hist-info"><div class="hist-title">ITP — Admis</div><div class="hist-sub">RAR București · Stație 1042</div></div>
+        <div class="hist-date">15.03.2024</div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-ico rca"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="hist-info"><div class="hist-title">RCA — Generali România</div><div class="hist-sub">Polița valabilă 12 luni</div></div>
+        <div class="hist-date">01.01.2024</div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-ico svc"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="hist-info"><div class="hist-title">Service — Schimb ulei</div><div class="hist-sub">Auto Service · istoric tehnic</div></div>
+        <div class="hist-date">20.11.2023</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-txt">Informații verificate de Mulberry.<br>Datele sensibile sunt protejate și nevizibile public.</div>
+    <a class="footer-brand" href="https://mulberry.autos"><span class="fb-dot"></span>mulberry.autos</a>
+    <div class="secure-note">
+      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Conexiune securizată · profil public
+    </div>
+  </div>
+
+</div>
+
+<script>
+function b64decode(str) { try { return decodeURIComponent(escape(atob(str))); } catch(e) { return null; } }
+
+(function() {
+  var raw = location.hash.replace(/^#/, '');
+  if (!raw) return;
+  var json = b64decode(raw);
+  if (!json) return;
+  var d;
+  try { d = JSON.parse(json); } catch(e) { return; }
+
+  function set(id, val) { var el = document.getElementById(id); if (el && val) el.textContent = val; }
+
+  if (d.p) set('plate', d.p.toUpperCase());
+  var modelLine = [d.m, d.y].filter(Boolean).join(' · ');
+  if (modelLine) set('model', modelLine);
+  set('mlbr-code', d.c || '—');
+  set('year', d.y || '—');
+  set('vin', d.v || '—');
+  set('owner', d.o || '—');
+
+  var sd = document.getElementById('scan-date');
+  if (sd) {
+    var now = new Date();
+    var dd = String(now.getDate()).padStart(2,'0');
+    var mm = String(now.getMonth()+1).padStart(2,'0');
+    sd.textContent = 'Scanat ' + dd + '.' + mm + '.' + now.getFullYear();
+  }
+
+  var vt = document.getElementById('verified-txt');
+  if (vt && d.ver === false) {
+    vt.textContent = 'Înregistrat';
+    var vbox = vt.closest('.verified');
+    if (vbox) { vbox.style.background = 'rgba(245,158,11,.14)'; vbox.style.borderColor = 'rgba(245,158,11,.35)'; vt.style.color = '#d97706'; }
+  }
+  document.title = (d.p || 'Vehicul') + ' — Mulberry';
+})();
+</script>
+</body>
+</html>
