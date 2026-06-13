@@ -119,6 +119,30 @@ html,body{height:100%;font-family:var(--font);background:var(--bg);color:var(--w
 .empty-state i{font-size:36px;margin-bottom:12px;display:block;opacity:.4}
 .empty-state p{font-size:13px}
 
+/* GO FORM INPUTS */
+.go-input{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:10px;padding:10px 13px;color:var(--w);font-size:13.5px;font-family:var(--font);outline:none}
+.go-input::placeholder{color:var(--gmt)}
+.go-input:focus{border-color:var(--g)}
+.go-btn{background:var(--g);color:#000;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);width:100%;transition:opacity .15s}
+.go-btn:hover{opacity:.85}
+.go-btn-ghost{background:transparent;border:1px solid var(--bd);color:var(--gmt);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all .15s}
+.go-btn-ghost:hover{border-color:var(--gb);color:var(--w)}
+.svc-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.svc-item:last-child{border-bottom:none}
+.svc-icon{width:36px;height:36px;border-radius:10px;background:rgba(0,199,106,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.svc-icon i{color:var(--g);font-size:17px}
+.svc-info{flex:1;min-width:0}
+.svc-name{font-size:13.5px;font-weight:600;color:var(--w);margin-bottom:2px}
+.svc-meta{font-size:11.5px;color:var(--gmt)}
+.svc-price{font-size:13px;font-weight:700;color:var(--g);flex-shrink:0;margin-right:10px}
+.rez-item{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.rez-item:last-child{border-bottom:none}
+.rez-status-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;flex-shrink:0;white-space:nowrap}
+.rez-status-badge.pending{background:rgba(255,200,0,.12);color:#ffd500}
+.rez-status-badge.confirmed{background:rgba(0,199,106,.15);color:var(--g)}
+.rez-status-badge.cancelled{background:rgba(255,70,70,.12);color:#ff6b6b}
+.rez-status-badge.completed{background:rgba(255,255,255,.06);color:var(--gmt)}
+
 /* MOBILE */
 @media(max-width:900px){
   .layout{grid-template-columns:1fr}
@@ -161,6 +185,10 @@ html,body{height:100%;font-family:var(--font);background:var(--bg);color:var(--w
       </a>
       <a class="sb-item" onclick="showHub('history')">
         <i class="ti ti-file-check"></i> Istoric intervenții
+      </a>
+      <a class="sb-item" onclick="showHub('services')">
+        <i class="ti ti-tool"></i> Servicii GO
+        <span class="sb-count" id="sb-svc-cnt" style="display:none">0</span>
       </a>
     </div>
     <div class="sb-section">
@@ -307,36 +335,51 @@ html,body{height:100%;font-family:var(--font);background:var(--bg);color:var(--w
       </div>
     </div>
 
-    <!-- REQUESTS -->
+    <!-- REQUESTS / REZERVĂRI GO -->
     <div class="hub-page" id="hub-requests">
       <div class="greet">
-        <div class="greet-title">Programări</div>
-        <div class="greet-sub">Gestionează programările clienților tăi.</div>
+        <div class="greet-title">Programări MulberryGO</div>
+        <div class="greet-sub">Rezervările primite de la clienți.</div>
       </div>
       <div class="card">
-        <div class="req-item">
-          <div class="req-avatar">AP</div>
-          <div class="req-info"><div class="req-name">Andrei Popescu</div><div class="req-detail">Dacia Logan · Revizie + schimb ulei · B-12-APX</div></div>
-          <div class="req-status new">NOU</div>
-          <div class="req-time">azi 09:30</div>
+        <div class="card-header">
+          <div class="card-title">Rezervări</div>
+          <a class="card-action" onclick="loadRequests()"><i class="ti ti-refresh" style="font-size:13px;margin-right:4px"></i>Actualizează</a>
         </div>
-        <div class="req-item">
-          <div class="req-avatar">MI</div>
-          <div class="req-info"><div class="req-name">Maria Ionescu</div><div class="req-detail">VW Golf · ITP + verificare frâne · B-55-MRX</div></div>
-          <div class="req-status new">NOU</div>
-          <div class="req-time">azi 11:00</div>
+        <div id="rez-list">
+          <div class="empty-state"><i class="ti ti-calendar"></i><p>Apasă „Actualizează" pentru a încărca rezervările.</p></div>
         </div>
-        <div class="req-item">
-          <div class="req-avatar">GS</div>
-          <div class="req-info"><div class="req-name">George Stan</div><div class="req-detail">BMW Seria 3 · Diagnosticare</div></div>
-          <div class="req-status pending">ÎN AȘTEPTARE</div>
-          <div class="req-time">mâine 10:00</div>
+      </div>
+    </div>
+
+    <!-- SERVICES GO -->
+    <div class="hub-page" id="hub-services">
+      <div class="greet">
+        <div class="greet-title">Servicii MulberryGO</div>
+        <div class="greet-sub">Serviciile pe care le oferi clienților prin Mulberry.</div>
+      </div>
+
+      <div class="card" style="margin-bottom:18px">
+        <div class="card-header"><div class="card-title">Adaugă serviciu nou</div></div>
+        <div style="display:grid;gap:12px">
+          <input class="go-input" id="svc-name" placeholder="Nume serviciu (ex: Revizie + schimb ulei)"/>
+          <input class="go-input" id="svc-desc" placeholder="Descriere scurtă (opțional)"/>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <input class="go-input" id="svc-dur" type="number" value="60" placeholder="Durată (min)"/>
+            <input class="go-input" id="svc-price" type="number" placeholder="Preț RON (opțional)"/>
+          </div>
+          <button class="go-btn" onclick="addService()">+ Adaugă serviciu</button>
+          <div id="svc-err" style="font-size:12px;color:#ff6b6b;display:none"></div>
         </div>
-        <div class="req-item">
-          <div class="req-avatar">RL</div>
-          <div class="req-info"><div class="req-name">Radu Luca</div><div class="req-detail">Skoda Octavia · Schimb anvelope</div></div>
-          <div class="req-status done">FINALIZAT</div>
-          <div class="req-time">ieri</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Serviciile tale</div>
+          <a class="card-action" onclick="loadServices()"><i class="ti ti-refresh" style="font-size:13px;margin-right:4px"></i>Reîncarcă</a>
+        </div>
+        <div id="svc-list">
+          <div class="empty-state"><i class="ti ti-tool"></i><p>Niciun serviciu adăugat. Adaugă primul serviciu de mai sus.</p></div>
         </div>
       </div>
     </div>
@@ -431,6 +474,8 @@ function showHub(id){
   document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
   document.getElementById('hub-'+id).classList.add('active');
   event && event.currentTarget && event.currentTarget.classList.add('active');
+  if(id==='services') loadServices();
+  if(id==='requests') loadRequests();
 }
 
 function logout(){
@@ -438,6 +483,129 @@ function logout(){
   sessionStorage.removeItem('mlbr_partner');
   window.location.href = '/mulberry_partners.html';
 }
+
+/* ── MulberryGO helpers ── */
+function _ptoken(){
+  const p=JSON.parse(localStorage.getItem('mlbr_partner')||'null');
+  return (p&&p.partner_token)||'';
+}
+function _goHeaders(){return{'Content-Type':'application/json','X-Partner-Token':_ptoken()};}
+
+async function loadServices(){
+  const tok=_ptoken(); if(!tok){_svcMsg('Conectează-te pentru a gestiona serviciile.');return;}
+  try{
+    const res=await fetch('/api/go/partner/services',{headers:{'X-Partner-Token':tok}});
+    if(!res.ok){_svcMsg('Eroare la încărcare ('+res.status+').');return;}
+    const d=await res.json();
+    renderServices(d.services||[]);
+  }catch(e){_svcMsg('Eroare de rețea: '+e.message);}
+}
+function _svcMsg(msg){document.getElementById('svc-list').innerHTML='<div class="empty-state"><i class="ti ti-alert-circle"></i><p>'+msg+'</p></div>';}
+
+function renderServices(services){
+  const el=document.getElementById('svc-list');
+  const cnt=document.getElementById('sb-svc-cnt');
+  if(!services.length){el.innerHTML='<div class="empty-state"><i class="ti ti-tool"></i><p>Niciun serviciu adăugat.</p></div>';cnt.style.display='none';return;}
+  cnt.textContent=services.length;cnt.style.display='';
+  el.innerHTML=services.filter(s=>s.active!==false).map(s=>`
+    <div class="svc-item">
+      <div class="svc-icon"><i class="ti ti-tool"></i></div>
+      <div class="svc-info">
+        <div class="svc-name">${esc(s.name)}</div>
+        <div class="svc-meta">${esc(s.description||'')}${s.description?' · ':''}${s.duration_min} min</div>
+      </div>
+      ${s.price_ron?`<div class="svc-price">${s.price_ron} RON</div>`:''}
+      <button class="go-btn-ghost" onclick="deleteService('${s.id}')"><i class="ti ti-trash" style="font-size:13px"></i></button>
+    </div>`).join('');
+}
+
+async function addService(){
+  const name=document.getElementById('svc-name').value.trim();
+  const desc=document.getElementById('svc-desc').value.trim();
+  const dur=parseInt(document.getElementById('svc-dur').value)||60;
+  const price=parseFloat(document.getElementById('svc-price').value)||null;
+  const errEl=document.getElementById('svc-err');
+  if(!name){errEl.textContent='Introduceți numele serviciului.';errEl.style.display='block';return;}
+  errEl.style.display='none';
+  const tok=_ptoken();
+  if(!tok){errEl.textContent='Sesiune invalidă. Reconectați-vă.';errEl.style.display='block';return;}
+  try{
+    const res=await fetch('/api/go/partner/services',{
+      method:'POST',headers:_goHeaders(),
+      body:JSON.stringify({name,description:desc,duration_min:dur,price_ron:price})
+    });
+    if(!res.ok){const d=await res.json();errEl.textContent=d.detail||'Eroare server.';errEl.style.display='block';return;}
+    ['svc-name','svc-desc','svc-price'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('svc-dur').value='60';
+    await loadServices();
+  }catch(e){errEl.textContent='Eroare de rețea.';errEl.style.display='block';}
+}
+
+async function deleteService(id){
+  if(!confirm('Șterge serviciul?'))return;
+  const tok=_ptoken();
+  try{
+    await fetch('/api/go/partner/services/'+id,{method:'DELETE',headers:_goHeaders()});
+    await loadServices();
+  }catch(e){alert('Eroare la ștergere.');}
+}
+
+/* ── Rezervări ── */
+async function loadRequests(){
+  const tok=_ptoken();
+  if(!tok){document.getElementById('rez-list').innerHTML='<div class="empty-state"><i class="ti ti-lock"></i><p>Conectează-te pentru a vedea rezervările.</p></div>';return;}
+  try{
+    const res=await fetch('/api/go/partner/requests',{headers:{'X-Partner-Token':tok}});
+    if(!res.ok){document.getElementById('rez-list').innerHTML='<div class="empty-state"><i class="ti ti-alert-circle"></i><p>Eroare la încărcare ('+res.status+').</p></div>';return;}
+    const d=await res.json();
+    renderRequests(d.rezervari||[]);
+  }catch(e){document.getElementById('rez-list').innerHTML='<div class="empty-state"><i class="ti ti-wifi-off"></i><p>Eroare de rețea.</p></div>';}
+}
+
+const STATUS_LABELS={'pending':'ÎN AȘTEPTARE','confirmed':'CONFIRMAT','cancelled':'ANULAT','completed':'FINALIZAT'};
+function renderRequests(list){
+  const el=document.getElementById('rez-list');
+  if(!list.length){el.innerHTML='<div class="empty-state"><i class="ti ti-calendar"></i><p>Nicio rezervare primită.</p></div>';return;}
+  el.innerHTML=list.map(r=>{
+    const svcName=(r.partner_services&&r.partner_services.name)||'Serviciu';
+    const dt=new Date(r.data_programata);
+    const dtStr=dt.toLocaleDateString('ro-RO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+    const initials=(r.client_email||'?').slice(0,2).toUpperCase();
+    const statusCls=r.status||'pending';
+    const statusLbl=STATUS_LABELS[r.status]||r.status;
+    const plate=r.client_vehicle_plate?` · ${esc(r.client_vehicle_plate)}`:'';
+    return `<div class="rez-item">
+      <div class="req-avatar">${initials}</div>
+      <div class="req-info">
+        <div class="req-name">${esc(r.client_email)}</div>
+        <div class="req-detail">${esc(svcName)}${plate}</div>
+        ${r.notes?`<div class="req-detail" style="margin-top:2px;font-style:italic">"${esc(r.notes)}"</div>`:''}
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
+        <span class="rez-status-badge ${statusCls}">${statusLbl}</span>
+        <div style="font-size:11px;color:var(--gdm)">${dtStr}</div>
+        ${r.status==='pending'?`<div style="display:flex;gap:4px">
+          <button class="go-btn-ghost" style="font-size:11px;padding:4px 8px" onclick="setStatus('${r.id}','confirmed')">Confirmă</button>
+          <button class="go-btn-ghost" style="font-size:11px;padding:4px 8px;color:#ff6b6b" onclick="setStatus('${r.id}','cancelled')">Anulează</button>
+        </div>`:''}
+        ${r.status==='confirmed'?`<button class="go-btn-ghost" style="font-size:11px;padding:4px 8px" onclick="setStatus('${r.id}','completed')">Finalizează</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function setStatus(id,status){
+  const tok=_ptoken();
+  try{
+    const res=await fetch('/api/go/rezervare/'+id+'/status',{
+      method:'PATCH',headers:_goHeaders(),body:JSON.stringify({status})
+    });
+    if(!res.ok){const d=await res.json();alert(d.detail||'Eroare server.');return;}
+    await loadRequests();
+  }catch(e){alert('Eroare de rețea.');}
+}
+
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 </script>
 </body>
 </html>

@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-06-12T22:58:28Z",
+  "updated_at": "2026-06-13T18:58:11Z",
   "cycle": {
     "articles_fetched": 70,
-    "articles_new": 5,
-    "insights_classified": 0,
+    "articles_new": 18,
+    "insights_classified": 1,
     "fuel_prices_updated": 0,
     "errors": 0,
-    "chroma_indexed": 0
+    "chroma_indexed": 1
   },
   "bnr_eur": 5.2353,
   "extra": {

@@ -1,6 +1,6 @@
 {
   "schema": "softscore_market_snapshot_v1",
-  "timestamp_utc": "2026-06-11T19:11:47.439422+00:00",
+  "timestamp_utc": "2026-06-13T06:57:34.709267+00:00",
   "model_key": "skoda-fabia-2010",
   "vin": "WVWZZZAUZNW123456",
   "marca": "Skoda",
@@ -8,20 +8,18 @@
   "an": 2010,
   "km": 0,
   "autovit": {
-    "count": 980,
-    "min": 512,
-    "max": 199169,
-    "avg": 16781,
-    "median": 4685,
+    "count": 912,
+    "min": 605,
+    "max": 194100,
+    "avg": 17687,
+    "median": 4754,
     "source": "autovit.ro",
     "currency_hint": "mixed_or_page_default"
   },
   "groq_verification": {
-    "median_plausible": true,
-    "avg_consistent": true,
-    "confidence_0_1": 0.9,
-    "notes_ro": "Eșantionul are o medie de 4.685 km, ceea ce este plauzibil pentru un model de 10 ani.",
-    "red_flags": []
+    "error": "Groq: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kmmybgszerkryg9p32tf04mc` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499996, Requested 1206. Please try again in 3m27.7056s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}; Gemini: Gemini HTTP 401: {\n  \"error\": {\n    \"code\": 401,\n    \"message\": \"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.\",\n    \"status\": \"UNAUTHENTICATED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"ACCESS_TOKEN_TYPE_UNSUPPORTED\",\n        \"metadata\": {\n          \"method\": \"google.ai.generativelanguage; Ollama: Ollama: [Errno 111] Connection refused",
+    "median_plausible": null,
+    "notes_ro": "Eroare apel Groq."
   },
   "cached": false
 }

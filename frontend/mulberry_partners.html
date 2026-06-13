@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Mulberry Partners</title>
 <meta name="description" content="Parteneri service auto — Mulberry creat să te propulseze. Free pentru parteneri."/>
+<link rel="icon" type="image/png" href="/favicon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -510,7 +511,7 @@ footer{padding:20px 48px;border-top:1px solid var(--bn);display:flex;align-items
           <div class="s-icon">✅</div>
           <div class="s-title">Cont creat!</div>
           <div class="s-sub">Am trimis un email de confirmare la<br><strong id="s-ok-email"></strong><br><br>Verifică inbox-ul pentru a activa contul.</div>
-          <button class="cbtn cbtn-green" style="margin-top:24px" onclick="window.location.href='/mulberry_partners_hub.html'">Intră în dashboard →</button>
+          <button class="cbtn cbtn-green" style="margin-top:24px" onclick="window.location.href='/mulberry_signup.html'">Intră în dashboard →</button>
         </div>
       </div>
 
@@ -569,12 +570,24 @@ function loginStep1(){
 }
 function otpNext(i,next){if(next!==null&&document.getElementById('otp'+i).value)document.getElementById('otp'+next).focus()}
 function otpBack(e,i,prev){if(e.key==='Backspace'&&!document.getElementById('otp'+i).value&&prev!==null)document.getElementById('otp'+prev).focus()}
-function verifyOtp(){
+async function verifyOtp(){
   const code=[0,1,2,3,4,5].map(i=>document.getElementById('otp'+i).value).join('');
   if(code.length<6){const el=document.getElementById('otp-err');el.textContent='Introdu toate cele 6 cifre.';el.style.display='block';return;}
   const email=document.getElementById('l-email').value.trim();
-  localStorage.setItem('mlbr_partner', JSON.stringify({email, name:'Partener', city:''}));
-  window.location.href='/mulberry_partners_hub.html';
+  try {
+    const res = await fetch('/api/go/partner/register', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email, name:'Partener', cif:''})
+    });
+    const data = res.ok ? await res.json() : {};
+    localStorage.setItem('mlbr_partner', JSON.stringify({
+      email, name: data.name || 'Partener', city:'',
+      partner_token: data.partner_token || '', partner_id: data.partner_id || ''
+    }));
+  } catch(_){
+    localStorage.setItem('mlbr_partner', JSON.stringify({email, name:'Partener', city:''}));
+  }
+  window.location.href='/mulberry_signup.html';
 }
 function resendOtp(){const el=document.getElementById('otp-err');el.style.color='green';el.textContent='Cod retrimis!';el.style.display='block';setTimeout(()=>{el.style.display='none';el.style.color='#ff4d4d'},3000)}
 function sendReset(){
@@ -628,7 +641,7 @@ function sBack(from){
   document.getElementById('s'+(from===1?'1':'2')).classList.add('active');
   sSetStep(from);
 }
-function sSubmit(){
+async function sSubmit(){
   const e=document.getElementById('s-email').value.trim();
   const p=document.getElementById('s-pass').value;
   const p2=document.getElementById('s-pass2').value;
@@ -640,19 +653,34 @@ function sSubmit(){
   SD.email=e;
   const btn=document.getElementById('btn-s3');
   btn.innerHTML='<span class="spin"></span> Se creează contul...';btn.disabled=true;
-  setTimeout(()=>{
+  try {
+    const res = await fetch('/api/go/partner/register', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        email: e, name: SD.name || SD.anafName || 'Partener',
+        cif: SD.cif || '', city: SD.city || '', phone: SD.phone || ''
+      })
+    });
+    const data = res.ok ? await res.json() : {};
+    localStorage.setItem('mlbr_partner', JSON.stringify({
+      email: e, name: SD.name || SD.anafName || 'Partener',
+      city: SD.city || '', cif: SD.cif || '',
+      partner_token: data.partner_token || '', partner_id: data.partner_id || ''
+    }));
+  } catch(_){
     localStorage.setItem('mlbr_partner', JSON.stringify({
       email: e, name: SD.name || SD.anafName || 'Partener',
       city: SD.city || '', cif: SD.cif || ''
     }));
-    document.getElementById('s-ok-email').textContent=e;
-    document.getElementById('sc-signup').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    document.getElementById('s-ok').classList.add('active');
-    document.getElementById('s-prog').style.width='100%';
-    [1,2,3].forEach(i=>document.getElementById('sd'+i).className='sdot done');
-    document.getElementById('sl1').className='sline done';
-    document.getElementById('sl2').className='sline done';
-  },1500);
+  }
+  document.getElementById('s-ok-email').textContent=e;
+  document.getElementById('sc-signup').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('s-ok').classList.add('active');
+  document.getElementById('s-prog').style.width='100%';
+  [1,2,3].forEach(i=>document.getElementById('sd'+i).className='sdot done');
+  document.getElementById('sl1').className='sline done';
+  document.getElementById('sl2').className='sline done';
+  btn.innerHTML='Creează cont';btn.disabled=false;
 }
 
 function se(errId,inId){document.getElementById(errId).classList.add('show');document.getElementById(inId).classList.add('err')}

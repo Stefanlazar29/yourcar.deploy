@@ -1,6 +1,6 @@
 {
   "schema": "softscore_market_snapshot_v1",
-  "timestamp_utc": "2026-06-11T19:11:44.710827+00:00",
+  "timestamp_utc": "2026-06-13T06:57:33.759512+00:00",
   "model_key": "skoda-6y-fabia-2004",
   "vin": "TMBCY46Y654251499",
   "marca": "Skoda",
@@ -8,22 +8,18 @@
   "an": 2004,
   "km": 0,
   "autovit": {
-    "count": 909,
-    "min": 512,
-    "max": 199169,
-    "avg": 18647,
-    "median": 4691,
+    "count": 916,
+    "min": 605,
+    "max": 194100,
+    "avg": 17824,
+    "median": 4754,
     "source": "autovit.ro",
     "currency_hint": "mixed_or_page_default"
   },
   "groq_verification": {
-    "median_plausible": true,
-    "avg_consistent": false,
-    "confidence_0_1": 0.5,
-    "notes_ro": "Eșantionul are o medie de 4691 km, ceea ce este plauzibil pentru un model de 2004. Totuși, media de 18647 km este neplauzibilă pentru un model atât de vechi.",
-    "red_flags": [
-      "media_inconsistenta"
-    ]
+    "error": "Groq: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kmmybgszerkryg9p32tf04mc` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499692, Requested 1209. Please try again in 2m35.6928s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}; Gemini: Gemini HTTP 401: {\n  \"error\": {\n    \"code\": 401,\n    \"message\": \"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.\",\n    \"status\": \"UNAUTHENTICATED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"ACCESS_TOKEN_TYPE_UNSUPPORTED\",\n        \"metadata\": {\n          \"method\": \"google.ai.generativelanguage; Ollama: Ollama: [Errno 111] Connection refused",
+    "median_plausible": null,
+    "notes_ro": "Eroare apel Groq."
   },
   "cached": false
 }

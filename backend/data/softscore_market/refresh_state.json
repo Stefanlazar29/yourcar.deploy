@@ -1,12 +1,12 @@
 {
   "skoda-6y-fabia-2004": {
-    "last_utc": "2026-06-11T19:11:44.710827+00:00",
-    "last_history_file": "skoda-6y-fabia-2004_20260611T191144Z.json",
+    "last_utc": "2026-06-13T06:57:33.759512+00:00",
+    "last_history_file": "skoda-6y-fabia-2004_20260613T065733Z.json",
     "vin_last": "TMBCY46Y654251499"
   },
   "skoda-fabia-2010": {
-    "last_utc": "2026-06-11T19:11:47.439422+00:00",
-    "last_history_file": "skoda-fabia-2010_20260611T191147Z.json",
+    "last_utc": "2026-06-13T06:57:34.709267+00:00",
+    "last_history_file": "skoda-fabia-2010_20260613T065734Z.json",
     "vin_last": "WVWZZZAUZNW123456"
   }
 }

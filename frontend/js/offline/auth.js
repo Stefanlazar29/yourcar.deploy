@@ -103,7 +103,7 @@
       if (err.status === 401) {
         setErr('si-err-pass', 'Parolă incorectă.');
       } else if (err.message && err.message.toLowerCase().includes('fetch')) {
-        setErr('si-err-pass', 'Backend offline — verifică http://46.225.100.151:8080/health');
+        setErr('si-err-pass', 'Backend offline — serverul nu răspunde.');
       } else {
         setErr('si-err-pass', err.message || 'Eroare necunoscută.');
       }
