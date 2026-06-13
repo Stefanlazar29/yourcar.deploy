@@ -16,5 +16,6 @@ jobs:
           key: ${{ secrets.HETZNER_SSH_KEY }}
           port: 443
           script: |
-            /home/stefan/mulberry/deploy.sh
-            echo "Deploy OK - $(date)"
+            cd ~/mulberry
+            git pull origin main
+            docker compose up -d --build
