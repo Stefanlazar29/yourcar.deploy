@@ -1,0 +1,1643 @@
+{
+  "schema": "mulberry_vehicle_archive_v2",
+  "generated_at": "2026-06-14T00:30:00Z",
+  "date": "2026-06-14",
+  "mlbr_code": "MLBR-F8C2-2CB3",
+  "vehicle": {
+    "user_id": 2,
+    "vin": "TMBCY46Y654251499",
+    "make": "Skoda",
+    "model": "6Y / Fabia",
+    "year": "2004",
+    "fuel": "benzina",
+    "plate": "BZ-39-ALZ",
+    "series": "AESK120011T35E4",
+    "mlbr_code": "MLBR-F8C2-2CB3"
+  },
+  "technical_exo_intelligence": {
+    "recent_insights": [
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Consum și valoare vehiculului sunt preocupări → Monitorizare consum și valoare",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:27:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Valoarea vehiculului scade cu vârsta → Verificare valorii vehiculului",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:27:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ Consum estimat ridicat la 0 km → Verificare consum și ajustare",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:27:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE ITP nedefinit, verificare obligatorie → Verificare ITP la autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:27:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL RCA nedefinit, verificare obligatorie → Verificare RCA la autoritatea rutieră",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:27:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "👤 PERSONALIZAT Verificare periodică a vehiculului → Programare pentru verificare periodică",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Sezonul estival, verificare condițiilor de drum → Verificare condițiilor de drum înainte de a pleca",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Recoladă pentru probleme de motor → Verificare istoricul reclamațiilor",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE ITP nedefinit, verificare obligatorie → Verificare ITP la autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC RCA nedefinit, verificare obligatorie → Verificare RCA la autoritatea rutieră",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Modelul Skoda 6Y / Fabia din 2004 are reclamații cunoscute privind sistemul de frânare → Verificare sistemului de frânare la un service autorizat",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Consumul estimat al vehiculului este ridicat, verificare necesară → Verificare consum la un service autorizat",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Prețul de vânzare al modelului Skoda 6Y / Fabia din 2004 este scăzut → Verificare prețuri la vânzători autorizați",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE ITP nedefinit, verificare obligatorie pentru utilizarea în România → Verificare ITP la autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC RCA nedefinit, verificare obligatorie înainte de a continua utilizarea → Verificare RCA la autoritatea rutieră",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:17:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Buget service medium, verifică oferte → Verifică oferte de service în zona ta",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:07:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică condițiile de drum înainte de a conduce → Verifică prognoza meteo și condițiile de drum",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:07:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Uzura estimată la 0 km, verifică periodic → Verifică periodic starea vehiculului",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:07:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Obține ITP înainte de a conduce → Aplică pentru ITP la autoritatea locală",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:07:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorității",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T21:07:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Cloud docs este verificat, dar este recomandat să se verifice periodic → Verificare periodică a documentelor",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Valoarea vehiculului este probabil scăzută din cauza uzurii estimate → Verificare valorii vehiculului la un site de vânzări",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT La 0 km, consumul este probabil ridicat, verificare obligatorie → Verificare consum la un service autorizat",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ ITP nedefinit, verificare obligatorie pentru a evita penalizări → Verificare ITP la autoritatea rutieră",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC RCA nedefinit, verificare obligatorie înainte de a putea vinde sau schimba vehiculul → Verificare RCA la autoritatea rutieră",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "👤 PERSONALIZAT Verifică kilometrajul pentru a evita surprize → Verifică instrumentele de bord",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică condițiile meteo pentru a evita condiții nefavorabile → Verifică site-ul meteo.ro",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică dacă are recoladă pentru modelul tău → Verifică site-ul Skoda pentru recoladă",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică starea ITP pentru a evita penalizări → Verifică starea ITP pe site-ul ANAF",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Verifică starea RCA pentru a evita penalizări → Verifică starea RCA pe site-ul ANI",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:57:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Verificare pentru recall-uri la Skoda 6Y / Fabia 2004 → Verificare la site-ul Skoda sau la un dealer",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:47:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ La 22 de ani, valoarea vehiculului poate fi scăzută → Verificare valorii vehiculului la un dealer",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:47:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT La 0 km, consumul poate fi ridicat, verificare necesară → Verificare consum la service",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:47:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE ITP nedefinit, verificare obligatorie pentru utilizare pe drumurile publice → Verificare ITP la autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:47:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC RCA nedefinit, verificare obligatorie pentru utilizare pe drumurile publice → Verificare RCA la autoritatea rutieră",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:47:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "👤 PERSONALIZAT Aloge un buget de service mediu pentru întreținere → Verifică periodic bugetul de service și ajustează dacă este necesar",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică sistemul de frânare și guma pentru iarnă → Verifică și înlocuiește guma dacă este necesar",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC La 0 km, uzura este minimă, dar verifică periodic → Verifică periodic uzura și consumul de carburant",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări → Verifică statutul ITP pe site-ul autorităților",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorităților",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Verifică consumul ridicat și ajustează utilizarea → Verifică consumul și ajustează utilizarea",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Valoarea vehiculului este afectată de uzură și documente → Verifică valoarea vehiculului pe piețe online",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC Uzura estimată la 0 km, verifică periodic → Verifică periodic uzura componentelor",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Evidențiază ITP pentru a evita penalizări → Evidențiază ITP la poliția locală",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA online",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:37:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Verifică condițiile de drum în România pentru a evita probleme → Verifică prognoza meteo",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:27:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Verifică prețurile service pentru modelul tău în România → Caută oferte de service",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:27:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică lista recomandărilor de service pentru modelul tău → Contactează un service autorizat",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:27:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări → Contactează autoritatea rutieră",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:27:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Verifică statutul RCA pentru a evita penalizări → Contactează autoritatea rutieră",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:27:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Verifică consumul și ajustează parametrii motorului → Verifică și ajustează parametrii motorului",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Valoarea vehiculului este afectată de uzură și starea documentelor → Verifică valorile de piață și ajustează prețul",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC La 0 km, uzura este minimă, dar verifică periodic → Verifică periodic uzura și consumul",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Verifică starea ITP pentru a evita penalizări → Verifică și actualizează ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Verifică starea RCA pentru a evita penalizări → Verifică și actualizează RCA",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON Condițiile de drum în România sunt normale → Verifică condițiile de drum pe site-ul autorităților",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Prețurile service pentru Skoda Fabia 6Y sunt moderate → Verifică prețurile service la diferite dealeri",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Modelul tău are recoladă pentru probleme de motor → Verifică cu dealerul dacă este necesară recoladă",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări → Verifică statutul ITP pe site-ul autorităților",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorităților",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:17:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Vehiculul are 22 de ani, verificare valabilitate a documentelor. → Verificare valabilitate a documentelor",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:07:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Consumul estimat al vehiculului este de 8-10 l/100km. → Verificare consum real",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:07:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Prețul de vânzare al vehiculului este estimat la 5.000-7.000 RON. → Verificare prețuri la site-uri de vânzare",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:07:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "🔧 MENTENANȚĂ ITP nedefinit, verificare recomandată pentru a evita penalizări. → Verificare ITP la autoritatea competentă",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:07:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC RCA nedefinit, verificare obligatorie înainte de a putea utiliza vehiculul. → Verificare RCA la autoritatea competentă",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T20:07:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Prețurile benzinei în România sunt medii → Verifică prețurile benzinei înainte de a umple rezervă",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🌡️ SEZON În România, vara este caldă și uscată, iarna este rece și ploioasă → Verifică condițiile meteorologice înainte de a pleca",
+        "insight_type": "weather",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚙️ TEHNIC Vehiculul are 0 km, dar uzura este dificil de estimat → Programează o inspecție tehnică pentru a evalua starea vehiculului",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Obține ITP pentru a evita penalizări → Vizitează site-ul autorității pentru a obține ITP",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:33"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorității",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:33"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "👤 PERSONALIZAT Verifică consumul periodic pentru a evita cheltuieli suplimentare → Verifică consumul periodic și ajustează comportamentul de conducere",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "💰 PIAȚĂ Valoarea vehiculului este estimată la 5.000 RON → Verifică oferte de vânzare pentru a negocia",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚙️ TEHNIC La 0 km, uzura este minimă, dar verifică periodic → Verifică periodic uzura componentelor",
+        "insight_type": "technical",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "📋 LEGISLAȚIE Verifică statutul ITP pentru a evita penalizări → Verifică statutul ITP pe site-ul autorității",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:32"
+      },
+      {
+        "vin": "TMBCY46Y654251499",
+        "insight_text": "⚠️ RECALL Verifică statutul RCA pentru a evita penalizări → Verifică statutul RCA pe site-ul autorității",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:57:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "👤 PERSONALIZAT Kilometraj: 0 km, uzura estimată scăzută → Verifică uzura estimată a vehiculului",
+        "insight_type": "personal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:47:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "💰 PIAȚĂ Buget service: medium, verifică prețurile service → Verifică prețurile service pentru Skoda Fabia 2010",
+        "insight_type": "market",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:47:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "📋 LEGISLAȚIE Cloud docs: 0/0 verificate, verifică starea documentelor → Verifică starea documentelor în cloud",
+        "insight_type": "legal",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:47:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "🔧 MENTENANȚĂ ITP nedefinit, verifică statutul documentului → Verifică statutul ITP la autoritatea rutieră",
+        "insight_type": "maintenance",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:47:32"
+      },
+      {
+        "vin": "WVWZZZAUZNW123456",
+        "insight_text": "⚠️ RECALL RCA nedefinit, verifică statutul documentului → Verifică statutul RCA la autoritatea rutieră",
+        "insight_type": "recall",
+        "engine": "exo_intelligence",
+        "created_at": "2026-06-13T19:47:32"
+      }
+    ],
+    "suspected_errors": []
+  },
+  "market_research": {
+    "fuel_prices": {},
+    "last_cycle_summary": {
+      "updated_at": "2026-06-13T22:57:32Z",
+      "cycle": {
+        "articles_fetched": 0,
+        "articles_new": 0,
+        "insights_classified": 0,
+        "fuel_prices_updated": 0,
+        "errors": 0,
+        "chroma_indexed": 0
+      },
+      "bnr_eur": null,
+      "extra": {
+        "optional_urls_tried": [
+          "https://www.bnr.ro/nbrfxrates.xml",
+          "https://www.peco-online.ro/"
+        ]
+      }
+    },
+    "articles_recent_tail": [
+      {
+        "id": 988,
+        "url": "https://www.motorsport.com/wec/news/jack-doohan-on-his-first-le-mans-driving-lmp2-cars-and-life-away-from-f1/10829831/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Jack Doohan on his first Le Mans, driving LMP2 cars, and life away from F1",
+        "content": "AutoHebdo: Jack, how are you feeling ahead of your first Le Mans?Jack Doohan: “Feeling good. It's been an exciting process and period so far. The team has done an exceptional job, also both my co-drivers. So it's been a very enjoyable experience, and I'm excited now for it to actually start. There's been a long process since Saturday – or even earlier for some of the guys, but for me from ...Keep reading",
+        "hash": "5c23dab438ff32703ac7654cf6220509",
+        "fetched_at": "2026-06-13T14:57:36"
+      },
+      {
+        "id": 989,
+        "url": "https://www.motorsport.com/f1/news/kim-kardashian-gifts-kimi-antonelli-custom-towel-after-viral-monaco-gp-mishap/10829793/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Kim Kardashian sends gift to Kimi Antonelli after viral Monaco GP mishap",
+        "content": "Mercedes Formula 1 driver Kimi Antonelli has received an unexpected gift from reality television star and entrepreneur Kim Kardashian, following her Monaco Grand Prix podium celebration mishap.Antonelli was handed an embroidered towel wrapped in a bow, with the message, \"To Kimi, from Kim\", following the second free practice session ahead of the Barcelona-Catalunya Grand Prix.This came ...Keep reading",
+        "hash": "1a3967c543d03d4ff5bc13dd04f70a58",
+        "fetched_at": "2026-06-13T14:57:36"
+      },
+      {
+        "id": 990,
+        "url": "https://www.topgear.ro/ce-inseamna-semnul-exclamarii-in-bordul-masinii/",
+        "source": "topgear.ro",
+        "title": "Ce inseamna semnul exclamarii in bordul masinii",
+        "content": "Semnul exclamarii aprins in bord nu este un detaliu pe care il poti ignora. De cele mai multe ori, acest martor indica o avertizare generala, iar sensul exact depinde de culoare, de simbolul in care apare si de mesajul afisat pe ecranul masinii. Multi soferi vad triunghiul cu semnul exclamarii sau un alt martor asemanator […]\nArticolul Ce inseamna semnul exclamarii in bordul masinii apare prima dată în Top Gear.",
+        "hash": "759217c47e589677352e20b67a09dee9",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 991,
+        "url": "https://www.topgear.ro/ce-inseamna-zr-la-anvelope-si-cand-conteaza-cu-adevarat/",
+        "source": "topgear.ro",
+        "title": "Ce inseamna ZR la anvelope si cand conteaza cu adevarat",
+        "content": "Marcajul ZR de pe flancul unei anvelope arata ca acel cauciuc este proiectat pentru viteze foarte mari, de peste 240 km/h, si foloseste constructie radiala. Nu este doar o litera in plus, ci un indiciu clar despre performanta, stabilitate si comportamentul anvelopei la rulare rapida. Multi soferi observa acest cod atunci cand citesc dimensiunea completa […]\nArticolul Ce inseamna ZR la anvelope si cand conteaza cu adevarat apare prima dată în Top Gear.",
+        "hash": "b504c5ebb419e5deaaee1b2cee511e0f",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 992,
+        "url": "https://www.motorsport.com/f1/news/the-trick-behind-lewis-hamiltons-best-qualifying-result-for-ferrari/10830071/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "The trick behind Lewis Hamilton's best qualifying result for Ferrari",
+        "content": "Lewis Hamilton overcame a tricky start to his Barcelona Grand Prix weekend by leaving the track before qualifying, where he took second for Sunday’s Formula 1 contest.The Ferrari driver split the Mercedes cars and was just 0.064s behind polesitter George Russell, in what was his best qualifying result since joining the Scuderia at the beginning of 2025.It came despite largely playing ...Keep reading",
+        "hash": "45135980c044c2b9386e8ded26f0b54d",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 993,
+        "url": "https://www.motorsport.com/wec/news/le-mans-24h-h4-toyota-extends-advantage-over-cadillac-in-the-evening/10830059/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Le Mans 24h, H4: Toyota extends advantage over BMW in the evening",
+        "content": "Toyota continues to lead the Le Mans 24 Hours at the end of the fourth hour, cementing its advantage over BMW and Cadillac in the Hypercar class.After an undercut catapulted the #8 Toyota TR010 at the head of the pack in the opening hour, Sebastien Buemi quickly pulled away from the chasing pack, building an advantage of nearly half a minute through his triple stint.Hartley took over the ...Keep reading",
+        "hash": "2a2360b012dad719c7c9143e3926fbd2",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 994,
+        "url": "https://www.motorsport.com/f1/news/max-verstappen-surprised-as-red-bull-halves-gap-to-mercedes-in-barcelona/10830057/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Max Verstappen surprised as Red Bull halves gap to Mercedes in Barcelona",
+        "content": "Red Bull locked out the third row of the grid for Sunday’s Formula 1 Barcelona Grand Prix. Max Verstappen appeared to be in contention for pole position after two sectors, but saw his grip disappear in the last part of the lap – an issue many drivers struggled with due to tyres overheating.“I think it was a decent qualifying session for us,” Verstappen reflected afterwards when ...Keep reading",
+        "hash": "deaad807ea2ee9a192e82cc57edc4cff",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 995,
+        "url": "https://www.motorsport.com/nascar-cup/news/car-chief-and-engineer-ejected-after-cars-of-larson-and-dye-fail-nascar-inspection/10830034/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Car chief and engineer ejected after Larson and Dye fail NASCAR inspection twice",
+        "content": "During Saturday inspection ahead of practice and qualifying for the NASCAR Cup race at Pocono, most cars managed to pass without issue.However, the No. 5 Hendrick Motorsports Chevrolet of Kyle Larson and the No. 78 Live Fast Motorsports Chevrolet of Daniel failed twice, before both cars passed on the third attempt.As a result of failing twice, both teams have lost their pit stall selection ...Keep reading",
+        "hash": "870c45a5e416056043b68d298cd75ee6",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 996,
+        "url": "https://www.motorsport.com/nascar-cup/news/christopher-bell-grateful-for-nascar-safety-advances-after-michigan-crash/10829995/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Christopher Bell grateful for NASCAR safety advances after Michigan crash",
+        "content": "More than anything else, Christopher Bell is just relieved that everything checked out good when it came to his head after his violent crash at Michigan International Speedway last weekend.The fractured wrist and bruised ankle, as far as he is concerned as of Saturday morning, will be manageable this weekend. The 31-year-old has Brandon Jones as a backup driver, just in case, but genuinely ...Keep reading",
+        "hash": "b989b64ad1ac6eabdc85678e7240100c",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 997,
+        "url": "https://www.motorsport.com/f1/news/at-least-a-two-stop-russell-and-hamilton-expect-barcelona-gp-to-be-hard-on-tyres/10830002/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "\"At least a two-stop\": George Russell and Lewis Hamilton expect Barcelona GP to be hard on tyres",
+        "content": "High tyre degradation at the Formula 1 Barcelona Grand Prix will create small differences between the three compounds and considerable strategic variation during Sunday's race, according to pole winner George Russell.Friday's long runs over FP2 demonstrated that the medium compound was dropping off at around three tenths per lap across the opening 10-12 laps of a stint, before dropping off ...Keep reading",
+        "hash": "19f357d0bcc5222a5f626c8366bc370f",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 998,
+        "url": "https://www.motorsport.com/f1/news/fernando-alonso-exhausted-by-aston-martin-woes-we-knew-we-have-the-worst-car-and-worst-engine/10830021/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Fernando Alonso 'exhausted' by Aston Martin woes: \"We knew we have the worst car and worst engine\"",
+        "content": "Aston Martin's abject performance in Barcelona comes as no surprise to Fernando Alonso as he qualified last for his home race - but having to keep explaining the team's many woes is starting to wear on him.The world champion took 22nd, which ended a 42-race streak of outqualifying team-mate Lance Stroll, who was 21st and a second behind next slowest Cadillac and four seconds off pole.Not ...Keep reading",
+        "hash": "07ac6806391bd3d7f46198861e07c10f",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 999,
+        "url": "https://www.motorsport.com/f1/news/the-big-reset-that-led-to-george-russells-barcelona-pole/10830011/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "The \"big reset\" that led to George Russell's Barcelona GP pole",
+        "content": "George Russell credited a “big reset” for his pole position at the Barcelona Grand Prix after adjusting his approach to get back into the Formula 1 title fight.The Mercedes driver started the season strongly by winning the Melbourne opener, but was quickly outshone by team-mate Kimi Antonelli who has won the five grands prix since.The 19-year-old headed into this weekend with a ...Keep reading",
+        "hash": "52a958361b461ee223e368d6d8214b56",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 1000,
+        "url": "https://www.motorsport.com/f1/news/f1-2026-qualifying-head-to-head-barcelona-gp/10830000/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "F1 2026 qualifying head-to-head: Barcelona GP",
+        "content": "After every F1 qualifying session, Motorsport publishes each team's qualifying record in terms of team-mate battles.This record is based exclusively on qualifying results so that grid penalties don't alter the statistics.When a driver can't put in a representative lap time due to a technical issue or an incident, this will be mentioned in the table.Read Also:Formula 1F1 ...Keep reading",
+        "hash": "a2458029239f735b269e385a85983f25",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 1001,
+        "url": "https://www.motorsport.com/f1/news/the-starting-grid-for-the-2026-f1-barcelona-grand-prix/10829991/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "The starting grid for the 2026 F1 Barcelona GP",
+        "content": "1 George Russell(Mercedes)       2     Lewis Hamilton(Ferrari)3 Kimi Antonelli(Mercedes)       4     Lando ...Keep reading",
+        "hash": "32439ae30bbbc4d65137b2d857f80a61",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 1002,
+        "url": "https://www.motorsport.com/f1/news/charles-leclerc-ashamed-of-himself-after-qualifying-crash-at-f1-barcelona-gp/10829973/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Charles Leclerc \"ashamed\" of himself after qualifying crash at F1 Barcelona GP",
+        "content": "A frustrated Charles Leclerc is feeling “ashamed” of himself after crashing in qualifying for the Formula 1 Barcelona Grand Prix, leaving him 10th on Sunday’s grid.The Ferrari driver drifted onto the dustier line at Turn 4, inevitably causing him to lose the back end and spin into the barrier on the first push lap of his Q3 session.It has continued an underwhelming run for Leclerc ...Keep reading",
+        "hash": "87671e3dd902c12872911a0d0bcbe5d9",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 1003,
+        "url": "https://www.motorsport.com/f1/news/toto-wolff-admits-lewis-hamilton-threat-after-barcelona-f1-qualifying/10829969/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Toto Wolff admits Lewis Hamilton threat after Barcelona F1 qualifying",
+        "content": "Mercedes team principal Toto Wolff has admitted that he remains cautious of the threat posed by seven-time Formula 1 champion Lewis Hamilton, conceding that his former driver will be a major obstacle in tomorrow's Barcelona-Catalunya Grand Prix. Speaking to Sky Sports F1 following a close qualifying session, Wolff explained that when Hamilton is \"in the right frame of mind and the car suits ...Keep reading",
+        "hash": "bb8f5b24217cd9291402ef82c2ae436b",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 1004,
+        "url": "https://www.motorsport.com/f1/news/f1-barcelona-gp-sunday-race-schedule-weather-forecast-and-how-to-watch/10829926/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "F1 Barcelona GP: Sunday race schedule, weather forecast and how to watch",
+        "content": "George Russell has given himself a chance to hit back in the 2026 Formula 1 title fight after taking pole for Sunday’s Barcelona-Catalunya Grand Prix. He ended Kimi Antonelli’s five-race pole streak, with Lewis Hamilton splitting the Mercedes drivers on the front row.Sunday is expected to be hot and dry, with temperatures around 27°C, so tyre life could be a major factor after a ...Keep reading",
+        "hash": "4ff3c9c85c1f6c5ab0c22047a7546e42",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 1005,
+        "url": "https://www.motorsport.com/f1/news/f1-barcelona-gp-qualifying-report/10829928/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "F1 Barcelona GP: George Russell beats Lewis Hamilton to pole as Charles Leclerc crashes",
+        "content": "George Russell finally struck back in the 2026 Formula 1 world title fight as he ended Kimi Antonelli’s dominant streak to take pole for the Barcelona Grand Prix.Russell set a 1m14.679s for his third pole of 2026, 0.064s quicker than second-placed Lewis Hamilton with Antonelli in third and three tenths behind his Mercedes team-mate.The Briton’s pole this weekend is no surprise after ...Keep reading",
+        "hash": "ab2d6bd7efe2dbbf54da3ee8dc60221e",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 1006,
+        "url": "https://www.motorsport.com/wec/news/le-mans-24h-h-1-report/10829903/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Le Mans 24h, H1: Toyota takes lead from 15th on the grid",
+        "content": "The #8 Toyota leads the 2026 Le Mans 24 Hours one hour into the race, despite starting from a lowly 15th position.Kevin Magnussen’s polesitting #15 BMW collapsed to eighth in the first hour; the Dane lost out to Will Stevens’ #12 Cadillac before even the first corner of the race before Rene Rast passed them both in the sister #20 BMW, by the first chicane of the Mulsanne ...Keep reading",
+        "hash": "8a2a7dc842eebed3bfc17ff73f7e32e3",
+        "fetched_at": "2026-06-13T18:57:36"
+      },
+      {
+        "id": 1007,
+        "url": "https://www.motorsport.com/f1/news/red-bull-left-confused-by-pierre-gasly-monaco-podium-reinstatement/10829930/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-ALL&utm_term=News&utm_content=www",
+        "source": "motorsport.com",
+        "title": "Red Bull left \"confused\" by Pierre Gasly Monaco podium reinstatement",
+        "content": "Red Bull team principal Laurent Mekies has spoken out on Pierre Gasly's reinstated Monaco Grand Prix podium, which has taken away Isack Hadjar's third place in Monte Carlo.Multiple drivers were handed penalties for allegedly speeding in the pitlane in Monaco. While the majority of those drivers served their penalties during the race, Gasly did not, so the time penalty was added after the ...Keep reading",
+        "hash": "bb4445b27b8566aa75cd65a60efd22ab",
+        "fetched_at": "2026-06-13T18:57:36"
+      }
+    ]
+  },
+  "security_auth_audit": {
+    "counts_by_status": {
+      "SUCCESS": 4,
+      "TAB_CLOSE": 12230
+    },
+    "recent_events": [
+      {
+        "id": 12234,
+        "created_at": "2026-04-16T22:57:55",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12233,
+        "created_at": "2026-04-16T21:17:00",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12232,
+        "created_at": "2026-04-16T21:16:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12231,
+        "created_at": "2026-04-16T21:16:41",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12230,
+        "created_at": "2026-04-16T21:12:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12229,
+        "created_at": "2026-04-16T21:11:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12228,
+        "created_at": "2026-04-16T21:09:45",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12227,
+        "created_at": "2026-04-16T21:09:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12226,
+        "created_at": "2026-04-16T21:09:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12225,
+        "created_at": "2026-04-13T20:41:08",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12224,
+        "created_at": "2026-04-11T09:20:13",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12223,
+        "created_at": "2026-04-11T08:42:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12222,
+        "created_at": "2026-04-11T08:40:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12221,
+        "created_at": "2026-04-11T08:34:31",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12220,
+        "created_at": "2026-04-11T08:34:02",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12219,
+        "created_at": "2026-04-11T08:31:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12218,
+        "created_at": "2026-04-11T08:30:57",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12217,
+        "created_at": "2026-04-11T08:30:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12216,
+        "created_at": "2026-04-11T08:24:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12215,
+        "created_at": "2026-04-11T08:24:37",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12214,
+        "created_at": "2026-04-11T08:24:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12213,
+        "created_at": "2026-04-11T08:24:06",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12212,
+        "created_at": "2026-04-11T08:24:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12211,
+        "created_at": "2026-04-11T08:24:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12210,
+        "created_at": "2026-04-11T08:24:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12209,
+        "created_at": "2026-04-11T08:24:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12208,
+        "created_at": "2026-04-11T08:24:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12207,
+        "created_at": "2026-04-11T08:22:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12206,
+        "created_at": "2026-04-11T08:22:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12205,
+        "created_at": "2026-04-11T08:21:21",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12204,
+        "created_at": "2026-04-11T08:20:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12203,
+        "created_at": "2026-04-11T08:19:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12202,
+        "created_at": "2026-04-11T08:18:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12201,
+        "created_at": "2026-04-11T08:17:39",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12200,
+        "created_at": "2026-04-11T08:17:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12199,
+        "created_at": "2026-04-11T08:10:51",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12198,
+        "created_at": "2026-04-11T08:09:02",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12197,
+        "created_at": "2026-04-11T08:05:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12196,
+        "created_at": "2026-04-11T08:04:49",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12195,
+        "created_at": "2026-04-11T08:04:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12194,
+        "created_at": "2026-04-11T08:02:28",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12193,
+        "created_at": "2026-04-10T21:54:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12192,
+        "created_at": "2026-04-10T21:54:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12191,
+        "created_at": "2026-04-10T21:41:42",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12190,
+        "created_at": "2026-04-10T21:29:50",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12189,
+        "created_at": "2026-04-10T21:29:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12188,
+        "created_at": "2026-04-10T21:29:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12187,
+        "created_at": "2026-04-10T21:29:18",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12186,
+        "created_at": "2026-04-10T21:23:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12185,
+        "created_at": "2026-04-10T21:20:16",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12184,
+        "created_at": "2026-04-10T21:18:38",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12183,
+        "created_at": "2026-04-10T21:17:04",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12182,
+        "created_at": "2026-04-10T21:16:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12181,
+        "created_at": "2026-04-10T21:13:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12180,
+        "created_at": "2026-04-10T21:09:12",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12179,
+        "created_at": "2026-04-10T20:57:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12178,
+        "created_at": "2026-04-10T20:56:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12177,
+        "created_at": "2026-04-10T20:53:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12176,
+        "created_at": "2026-04-10T20:52:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12175,
+        "created_at": "2026-04-04T04:11:58",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12174,
+        "created_at": "2026-04-04T04:11:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12173,
+        "created_at": "2026-04-04T03:36:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12172,
+        "created_at": "2026-04-04T03:31:38",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12171,
+        "created_at": "2026-04-04T03:29:45",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12170,
+        "created_at": "2026-04-04T03:29:40",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12169,
+        "created_at": "2026-04-04T03:29:36",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12168,
+        "created_at": "2026-04-04T03:29:22",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12167,
+        "created_at": "2026-04-04T03:23:53",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12166,
+        "created_at": "2026-04-04T03:22:25",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12165,
+        "created_at": "2026-04-04T03:21:10",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12164,
+        "created_at": "2026-04-04T03:21:05",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12163,
+        "created_at": "2026-04-04T03:17:34",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12162,
+        "created_at": "2026-04-04T03:17:07",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12161,
+        "created_at": "2026-04-04T03:16:41",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12160,
+        "created_at": "2026-04-04T03:16:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12159,
+        "created_at": "2026-04-04T02:58:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12158,
+        "created_at": "2026-04-04T02:50:20",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12157,
+        "created_at": "2026-04-04T02:34:54",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12156,
+        "created_at": "2026-04-04T02:31:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12155,
+        "created_at": "2026-04-04T02:30:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12154,
+        "created_at": "2026-04-04T02:28:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12153,
+        "created_at": "2026-04-04T02:27:35",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12152,
+        "created_at": "2026-04-04T02:27:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12151,
+        "created_at": "2026-04-04T02:27:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12150,
+        "created_at": "2026-04-04T02:26:48",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12149,
+        "created_at": "2026-04-04T02:26:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12148,
+        "created_at": "2026-04-04T02:26:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12147,
+        "created_at": "2026-04-04T02:26:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12146,
+        "created_at": "2026-04-04T02:25:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12145,
+        "created_at": "2026-04-04T02:16:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12144,
+        "created_at": "2026-04-03T23:46:36",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12143,
+        "created_at": "2026-04-03T23:46:32",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12142,
+        "created_at": "2026-04-03T23:11:44",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12141,
+        "created_at": "2026-04-03T23:07:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12140,
+        "created_at": "2026-04-03T22:57:42",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12139,
+        "created_at": "2026-04-03T22:57:24",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12138,
+        "created_at": "2026-04-03T22:57:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12137,
+        "created_at": "2026-04-03T22:53:33",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12136,
+        "created_at": "2026-04-03T22:52:35",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12135,
+        "created_at": "2026-04-03T22:25:55",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12134,
+        "created_at": "2026-04-03T22:11:31",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12133,
+        "created_at": "2026-04-03T22:04:16",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12132,
+        "created_at": "2026-04-03T22:02:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12131,
+        "created_at": "2026-04-03T22:00:09",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12130,
+        "created_at": "2026-04-03T21:58:26",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12129,
+        "created_at": "2026-04-03T21:49:54",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12128,
+        "created_at": "2026-04-03T21:49:23",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12127,
+        "created_at": "2026-04-03T21:42:56",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12126,
+        "created_at": "2026-04-03T21:42:52",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12125,
+        "created_at": "2026-04-03T21:36:17",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12124,
+        "created_at": "2026-04-03T21:36:15",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12123,
+        "created_at": "2026-04-03T21:36:11",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12122,
+        "created_at": "2026-04-03T21:32:30",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12121,
+        "created_at": "2026-04-03T21:32:08",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12120,
+        "created_at": "2026-04-03T21:25:41",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12119,
+        "created_at": "2026-04-03T21:22:03",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12118,
+        "created_at": "2026-04-03T21:22:01",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12117,
+        "created_at": "2026-04-03T21:21:49",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12116,
+        "created_at": "2026-04-03T21:21:47",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      },
+      {
+        "id": 12115,
+        "created_at": "2026-04-03T21:21:43",
+        "status": "TAB_CLOSE",
+        "user_id": 2,
+        "path": "/auth/client-tab-close"
+      }
+    ]
+  },
+  "fleet_soft_score_snapshot": {
+    "by_vin": {
+      "TMBCY46Y654251499": 24.0
+    },
+    "avg": 24.0
+  },
+  "soft_score_delta_vs_previous": {
+    "note": "Nu există snapshot anterior (prima zi sau arhivă lipsă)."
+  },
+  "device_signature_authorized": ""
+}

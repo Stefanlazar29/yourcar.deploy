@@ -1,0 +1,18 @@
+# Nu include în deploy Vercel
+backend/
+.venv/
+node_modules/
+.pytest_cache/
+chroma_db/
+uploads/
+*.db
+*.sqlite
+*.sqlite3
+.env*
+Dockerfile*
+docker-compose.yml
+railway.toml
+requirements.txt
+*.py
+apps/web/
+tests/

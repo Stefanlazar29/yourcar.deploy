@@ -1,6 +1,6 @@
 {
   "schema": "softscore_market_snapshot_v1",
-  "timestamp_utc": "2026-06-13T06:57:34.709267+00:00",
+  "timestamp_utc": "2026-04-22T15:17:24.590558+00:00",
   "model_key": "skoda-fabia-2010",
   "vin": "WVWZZZAUZNW123456",
   "marca": "Skoda",
@@ -8,16 +8,16 @@
   "an": 2010,
   "km": 0,
   "autovit": {
-    "count": 912,
-    "min": 605,
+    "count": 882,
+    "min": 512,
     "max": 194100,
-    "avg": 17687,
-    "median": 4754,
+    "avg": 18137,
+    "median": 4757,
     "source": "autovit.ro",
     "currency_hint": "mixed_or_page_default"
   },
   "groq_verification": {
-    "error": "Groq: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kmmybgszerkryg9p32tf04mc` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499996, Requested 1206. Please try again in 3m27.7056s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}; Gemini: Gemini HTTP 401: {\n  \"error\": {\n    \"code\": 401,\n    \"message\": \"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.\",\n    \"status\": \"UNAUTHENTICATED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"ACCESS_TOKEN_TYPE_UNSUPPORTED\",\n        \"metadata\": {\n          \"method\": \"google.ai.generativelanguage; Ollama: Ollama: [Errno 111] Connection refused",
+    "error": "Groq: Pachetul 'groq' nu e instalat. Rulează: pip install groq; Gemini: Gemini HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_con; Ollama: Ollama: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
     "median_plausible": null,
     "notes_ro": "Eroare apel Groq."
   },

@@ -57,7 +57,6 @@ from backend import mlbr_file
 from backend import archive_service
 from backend import auth_audit
 from backend import business_analyze
-from backend import email_service
 from backend.vehicle_dto import (
   market_intel_synthesis_row_for_dto,
   vehicle_dto_from_car_row,
@@ -352,6 +351,7 @@ def make_token(user_id: int, identifier: str, role: str = "user") -> str:
   payload = {"sub": str(user_id), "identifier": identifier, "role": role, "exp": exp}
   return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALG)
 
+
 def _user_from_jwt_token(token: str) -> database.UserRow:
   try:
     payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALG])
@@ -485,32 +485,6 @@ def optional_device_fingerprint(
 # ────────────────────────────────────────────────────────────────
 
 app = FastAPI(title="Mulberry API", version="1.2")
-
-
-@app.post("/auth/google/exchange")
-def google_token_exchange(body: dict = Body(...)):
-  """Schimbă tokenul Supabase cu un JWT backend."""
-  supabase_token = body.get("access_token")
-  if not supabase_token:
-    raise HTTPException(status_code=400, detail="Token lipsă")
-  try:
-    from supabase import create_client
-    _sb_url = os.getenv("SUPABASE_URL", "")
-    _sb_key = os.getenv("SUPABASE_SERVICE_KEY") or os.getenv("SUPABASE_ANON_KEY", "")
-    sb = create_client(_sb_url, _sb_key)
-    user_resp = sb.auth.get_user(supabase_token)
-    email = user_resp.user.email
-  except Exception:
-    raise HTTPException(status_code=401, detail="Token Supabase invalid")
-  user = database.get_user_by_identifier(email)
-  if not user:
-    import secrets, bcrypt as _bcrypt
-    fake_pw = secrets.token_hex(32).encode("utf-8")
-    fake_hash = _bcrypt.hashpw(fake_pw, _bcrypt.gensalt()).decode("ascii")
-    user = database.create_user(identifier=email, password_hash=fake_hash)
-  token = make_token(user_id=user.id, identifier=email, role=user.role or "user")
-  return TokenOut(access_token=token, role=user.role or "user")
-
 
 # CORS: dev local + producție Mulberry/Vercel + supliment din MULBERRY_CORS_ORIGINS
 def _resolve_cors_origins() -> List[str]:
@@ -761,79 +735,21 @@ def exo_chat(inp: ExoChatIn, current: database.UserRow = Depends(require_device_
     raise HTTPException(status_code=500, detail=f"Chat EXO: {e}")
 
 
-@app.post("/gemini-chat")
+@app.post("/api/gemini-chat")
 async def gemini_chat_proxy(inp: GeminiChatIn):
-  """Proxy Groq (llama-3.3-70b) — fallback Gemini."""
+  """Proxy Gemini 2.0 Flash — cheia API rămâne pe server, nu în sursa paginii."""
   import urllib.request as _urlreq
-  _GROQ_KEY = os.environ.get("GROQ_API_KEY", "")
-  if not _GROQ_KEY:
-    raise HTTPException(status_code=500, detail="GROQ_API_KEY not configured")
+  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyDNqrg7_tIZ0COV8mpQqI1FmLoAa0HOR_Q")
+  _GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={_GEMINI_KEY}"
   _SYSTEM = (
     "Ești MulberryAI, asistentul auto inteligent al platformei Mulberry. "
     "Ajuți utilizatorii cu întrebări despre vehiculele lor, mentenanță, diagnosticare, "
     "asigurări și servicii auto. Fii concis, prietenos și profesionist. "
     "Răspunde în limba utilizatorului."
   )
-  messages = [{"role": "system", "content": _SYSTEM}]
-  for c in inp.contents:
-    role = "user" if c.get("role") == "user" else "assistant"
-    text = c.get("parts", [{}])[0].get("text", "")
-    messages.append({"role": role, "content": text})
   payload = json.dumps({
-    "model": "llama-3.3-70b-versatile",
-    "messages": messages,
-    "max_tokens": 1024
-  }).encode("utf-8")
-  def _call():
-    req = _urlreq.Request(
-      "https://api.groq.com/openai/v1/chat/completions",
-      data=payload,
-      headers={"Content-Type": "application/json", "Authorization": f"Bearer {_GROQ_KEY}"}
-    )
-    with _urlreq.urlopen(req, timeout=30) as resp:
-      return json.loads(resp.read())
-  try:
-    loop = asyncio.get_event_loop()
-    data = await loop.run_in_executor(None, _call)
-    text = data["choices"][0]["message"]["content"]
-    return {"response": text}
-  except Exception as e:
-    raise HTTPException(status_code=502, detail=f"Groq error: {e}")
-
-
-class TalonScanIn(BaseModel):
-  image: str      # base64
-  mime_type: str  # image/jpeg | image/png
-
-
-@app.post("/api/scan-talon")
-async def scan_talon(inp: TalonScanIn):
-  """OCR certificat de înmatriculare (talon) via Gemini Vision."""
-  import urllib.request as _urlreq
-  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
-  if not _GEMINI_KEY:
-    raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured on server")
-  _GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={_GEMINI_KEY}"
-  prompt = (
-    "Ești un expert în documente auto românești. Analizează această imagine a unui certificat de înmatriculare "
-    "(talon) și extrage EXACT următoarele câmpuri în format JSON:\n"
-    "{\n"
-    '  "vin": "...",\n'
-    '  "plate": "...",\n'
-    '  "owner": "...",\n'
-    '  "brand": "...",\n'
-    '  "model": "...",\n'
-    '  "year": "..."\n'
-    "}\n"
-    "Dacă un câmp nu este vizibil sau lizibil, pune null. Răspunde DOAR cu JSON-ul, fără explicații."
-  )
-  payload = json.dumps({
-    "contents": [{
-      "parts": [
-        {"text": prompt},
-        {"inline_data": {"mime_type": inp.mime_type, "data": inp.image}}
-      ]
-    }]
+    "systemInstruction": {"parts": [{"text": _SYSTEM}]},
+    "contents": inp.contents
   }).encode("utf-8")
   def _call():
     req = _urlreq.Request(_GEMINI_URL, data=payload, headers={"Content-Type": "application/json"})
@@ -842,15 +758,10 @@ async def scan_talon(inp: TalonScanIn):
   try:
     loop = asyncio.get_event_loop()
     data = await loop.run_in_executor(None, _call)
-    raw = data["candidates"][0]["content"]["parts"][0]["text"]
-    # Curăță markdown code blocks dacă Gemini le adaugă
-    raw = raw.strip().lstrip("```json").lstrip("```").rstrip("```").strip()
-    extracted = json.loads(raw)
-    return extracted
-  except json.JSONDecodeError:
-    raise HTTPException(status_code=422, detail="Nu am putut interpreta răspunsul AI. Încearcă o poză mai clară.")
+    text = data["candidates"][0]["content"]["parts"][0]["text"]
+    return {"response": text}
   except Exception as e:
-    raise HTTPException(status_code=502, detail=f"Eroare OCR: {e}")
+    raise HTTPException(status_code=502, detail=f"Gemini error: {e}")
 
 
 @app.get("/debug/status")
@@ -1166,7 +1077,7 @@ def form_submit(inp: FormSubmitIn):
 
 
 @app.post("/auth/login", response_model=TokenOut)
-def login(inp: LoginIn, request: Request, background_tasks: BackgroundTasks):
+def login(inp: LoginIn, request: Request):
   """
   Login dublu: Parola 1 (email + parolă) + Parola 2 (nr. telefon).
   Dacă userul are phone în DB și nu a furnizat phone_number → needs_phone=True.
@@ -1241,9 +1152,6 @@ def login(inp: LoginIn, request: Request, background_tasks: BackgroundTasks):
     session_hash=session_hash,
   )
   token = make_token(user.id, user.identifier, user.role or "user")
-  if "@" in (user.identifier or ""):
-    name = user.identifier.split("@")[0]
-    background_tasks.add_task(email_service.send_login_alert, user.identifier, name, ip_addr)
   return TokenOut(
     access_token=token,
     role=user.role or "user",
@@ -1253,7 +1161,7 @@ def login(inp: LoginIn, request: Request, background_tasks: BackgroundTasks):
 
 
 @app.post("/auth/register", response_model=TokenOut)
-def register(inp: RegisterIn, request: Request, background_tasks: BackgroundTasks):
+def register(inp: RegisterIn, request: Request):
   ident = database.normalize_identifier(inp.identifier)
   if not ident:
     raise HTTPException(status_code=400, detail="Telefon/Email invalid.")
@@ -1683,39 +1591,16 @@ def upsert_car(inp: CarIn, current: database.UserRow = Depends(get_current_user)
   return {"ok": True}
 
 
-@app.get("/cars/check-plate")
-def check_plate(plate: str):
-  """Returnează {available: bool} — true dacă plăcuța nu e înregistrată încă."""
-  normalized = plate.strip().upper().replace(" ", "").replace("-", "")
-  with database.get_db() as conn:
-    row = conn.execute(
-      "SELECT id FROM cars WHERE UPPER(REPLACE(REPLACE(plate,' ',''),'-','')) = ?",
-      (normalized,)
-    ).fetchone()
-  return {"available": row is None}
-
-
 @app.post("/cars/sync")
-def sync_car(background_tasks: BackgroundTasks, payload: Dict[str, Any] = Body(...), current: database.UserRow = Depends(get_current_user)):
+def sync_car(payload: Dict[str, Any] = Body(...), current: database.UserRow = Depends(get_current_user)):
   """
   Sincronizează vehiculul din obiectul din browser (localStorage) în dev.db.
   Cod MLBR derivat din VIN (stabil); insert dacă lipsește, altfel update pe VIN / rând fără VIN.
   """
-  is_new = database.get_car_for_user(current.id) is None
   try:
-    result = database.sync_vehicle_from_client(current.id, payload or {})
+    return database.sync_vehicle_from_client(current.id, payload or {})
   except ValueError as e:
     raise HTTPException(status_code=400, detail=str(e)) from e
-  if is_new and "@" in (current.identifier or ""):
-    name = current.identifier.split("@")[0]
-    vin = (payload.get("vin") or "").strip()
-    plate = (payload.get("plate") or "").strip()
-    model = (payload.get("model") or "").strip()
-    brand = (payload.get("brand") or "").strip()
-    model_vehicle = f"{brand} {model}".strip()
-    k_code = database.mlbr_code_from_vin(vin) if vin else ""
-    background_tasks.add_task(email_service.send_welcome, current.identifier, name, vin, plate, model_vehicle, k_code)
-  return result
 
 
 @app.post("/sync", response_model=SyncResponse)
