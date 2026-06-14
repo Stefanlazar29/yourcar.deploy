@@ -8,7 +8,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 46.225.100.151
+          username: stefan
+          key: ${{ secrets.HETZNER_SSH_KEY }}
+          port: 443
+          source: "*.html,*.css,*.png,*.svg,*.jpg,*.ico,js/**,css/**"
+          target: "/home/stefan/mulberry/"
+          overwrite: true
+
+      - name: Restart Nginx
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 46.225.100.151
@@ -16,6 +30,27 @@ jobs:
           key: ${{ secrets.HETZNER_SSH_KEY }}
           port: 443
           script: |
-            cd ~/mulberry
-            git pull origin main
-            docker-compose up -d --build
+            cat > ~/mulberry/docker/nginx/default.conf << 'NGINX'
+            upstream mulberry_api {
+                server api:8000;
+                keepalive 32;
+            }
+            server {
+                listen 80;
+                server_name _;
+                client_max_body_size 50m;
+                location / {
+                    proxy_pass http://mulberry_api;
+                    proxy_http_version 1.1;
+                    proxy_set_header Host $host;
+                    proxy_set_header X-Real-IP $remote_addr;
+                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                    proxy_set_header X-Forwarded-Proto $scheme;
+                    proxy_set_header Upgrade $http_upgrade;
+                    proxy_set_header Connection "upgrade";
+                    proxy_read_timeout 120s;
+                }
+            }
+            NGINX
+            docker restart mulberry-nginx-1
+            echo "Deploy OK - $(date)"
